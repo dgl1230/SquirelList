@@ -14,6 +14,20 @@
 		186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186B32EA1A758E5000A8D4CB /* Images.xcassets */; };
 		186B32EE1A758E5000A8D4CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */; };
 		186B32FA1A758E5000A8D4CB /* SquirelListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32F91A758E5000A8D4CB /* SquirelListTests.swift */; };
+		186B33051A758EB400A8D4CB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33031A758EB400A8D4CB /* Bolts.framework */; };
+		186B33061A758EB400A8D4CB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33041A758EB400A8D4CB /* Parse.framework */; };
+		186B33081A758F7E00A8D4CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33071A758F7E00A8D4CB /* AudioToolbox.framework */; };
+		186B330A1A758F8800A8D4CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33091A758F8800A8D4CB /* CFNetwork.framework */; };
+		186B330C1A758F9300A8D4CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B330B1A758F9300A8D4CB /* CoreGraphics.framework */; };
+		186B330E1A758F9E00A8D4CB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B330D1A758F9E00A8D4CB /* CoreLocation.framework */; };
+		186B33101A758FA800A8D4CB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */; };
+		186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33111A758FB100A8D4CB /* QuartzCore.framework */; };
+		186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33131A758FBC00A8D4CB /* Security.framework */; };
+		186B33161A758FC600A8D4CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33151A758FC600A8D4CB /* StoreKit.framework */; };
+		186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */; };
+		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
+		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
+		186B33211A75AE7600A8D4CB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		186B32DC1A758E5000A8D4CB /* SquirelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquirelList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		186B32DC1A758E5000A8D4CB /* SquirelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirelList/build/Debug-iphoneos/SquirelList.app"; sourceTree = "<absolute>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E31A758E5000A8D4CB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -35,9 +49,24 @@
 		186B32E81A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		186B32EA1A758E5000A8D4CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		186B32ED1A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		186B32F31A758E5000A8D4CB /* SquirelListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SquirelListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		186B32F31A758E5000A8D4CB /* SquirelListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SquirelListTests.xctest; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirelList/build/Debug-iphoneos/SquirelListTests.xctest"; sourceTree = "<absolute>"; };
 		186B32F81A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32F91A758E5000A8D4CB /* SquirelListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirelListTests.swift; sourceTree = "<group>"; };
+		186B33031A758EB400A8D4CB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		186B33041A758EB400A8D4CB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		186B33071A758F7E00A8D4CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		186B33091A758F8800A8D4CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		186B330B1A758F9300A8D4CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		186B330D1A758F9E00A8D4CB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		186B33111A758FB100A8D4CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		186B33131A758FBC00A8D4CB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		186B33151A758FC600A8D4CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		186B33191A758FDA00A8D4CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
+		186B33201A75AE7600A8D4CB /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +74,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */,
+				186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */,
+				186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */,
+				186B33161A758FC600A8D4CB /* StoreKit.framework in Frameworks */,
+				186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */,
+				186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */,
+				186B33101A758FA800A8D4CB /* MobileCoreServices.framework in Frameworks */,
+				186B330E1A758F9E00A8D4CB /* CoreLocation.framework in Frameworks */,
+				186B330C1A758F9300A8D4CB /* CoreGraphics.framework in Frameworks */,
+				186B330A1A758F8800A8D4CB /* CFNetwork.framework in Frameworks */,
+				186B33081A758F7E00A8D4CB /* AudioToolbox.framework in Frameworks */,
+				186B33061A758EB400A8D4CB /* Parse.framework in Frameworks */,
+				186B33051A758EB400A8D4CB /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,28 +105,20 @@
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirelList */,
 				186B32F61A758E5000A8D4CB /* SquirelListTests */,
-				186B32DD1A758E5000A8D4CB /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		186B32DD1A758E5000A8D4CB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				186B32DC1A758E5000A8D4CB /* SquirelList.app */,
-				186B32F31A758E5000A8D4CB /* SquirelListTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		186B32DE1A758E5000A8D4CB /* SquirelList */ = {
 			isa = PBXGroup;
 			children = (
+				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				186B32E31A758E5000A8D4CB /* FirstViewController.swift */,
 				186B32E51A758E5000A8D4CB /* SecondViewController.swift */,
-				186B32E71A758E5000A8D4CB /* Main.storyboard */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
 				186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */,
+				186B32E71A758E5000A8D4CB /* Main.storyboard */,
+				186B33201A75AE7600A8D4CB /* RegisterViewController.swift */,
 				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 			);
 			path = SquirelList;
@@ -93,6 +127,19 @@
 		186B32DF1A758E5000A8D4CB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
+				186B33191A758FDA00A8D4CB /* libz.dylib */,
+				186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */,
+				186B33151A758FC600A8D4CB /* StoreKit.framework */,
+				186B33131A758FBC00A8D4CB /* Security.framework */,
+				186B33111A758FB100A8D4CB /* QuartzCore.framework */,
+				186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */,
+				186B330D1A758F9E00A8D4CB /* CoreLocation.framework */,
+				186B330B1A758F9300A8D4CB /* CoreGraphics.framework */,
+				186B33091A758F8800A8D4CB /* CFNetwork.framework */,
+				186B33071A758F7E00A8D4CB /* AudioToolbox.framework */,
+				186B33031A758EB400A8D4CB /* Bolts.framework */,
+				186B33041A758EB400A8D4CB /* Parse.framework */,
 				186B32E01A758E5000A8D4CB /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -180,7 +227,7 @@
 				Base,
 			);
 			mainGroup = 186B32D31A758E5000A8D4CB;
-			productRefGroup = 186B32DD1A758E5000A8D4CB /* Products */;
+			productRefGroup = 186B32D31A758E5000A8D4CB;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -218,6 +265,7 @@
 				186B32E61A758E5000A8D4CB /* SecondViewController.swift in Sources */,
 				186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */,
 				186B32E41A758E5000A8D4CB /* FirstViewController.swift in Sources */,
+				186B33211A75AE7600A8D4CB /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,9 +388,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SquirelList",
+				);
 				INFOPLIST_FILE = SquirelList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SquirelList/SquirelList-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -350,9 +405,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SquirelList",
+				);
 				INFOPLIST_FILE = SquirelList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SquirelList/SquirelList-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -409,6 +470,7 @@
 				186B32FF1A758E5000A8D4CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		186B33001A758E5000A8D4CB /* Build configuration list for PBXNativeTarget "SquirelListTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +479,7 @@
 				186B33021A758E5000A8D4CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
