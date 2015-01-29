@@ -92,6 +92,8 @@ class RegisterLoginViewController: UIViewController {
         }
     }
     
+
+    
     
     /* Parameters: error, which is the error that the user should see in the UIAlertController
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
@@ -129,11 +131,22 @@ class RegisterLoginViewController: UIViewController {
     
     }
     
+    
+    override func viewDidAppear(animated: Bool)  {
+        if PFUser.currentUser() != nil {
+                self.performSegueWithIdentifier("jumpToHome", sender: self)
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    
+
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

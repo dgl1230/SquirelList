@@ -10,48 +10,57 @@ import UIKit
 
 class FirstViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        
-        /*
-        var score = PFObject(className: "Score")
-        score.setObject("Rob", forKey: "name")
-        score.setObject(95, forKey: "number")
-        score.saveInBackgroundWithBlock{
-        
-            (success: Bool!, error: NSError!) -> Void in
-            
-            if success == true {
-                println("Score created with ID: \(score.objectId)")
-            } else {
-                println(error)
-            }
-        }
-        */
-        
-        var query = PFQuery(className: "Score")
-        query.getObjectInBackgroundWithId("kvkEWeY3YQ") {
-        
-            (score: PFObject!, error: NSError!) -> Void in
-            
-            if error == nil {
-                println(score)
-            } else {
-                println(error)
-            }
-        }
-        
-
-        
-    }
+    var users = [""]
 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        cell.textLabel?.text = users[indexPath.row]
+        return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        }
+    }
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var query = PFUser.query()
+        query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
+            self.users.removeAll(keepCapacity: true)
+            for object in objects {
+                var user:PFUser = object as PFUser
+                self.users.append(user.username)
+                
+            }
+            self.tableView.reloadData()
+        
+        })
+    }
+
 
 
 }
