@@ -39,7 +39,7 @@ class RegisterLoginViewController: UIViewController {
                 (user: PFUser!, signupError: NSError!) -> Void in
                     self.resumeInteractionEvents()
                     if signupError ==  nil {
-                        println("Logged in :D")
+                        self.performSegueWithIdentifier("jumpToHome", sender: self)
                     } else {
                         if let errorString = signupError.userInfo?["error"] as? NSString {
                             error = errorString

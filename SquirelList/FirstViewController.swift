@@ -49,6 +49,8 @@ class FirstViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         var query = PFUser.query()
+        //var group_query = PFObject.query()
+        
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             self.users.removeAll(keepCapacity: true)
             for object in objects {
