@@ -27,7 +27,7 @@ class RegisterLoginViewController: UIViewController {
         var error = ""
     
         if usernameLogin.text == "" || passwordLogin.text == "" {
-            error = "We need your emai and password to login"
+            error = "We need your email and password to login"
         }
         
         if error != "" {
@@ -41,7 +41,7 @@ class RegisterLoginViewController: UIViewController {
                     if signupError ==  nil {
                         self.performSegueWithIdentifier("jumpToHome", sender: self)
                     } else {
-                        if let errorString = signupError.userInfo?["error"] as? NSString {
+                        if let errorString = signupError.userInfo?["error"] as? String {
                             error = errorString
                         } else {
                             error = "There was a random bug :( Please try again"
@@ -81,7 +81,7 @@ class RegisterLoginViewController: UIViewController {
                 if signupError == nil {
                     println("It worked gurlll")
                 } else {
-                    if let errorString = signupError.userInfo?["error"] as? NSString {
+                    if let errorString = signupError.userInfo?["error"] as? String {
                         error = errorString
                     } else {
                         error = "There was a random bug :( Please try again"

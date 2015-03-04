@@ -10,7 +10,7 @@ import UIKit
 
 class FirstViewController: UITableViewController {
 
-    var users = [""]
+    var users = [PFUser]()
 
 
     override func didReceiveMemoryWarning() {
@@ -24,9 +24,26 @@ class FirstViewController: UITableViewController {
     }
     
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SingleUserSquirrels" {
+            let controller = segue.destinationViewController as! SquirrelViewController
+            var selectedUser = sender as! PFUser
+            controller.selectedUser = selectedUser
+            //var addButton = self.view.viewWithTag(69) as! UIBarButtonItem
+            
+        }
+
+    }
+    
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
-        cell.textLabel?.text = users[indexPath.row]
+        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        if (users[indexPath.row]["username"] as? String == PFUser.currentUser().username) {
+             cell.textLabel?.text = "me"
+        }
+        else {
+            cell.textLabel?.text = users[indexPath.row]["username"] as? String
+        }
         return cell
     }
     
@@ -38,24 +55,20 @@ class FirstViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        if cell.accessoryType == UITableViewCellAccessoryType.Checkmark {
-            cell.accessoryType = UITableViewCellAccessoryType.None
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        }
+        self.performSegueWithIdentifier("SingleUserSquirrels", sender: users[indexPath.row])
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         var query = PFUser.query()
-        //var group_query = PFObject.query()
+        //query.whereKey("owner", equalTo: selectedUser!["username"])
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             self.users.removeAll(keepCapacity: true)
             for object in objects {
-                var user:PFUser = object as PFUser
-                self.users.append(user.username)
+                var user:PFUser = object as! PFUser
+                self.users.append(user)
                 
             }
             self.tableView.reloadData()
