@@ -12,12 +12,6 @@ class FirstViewController: UITableViewController {
 
     var users = [PFUser]()
 
-
-    @IBAction func logout(sender: AnyObject) {
-        PFUser.logOut()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
 		182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182595271A8E9B050057BEDD /* ChatDetailViewController.swift */; };
+		183415B81AAE2ADC0093B4CB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */; };
+		183415BA1AAE85110093B4CB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B91AAE85110093B4CB /* EditProfileViewController.swift */; };
 		186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E11A758E5000A8D4CB /* AppDelegate.swift */; };
 		186B32E41A758E5000A8D4CB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E31A758E5000A8D4CB /* FirstViewController.swift */; };
 		186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */; };
@@ -39,6 +41,8 @@
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
 		182595271A8E9B050057BEDD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
 		183415B61AAAC68E0093B4CB /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirrelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/SquirrelList.app"; sourceTree = "<absolute>"; };
+		183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		183415B91AAE85110093B4CB /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E31A758E5000A8D4CB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -101,20 +105,22 @@
 		186B32DE1A758E5000A8D4CB /* SquirrelList */ = {
 			isa = PBXGroup;
 			children = (
+				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
 				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
+				183415B91AAE85110093B4CB /* EditProfileViewController.swift */,
 				186B32E31A758E5000A8D4CB /* FirstViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
+				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
+				18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */,
+				18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */,
+				186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */,
+				183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
+				18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */,
 				186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */,
 				186B32E71A758E5000A8D4CB /* Main.storyboard */,
-				18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */,
-				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
-				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
-				18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */,
-				18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */,
-				186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */,
 				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 			);
 			path = SquirrelList;
@@ -212,7 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183415BA1AAE85110093B4CB /* EditProfileViewController.swift in Sources */,
 				18D6AC1B1AA2B2D60016FB2D /* SquirrelDetailViewController.swift in Sources */,
+				183415B81AAE2ADC0093B4CB /* UserProfileViewController.swift in Sources */,
 				18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */,
 				186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */,
 				186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */,
