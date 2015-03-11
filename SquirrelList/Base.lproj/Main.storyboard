@@ -59,7 +59,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addSquirrelButton" destination="QCF-gE-72V" id="G0q-5U-HTq"/>
-                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="GPf-7a-lug"/>
+                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="Cha-Hu-QPx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -79,12 +79,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhX-JM-Mai">
-                                <rect key="frame" x="109" y="166" width="97" height="30"/>
+                                <rect key="frame" x="107" y="465" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vv5-9p-Wsa">
-                                <rect key="frame" x="107" y="103" width="107" height="46"/>
+                                <rect key="frame" x="107" y="402" width="107" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="Rate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,17 +93,59 @@
                                     <action selector="rateSquirrel:" destination="5mO-wa-pIV" eventType="touchUpInside" id="fPL-1G-rCl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtu-c7-vgD">
+                                <rect key="frame" x="44" y="90" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXl-lD-eM7">
+                                <rect key="frame" x="179" y="90" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg. Rating: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-xm-GTM">
+                                <rect key="frame" x="35" y="154" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqM-Fh-hiY">
+                                <rect key="frame" x="170" y="154" width="78" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIj-z4-gEY">
+                                <rect key="frame" x="170" y="203" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-EK-2vJ">
+                                <rect key="frame" x="33" y="203" width="94" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aMF-zL-iQH"/>
                     <connections>
-                        <outlet property="rateNumber" destination="mhX-JM-Mai" id="VxO-8Y-DdS"/>
+                        <outlet property="avgRatingLabel" destination="KqM-Fh-hiY" id="haA-ma-6hr"/>
+                        <outlet property="firstNameLabel" destination="gtu-c7-vgD" id="JAg-Td-bBT"/>
+                        <outlet property="lastNameLabel" destination="NXl-lD-eM7" id="ZoN-2b-dyZ"/>
+                        <outlet property="rateButton" destination="vv5-9p-Wsa" id="ZEC-FD-Od7"/>
+                        <outlet property="rateNumberTextField" destination="mhX-JM-Mai" id="jaW-jj-2zr"/>
+                        <outlet property="userRatingLabel" destination="DIj-z4-gEY" id="tag-gp-z3K"/>
+                        <outlet property="yourRatingLabel" destination="MdC-EK-2vJ" id="VFA-5J-xRA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTe-KS-Yfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="-345"/>
+            <point key="canvasLocation" x="1911" y="-345"/>
         </scene>
         <!--Add Squirrel -->
         <scene sceneID="6OE-gP-1Oe">
@@ -683,7 +725,7 @@
                     <navigationItem key="navigationItem" title="Squirrels" id="RX6-kA-Eba"/>
                     <connections>
                         <outlet property="teamRatingLabel" destination="32X-pb-5nS" id="03I-gv-xGb"/>
-                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="hYl-aI-By4"/>
+                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="PKS-xP-He4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEe-Q4-NcR" sceneMemberID="firstResponder"/>
@@ -746,6 +788,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hYl-aI-By4"/>
+        <segue reference="Cha-Hu-QPx"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDelegate {
+class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
 
     var squirrels = [PFObject]()
     var selectedUser: PFUser?
@@ -59,9 +59,8 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
             
         }
         if segue.identifier == "SquirrelDetails" {
-            //let navigationController = segue.destinationViewController as! UINavigationController
             let controller = segue.destinationViewController as SquirrelDetailViewController
-            //controller.delegate = self
+            controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
             
         }
@@ -126,10 +125,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         var username = PFUser.currentUser()["username"] as String
         var raters = squirrels[indexPath.row]["raters"] as [String]
-        if (!checkIfUserRatedSquirrel(username, raters: raters)) {
-            self.performSegueWithIdentifier("SquirrelDetails", sender: squirrels[indexPath.row])
-        }
-        
+        self.performSegueWithIdentifier("SquirrelDetails", sender: squirrels[indexPath.row])        
         
     }
     
@@ -172,7 +168,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
                 var username = self.selectedUser!["username"] as String
                 self.title = "\(username)'s  Squirrels"
                 var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as String)
-                self.teamRatingLabel.text = "Team Rating: \(teamRating)"
+                self.teamRatingLabel.text = "Team Rating: \(teamRating!)"
             } 
         })
         //If the selected user is nil, then we are not on user squirrels, which has no addSquirrelButton
@@ -223,6 +219,11 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
         }
 
         
+    }
+    
+    //Should be its own extension 
+    func squirrelDetailViewController(controller: SquirrelDetailViewController) {
+            self.tableView.reloadData()
     }
     
     
