@@ -11,24 +11,28 @@ import UIKit
 class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
 
     var squirrels = [PFObject]()
+    
+    //Optional value for determing if we're viewing someone else's squirrels
     var selectedUser: PFUser?
+    
     var didTheyRate: Bool?
     
-    //There are optionals for updating a Squirrel's rating
     
+    //These are optionals for updating a Squirrel's rating
     var rating: String?
     var teamRatings = [String]()
 
     
     @IBOutlet weak var teamRatingLabel: UILabel!
     
-    @IBOutlet weak var addSquirrelButton: UIBarButtonItem!
+    @IBOutlet weak var addSquirrelButton: UIBarButtonItem?
 
 
     func calculateTeamRating(username:String) -> String? {
         teamRatings = []
         for squirrel in self.squirrels {
-            if (squirrel["owner"] as String == username) && (squirrel["avg_rating"] != nil){
+            //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
+            if (squirrel["owner"] as String == username) && (squirrel["avg_rating"] as String != ""){
                 teamRatings.append(squirrel["avg_rating"] as String)
             }
         }
@@ -62,32 +66,36 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
             let controller = segue.destinationViewController as SquirrelDetailViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
+            if sender!["owner"] != nil {
+                controller.squirrelOwner = selectedUser?
+            }
             
         }
 
     }
     
     
-    func calculateAverageRating(ratings:[String]) -> Int {
+    func calculateAverageRating(ratings:[String]) -> String {
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
-            return 0
+            return "No Ratings"
         }
         numOfRatings = 0
         var sum = 0
 
         for rating in ratings {
             if let test = rating.toInt() {
-                println(rating)
                  sum += rating.toInt()!
                  numOfRatings += 1
             }
            
         }
-        return Int(Float(sum)/Float(numOfRatings))
+        return String(Int(sum/numOfRatings))
         
     }
     
+    
+
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
@@ -103,15 +111,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
         ratingLabel.text = squirrels[indexPath.row]["avg_rating"] as? String
         
         var raters = squirrels[indexPath.row]["raters"] as? [String]
-        if let check = raters {
-            didTheyRate = checkIfUserRatedSquirrel(PFUser.currentUser().username, raters: squirrels[indexPath.row]["raters"] as [String])
-        } else {
-            didTheyRate = false
-        }
-        if (didTheyRate == false) {
-            var rate = cell.viewWithTag(4) as UIButton
-            rate.setTitle("Rate", forState: UIControlState.Normal)
-        }
+        
         return cell
     }
     
@@ -123,10 +123,10 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        
         var username = PFUser.currentUser()["username"] as String
         var raters = squirrels[indexPath.row]["raters"] as [String]
-        self.performSegueWithIdentifier("SquirrelDetails", sender: squirrels[indexPath.row])        
-        
+        self.performSegueWithIdentifier("SquirrelDetails", sender: squirrels[indexPath.row])
     }
     
     
@@ -152,8 +152,11 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "SquirrelTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         var query = PFQuery(className:"Squirrel")
+
+        //Check to see if we are viewing someone else's squirrels
         if (selectedUser != nil) {
-            //Then we are going to a selected user's list of Squirrels
+            var username = self.selectedUser!["username"] as String
+            self.title = "\(username)'s  Squirrels"
             query.whereKey("owner", equalTo: selectedUser!["username"])
         }
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
@@ -163,18 +166,22 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
                 self.squirrels.append(squirrel)
             }
             self.tableView.reloadData()
-            //test to see if they are viewing someone's squirrel list 
-            if let test = self.selectedUser {
-                var username = self.selectedUser!["username"] as String
-                self.title = "\(username)'s  Squirrels"
+            if (self.selectedUser != nil) {
+                //We need to calculate the team rating AFTER all the the squirrels have been queried
                 var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as String)
-                self.teamRatingLabel.text = "Team Rating: \(teamRating!)"
-            } 
+                if teamRating == "No Ratings" {
+                    self.teamRatingLabel.text = "Their Squirrels have not been rated yet"
+                } else {
+                    self.teamRatingLabel.text = "Team Rating: \(teamRating!)"
+                }
+                
+            }
         })
-        //If the selected user is nil, then we are not on user squirrels, which has no addSquirrelButton
+        //If the selected user is nil, then we are now on user squirrels, which has no addSquirrelButton
         if !userCanAddSquirrel() && self.selectedUser == nil {
-            addSquirrelButton.enabled = false
+            addSquirrelButton?.enabled = false
         }
+
 
     }
     
@@ -187,8 +194,6 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
    
     
     //Should also be made into its own extension
-    
-    
     func addSquirrelViewController(controller: AddSquirrelViewController, didFinishAddingFirstName firstName: NSString, didFinishAddingLastName lastName: NSString) {
         let newRowIndex = squirrels.count
 

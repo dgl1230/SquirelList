@@ -123,6 +123,7 @@ class RegisterLoginViewController: UIViewController {
     }
     
     
+    
 
     
     /*
@@ -136,6 +137,9 @@ class RegisterLoginViewController: UIViewController {
     }
     
     
+    
+    
+    
     override func viewDidAppear(animated: Bool)  {
         if PFUser.currentUser() != nil {
                 self.performSegueWithIdentifier("jumpToHome", sender: self)
@@ -145,8 +149,12 @@ class RegisterLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
     
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     
 
     

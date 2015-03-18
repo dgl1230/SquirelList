@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
+		1823AF5A1AB3E17F00BABE6F /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1823AF591AB3E17F00BABE6F /* TradeViewController.swift */; };
 		182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182595271A8E9B050057BEDD /* ChatDetailViewController.swift */; };
 		183415B81AAE2ADC0093B4CB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */; };
 		183415BA1AAE85110093B4CB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B91AAE85110093B4CB /* EditProfileViewController.swift */; };
 		186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E11A758E5000A8D4CB /* AppDelegate.swift */; };
-		186B32E41A758E5000A8D4CB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E31A758E5000A8D4CB /* FirstViewController.swift */; };
+		186B32E41A758E5000A8D4CB /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E31A758E5000A8D4CB /* UsersViewController.swift */; };
 		186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */; };
 		186B32E91A758E5000A8D4CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186B32E71A758E5000A8D4CB /* Main.storyboard */; };
 		186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186B32EA1A758E5000A8D4CB /* Images.xcassets */; };
@@ -31,21 +32,24 @@
 		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
 		186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */; };
+		187960D01AB6179700538306 /* SquirrelsForTradingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960CF1AB6179700538306 /* SquirrelsForTradingViewController.swift */; };
+		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
 		18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */; };
 		18921EB81A9C3A9E00D8F012 /* SquirrelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */; };
 		18D6AC1B1AA2B2D60016FB2D /* SquirrelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */; };
+		18D6FC221AB91773004E754A /* TradeOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D6FC211AB91773004E754A /* TradeOfferViewController.swift */; };
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
+		1823AF591AB3E17F00BABE6F /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
 		182595271A8E9B050057BEDD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
-		183415B61AAAC68E0093B4CB /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirrelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/SquirrelList.app"; sourceTree = "<absolute>"; };
 		183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		183415B91AAE85110093B4CB /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		186B32E31A758E5000A8D4CB /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		186B32E31A758E5000A8D4CB /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquirrelViewController.swift; sourceTree = "<group>"; };
 		186B32E81A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		186B32EA1A758E5000A8D4CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -65,9 +69,13 @@
 		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
 		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
+		187960CF1AB6179700538306 /* SquirrelsForTradingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelsForTradingViewController.swift; sourceTree = "<group>"; };
+		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		187960D31AB7519900538306 /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirrelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/SquirrelList.app"; sourceTree = "<absolute>"; };
 		18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelTableViewCell.swift; path = ../SquirrelTableViewCell.swift; sourceTree = "<group>"; };
 		18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SquirrelTableViewCell.xib; path = ../SquirrelTableViewCell.xib; sourceTree = "<group>"; };
 		18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelDetailViewController.swift; sourceTree = "<group>"; };
+		18D6FC211AB91773004E754A /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeOfferViewController.swift; sourceTree = "<group>"; };
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,13 +118,17 @@
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
 				183415B91AAE85110093B4CB /* EditProfileViewController.swift */,
-				186B32E31A758E5000A8D4CB /* FirstViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
+				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
 				18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */,
+				187960CF1AB6179700538306 /* SquirrelsForTradingViewController.swift */,
 				18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */,
 				186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */,
+				18D6FC211AB91773004E754A /* TradeOfferViewController.swift */,
+				1823AF591AB3E17F00BABE6F /* TradeViewController.swift */,
 				183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */,
+				186B32E31A758E5000A8D4CB /* UsersViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
 				18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */,
 				186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */,
@@ -164,7 +176,7 @@
 			);
 			name = SquirrelList;
 			productName = SquirelList;
-			productReference = 183415B61AAAC68E0093B4CB /* SquirrelList.app */;
+			productReference = 187960D31AB7519900538306 /* SquirrelList.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -178,6 +190,7 @@
 				TargetAttributes = {
 					186B32DB1A758E5000A8D4CB = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = PNMSTTGB8C;
 					};
 				};
 			};
@@ -221,13 +234,17 @@
 				183415BA1AAE85110093B4CB /* EditProfileViewController.swift in Sources */,
 				18D6AC1B1AA2B2D60016FB2D /* SquirrelDetailViewController.swift in Sources */,
 				183415B81AAE2ADC0093B4CB /* UserProfileViewController.swift in Sources */,
+				1823AF5A1AB3E17F00BABE6F /* TradeViewController.swift in Sources */,
 				18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */,
+				187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */,
 				186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */,
+				187960D01AB6179700538306 /* SquirrelsForTradingViewController.swift in Sources */,
 				186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */,
 				18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */,
 				182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */,
-				186B32E41A758E5000A8D4CB /* FirstViewController.swift in Sources */,
+				186B32E41A758E5000A8D4CB /* UsersViewController.swift in Sources */,
 				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
+				18D6FC221AB91773004E754A /* TradeOfferViewController.swift in Sources */,
 				181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,13 +355,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SquirrelList",
 				);
 				INFOPLIST_FILE = SquirrelList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				"TEST_HOST[sdk=*]" = "";
@@ -357,13 +378,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/SquirrelList",
 				);
 				INFOPLIST_FILE = SquirrelList/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 			};
 			name = Release;

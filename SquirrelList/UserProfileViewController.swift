@@ -21,6 +21,13 @@ class UserProfileViewController: UIViewController {
     @IBAction func editProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfile", sender: self)
     }
+    
+    
+    @IBAction func seeNotifications(sender: AnyObject) {
+        self.performSegueWithIdentifier("userNotifications", sender: self)
+    }
+    
+    
 
     @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
@@ -33,7 +40,11 @@ class UserProfileViewController: UIViewController {
             let navigationController = segue.destinationViewController as UINavigationController
             let controller = navigationController.topViewController as EditProfileViewController
             //controller.delegate = self
-            
+        }
+        if segue.identifier == "userNotifications" {
+            let navigationController = segue.destinationViewController as UINavigationController
+            let controller = navigationController.topViewController as NotificationsViewController
+            //controller.delegate = self
         }
 
 

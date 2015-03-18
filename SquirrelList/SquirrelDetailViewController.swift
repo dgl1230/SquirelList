@@ -16,7 +16,10 @@ protocol SquirrelDetailViewControllerDelegate: class {
 class SquirrelDetailViewController: UIViewController {
     
     weak var delegate: SquirrelViewController?
+    
     var ratedSquirrel: PFObject?
+    
+    var squirrelOwner: PFUser?
     
     @IBOutlet weak var firstNameLabel: UILabel!
     
@@ -24,14 +27,25 @@ class SquirrelDetailViewController: UIViewController {
     
     @IBOutlet weak var avgRatingLabel: UILabel!
     
+    //Label that says "owner:" doesn't actually say the owner's name
+    @IBOutlet weak var ownerLabel: UILabel!
+    
     @IBOutlet weak var rateButton: UIButton!
     
     @IBOutlet weak var rateNumberTextField: UITextField!
     
+    //Label that displays the owners name
+    @IBOutlet weak var squirrelOwnerLabel: UILabel!
+    
+    @IBOutlet weak var tradeButton: UIButton!
+    
+    //This label displays the user's actual rating
     @IBOutlet weak var userRatingLabel: UILabel!
     
     //The label that says "Your Rating" - it does not actually display the rating
     @IBOutlet weak var yourRatingLabel: UILabel!
+    
+    
     
     @IBAction func rateSquirrel(sender: AnyObject) {
         //check if ["raters"] is nil. If it is, we create it
@@ -54,6 +68,14 @@ class SquirrelDetailViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    
+    @IBAction func tradeSquirrel(sender: AnyObject) {
+        self.performSegueWithIdentifier("tradeSquirrel", sender: self)
+    }
+    
+    
+    
     
     func calculateAverageRating(ratings:[String]) -> String {
         var numOfRatings = ratings.count
@@ -84,12 +106,28 @@ class SquirrelDetailViewController: UIViewController {
         return ratings[index!]
     }
     
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "tradeSquirrel" {
+            let controller = segue.destinationViewController as TradeViewController
+            controller.desiredSquirrelOwner = squirrelOwner!
+            controller.desiredSquirrel = ratedSquirrel!
+        }
+
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         var firstName = ratedSquirrel!["first_name"] as String
         var lastName = ratedSquirrel!["last_name"] as String
         self.title = "\(firstName) \(lastName)"
         firstNameLabel.text = firstName
         lastNameLabel.text = lastName
+        
+        //Check if the squirrel has an average rating 
         if ratedSquirrel!["avg_rating"] != nil {
             avgRatingLabel.text = ratedSquirrel!["avg_rating"] as? String
         } else {
@@ -97,6 +135,7 @@ class SquirrelDetailViewController: UIViewController {
         }
         var userRatedSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String])
         
+        //Check if the user has rated the squirrel
         if userRatedSquirrel {
             userRatingLabel.text = getUserRating(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String], ratings: ratedSquirrel!["ratings"] as [String])
             rateNumberTextField.hidden = true
@@ -105,6 +144,17 @@ class SquirrelDetailViewController: UIViewController {
             //The user did not rate the squirrel 
             yourRatingLabel.hidden = true
             userRatingLabel.hidden = true
+        }
+        
+        //Check if the squirrel has an owner to propose a trade with
+        if ratedSquirrel!["owner"] == nil {
+            tradeButton.hidden = true
+            ownerLabel.hidden = true
+            squirrelOwnerLabel.hidden = true
+        } else {
+            //Squirrel does have an owner
+            ownerLabel.hidden = false
+            squirrelOwnerLabel.text = ratedSquirrel!["owner"] as? String
         }
         
     }

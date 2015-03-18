@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UITableViewController {
+class UsersViewController: UITableViewController {
 
     var users = [PFUser]()
 
@@ -26,10 +26,7 @@ class FirstViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SingleUserSquirrels" {
             let controller = segue.destinationViewController as SquirrelViewController
-            var selectedUser = sender as PFUser
-            controller.selectedUser = selectedUser
-            //var addButton = self.view.viewWithTag(69) as! UIBarButtonItem
-            
+            controller.selectedUser = sender as? PFUser
         }
 
     }
