@@ -8,6 +8,8 @@
 
 import UIKit
 
+//This view controller is for proposing trades to other users
+
 class TradeViewController: UIViewController, SquirrelsForTradeDelegate {
 
     var desiredSquirrel: PFObject?

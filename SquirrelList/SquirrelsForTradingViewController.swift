@@ -48,7 +48,7 @@ class SquirrelsForTradingViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         delegate?.SquirrelForTradeDelegate(self, selectedSquirrel: squirrels[indexPath.row], desiredSquirrelOwnerTransfer: desiredSquirrelOwner!, desiredSquirrelTransfer: desiredSquirrel!)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
         
     }
     

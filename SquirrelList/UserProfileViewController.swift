@@ -9,6 +9,9 @@
 import UIKit
 
 class UserProfileViewController: UIViewController {
+    
+    //Optional for determining if user is going to trade proposals or invites, depending on button pushed
+    var typeOfNotifcation: String?
 
 
     @IBOutlet weak var firstNameLabel: UILabel!
@@ -17,13 +20,23 @@ class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
 
+    @IBAction func pfQueryTest(sender: AnyObject) {
+        self.performSegueWithIdentifier("pfQueryTest", sender: self)
+    }
 
     @IBAction func editProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfile", sender: self)
     }
     
     
+    @IBAction func seeInvites(sender: AnyObject) {
+        typeOfNotifcation = "invite"
+        self.performSegueWithIdentifier("userNotifications", sender: self)
+    }
+    
+    
     @IBAction func seeNotifications(sender: AnyObject) {
+        typeOfNotifcation = "trade"
         self.performSegueWithIdentifier("userNotifications", sender: self)
     }
     
@@ -44,7 +57,12 @@ class UserProfileViewController: UIViewController {
         if segue.identifier == "userNotifications" {
             let navigationController = segue.destinationViewController as UINavigationController
             let controller = navigationController.topViewController as NotificationsViewController
-            //controller.delegate = self
+            controller.typeOfNotification = typeOfNotifcation!
+        }
+        if segue.identifier == "pfQueryTest" {
+            let navigationController = segue.destinationViewController as UINavigationController
+            let controller = navigationController.topViewController as SquirrelNewViewController
+            //controller.typeOfNotification = typeOfNotifcation!
         }
 
 

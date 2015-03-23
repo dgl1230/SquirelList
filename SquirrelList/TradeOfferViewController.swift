@@ -45,8 +45,8 @@ class TradeOfferViewController: UIViewController {
         yourSquirrel!.save()
     
         tradeProposal!.deleteInBackground()
-        dismissViewControllerAnimated(true, completion: nil)
         delegate?.tradeOfferViewController(self)
+        self.navigationController?.popViewControllerAnimated(true)
     
     }
     

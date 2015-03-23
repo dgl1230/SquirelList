@@ -39,10 +39,6 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("willShowKeyBoard:"), name:UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("willHideKeyBoard:"), name:UIKeyboardWillHideNotification, object: nil)
-        //println(self.composeChatView.frame.origin.y)
-        //println(self.composeChatView.frame.size.height)
-        //println(self.chatTbl.frame.origin.y)
-        //println(self.chatTbl.frame.size.height)
         messages = NSMutableArray()
         chatTxtField.delegate = self
         getMessages()
@@ -56,8 +52,8 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
-        //println(self.composeChatView.frame.origin.y)
-        //println(self.chatTbl.frame.origin.y)
+        println("The starting composeChatView Y coordinate is \(self.composeChatView.frame.origin.y)")
+        println("The starting height of the chatTbl is \(self.chatTbl.frame.size.height)")
 
     }
 
@@ -171,8 +167,6 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func willShowKeyBoard(notification : NSNotification){
-        //println("starting")
-        
         var userInfo: NSDictionary!
         userInfo = notification.userInfo
         
@@ -181,36 +175,31 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as NSTimeInterval
         var keyboardF:NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
         var keyboardFrame = keyboardF.CGRectValue()
-        
-
-        
+    
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
+            println("animating changes")
             
-            self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
+            //self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height - keyboardFrame.size.height+49)
             
-            self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height - keyboardFrame.size.height+49);
+            
+            //self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
+            self.composeChatView.frame.origin.y = self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+3
+            println("The composeChatView Y coordinate is now \(self.composeChatView.frame.origin.y)")
+            self.chatTbl.frame.size.height = self.chatTbl.frame.size.height - keyboardFrame.size.height + 49
+            println("The height of hte chatTbl is now \(self.chatTbl.frame.size.height)")
+            
+            
             
 
             
             }, completion: nil)
         var indexPath = NSIndexPath(forRow:messages.count-1, inSection: 0)
         chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-        //println("ComposeChatView Y Origin is \(self.composeChatView.frame.origin.y)")
-        //println("ComposeChatView Height is \(self.composeChatView.frame.size.height)")
-        //println("ChatTbl Y Origin is \(self.chatTbl.frame.origin.y)")
-        //println("ChatTbl Heigh is \(self.chatTbl.frame.size.height)")
-        //println(keyboardFrame.origin.y)
-        //println(keyboardFrame.size.height)
-        //println(self.chatTbl.frame.origin.y)
-        //println(self.chatTbl.frame.height)
         
 
     }
     
     func willHideKeyBoard(notification : NSNotification){
-        //println("ending")
-        
-        
         var userInfo: NSDictionary!
         userInfo = notification.userInfo
         
@@ -221,24 +210,16 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         var keyboardFrame = keyboardF.CGRectValue()
         
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
+            println("reverting keyboard")
             
-            self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
-            self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height + keyboardFrame.size.height-49);
-            
- 
-
-            
-            
-            
-           
+            //self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
+            self.composeChatView.frame.origin.y = self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-3
+            println("The composeChatView Y coordinate is now \(self.composeChatView.frame.origin.y)")
+            //self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height + keyboardFrame.size.height-49);
+            self.chatTbl.frame.size.height = self.chatTbl.frame.size.height + keyboardFrame.size.height-49
+            println("The height of hte chatTbl is now \(self.chatTbl.frame.size.height)")
             
             }, completion: nil)
-        
-        //println("ComposeChatView Y Origin is \(self.composeChatView.frame.origin.y)")
-        //println("ComposeChatView Height is \(self.composeChatView.frame.size.height)")
-        //println("ChatTbl Y Origin is \(self.chatTbl.frame.origin.y)")
-        //println("ChatTbl Heigh is \(self.chatTbl.frame.size.height)")
-
 
     }
     

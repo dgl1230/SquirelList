@@ -9,7 +9,7 @@
 import UIKit
 
 
-class SquirrelTableViewCell: UITableViewCell {
+class SquirrelTableViewCell: PFTableViewCell {
     
    var squirrel: PFObject?
    var username: String?

@@ -30,12 +30,8 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         let first = firstName.text as NSString
         let last = lastName.text as NSString
         
-        if firstName.text == "" || lastName.text == "" {
-            displayErrorAlert("Your Squirrel needs a first and last name you monster!")
-        }
-        else {
         delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first, didFinishAddingLastName: last)
-        }
+
     }
     
     /* Parameters: error, which is the error that the user should see in the UIAlertController

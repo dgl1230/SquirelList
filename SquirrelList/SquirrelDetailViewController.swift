@@ -71,6 +71,7 @@ class SquirrelDetailViewController: UIViewController {
     
     
     @IBAction func tradeSquirrel(sender: AnyObject) {
+        println("button pressed")
         self.performSegueWithIdentifier("tradeSquirrel", sender: self)
     }
     
@@ -109,6 +110,7 @@ class SquirrelDetailViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tradeSquirrel" {
+            println("pushing")
             let controller = segue.destinationViewController as TradeViewController
             controller.desiredSquirrelOwner = squirrelOwner!
             controller.desiredSquirrel = ratedSquirrel!

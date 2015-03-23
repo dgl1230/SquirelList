@@ -27,10 +27,12 @@ class RegisterLoginViewController: UIViewController {
         var error = ""
     
         if usernameLogin.text == "" || passwordLogin.text == "" {
-            error = "We need your email and password to login"
+            println("login error")
+            error = "We need your username and password to login"
         }
         
         if error != "" {
+            println(error)
             displayErrorAlert(error)
         } else {
             displayLoadingAnimator()
@@ -72,6 +74,7 @@ class RegisterLoginViewController: UIViewController {
             user.password = passwordRegister.text
             user.username = usernameRegister.text
             user["num_of_squirrels"] = 0
+            user["current_group"] = "first_group"
     
             displayLoadingAnimator()
     
@@ -140,7 +143,7 @@ class RegisterLoginViewController: UIViewController {
     
     
     
-    override func viewDidAppear(animated: Bool)  {
+    override func viewDidAppear(animated: Bool) {
         if PFUser.currentUser() != nil {
                 self.performSegueWithIdentifier("jumpToHome", sender: self)
         }
@@ -149,7 +152,6 @@ class RegisterLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {

@@ -26,6 +26,11 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
     @IBOutlet weak var teamRatingLabel: UILabel!
     
     @IBOutlet weak var addSquirrelButton: UIBarButtonItem?
+    
+    
+    @IBAction func addSquirrel(sender: AnyObject) {
+        self.performSegueWithIdentifier("AddSquirrel", sender: self)
+    }
 
 
     func calculateTeamRating(username:String) -> String? {
@@ -95,6 +100,11 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
     }
     
     
+    //Reloads the tableview data and then ends the pull to refresh loading animation when complete
+    func refresh(sender:AnyObject) {
+        self.tableView.reloadData()
+        self.refreshControl!.endRefreshing()
+    }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -131,25 +141,33 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
     
     
     func userCanAddSquirrel() -> Bool {
+        //Need to fetch in order to update "num_of"squirrels" field
+        PFUser.currentUser().fetch()
         var query = PFUser.query()
-        var loggedInUserQuery = PFUser.query()
-        loggedInUserQuery.whereKey("username", equalTo: PFUser.currentUser()["username"])
-        var loggedInUser = loggedInUserQuery.getFirstObject()
         var users = query.findObjects()
+        //The most squirrels owned by one user
+        var mostSquirrels = 0
         for user in users {
-            if (loggedInUser["num_of_squirrels"] as Int > user["num_of_squirrels"] as Int) {
-                return false
+            if (user["num_of_squirrels"] as Int > mostSquirrels) {
+                mostSquirrels = user["num_of_squirrels"] as Int
             }
         }
+        if PFUser.currentUser()["num_of_squirrels"] as Int > mostSquirrels {
+            return false
+        }
         return true
-            
-        
-        
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //For allowing pull to refresh 
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+        
         tableView.registerNib(UINib(nibName: "SquirrelTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         var query = PFQuery(className:"Squirrel")
 
@@ -169,6 +187,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
             if (self.selectedUser != nil) {
                 //We need to calculate the team rating AFTER all the the squirrels have been queried
                 var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as String)
+                
                 if teamRating == "No Ratings" {
                     self.teamRatingLabel.text = "Their Squirrels have not been rated yet"
                 } else {
@@ -178,7 +197,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
             }
         })
         //If the selected user is nil, then we are now on user squirrels, which has no addSquirrelButton
-        if !userCanAddSquirrel() && self.selectedUser == nil {
+        if userCanAddSquirrel() == false || self.selectedUser != nil {
             addSquirrelButton?.enabled = false
         }
 
@@ -195,6 +214,7 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
     
     //Should also be made into its own extension
     func addSquirrelViewController(controller: AddSquirrelViewController, didFinishAddingFirstName firstName: NSString, didFinishAddingLastName lastName: NSString) {
+        println("going to delegate function")
         let newRowIndex = squirrels.count
 
         var newSquirrel = PFObject(className:"Squirrel")
@@ -211,6 +231,12 @@ class SquirrelViewController: UITableViewController, AddSquirrelViewControllerDe
             (success: Bool, error: NSError!) -> Void in
             if (success) {
                 self.dismissViewControllerAnimated(true, completion: nil)
+                //Update the number of squirrels the user has
+                println(PFUser.currentUser()["num_of_squirrels"])
+                var currentNum = PFUser.currentUser()["num_of_squirrels"] as? Int
+                PFUser.currentUser()["num_of_squirrels"] = currentNum! + 1
+                PFUser.currentUser().save()
+                
                 //updating the rows in the table view
                 let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
                 let indexPaths = [indexPath]

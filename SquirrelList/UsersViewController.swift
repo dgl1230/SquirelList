@@ -31,6 +31,12 @@ class UsersViewController: UITableViewController {
 
     }
     
+    //Reloads the tableview data and then ends the pull to refresh loading animation when complete
+    func refresh(sender:AnyObject) {
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
@@ -57,8 +63,25 @@ class UsersViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //For allowing pull to refresh 
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl!)
+        
+        //First we need to get the appropriate group 
+        var currentGroupQuery = PFQuery(className: "Group")
+        PFUser.currentUser().fetch()
+        currentGroupQuery.whereKey("name", equalTo: PFUser.currentUser()["current_group"])
+        var currentGroup = currentGroupQuery.getFirstObject()
+        
+        var userIDs = currentGroup!["userIDs"] as [String]
+        
         var query = PFUser.query()
-        //query.whereKey("owner", equalTo: selectedUser!["username"])
+        //Need to refine this to take into account new users
+        //Need to update currentGroup in registerpage
+        //query.whereKey("objectId", containedIn: userIDs)
         
         query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
             self.users.removeAll(keepCapacity: true)
@@ -68,8 +91,10 @@ class UsersViewController: UITableViewController {
                 
             }
             self.tableView.reloadData()
-        
+            self.title = currentGroup!["name"] as? String
+            
         })
+        
     }
 
 

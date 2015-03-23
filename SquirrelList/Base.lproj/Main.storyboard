@@ -138,7 +138,6 @@
                                 </state>
                                 <connections>
                                     <action selector="tradeSquirrel:" destination="5mO-wa-pIV" eventType="touchUpInside" id="Iuc-EH-t9I"/>
-                                    <segue destination="tql-zb-M1h" kind="push" identifier="tradeSquirrel" id="7fb-L5-CR5"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="owner:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JmG-zu-6WE">
@@ -195,6 +194,7 @@
                         <outlet property="tradeButton" destination="F50-cY-yeh" id="SzG-BY-RZ4"/>
                         <outlet property="userRatingLabel" destination="DIj-z4-gEY" id="tag-gp-z3K"/>
                         <outlet property="yourRatingLabel" destination="MdC-EK-2vJ" id="VFA-5J-xRA"/>
+                        <segue destination="tql-zb-M1h" kind="push" identifier="tradeSquirrel" id="6Sh-pb-Fc6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fTe-KS-Yfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -297,7 +297,7 @@
                         <outlet property="offeredSquirrelLabel" destination="NQZ-kA-NqT" id="qUr-vf-ouG"/>
                         <outlet property="proposeTradeButton" destination="xEf-Pn-If2" id="SJ6-2X-7rd"/>
                         <outlet property="selectSquirrelButton" destination="5eC-bL-aDg" id="znD-W1-JQO"/>
-                        <segue destination="bck-TG-7KF" kind="modal" identifier="userSquirrels" id="AKv-XM-StN"/>
+                        <segue destination="bck-TG-7KF" kind="push" identifier="userSquirrels" id="AKv-XM-StN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLL-0W-AtG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -769,6 +769,24 @@
                                     <action selector="seeNotifications:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="iUj-qj-BvN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPy-QA-o0j">
+                                <rect key="frame" x="242" y="195" width="45" height="30"/>
+                                <state key="normal" title="Invites">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="seeInvites:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="PwE-7K-kV5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAj-yV-VXz">
+                                <rect key="frame" x="103" y="453" width="97" height="30"/>
+                                <state key="normal" title="PF Query Test">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pfQueryTest:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="o2Y-oq-tGo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -791,6 +809,7 @@
                         <outlet property="lastNameLabel" destination="TBY-Mg-7yQ" id="vjG-TK-n56"/>
                         <outlet property="usernameLabel" destination="zzR-Y2-HYv" id="I1p-Pe-qwR"/>
                         <segue destination="64t-eA-4qs" kind="modal" identifier="userNotifications" id="oM3-Bv-Qle"/>
+                        <segue destination="uPm-9y-y1S" kind="modal" identifier="pfQueryTest" id="gcb-kl-okB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQA-Le-GXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -874,7 +893,7 @@
             </objects>
             <point key="canvasLocation" x="1957" y="1769"/>
         </scene>
-        <!--Notifications-->
+        <!--Notification-->
         <scene sceneID="hkT-c4-dlW">
             <objects>
                 <viewController id="eZg-0E-lLr" customClass="NotificationsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
@@ -889,14 +908,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O5b-cr-cRX" id="QV7-SQ-g09">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5u-3g-ATj">
-                                            <rect key="frame" x="21" y="18" width="137" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="proposes trade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggU-7q-WcU">
-                                            <rect key="frame" x="173" y="17" width="117" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="trade proposal info " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5u-3g-ATj">
+                                            <rect key="frame" x="21" y="19" width="291" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -907,7 +920,7 @@
                         </prototypes>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Notifications" id="og8-9o-bjD">
+                    <navigationItem key="navigationItem" title="Notification" id="og8-9o-bjD">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="jZQ-Fr-qar">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tcS-f5-tCK">
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
@@ -923,12 +936,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="Hoc-yg-NfU" kind="modal" identifier="tradeOffer" id="EDs-YZ-UR1"/>
+                        <segue destination="Hoc-yg-NfU" kind="modal" identifier="tradeOffer1" id="EDs-YZ-UR1"/>
+                        <segue destination="gHt-7r-Dan" kind="modal" identifier="tradeOffer" id="wRK-qE-PHf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74o-rr-SnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010" y="2453"/>
+            <point key="canvasLocation" x="2542" y="2452"/>
         </scene>
         <!--Trade Offer View Controller-->
         <scene sceneID="jCq-h4-Cz0">
@@ -996,7 +1010,90 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0z-vX-Yg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2431" y="2453"/>
+            <point key="canvasLocation" x="2963" y="2453"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="74f-kh-16v">
+            <objects>
+                <viewController id="gHt-7r-Dan" customClass="DetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jmB-cu-zFa"/>
+                        <viewControllerLayoutGuide type="bottom" id="oYL-nJ-QbS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FUz-q5-PoD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Oc-tZ-5sP" userLabel="Pop-up View">
+                                <rect key="frame" x="40" y="164" width="240" height="240"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ra-rh4">
+                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
+                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="gHt-7r-Dan" eventType="touchUpInside" id="Glj-q9-CYs"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyc-X7-fuN">
+                                        <rect key="frame" x="69" y="61" width="113" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-96-llC">
+                                        <rect key="frame" x="104" y="96" width="21" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drg-xL-fc5">
+                                        <rect key="frame" x="74" y="132" width="93" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELY-09-TeL">
+                                        <rect key="frame" x="8" y="210" width="51" height="30"/>
+                                        <state key="normal" title="Decline">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="declineOffer:" destination="gHt-7r-Dan" eventType="touchUpInside" id="v3L-D2-ugT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eI-2l-p2d">
+                                        <rect key="frame" x="186" y="210" width="49" height="30"/>
+                                        <state key="normal" title="Accept">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="acceptOffer:" destination="gHt-7r-Dan" eventType="touchUpInside" id="8rx-2I-yX7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.95000000000000007" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="5i9-FH-USm"/>
+                                    <constraint firstAttribute="width" constant="240" id="B85-aV-hSL"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="1Oc-tZ-5sP" secondAttribute="centerX" id="5ru-fC-3Ng"/>
+                            <constraint firstAttribute="centerY" secondItem="1Oc-tZ-5sP" secondAttribute="centerY" id="PBv-Ar-JpP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="offeredSquirrelLabel" destination="pyc-X7-fuN" id="Qlt-c5-5cj"/>
+                        <outlet property="popupView" destination="1Oc-tZ-5sP" id="y5U-a5-yqS"/>
+                        <outlet property="yourSquirrelLabel" destination="drg-xL-fc5" id="zcF-6c-m4i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TXM-XF-aOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2431" y="3141"/>
         </scene>
         <!--Group-->
         <scene sceneID="rdM-jh-nt3">
@@ -1111,6 +1208,30 @@
             </objects>
             <point key="canvasLocation" x="2845" y="-345"/>
         </scene>
+        <!--Squirrels-->
+        <scene sceneID="dIc-R8-Abi">
+            <objects>
+                <viewController id="tsb-Xl-Tzc" customClass="SquirrelNewViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xB4-Qu-a8D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bre-tC-T9c" customClass="SquirrelTableViewCell" customModule="SquirrelList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bre-tC-T9c" id="NxF-g2-A08">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Squirrels" id="5Nc-qK-qpL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MAY-qN-eCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1466" y="2516"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="BPL-Ur-LTV">
             <objects>
@@ -1127,10 +1248,47 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eBO-nk-QTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1425" y="2453"/>
+            <point key="canvasLocation" x="1957" y="2453"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Na3-sn-4Xh">
+            <objects>
+                <viewController id="4BW-u3-IJN" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pGh-62-8XO"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Y5-7L-rvm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Kd-6l-A6K">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jYj-rv-wRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q6C-ds-YMK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uPm-9y-y1S" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="drv-l9-glH"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ulo-9w-nIW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="tsb-Xl-Tzc" kind="relationship" relationship="rootViewController" id="LzE-XD-2Uy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ruj-IV-wK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="934" y="2516"/>
         </scene>
     </scenes>
     <resources>
+        <image name="CloseButton" width="15" height="15"/>
         <image name="chat_camera" width="25" height="19"/>
         <image name="chat_input_background" width="320" height="44"/>
         <image name="chat_input_textfield" width="221" height="29"/>

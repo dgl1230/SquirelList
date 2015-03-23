@@ -12,6 +12,12 @@
 		182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182595271A8E9B050057BEDD /* ChatDetailViewController.swift */; };
 		183415B81AAE2ADC0093B4CB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */; };
 		183415BA1AAE85110093B4CB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183415B91AAE85110093B4CB /* EditProfileViewController.swift */; };
+		1845611D1ABF75BE00026473 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611C1ABF75BE00026473 /* DetailViewController.swift */; };
+		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
+		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
+		184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561221ABFD24B00026473 /* BounceAnimationController.swift */; };
+		184ED40A1AC0A07800F82D50 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 184ED4091AC0A07800F82D50 /* ParseUI.framework */; };
+		184ED40C1AC0A29A00F82D50 /* SquirrelNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184ED40B1AC0A29A00F82D50 /* SquirrelNewViewController.swift */; };
 		186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E11A758E5000A8D4CB /* AppDelegate.swift */; };
 		186B32E41A758E5000A8D4CB /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E31A758E5000A8D4CB /* UsersViewController.swift */; };
 		186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */; };
@@ -47,6 +53,13 @@
 		182595271A8E9B050057BEDD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
 		183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		183415B91AAE85110093B4CB /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		1845611B1ABE417100026473 /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquirrelList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1845611C1ABF75BE00026473 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
+		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
+		184ED4091AC0A07800F82D50 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		184ED40B1AC0A29A00F82D50 /* SquirrelNewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelNewViewController.swift; sourceTree = "<group>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E31A758E5000A8D4CB /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -71,7 +84,6 @@
 		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
 		187960CF1AB6179700538306 /* SquirrelsForTradingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelsForTradingViewController.swift; sourceTree = "<group>"; };
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		187960D31AB7519900538306 /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirrelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/SquirrelList.app"; sourceTree = "<absolute>"; };
 		18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelTableViewCell.swift; path = ../SquirrelTableViewCell.swift; sourceTree = "<group>"; };
 		18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SquirrelTableViewCell.xib; path = ../SquirrelTableViewCell.xib; sourceTree = "<group>"; };
 		18D6AC1A1AA2B2D60016FB2D /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelDetailViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +98,7 @@
 			files = (
 				186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */,
 				186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */,
+				184ED40A1AC0A07800F82D50 /* ParseUI.framework in Frameworks */,
 				186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */,
 				186B33161A758FC600A8D4CB /* StoreKit.framework in Frameworks */,
 				186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */,
@@ -107,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirrelList */,
+				1845611B1ABE417100026473 /* SquirrelList.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,7 +131,11 @@
 				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
+				1845611C1ABF75BE00026473 /* DetailViewController.swift */,
+				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
+				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				183415B91AAE85110093B4CB /* EditProfileViewController.swift */,
+				184561201ABFCE3100026473 /* GradientView.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
@@ -125,6 +143,7 @@
 				187960CF1AB6179700538306 /* SquirrelsForTradingViewController.swift */,
 				18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */,
 				186B32E51A758E5000A8D4CB /* SquirrelViewController.swift */,
+				184ED40B1AC0A29A00F82D50 /* SquirrelNewViewController.swift */,
 				18D6FC211AB91773004E754A /* TradeOfferViewController.swift */,
 				1823AF591AB3E17F00BABE6F /* TradeViewController.swift */,
 				183415B71AAE2ADC0093B4CB /* UserProfileViewController.swift */,
@@ -143,6 +162,7 @@
 			children = (
 				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
 				186B33191A758FDA00A8D4CB /* libz.dylib */,
+				184ED4091AC0A07800F82D50 /* ParseUI.framework */,
 				186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */,
 				186B33151A758FC600A8D4CB /* StoreKit.framework */,
 				186B33131A758FBC00A8D4CB /* Security.framework */,
@@ -176,7 +196,7 @@
 			);
 			name = SquirrelList;
 			productName = SquirelList;
-			productReference = 187960D31AB7519900538306 /* SquirrelList.app */;
+			productReference = 1845611B1ABE417100026473 /* SquirrelList.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -238,14 +258,19 @@
 				18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */,
 				187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */,
 				186B32E61A758E5000A8D4CB /* SquirrelViewController.swift in Sources */,
+				1845611D1ABF75BE00026473 /* DetailViewController.swift in Sources */,
 				187960D01AB6179700538306 /* SquirrelsForTradingViewController.swift in Sources */,
 				186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */,
+				184ED40C1AC0A29A00F82D50 /* SquirrelNewViewController.swift in Sources */,
 				18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */,
 				182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */,
 				186B32E41A758E5000A8D4CB /* UsersViewController.swift in Sources */,
 				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
+				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
 				18D6FC221AB91773004E754A /* TradeOfferViewController.swift in Sources */,
+				1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */,
 				181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */,
+				184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
