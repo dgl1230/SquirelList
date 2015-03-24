@@ -1,31 +1,22 @@
 //
-//  SquirrelDetailViewController.swift
-//  SquirelList
+//  SquirrelDetailNewViewController.swift
+//  SquirrelList
 //
-//  Created by Denis Geary Lopez on 2/28/15.
+//  Created by Denis Geary Lopez on 3/23/15.
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
-
-
 import UIKit
 
+class SquirrelDetailNewViewController: PopUpViewController {
 
-protocol SquirrelDetailViewControllerDelegate: class {
-    func squirrelDetailViewController(controller: SquirrelDetailViewController)
-}
-
-class SquirrelDetailViewController: UIViewController {
-    
     weak var delegate: SquirrelViewController?
     
     var ratedSquirrel: PFObject?
     
     var squirrelOwner: PFUser?
     
-    @IBOutlet weak var firstNameLabel: UILabel!
-    
-    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var squirrelNameLabel: UILabel!
     
     @IBOutlet weak var avgRatingLabel: UILabel!
     
@@ -48,7 +39,6 @@ class SquirrelDetailViewController: UIViewController {
     @IBOutlet weak var yourRatingLabel: UILabel!
     
     
-    
     @IBAction func rateSquirrel(sender: AnyObject) {
         //check if ["raters"] is nil. If it is, we create it
         var rater = PFUser.currentUser()["username"] as String
@@ -66,7 +56,7 @@ class SquirrelDetailViewController: UIViewController {
         }
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as [String])
         ratedSquirrel!.save()
-        delegate?.squirrelDetailViewController(self)
+        //delegate?.squirrelDetailViewController(self)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -123,13 +113,16 @@ class SquirrelDetailViewController: UIViewController {
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
+
+
     
+
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         var firstName = ratedSquirrel!["first_name"] as String
         var lastName = ratedSquirrel!["last_name"] as String
-        self.title = "\(firstName) \(lastName)"
-        firstNameLabel.text = firstName
-        lastNameLabel.text = lastName
+        squirrelNameLabel.text = "\(firstName) \(lastName)"
         
         //Check if the squirrel has an average rating 
         if ratedSquirrel!["avg_rating"] != nil {
@@ -141,7 +134,7 @@ class SquirrelDetailViewController: UIViewController {
         
         //Check if the user has rated the squirrel
         if userRatedSquirrel {
-            userRatingLabel.text = getUserRating(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String], ratings: ratedSquirrel!["ratings"] as [String])
+            yourRatingLabel.text = getUserRating(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String], ratings: ratedSquirrel!["ratings"] as [String])
             rateNumberTextField.hidden = true
             rateButton.hidden = true
         } else {
@@ -155,16 +148,28 @@ class SquirrelDetailViewController: UIViewController {
             tradeButton.hidden = true
             ownerLabel.hidden = true
             squirrelOwnerLabel.hidden = true
+        } else if ratedSquirrel!["owner"] as String == PFUser.currentUser()["username"] as String{
+            tradeButton.hidden = true
+            ownerLabel.hidden = false
+            squirrelOwnerLabel.text = "me"
         } else {
             //Squirrel does have an owner
             ownerLabel.hidden = false
             squirrelOwnerLabel.text = ratedSquirrel!["owner"] as? String
         }
-        
+
     }
 
-
    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
-
-

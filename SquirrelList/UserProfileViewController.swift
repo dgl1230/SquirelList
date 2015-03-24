@@ -20,9 +20,6 @@ class UserProfileViewController: UIViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
 
-    @IBAction func pfQueryTest(sender: AnyObject) {
-        self.performSegueWithIdentifier("pfQueryTest", sender: self)
-    }
 
     @IBAction func editProfile(sender: AnyObject) {
         self.performSegueWithIdentifier("editProfile", sender: self)
@@ -61,7 +58,7 @@ class UserProfileViewController: UIViewController {
         }
         if segue.identifier == "pfQueryTest" {
             let navigationController = segue.destinationViewController as UINavigationController
-            let controller = navigationController.topViewController as SquirrelNewViewController
+            let controller = navigationController.topViewController as SquirrelViewController
             //controller.typeOfNotification = typeOfNotifcation!
         }
 

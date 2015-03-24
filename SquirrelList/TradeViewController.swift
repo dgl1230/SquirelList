@@ -10,7 +10,7 @@ import UIKit
 
 //This view controller is for proposing trades to other users
 
-class TradeViewController: UIViewController, SquirrelsForTradeDelegate {
+class TradeViewController: UIViewController, SquirrelViewControllerDelegate {
 
     var desiredSquirrel: PFObject?
     
@@ -58,7 +58,14 @@ class TradeViewController: UIViewController, SquirrelsForTradeDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userSquirrels" {
             //let navigationController = segue.destinationViewController as UINavigationController
+            /*
             let controller = segue.destinationViewController as SquirrelsForTradingViewController
+            controller.desiredSquirrel = desiredSquirrel
+            controller.desiredSquirrelOwner = desiredSquirrelOwner
+            controller.delegate = self
+            */
+            let controller = segue.destinationViewController as SquirrelViewController
+            controller.currentlyTrading = true
             controller.desiredSquirrel = desiredSquirrel
             controller.desiredSquirrelOwner = desiredSquirrelOwner
             controller.delegate = self
@@ -87,12 +94,13 @@ class TradeViewController: UIViewController, SquirrelsForTradeDelegate {
         
     }
     
+    
     //Should be its own extension
-    func SquirrelForTradeDelegate(controller: SquirrelsForTradingViewController, selectedSquirrel: PFObject, desiredSquirrelOwnerTransfer: PFUser, desiredSquirrelTransfer: PFObject) {
+    func SquirrelTradeDelegate(controller: SquirrelViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
             println("delegate working")
             //Ghetto way of transfering this info back from previous controller, might be able to get rid of it
-            desiredSquirrel = desiredSquirrelTransfer
-            desiredSquirrelOwner = desiredSquirrelOwnerTransfer
+            desiredSquirrel = wantedSquirrel
+            desiredSquirrelOwner = wantedSquirrelOwner
             offeredSquirrel = selectedSquirrel
         
             var firstName = selectedSquirrel["first_name"] as? String
@@ -102,6 +110,8 @@ class TradeViewController: UIViewController, SquirrelsForTradeDelegate {
             proposeTradeButton.hidden = false
             selectSquirrelButton.hidden = true
     }
+    
+    
 
         
 

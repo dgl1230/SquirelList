@@ -6,15 +6,16 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+/*
 import UIKit
 
-protocol DetailViewControllerDelegate: class {
-    func detailViewController(controller: DetailViewController)
+protocol PopUpViewControllerDelegate: class {
+    func popupViewController(controller: PopUpViewController)
 }
 
-class DetailViewController: UIViewController {
+class PopUpViewController: UIViewController {
 
-    var delegate: DetailViewControllerDelegate?
+    var delegate: PopUpViewControllerDelegate?
     
     var offeredSquirrel: PFObject?
 
@@ -40,7 +41,7 @@ class DetailViewController: UIViewController {
         yourSquirrel!.save()
     
         tradeProposal!.deleteInBackground()
-        delegate?.detailViewController(self)
+        delegate?.popupViewController(self)
         //self.navigationController?.popViewControllerAnimated(true)
         dismissViewControllerAnimated(true, completion: nil)
     
@@ -50,7 +51,7 @@ class DetailViewController: UIViewController {
     @IBAction func declineOffer(sender: AnyObject) {
         tradeProposal!.deleteInBackground()
         dismissViewControllerAnimated(true, completion: nil)
-        delegate?.detailViewController(self)
+        delegate?.popupViewController(self)
     
     }
 
@@ -108,7 +109,7 @@ class DetailViewController: UIViewController {
 
 }
 
-extension DetailViewController: UIViewControllerTransitioningDelegate {
+extension PopUpViewController: UIViewControllerTransitioningDelegate {
 
     //To use custom animation controller
     func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -122,11 +123,12 @@ extension DetailViewController: UIViewControllerTransitioningDelegate {
 
 
 //Alerts you if the user touched outside of the popupView
-extension DetailViewController: UIGestureRecognizerDelegate {
+extension PopUpViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         return (touch.view == view)
     }
 }
 
+*/
 
 

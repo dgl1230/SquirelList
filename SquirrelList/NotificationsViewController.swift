@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationsViewController: UITableViewController, TradeOfferViewControllerDelegate, DetailViewControllerDelegate {
+class NotificationsViewController: UITableViewController, TradeOfferViewControllerDelegate {
 
     var notifications = [PFObject]()
     
@@ -26,10 +26,10 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tradeOffer" {
-            let controller = segue.destinationViewController as DetailViewController
+            let controller = segue.destinationViewController as PopUpViewController
             
-            controller.delegate = self
-            controller.tradeProposal = sender as? PFObject
+            //controller.delegate = self
+            //controller.tradeProposal = sender as? PFObject
             
         }
 
@@ -107,9 +107,11 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
     
     //Needs to be its own extension 
     
-    func detailViewController(controller: DetailViewController) {
+    /*
+    func popupViewController(controller: PopUpViewController) {
         self.viewDidLoad()
     }
+    */
  
     
 

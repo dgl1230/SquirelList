@@ -23,6 +23,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
     @IBAction func cancel() {
+        dismissViewControllerAnimated(true, completion: nil)
         delegate?.addSquirrelViewControllerDidCancel(self)
     }
     

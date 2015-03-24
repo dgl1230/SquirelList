@@ -54,13 +54,14 @@
                     <navigationItem key="navigationItem" title="Squirrels" id="chp-pU-Rsd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QCF-gE-72V">
                             <connections>
+                                <action selector="addSquirrel:" destination="8rJ-Kc-sve" id="Yl6-hG-YGd"/>
                                 <segue destination="i6V-Ix-eh3" kind="modal" identifier="AddSquirrel" id="x4U-3H-U4Z"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addSquirrelButton" destination="QCF-gE-72V" id="G0q-5U-HTq"/>
-                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="Cha-Hu-QPx"/>
+                        <outlet property="addSquirrelButton" destination="QCF-gE-72V" id="KEe-PA-0Up"/>
+                        <segue destination="1gz-ah-LQH" kind="modal" identifier="SquirrelDetails" id="U0x-nx-gDC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -778,15 +779,6 @@
                                     <action selector="seeInvites:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="PwE-7K-kV5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAj-yV-VXz">
-                                <rect key="frame" x="103" y="453" width="97" height="30"/>
-                                <state key="normal" title="PF Query Test">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pfQueryTest:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="o2Y-oq-tGo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -809,7 +801,6 @@
                         <outlet property="lastNameLabel" destination="TBY-Mg-7yQ" id="vjG-TK-n56"/>
                         <outlet property="usernameLabel" destination="zzR-Y2-HYv" id="I1p-Pe-qwR"/>
                         <segue destination="64t-eA-4qs" kind="modal" identifier="userNotifications" id="oM3-Bv-Qle"/>
-                        <segue destination="uPm-9y-y1S" kind="modal" identifier="pfQueryTest" id="gcb-kl-okB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQA-Le-GXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1012,10 +1003,10 @@
             </objects>
             <point key="canvasLocation" x="2963" y="2453"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Pop Up View Controller-->
         <scene sceneID="74f-kh-16v">
             <objects>
-                <viewController id="gHt-7r-Dan" customClass="DetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gHt-7r-Dan" customClass="PopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jmB-cu-zFa"/>
                         <viewControllerLayoutGuide type="bottom" id="oYL-nJ-QbS"/>
@@ -1093,7 +1084,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXM-XF-aOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2431" y="3141"/>
+            <point key="canvasLocation" x="2489" y="3159"/>
         </scene>
         <!--Group-->
         <scene sceneID="rdM-jh-nt3">
@@ -1146,7 +1137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEe-Q4-NcR" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1442" y="-345"/>
+            <point key="canvasLocation" x="1468" y="-345"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Dsw-99-TJv">
@@ -1188,7 +1179,7 @@
         <!--User Squirrels-->
         <scene sceneID="VaJ-Nv-JYk">
             <objects>
-                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelsForTradingViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="19G-oi-EXZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1208,30 +1199,6 @@
             </objects>
             <point key="canvasLocation" x="2845" y="-345"/>
         </scene>
-        <!--Squirrels-->
-        <scene sceneID="dIc-R8-Abi">
-            <objects>
-                <viewController id="tsb-Xl-Tzc" customClass="SquirrelNewViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xB4-Qu-a8D">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bre-tC-T9c" customClass="SquirrelTableViewCell" customModule="SquirrelList" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bre-tC-T9c" id="NxF-g2-A08">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Squirrels" id="5Nc-qK-qpL"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MAY-qN-eCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1466" y="2516"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="BPL-Ur-LTV">
             <objects>
@@ -1250,41 +1217,126 @@
             </objects>
             <point key="canvasLocation" x="1957" y="2453"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Na3-sn-4Xh">
+        <!--Squirrel Detail New View Controller-->
+        <scene sceneID="IDb-3L-dkK">
             <objects>
-                <viewController id="4BW-u3-IJN" sceneMemberID="viewController">
+                <viewController id="1gz-ah-LQH" customClass="SquirrelDetailNewViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pGh-62-8XO"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Y5-7L-rvm"/>
+                        <viewControllerLayoutGuide type="top" id="CSp-Hj-RJb"/>
+                        <viewControllerLayoutGuide type="bottom" id="MxX-n1-dK4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7Kd-6l-A6K">
+                    <view key="view" contentMode="scaleToFill" id="kGc-LL-pxc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Yf-Ha-EGs" userLabel="Pop-up View">
+                                <rect key="frame" x="40" y="164" width="240" height="282"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZK-wQ-a1G" userLabel="Close">
+                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
+                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="1gz-ah-LQH" eventType="touchUpInside" id="ztq-lz-voK"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLa-Hf-fOg">
+                                        <rect key="frame" x="8" y="38" width="224" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Owner:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJs-Ll-nGs">
+                                        <rect key="frame" x="23" y="149" width="56" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-oL-86M">
+                                        <rect key="frame" x="130" y="149" width="76" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg. Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy2-IP-M7O">
+                                        <rect key="frame" x="23" y="74" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-7j-8Ze">
+                                        <rect key="frame" x="130" y="74" width="78" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdO-HS-auT">
+                                        <rect key="frame" x="23" y="113" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To0-v6-S0s">
+                                        <rect key="frame" x="130" y="113" width="84" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lr-iy-gcw">
+                                        <rect key="frame" x="76" y="185" width="88" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Propose Trade">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tradeSquirrel:" destination="1gz-ah-LQH" eventType="touchUpInside" id="6iJ-FG-JNs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Nu-6w-MWA">
+                                        <rect key="frame" x="23" y="244" width="32" height="30"/>
+                                        <state key="normal" title="Rate">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rateSquirrel:" destination="1gz-ah-LQH" eventType="touchUpInside" id="3eL-3Z-7cc"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rating" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5SL-ba-4Bk">
+                                        <rect key="frame" x="76" y="244" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="JpO-q9-b90"/>
+                                    <constraint firstAttribute="height" constant="282" id="kND-so-YLF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="2Yf-Ha-EGs" secondAttribute="centerX" id="LgR-8z-TpI"/>
+                            <constraint firstAttribute="centerY" secondItem="2Yf-Ha-EGs" secondAttribute="centerY" constant="-21" id="l2f-TS-gkw"/>
+                        </constraints>
                     </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jYj-rv-wRQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Q6C-ds-YMK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uPm-9y-y1S" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="drv-l9-glH"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ulo-9w-nIW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                    <navigationItem key="navigationItem" id="ypK-0E-YRf"/>
                     <connections>
-                        <segue destination="tsb-Xl-Tzc" kind="relationship" relationship="rootViewController" id="LzE-XD-2Uy"/>
+                        <outlet property="avgRatingLabel" destination="cIP-7j-8Ze" id="gPD-xd-L9h"/>
+                        <outlet property="ownerLabel" destination="nJs-Ll-nGs" id="v7r-f6-P10"/>
+                        <outlet property="popupView" destination="2Yf-Ha-EGs" id="VRw-Qx-Gn1"/>
+                        <outlet property="rateButton" destination="2Nu-6w-MWA" id="g1D-rQ-T5N"/>
+                        <outlet property="rateNumberTextField" destination="5SL-ba-4Bk" id="zqJ-uH-Iq7"/>
+                        <outlet property="squirrelNameLabel" destination="QLa-Hf-fOg" id="NzB-PV-Xlw"/>
+                        <outlet property="squirrelOwnerLabel" destination="Ylf-oL-86M" id="tXL-tv-SPo"/>
+                        <outlet property="tradeButton" destination="6lr-iy-gcw" id="5PP-eb-KuD"/>
+                        <outlet property="userRatingLabel" destination="mdO-HS-auT" id="ibz-uz-j3v"/>
+                        <outlet property="yourRatingLabel" destination="To0-v6-S0s" id="L0X-EY-zfm"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ruj-IV-wK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fvl-En-3fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="2516"/>
+            <point key="canvasLocation" x="2433" y="349"/>
         </scene>
     </scenes>
     <resources>
@@ -1305,7 +1357,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="Cha-Hu-QPx"/>
-    </inferredMetricsTieBreakers>
 </document>
