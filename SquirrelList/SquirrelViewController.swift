@@ -49,7 +49,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         // Configure the PFQueryTableView
         self.parseClassName = "Squirrel"
         self.textKey = "first_name"
-        self.pullToRefreshEnabled = true
+        if currentlyTrading? == true {
+            self.pullToRefreshEnabled = false
+        } else {
+            self.pullToRefreshEnabled = true
+        }
         self.paginationEnabled = false
     }
     
@@ -97,13 +101,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddSquirrel" {
-            let navigationController = segue.destinationViewController as UINavigationController
-            let controller = navigationController.topViewController as AddSquirrelViewController
+            let controller = segue.destinationViewController as AddSquirrelViewController
             controller.delegate = self
             
         }
         if segue.identifier == "SquirrelDetails" {
-            let controller = segue.destinationViewController as SquirrelDetailNewViewController
+            let controller = segue.destinationViewController as SquirrelDetailViewController
             //controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
             if sender!["owner"] != nil {
@@ -129,11 +132,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery! {
         var query = PFQuery(className: "Squirrel")
-        if selectedUser != nil {
-            query.whereKey("owner", equalTo: selectedUser!["username"])
-        } else if currentlyTrading? == true {
+        if currentlyTrading? == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()["username"])
         }
+        else if selectedUser != nil {
+            query.whereKey("owner", equalTo: selectedUser!["username"])
+        } 
         query.orderByAscending("last_name")
         return query
     }
@@ -151,9 +155,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println(currentlyTrading)
         if currentlyTrading? == true {
-            //Then we want to select a Squirrel for trade, not see their details
+            //dismissViewControllerAnimated(true, completion: nil)
             delegate?.SquirrelTradeDelegate!(self, selectedSquirrel: objects[indexPath.row] as PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)
+            
             self.navigationController?.popViewControllerAnimated(true)
         }
         else {
@@ -187,7 +193,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "SquirrelTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
+
         //If the selected user is nil, then we are now on user squirrels, which has no addSquirrelButton
         if userCanAddSquirrel() == false || self.selectedUser != nil {
             addSquirrelButton?.enabled = false

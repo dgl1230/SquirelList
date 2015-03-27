@@ -31,7 +31,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="-345"/>
+            <point key="canvasLocation" x="884" y="-345"/>
         </scene>
         <!--Squirrels-->
         <scene sceneID="wg7-f3-ORb">
@@ -55,255 +55,18 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QCF-gE-72V">
                             <connections>
                                 <action selector="addSquirrel:" destination="8rJ-Kc-sve" id="Yl6-hG-YGd"/>
-                                <segue destination="i6V-Ix-eh3" kind="modal" identifier="AddSquirrel" id="x4U-3H-U4Z"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addSquirrelButton" destination="QCF-gE-72V" id="KEe-PA-0Up"/>
                         <segue destination="1gz-ah-LQH" kind="modal" identifier="SquirrelDetails" id="U0x-nx-gDC"/>
+                        <segue destination="YAQ-u8-yw6" kind="push" identifier="AddSquirrel" id="JST-aR-Mpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="341"/>
-        </scene>
-        <!--Squirrel Detail View Controller-->
-        <scene sceneID="JGH-pF-8BV">
-            <objects>
-                <viewController id="5mO-wa-pIV" customClass="SquirrelDetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dRe-y5-hq5"/>
-                        <viewControllerLayoutGuide type="bottom" id="7T6-pQ-Idh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fds-11-g1z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mhX-JM-Mai">
-                                <rect key="frame" x="107" y="479" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vv5-9p-Wsa">
-                                <rect key="frame" x="107" y="420" width="107" height="49"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <state key="normal" title="Rate">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="rateSquirrel:" destination="5mO-wa-pIV" eventType="touchUpInside" id="fPL-1G-rCl"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtu-c7-vgD">
-                                <rect key="frame" x="44" y="74" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXl-lD-eM7">
-                                <rect key="frame" x="215" y="74" width="33" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avg. Rating: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjH-xm-GTM">
-                                <rect key="frame" x="35" y="110" width="98" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KqM-Fh-hiY">
-                                <rect key="frame" x="170" y="110" width="78" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIj-z4-gEY">
-                                <rect key="frame" x="170" y="146" width="83" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdC-EK-2vJ">
-                                <rect key="frame" x="33" y="146" width="94" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F50-cY-yeh">
-                                <rect key="frame" x="137" y="348" width="54" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Trade">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tradeSquirrel:" destination="5mO-wa-pIV" eventType="touchUpInside" id="Iuc-EH-t9I"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="owner:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JmG-zu-6WE">
-                                <rect key="frame" x="64" y="177" width="53" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="squirrelOwner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4Y-rJ-ZQK">
-                                <rect key="frame" x="170" y="177" width="107" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="F50-cY-yeh" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="121" id="1LR-Ks-hwg"/>
-                            <constraint firstItem="vv5-9p-Wsa" firstAttribute="top" secondItem="F50-cY-yeh" secondAttribute="bottom" constant="33" id="1b3-ZP-ibw"/>
-                            <constraint firstItem="sjH-xm-GTM" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="19" id="29f-Zq-Lvi"/>
-                            <constraint firstItem="vv5-9p-Wsa" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="91" id="2LW-3q-teK"/>
-                            <constraint firstItem="gtu-c7-vgD" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="28" id="6h9-Ju-aft"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F50-cY-yeh" secondAttribute="trailing" constant="113" id="74x-28-z0b"/>
-                            <constraint firstItem="KqM-Fh-hiY" firstAttribute="top" secondItem="NXl-lD-eM7" secondAttribute="bottom" constant="15" id="80J-9K-AZL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="U4Y-rJ-ZQK" secondAttribute="trailing" constant="27" id="G30-3o-18i"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NXl-lD-eM7" secondAttribute="trailing" constant="56" id="Gj6-Ho-qbx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vv5-9p-Wsa" secondAttribute="trailing" constant="90" id="IcV-tE-IQv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="KqM-Fh-hiY" secondAttribute="trailing" constant="56" id="IiL-UP-hR6"/>
-                            <constraint firstItem="MdC-EK-2vJ" firstAttribute="top" secondItem="sjH-xm-GTM" secondAttribute="bottom" constant="15" id="Kn0-0B-xRg"/>
-                            <constraint firstItem="JmG-zu-6WE" firstAttribute="top" secondItem="MdC-EK-2vJ" secondAttribute="bottom" constant="10" id="MRu-fK-jQp"/>
-                            <constraint firstItem="mhX-JM-Mai" firstAttribute="top" secondItem="vv5-9p-Wsa" secondAttribute="bottom" constant="10" id="OLz-UV-q1U"/>
-                            <constraint firstItem="NXl-lD-eM7" firstAttribute="top" secondItem="dRe-y5-hq5" secondAttribute="bottom" constant="10" id="RyU-b6-BQF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mhX-JM-Mai" secondAttribute="trailing" constant="100" id="Ue1-9j-6xQ"/>
-                            <constraint firstItem="JmG-zu-6WE" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="48" id="Uwl-EA-d9h"/>
-                            <constraint firstItem="mhX-JM-Mai" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="91" id="aGQ-kV-VkM"/>
-                            <constraint firstItem="DIj-z4-gEY" firstAttribute="top" secondItem="KqM-Fh-hiY" secondAttribute="bottom" constant="15" id="gZl-vm-3Ej"/>
-                            <constraint firstItem="MdC-EK-2vJ" firstAttribute="leading" secondItem="Fds-11-g1z" secondAttribute="leadingMargin" constant="17" id="nYJ-XO-H6r"/>
-                            <constraint firstItem="gtu-c7-vgD" firstAttribute="top" secondItem="dRe-y5-hq5" secondAttribute="bottom" constant="10" id="okC-6U-R8p"/>
-                            <constraint firstItem="U4Y-rJ-ZQK" firstAttribute="top" secondItem="DIj-z4-gEY" secondAttribute="bottom" constant="10" id="r9n-kN-mFq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DIj-z4-gEY" secondAttribute="trailing" constant="51" id="s4Y-yq-fTT"/>
-                            <constraint firstItem="7T6-pQ-Idh" firstAttribute="top" secondItem="mhX-JM-Mai" secondAttribute="bottom" constant="10" id="u2k-bs-zmp"/>
-                            <constraint firstItem="sjH-xm-GTM" firstAttribute="top" secondItem="gtu-c7-vgD" secondAttribute="bottom" constant="15" id="yeg-Rv-QOB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="aMF-zL-iQH"/>
-                    <connections>
-                        <outlet property="avgRatingLabel" destination="KqM-Fh-hiY" id="haA-ma-6hr"/>
-                        <outlet property="firstNameLabel" destination="gtu-c7-vgD" id="JAg-Td-bBT"/>
-                        <outlet property="lastNameLabel" destination="NXl-lD-eM7" id="ZoN-2b-dyZ"/>
-                        <outlet property="ownerLabel" destination="JmG-zu-6WE" id="fXQ-Pf-Uhf"/>
-                        <outlet property="rateButton" destination="vv5-9p-Wsa" id="ZEC-FD-Od7"/>
-                        <outlet property="rateNumberTextField" destination="mhX-JM-Mai" id="jaW-jj-2zr"/>
-                        <outlet property="squirrelOwnerLabel" destination="U4Y-rJ-ZQK" id="0pL-ib-VBv"/>
-                        <outlet property="tradeButton" destination="F50-cY-yeh" id="SzG-BY-RZ4"/>
-                        <outlet property="userRatingLabel" destination="DIj-z4-gEY" id="tag-gp-z3K"/>
-                        <outlet property="yourRatingLabel" destination="MdC-EK-2vJ" id="VFA-5J-xRA"/>
-                        <segue destination="tql-zb-M1h" kind="push" identifier="tradeSquirrel" id="6Sh-pb-Fc6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fTe-KS-Yfj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1911" y="-345"/>
-        </scene>
-        <!--Trade View Controller-->
-        <scene sceneID="4JZ-4t-5wD">
-            <objects>
-                <viewController id="tql-zb-M1h" customClass="TradeViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cCf-6V-XB2"/>
-                        <viewControllerLayoutGuide type="bottom" id="HoR-wz-Lch"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Fkk-jl-aEY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Propose a trade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEg-kU-yag">
-                                <rect key="frame" x="99" y="38" width="123" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desired squirrel:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSp-ON-7y1">
-                                <rect key="frame" x="16" y="93" width="125" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="desiredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsE-ht-vU3">
-                                <rect key="frame" x="149" y="93" width="116" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offered squirrel:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAI-iC-7k3">
-                                <rect key="frame" x="16" y="152" width="123" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offeredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQZ-kA-NqT">
-                                <rect key="frame" x="157" y="152" width="113" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOE-Td-uV4">
-                                <rect key="frame" x="16" y="34" width="48" height="30"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancel:" destination="tql-zb-M1h" eventType="touchUpInside" id="F1b-Ny-kfo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEf-Pn-If2">
-                                <rect key="frame" x="86" y="339" width="148" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Propose Trade">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="proposeTrade:" destination="tql-zb-M1h" eventType="touchUpInside" id="qxy-9s-gdS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eC-bL-aDg">
-                                <rect key="frame" x="54" y="238" width="212" height="35"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Select a Squirrel to trade">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="selectSquirrel:" destination="tql-zb-M1h" eventType="touchUpInside" id="aCJ-pI-E5U"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="zSp-ON-7y1" firstAttribute="leading" secondItem="Fkk-jl-aEY" secondAttribute="leadingMargin" id="44f-xF-hpb"/>
-                            <constraint firstItem="xEf-Pn-If2" firstAttribute="top" secondItem="5eC-bL-aDg" secondAttribute="bottom" constant="66" id="66O-rY-Vm9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5eC-bL-aDg" secondAttribute="trailing" constant="38" id="8UN-k7-MGZ"/>
-                            <constraint firstItem="NQZ-kA-NqT" firstAttribute="top" secondItem="nsE-ht-vU3" secondAttribute="bottom" constant="38" id="MHx-QI-lOy"/>
-                            <constraint firstItem="5eC-bL-aDg" firstAttribute="top" secondItem="BAI-iC-7k3" secondAttribute="bottom" constant="65" id="NRh-Ew-kjE"/>
-                            <constraint firstItem="xEf-Pn-If2" firstAttribute="leading" secondItem="Fkk-jl-aEY" secondAttribute="leadingMargin" constant="70" id="NWA-JQ-7UA"/>
-                            <constraint firstItem="5eC-bL-aDg" firstAttribute="leading" secondItem="Fkk-jl-aEY" secondAttribute="leadingMargin" constant="38" id="RKA-K8-o4e"/>
-                            <constraint firstItem="HoR-wz-Lch" firstAttribute="top" secondItem="xEf-Pn-If2" secondAttribute="bottom" constant="141" id="Yha-RV-CjC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="NQZ-kA-NqT" secondAttribute="trailing" constant="34" id="dcg-uT-eva"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="xEf-Pn-If2" secondAttribute="trailing" constant="70" id="gYU-oD-dbf"/>
-                            <constraint firstItem="BAI-iC-7k3" firstAttribute="top" secondItem="zSp-ON-7y1" secondAttribute="bottom" constant="38" id="jMo-RF-S8i"/>
-                            <constraint firstItem="BAI-iC-7k3" firstAttribute="leading" secondItem="Fkk-jl-aEY" secondAttribute="leadingMargin" id="kBr-gO-MRz"/>
-                            <constraint firstItem="5eC-bL-aDg" firstAttribute="top" secondItem="NQZ-kA-NqT" secondAttribute="bottom" constant="65" id="m8h-l3-R26"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nsE-ht-vU3" secondAttribute="trailing" constant="39" id="qfA-GN-bjl"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="P1m-ag-aT4"/>
-                    <connections>
-                        <outlet property="desiredSquirrelLabel" destination="nsE-ht-vU3" id="j9O-cX-4IA"/>
-                        <outlet property="offeredSquirrelLabel" destination="NQZ-kA-NqT" id="qUr-vf-ouG"/>
-                        <outlet property="proposeTradeButton" destination="xEf-Pn-If2" id="SJ6-2X-7rd"/>
-                        <outlet property="selectSquirrelButton" destination="5eC-bL-aDg" id="znD-W1-JQO"/>
-                        <segue destination="bck-TG-7KF" kind="push" identifier="userSquirrels" id="AKv-XM-StN"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mLL-0W-AtG" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2359" y="-345"/>
+            <point key="canvasLocation" x="884" y="349"/>
         </scene>
         <!--Add Squirrel -->
         <scene sceneID="6OE-gP-1Oe">
@@ -357,11 +120,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Squirrel " id="PWj-Qa-X0S">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zqw-lO-EYh">
-                            <connections>
-                                <action selector="cancel" destination="YAQ-u8-yw6" id="HJv-v9-ljX"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="x2E-Ks-MC6">
                             <connections>
                                 <action selector="done" destination="YAQ-u8-yw6" id="Cyg-pJ-l4T"/>
@@ -376,7 +134,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XxY-gb-RG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957" y="349"/>
+            <point key="canvasLocation" x="1468" y="349"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="0Xa-UT-v4b">
@@ -516,7 +274,7 @@
                         <segue destination="YYC-jh-zkT" kind="relationship" relationship="viewControllers" id="E0s-wp-tPQ"/>
                         <segue destination="mbu-c9-EXM" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="sYW-x8-hS1" kind="relationship" relationship="viewControllers" id="ANP-sw-EeV"/>
-                        <segue destination="Ufh-Zt-Uio" kind="relationship" relationship="viewControllers" id="jzT-so-Gcf"/>
+                        <segue destination="s67-Oq-zhO" kind="relationship" relationship="viewControllers" id="eWx-NC-CzM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -541,24 +299,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TeP-V3-IJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="430" y="349"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dXU-Z3-8IF">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="i6V-Ix-eh3" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XTd-mw-WtU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="YAQ-u8-yw6" kind="relationship" relationship="rootViewController" id="WCX-J3-30a"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sej-uk-VrT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1425" y="349"/>
         </scene>
         <!--League Chat -->
         <scene sceneID="2TO-B8-sM4">
@@ -701,6 +441,7 @@
                 <navigationController id="sYW-x8-hS1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tabbar_chat" id="rVk-ld-K6F">
                         <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="0l7-Di-f43">
@@ -758,16 +499,6 @@
                                 </state>
                                 <connections>
                                     <action selector="editProfile:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="8A7-hg-yf8"/>
-                                    <segue destination="Y6a-eR-Bv6" kind="modal" identifier="editProfile" id="o9r-Y6-8wN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sey-ju-wd8">
-                                <rect key="frame" x="16" y="72" width="86" height="30"/>
-                                <state key="normal" title="Notifications">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="seeNotifications:" destination="Ipu-2j-IVn" eventType="touchUpInside" id="iUj-qj-BvN"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPy-QA-o0j">
@@ -800,12 +531,12 @@
                         <outlet property="firstNameLabel" destination="LKx-zo-asH" id="ymo-Xw-OU4"/>
                         <outlet property="lastNameLabel" destination="TBY-Mg-7yQ" id="vjG-TK-n56"/>
                         <outlet property="usernameLabel" destination="zzR-Y2-HYv" id="I1p-Pe-qwR"/>
-                        <segue destination="64t-eA-4qs" kind="modal" identifier="userNotifications" id="oM3-Bv-Qle"/>
+                        <segue destination="6vg-Nk-6AX" kind="push" identifier="EditProfile" id="YY0-6V-BTl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQA-Le-GXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="1769"/>
+            <point key="canvasLocation" x="1256" y="1785"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="tuh-Ad-Aae">
@@ -859,20 +590,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit Profile" id="F4n-7J-Lji">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="GpS-Jy-Htf">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LYA-YX-fQA">
-                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="back:" destination="6vg-Nk-6AX" eventType="touchUpInside" id="IvV-kM-6q1"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="F4n-7J-Lji"/>
                     <connections>
                         <outlet property="firstNameTextField" destination="77A-dG-MQL" id="NmS-xm-v4D"/>
                         <outlet property="lastNameTextField" destination="MQQ-uX-Kxc" id="jaN-HD-yPY"/>
@@ -882,9 +600,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IKS-PR-7gp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957" y="1769"/>
+            <point key="canvasLocation" x="1633" y="1785"/>
         </scene>
-        <!--Notification-->
+        <!--Trade Offers-->
         <scene sceneID="hkT-c4-dlW">
             <objects>
                 <viewController id="eZg-0E-lLr" customClass="NotificationsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
@@ -911,102 +629,20 @@
                         </prototypes>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Notification" id="og8-9o-bjD">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="jZQ-Fr-qar">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="tcS-f5-tCK">
-                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="back:" destination="eZg-0E-lLr" eventType="touchUpInside" id="5ee-zL-6fi"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Trade Offers" id="og8-9o-bjD"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="Hoc-yg-NfU" kind="modal" identifier="tradeOffer1" id="EDs-YZ-UR1"/>
                         <segue destination="gHt-7r-Dan" kind="modal" identifier="tradeOffer" id="wRK-qE-PHf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74o-rr-SnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2542" y="2452"/>
+            <point key="canvasLocation" x="1256" y="2466"/>
         </scene>
         <!--Trade Offer View Controller-->
-        <scene sceneID="jCq-h4-Cz0">
-            <objects>
-                <viewController id="Hoc-yg-NfU" customClass="TradeOfferViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Tlj-0a-Xvy"/>
-                        <viewControllerLayoutGuide type="bottom" id="hFp-Ta-gB1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Kfk-wO-S9X">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Offered Squirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1z-DE-WQb">
-                                <rect key="frame" x="16" y="66" width="121" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrell" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNd-PS-cw8">
-                                <rect key="frame" x="151" y="66" width="146" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Squirrel: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsy-oF-saX">
-                                <rect key="frame" x="16" y="120" width="108" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVt-qL-drk">
-                                <rect key="frame" x="138" y="120" width="159" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yi2-dX-H9I">
-                                <rect key="frame" x="16" y="346" width="80" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Decline">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="declineTrade:" destination="Hoc-yg-NfU" eventType="touchUpInside" id="O1I-zw-eIA"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VpF-ys-neV">
-                                <rect key="frame" x="217" y="346" width="80" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Accept">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="acceptTrade:" destination="Hoc-yg-NfU" eventType="touchUpInside" id="ecU-6k-BEO"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="offeredSquirrelLabel" destination="xNd-PS-cw8" id="oYL-Ko-bfi"/>
-                        <outlet property="yourSquirrelLabel" destination="XVt-qL-drk" id="ftQ-nv-Wmo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="t0z-vX-Yg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2963" y="2453"/>
-        </scene>
-        <!--Pop Up View Controller-->
         <scene sceneID="74f-kh-16v">
             <objects>
-                <viewController id="gHt-7r-Dan" customClass="PopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gHt-7r-Dan" customClass="TradeOfferViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jmB-cu-zFa"/>
                         <viewControllerLayoutGuide type="bottom" id="oYL-nJ-QbS"/>
@@ -1018,12 +654,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Oc-tZ-5sP" userLabel="Pop-up View">
                                 <rect key="frame" x="40" y="164" width="240" height="240"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ra-rh4">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W28-Ra-rh4" userLabel="Close">
                                         <rect key="frame" x="3" y="0.0" width="15" height="22"/>
                                         <accessibility key="accessibilityConfiguration" label="Close Button"/>
                                         <state key="normal" image="CloseButton"/>
                                         <connections>
-                                            <action selector="close" destination="gHt-7r-Dan" eventType="touchUpInside" id="Glj-q9-CYs"/>
+                                            <action selector="close" destination="gHt-7r-Dan" eventType="touchUpInside" id="SO2-x7-JjJ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyc-X7-fuN">
@@ -1035,7 +671,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dvZ-96-llC">
                                         <rect key="frame" x="104" y="96" width="21" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drg-xL-fc5">
@@ -1050,7 +686,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="declineOffer:" destination="gHt-7r-Dan" eventType="touchUpInside" id="v3L-D2-ugT"/>
+                                            <action selector="declineTrade:" destination="gHt-7r-Dan" eventType="touchUpInside" id="GXv-GL-ZDh"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eI-2l-p2d">
@@ -1059,7 +695,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="acceptOffer:" destination="gHt-7r-Dan" eventType="touchUpInside" id="8rx-2I-yX7"/>
+                                            <action selector="acceptTrade:" destination="gHt-7r-Dan" eventType="touchUpInside" id="wRs-Wh-pvu"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1077,14 +713,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="offeredSquirrelLabel" destination="pyc-X7-fuN" id="Qlt-c5-5cj"/>
-                        <outlet property="popupView" destination="1Oc-tZ-5sP" id="y5U-a5-yqS"/>
-                        <outlet property="yourSquirrelLabel" destination="drg-xL-fc5" id="zcF-6c-m4i"/>
+                        <outlet property="offeredSquirrelLabel" destination="pyc-X7-fuN" id="Aas-SW-iS8"/>
+                        <outlet property="popupView" destination="1Oc-tZ-5sP" id="8qC-Ic-hnm"/>
+                        <outlet property="yourSquirrelLabel" destination="drg-xL-fc5" id="Sns-fi-3VH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TXM-XF-aOS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2489" y="3159"/>
+            <point key="canvasLocation" x="1633" y="2466"/>
         </scene>
         <!--Group-->
         <scene sceneID="rdM-jh-nt3">
@@ -1132,56 +768,19 @@
                     <navigationItem key="navigationItem" title="Squirrels" id="RX6-kA-Eba"/>
                     <connections>
                         <outlet property="teamRatingLabel" destination="32X-pb-5nS" id="03I-gv-xGb"/>
-                        <segue destination="5mO-wa-pIV" kind="push" identifier="SquirrelDetails" id="PKS-xP-He4"/>
+                        <segue destination="1gz-ah-LQH" kind="modal" identifier="SquirrelDetails" id="vxR-tG-TAF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEe-Q4-NcR" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1468" y="-345"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="Dsw-99-TJv">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ufh-Zt-Uio" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="PNc-7A-cVc"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vVO-Kc-jcZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Ipu-2j-IVn" kind="relationship" relationship="rootViewController" id="Olr-vy-4L9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ROG-4C-8zE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="430" y="1769"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="90p-XS-ZR0">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y6a-eR-Bv6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zqc-Uq-lOh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="6vg-Nk-6AX" kind="relationship" relationship="rootViewController" id="1UG-ft-DP5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gZe-47-HeS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1425" y="1769"/>
-        </scene>
         <!--User Squirrels-->
         <scene sceneID="VaJ-Nv-JYk">
             <objects>
                 <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="19G-oi-EXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="259"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1197,30 +796,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Kj-hf-8BI" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2845" y="-345"/>
+            <point key="canvasLocation" x="3161" y="-352"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="BPL-Ur-LTV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="64t-eA-4qs" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZL1-Yb-FOm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eZg-0E-lLr" kind="relationship" relationship="rootViewController" id="Dtb-D4-Whc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eBO-nk-QTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1957" y="2453"/>
-        </scene>
-        <!--Squirrel Detail New View Controller-->
+        <!--Squirrel Detail View Controller-->
         <scene sceneID="IDb-3L-dkK">
             <objects>
-                <viewController id="1gz-ah-LQH" customClass="SquirrelDetailNewViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1gz-ah-LQH" customClass="SquirrelDetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CSp-Hj-RJb"/>
                         <viewControllerLayoutGuide type="bottom" id="MxX-n1-dK4"/>
@@ -1243,43 +824,43 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLa-Hf-fOg">
                                         <rect key="frame" x="8" y="38" width="224" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Owner:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJs-Ll-nGs">
                                         <rect key="frame" x="23" y="149" width="56" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-oL-86M">
                                         <rect key="frame" x="130" y="149" width="76" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg. Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy2-IP-M7O">
                                         <rect key="frame" x="23" y="74" width="94" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIP-7j-8Ze">
                                         <rect key="frame" x="130" y="74" width="78" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdO-HS-auT">
                                         <rect key="frame" x="23" y="113" width="88" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To0-v6-S0s">
                                         <rect key="frame" x="130" y="113" width="84" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lr-iy-gcw">
@@ -1332,11 +913,316 @@
                         <outlet property="tradeButton" destination="6lr-iy-gcw" id="5PP-eb-KuD"/>
                         <outlet property="userRatingLabel" destination="mdO-HS-auT" id="ibz-uz-j3v"/>
                         <outlet property="yourRatingLabel" destination="To0-v6-S0s" id="L0X-EY-zfm"/>
+                        <segue destination="Igs-Gg-p6U" kind="modal" identifier="tradeSquirrel" id="PUt-IW-E5d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fvl-En-3fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2433" y="349"/>
+            <point key="canvasLocation" x="1929" y="-345"/>
+        </scene>
+        <!--Trade View Controller-->
+        <scene sceneID="dUa-GV-r3a">
+            <objects>
+                <viewController id="Igs-Gg-p6U" customClass="TradeViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fvR-FW-qhJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="K2N-bn-yhQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WIs-qO-W6M">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raQ-x4-CNh" userLabel="Pop-up View">
+                                <rect key="frame" x="40" y="164" width="240" height="282"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taS-TF-UKO" userLabel="Close">
+                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
+                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="Igs-Gg-p6U" eventType="touchUpInside" id="SyA-LV-wPN"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trade Offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdn-zo-3Oj">
+                                        <rect key="frame" x="8" y="38" width="224" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Desired squirrel: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPd-iS-xZF">
+                                        <rect key="frame" x="8" y="77" width="130" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Offered squirrel:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5k-C1-UdQ">
+                                        <rect key="frame" x="8" y="113" width="123" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkI-ny-uY5">
+                                        <rect key="frame" x="119" y="113" width="113" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="desiredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-WR-u1g">
+                                        <rect key="frame" x="119" y="77" width="116" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBs-pL-Rc0">
+                                        <rect key="frame" x="35" y="155" width="171" height="30"/>
+                                        <state key="normal" title="Select a Squirrel to trade">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectSquirrel:" destination="Igs-Gg-p6U" eventType="touchUpInside" id="j2o-45-5kD"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1q-j4-gEX">
+                                        <rect key="frame" x="70" y="203" width="100" height="30"/>
+                                        <state key="normal" title="Propose Trade">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="proposeTrade:" destination="Igs-Gg-p6U" eventType="touchUpInside" id="40C-Lh-osb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="8ji-t0-Few"/>
+                                    <constraint firstAttribute="height" constant="282" id="gsq-jh-5tO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="raQ-x4-CNh" secondAttribute="centerY" constant="-21" id="Tpw-ON-R3Z"/>
+                            <constraint firstAttribute="centerX" secondItem="raQ-x4-CNh" secondAttribute="centerX" id="ZiT-SM-ez6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="bDr-ge-pUM"/>
+                    <connections>
+                        <outlet property="desiredSquirrelLabel" destination="waD-WR-u1g" id="HbT-GR-bop"/>
+                        <outlet property="offeredSquirrelLabel" destination="NkI-ny-uY5" id="Aq0-91-dB4"/>
+                        <outlet property="popupView" destination="raQ-x4-CNh" id="jc5-e2-7Qs"/>
+                        <outlet property="proposeTradeButton" destination="V1q-j4-gEX" id="eYQ-IJ-yaD"/>
+                        <outlet property="selectSquirrelButton" destination="iBs-pL-Rc0" id="BJM-Go-Jqx"/>
+                        <segue destination="Vu5-tu-h7U" kind="modal" identifier="userSquirrels" id="49m-hH-fxz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B6r-Ow-53n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="-352"/>
+        </scene>
+        <!--User Squirrels Pop Up View Controller-->
+        <scene sceneID="hQe-Jk-fm2">
+            <objects>
+                <viewController id="Vu5-tu-h7U" customClass="UserSquirrelsPopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t1a-zw-Hcu"/>
+                        <viewControllerLayoutGuide type="bottom" id="1hR-h1-vBR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TuN-7T-b16">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7cg-gb-KOF" userLabel="Pop-up View">
+                                <rect key="frame" x="40" y="164" width="240" height="282"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VV3-ni-SdL" userLabel="Close">
+                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
+                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="Vu5-tu-h7U" eventType="touchUpInside" id="Dvo-nz-Fu0"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a squirrel to trade" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqA-tZ-aVN">
+                                        <rect key="frame" x="44" y="0.0" width="188" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNs-RS-jxa">
+                                        <rect key="frame" x="0.0" y="23" width="240" height="259"/>
+                                        <connections>
+                                            <segue destination="bck-TG-7KF" kind="embed" identifier="userSquirrelsEmbed" id="0L0-7G-FFb"/>
+                                        </connections>
+                                    </containerView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="282" id="0df-5U-0sg"/>
+                                    <constraint firstAttribute="width" constant="240" id="FYS-Tn-V7i"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="7cg-gb-KOF" secondAttribute="centerY" constant="-21" id="MVx-DC-Ldq"/>
+                            <constraint firstAttribute="centerX" secondItem="7cg-gb-KOF" secondAttribute="centerX" id="NIg-ry-me7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Qyt-lJ-cDl"/>
+                    <connections>
+                        <outlet property="popupView" destination="7cg-gb-KOF" id="e7Y-rl-EgV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pbq-Kc-0Vc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2752" y="-352"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="ctE-uM-yHo">
+            <objects>
+                <tableViewController id="k0v-Ft-1ge" customClass="MoreTableViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0zV-bQ-VG5">
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="jPE-vf-8DV">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="IxZ-K5-GTb">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IxZ-K5-GTb" id="XnI-9G-1x4">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-fA-Tbm">
+                                                    <rect key="frame" x="20" y="11" width="219" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="YDa-rX-216">
+                                        <rect key="frame" x="0.0" y="44" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YDa-rX-216" id="bGq-aa-b2W">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trade Offers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Xe-5p-0mA">
+                                                    <rect key="frame" x="20" y="11" width="219" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="eZ9-zX-T9z">
+                                        <rect key="frame" x="0.0" y="88" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eZ9-zX-T9z" id="o52-6j-eaQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Group Invites" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS8-p4-ovE">
+                                                    <rect key="frame" x="20" y="11" width="219" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="U7w-fF-IX2">
+                                        <rect key="frame" x="0.0" y="132" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U7w-fF-IX2" id="vfQ-m6-mJ8">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSC-sn-AVu">
+                                                    <rect key="frame" x="20" y="11" width="219" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="7Uj-7d-fEO">
+                                        <rect key="frame" x="0.0" y="176" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7Uj-7d-fEO" id="d1X-lI-qLK">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zny-Xf-ak8">
+                                                    <rect key="frame" x="20" y="11" width="219" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="b23-v2-4gJ">
+                                        <rect key="frame" x="0.0" y="220" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b23-v2-4gJ" id="eeH-ey-QNj">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Log out" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tR7-wL-3Mu">
+                                                    <rect key="frame" x="20" y="11" width="219" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="k0v-Ft-1ge" id="MPU-dd-0z3"/>
+                            <outlet property="delegate" destination="k0v-Ft-1ge" id="OtU-S1-x2N"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="More" id="aoZ-8r-45u"/>
+                    <connections>
+                        <outlet property="tblOptions" destination="0zV-bQ-VG5" id="x1U-eY-XCU"/>
+                        <segue destination="Ipu-2j-IVn" kind="push" identifier="MyProfile" id="lee-kf-hqL"/>
+                        <segue destination="eZg-0E-lLr" kind="push" identifier="TradeOffers" id="XPh-9v-s92"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WaY-ci-nvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="1785"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dlZ-qa-TDY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s67-Oq-zhO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tabbar_more" id="bPR-WL-g6a">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="A53-6W-dfZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="k0v-Ft-1ge" kind="relationship" relationship="rootViewController" id="unB-mI-xTe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U21-6I-U0o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="1785"/>
         </scene>
     </scenes>
     <resources>
@@ -1351,10 +1237,14 @@
         <image name="profile-pic4" width="52" height="52"/>
         <image name="second" width="30" height="30"/>
         <image name="tabbar_chat" width="23" height="36"/>
+        <image name="tabbar_more" width="24" height="37"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="U0x-nx-gDC"/>
+    </inferredMetricsTieBreakers>
 </document>

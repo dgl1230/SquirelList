@@ -15,14 +15,13 @@ class UserProfileViewController: UIViewController {
 
 
     @IBOutlet weak var firstNameLabel: UILabel!
-    
     @IBOutlet weak var lastNameLabel: UILabel!
-    
     @IBOutlet weak var usernameLabel: UILabel!
 
 
+
     @IBAction func editProfile(sender: AnyObject) {
-        self.performSegueWithIdentifier("editProfile", sender: self)
+        self.performSegueWithIdentifier("EditProfile", sender: self)
     }
     
     
@@ -31,13 +30,7 @@ class UserProfileViewController: UIViewController {
         self.performSegueWithIdentifier("userNotifications", sender: self)
     }
     
-    
-    @IBAction func seeNotifications(sender: AnyObject) {
-        typeOfNotifcation = "trade"
-        self.performSegueWithIdentifier("userNotifications", sender: self)
-    }
-    
-    
+        
 
     @IBAction func logout(sender: AnyObject) {
         PFUser.logOut()
@@ -46,9 +39,8 @@ class UserProfileViewController: UIViewController {
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "editProfile" {
-            let navigationController = segue.destinationViewController as UINavigationController
-            let controller = navigationController.topViewController as EditProfileViewController
+        if segue.identifier == "EditProfile" {
+            let controller = segue.destinationViewController as EditProfileViewController
             //controller.delegate = self
         }
         if segue.identifier == "userNotifications" {

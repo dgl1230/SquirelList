@@ -22,9 +22,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     @IBOutlet weak var saveButton: UIButton!
     
-    @IBAction func back(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    
     
     @IBAction func uploadImage(sender: AnyObject) {
         var image = UIImagePickerController()
@@ -55,6 +53,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
             currentUser["profile_pic"] =  imageFile
         }
         currentUser.save()
+        //self.navigationController?.popToViewController(self.navigationContro animated: true)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

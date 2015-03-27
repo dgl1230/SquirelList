@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+/*
 import UIKit
 
 
 //This view controller is for trades that have already been proposed to the user. Not for trade that the user will create to propose to other users
+
+//Need to change it to a popupViewController
 
 
 protocol TradeOfferViewControllerDelegate: class {
@@ -17,7 +20,7 @@ protocol TradeOfferViewControllerDelegate: class {
 }
 
 
-class TradeOfferViewController: UIViewController {
+class TradeOfferOldViewController: UIViewController {
 
     var delegate: TradeOfferViewControllerDelegate?
     
@@ -95,3 +98,5 @@ class TradeOfferViewController: UIViewController {
     */
 
 }
+
+*/

@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+/*
+A view controller that "pops" up in front of the parent view controller. This class is the parent class for many sub PopUpViewControllers
+*/
+
 import UIKit
 
 
@@ -23,7 +27,7 @@ class PopUpViewController: UIViewController {
         modalPresentationStyle = .Custom
         transitioningDelegate = self
     }
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

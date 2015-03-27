@@ -1,26 +1,30 @@
 //
-//  TradeOfferNewViewController.swift
+//  TradeViewController.swift
 //  SquirrelList
 //
-//  Created by Denis Geary Lopez on 3/24/15.
+//  Created by Denis Geary Lopez on 3/13/15.
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
-
-//This view controller is for proposing trades to other users
 import UIKit
 
+//This view controller is for proposing trades to other users
 
-class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewControllerDelegate {
+class TradeViewOldController: UIViewController, SquirrelViewControllerDelegate {
 
     var desiredSquirrel: PFObject?
+    
     var desiredSquirrelOwner: PFUser?
+    
     var offeredSquirrel: PFObject?
 
 
     @IBOutlet weak var desiredSquirrelLabel: UILabel!
+
     @IBOutlet weak var offeredSquirrelLabel: UILabel!
+
     @IBOutlet weak var proposeTradeButton: UIButton!
+    
     @IBOutlet weak var selectSquirrelButton: UIButton!
     
     
@@ -40,7 +44,6 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError!) -> Void in
             if (success) {
-                println("trade offer success!")
                 self.dismissViewControllerAnimated(true, completion: nil)
                 
             } else {
@@ -54,7 +57,15 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userSquirrels" {
-            let controller = segue.destinationViewController as UserSquirrelsPopUpViewController
+            //let navigationController = segue.destinationViewController as UINavigationController
+            /*
+            let controller = segue.destinationViewController as SquirrelsForTradingViewController
+            controller.desiredSquirrel = desiredSquirrel
+            controller.desiredSquirrelOwner = desiredSquirrelOwner
+            controller.delegate = self
+            */
+            let controller = segue.destinationViewController as SquirrelViewController
+            controller.currentlyTrading = true
             controller.desiredSquirrel = desiredSquirrel
             controller.desiredSquirrelOwner = desiredSquirrelOwner
             controller.delegate = self
@@ -83,8 +94,10 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         
     }
     
+    
     //Should be its own extension
-    func userSquirrelsPopUpViewControllerDelegate(controller: UserSquirrelsPopUpViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
+    func SquirrelTradeDelegate(controller: SquirrelViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
+            println("delegate working")
             //Ghetto way of transfering this info back from previous controller, might be able to get rid of it
             desiredSquirrel = wantedSquirrel
             desiredSquirrelOwner = wantedSquirrelOwner
@@ -96,8 +109,20 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             offeredSquirrelLabel.hidden = false
             proposeTradeButton.hidden = false
             selectSquirrelButton.hidden = true
-        
     }
+    
+    
 
-   
+        
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

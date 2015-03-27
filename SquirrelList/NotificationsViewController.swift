@@ -15,10 +15,6 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
     //For determining if we're going through trade proposals or group invites 
     var typeOfNotification: String?
 
-
-    @IBAction func back(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -26,10 +22,9 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tradeOffer" {
-            let controller = segue.destinationViewController as PopUpViewController
-            
-            //controller.delegate = self
-            //controller.tradeProposal = sender as? PFObject
+            let controller = segue.destinationViewController as TradeOfferViewController
+            controller.delegate = self
+            controller.tradeProposal = sender as? PFObject
             
         }
 
@@ -46,9 +41,11 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
             return cell
         }
         else {
+            //The user is going through their trade proposals 
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
-            var usernameLabel = cell.viewWithTag(1) as UILabel
-            usernameLabel.text = notifications[indexPath.row]["offeringUser"] as? String
+            var tradeOfferLabel = cell.viewWithTag(1) as UILabel
+            var username = notifications[indexPath.row]["offeringUser"] as? String
+            tradeOfferLabel.text = "\(username!) proposes a trade"
             return cell
         }
     }
@@ -84,7 +81,6 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
                 self.tableView.reloadData()
             })
         } else {
-            self.title = "Trade Proposals"
             var query = PFQuery(className:"TradeProposal")
             query.whereKey("receivingUser", equalTo: PFUser.currentUser()["username"])
         
@@ -102,7 +98,8 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
 
     //Needs to be its own extension 
     func tradeOfferViewController(controller: TradeOfferViewController) {
-        self.viewDidLoad()
+        //Not correctly reloading data. Might need to make it a PQueryTableViewController
+        self.tableView.reloadData()
     }
     
     //Needs to be its own extension 
