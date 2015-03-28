@@ -37,6 +37,9 @@ class MoreTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "FindFriends" {
+            let controller = segue.destinationViewController as FindFriendsViewController
+        }
         if segue.identifier == "MyProfile" {
             println(2)
             let controller = segue.destinationViewController as UserProfileViewController
@@ -49,7 +52,7 @@ class MoreTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 5
     }
     
     
@@ -75,6 +78,10 @@ class MoreTableViewController: UITableViewController {
         if indexPath.row == 1 {
             //The user is selecing "Trade Offers"
             performSegueWithIdentifier("TradeOffers", sender: self)
+        }
+        if indexPath.row == 3 {
+            //The user is selecting "Find Friends"
+            performSegueWithIdentifier("FindFriends", sender: self)
         }
         
 

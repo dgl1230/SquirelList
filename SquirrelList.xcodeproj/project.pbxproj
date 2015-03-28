@@ -40,6 +40,7 @@
 		18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */; };
 		18921EB81A9C3A9E00D8F012 /* SquirrelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */; };
 		18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */; };
+		18D2466D1AC60283003D560A /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466C1AC60283003D560A /* FindFriendsViewController.swift */; };
 		18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */; };
 		18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */; };
 		18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */; };
@@ -84,6 +85,7 @@
 		18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelTableViewCell.swift; path = ../SquirrelTableViewCell.swift; sourceTree = "<group>"; };
 		18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SquirrelTableViewCell.xib; path = ../SquirrelTableViewCell.xib; sourceTree = "<group>"; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
+		18D2466C1AC60283003D560A /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelDetailViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
 				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				183415B91AAE85110093B4CB /* EditProfileViewController.swift */,
+				18D2466C1AC60283003D560A /* FindFriendsViewController.swift */,
 				184561201ABFCE3100026473 /* GradientView.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
@@ -271,6 +274,7 @@
 				184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */,
 				18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */,
 				18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */,
+				18D2466D1AC60283003D560A /* FindFriendsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

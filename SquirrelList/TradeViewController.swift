@@ -40,8 +40,14 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError!) -> Void in
             if (success) {
-                println("trade offer success!")
+                var parent = self.parentViewController
                 self.dismissViewControllerAnimated(true, completion: nil)
+                self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+                let owner = self.desiredSquirrelOwner!["username"] as String
+                let message = "You will be notified if \(owner) accepts your trade."
+                let alert = UIAlertController(title: "Trade Offered", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
                 
             } else {
                 println(error)
