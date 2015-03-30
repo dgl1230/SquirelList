@@ -52,7 +52,6 @@ class FindFriendsViewController: PFQueryTableViewController, UISearchBarDelegate
     
     
     func searchDisplayController(controller: UISearchDisplayController!, shouldReloadTableForSearchString searchString: String!) -> Bool {
-            println(self.filteredUsers.count)
             self.filterContentForSearchText(searchString)
             return true
     }

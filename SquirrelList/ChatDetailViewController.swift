@@ -15,7 +15,6 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
     var receivers = [String]()
     var group = "$$Bitches"
     
-    
     var messageArray = [String]()
     var senderArray = [String]()
     
@@ -52,17 +51,8 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
                 NSLog("Error: %@ %@", error, error.userInfo!)
             }
         }
-        println("The starting composeChatView Y coordinate is \(self.composeChatView.frame.origin.y)")
-        println("The starting height of the chatTbl is \(self.chatTbl.frame.size.height)")
-
     }
 
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func addMessage(message: String, ofType msgType:String) {
         messages.addObject(["message":message, "type":msgType])
@@ -95,7 +85,7 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             //Then the message is from someone other than the logged in user
             cell = chatTbl.dequeueReusableCellWithIdentifier("ChatSentCell") as UITableViewCell
             var textLable = cell.viewWithTag(12) as UILabel
-            var nameLable = cell.viewWithTag(11) as UILabel
+            var nameLable = cell.viewWithTag(10) as UILabel
             var chatImage = cell.viewWithTag(1) as UIImageView
             var profileImage = cell.viewWithTag(2) as UIImageView
             chatImage.frame = CGRectMake(chatImage.frame.origin.x, chatImage.frame.origin.y, ((sizeOFStr.width + 60)  > 100 ? (sizeOFStr.width + 60) : 100), sizeOFStr.height + 40)
@@ -109,7 +99,6 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             cell = chatTbl.dequeueReusableCellWithIdentifier("ChatReceivedCell") as UITableViewCell
             var deliveredLabel = cell.viewWithTag(13) as UILabel
             var textLable = cell.viewWithTag(12) as UILabel
-            var timeLabel = cell.viewWithTag(11) as UILabel
             var chatImage = cell.viewWithTag(1) as UIImageView
             var profileImage = cell.viewWithTag(2) as UIImageView
             //profileImage.image = UIImage(named: "profileIcon")
@@ -120,11 +109,8 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             chatImage.image = UIImage(named: "chat_new_send")?.stretchableImageWithLeftCapWidth(20,topCapHeight: 20);
             textLable.frame = CGRectMake(36 + distanceFactor, textLable.frame.origin.y, textLable.frame.size.width, sizeOFStr.height)
             profileImage.center = CGPointMake(profileImage.center.x, textLable.frame.origin.y + textLable.frame.size.height - profileImage.frame.size.height/2 + 10)
-            timeLabel.frame = CGRectMake(36 + distanceFactor, timeLabel.frame.origin.y, timeLabel.frame.size.width, timeLabel.frame.size.height)
             deliveredLabel.frame = CGRectMake(deliveredLabel.frame.origin.x, textLable.frame.origin.y + textLable.frame.size.height + 20, deliveredLabel.frame.size.width, deliveredLabel.frame.size.height)
             textLable.text = msg as String
-            var nameLable = cell.viewWithTag(11) as UILabel
-            nameLable.text = self.senderArray[indexPath.row]
         }
         return cell
     }
@@ -155,9 +141,7 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
                     self.chatTbl.reloadData()
                     var indexPath = NSIndexPath(forRow:self.messages.count-1, inSection: 0)
                     self.chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-                   
                 }
-                
             }
         }
         
@@ -177,21 +161,11 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         var keyboardFrame = keyboardF.CGRectValue()
     
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
-            println("animating changes")
             
-            //self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height - keyboardFrame.size.height+49)
-            
-            
-            //self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
-            self.composeChatView.frame.origin.y = self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+3
-            println("The composeChatView Y coordinate is now \(self.composeChatView.frame.origin.y)")
-            self.chatTbl.frame.size.height = self.chatTbl.frame.size.height - keyboardFrame.size.height + 49
-            println("The height of hte chatTbl is now \(self.chatTbl.frame.size.height)")
+            self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height - keyboardFrame.size.height+49)
             
             
-            
-
-            
+            self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+5, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
             }, completion: nil)
         var indexPath = NSIndexPath(forRow:messages.count-1, inSection: 0)
         chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
@@ -210,15 +184,8 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         var keyboardFrame = keyboardF.CGRectValue()
         
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
-            println("reverting keyboard")
-            
-            //self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-3, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
-            self.composeChatView.frame.origin.y = self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-3
-            println("The composeChatView Y coordinate is now \(self.composeChatView.frame.origin.y)")
-            //self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height + keyboardFrame.size.height-49);
-            self.chatTbl.frame.size.height = self.chatTbl.frame.size.height + keyboardFrame.size.height-49
-            println("The height of hte chatTbl is now \(self.chatTbl.frame.size.height)")
-            
+            self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y + keyboardFrame.size.height-self.composeChatView.frame.size.height-5, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
+            self.chatTbl.frame = CGRectMake(self.chatTbl.frame.origin.x, self.chatTbl.frame.origin.y, self.chatTbl.frame.size.width, self.chatTbl.frame.size.height + keyboardFrame.size.height-49);
             }, completion: nil)
 
     }
@@ -248,12 +215,10 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
                         //var deliveredLabel = cell.viewWithTag(13) as! UILabel
                         //deliveredLabel.hidden = false
                         
-                        println("Number of messags is \(self.messages.count)")
                         self.chatTbl.reloadData()
                         var indexPath = NSIndexPath(forRow:self.messages.count-1, inSection: 0)
-                        println("The indexPath number is \(indexPath.row)")
-                        println("The number of senders is \(self.senderArray.count)")
                         self.chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                        self.chatTxtField.resignFirstResponder()
                     } else {
                         println(error)
                     }
@@ -278,10 +243,7 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         return labelSize.size
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        self.view.endEditing(true)
-    }
-    
+        
     
     
     /*
