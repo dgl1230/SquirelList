@@ -58,6 +58,7 @@ class SquirrelDetailViewController: PopUpViewController {
     
     
     @IBAction func tradeSquirrel(sender: AnyObject) {
+        println("trade touched")
         self.performSegueWithIdentifier("tradeSquirrel", sender: self)
     }
     
@@ -104,6 +105,7 @@ class SquirrelDetailViewController: PopUpViewController {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        println("touching")
         self.view.endEditing(true)
     }
 

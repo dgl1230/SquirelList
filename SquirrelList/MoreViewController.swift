@@ -37,14 +37,6 @@ class MoreTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "FindFriends" {
-            let controller = segue.destinationViewController as FindFriendsViewController
-        }
-        if segue.identifier == "MyProfile" {
-            println(2)
-            let controller = segue.destinationViewController as UserProfileViewController
-            println(3)
-        }
         if segue.identifier == "TradeOffers" {
             let controller = segue.destinationViewController as NotificationsViewController
             controller.typeOfNotification = "trade"
@@ -52,40 +44,22 @@ class MoreTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
-    
-
-    /*
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //let indexPathNew = tableView.indexPathForSelectedRow()
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-        if indexPath.row  == 0 {
-            //The user is selecting "My Profile"
-            performSegueWithIdentifier("MyProfile", sender: self)
-        }
         if indexPath.row == 1 {
+            //The user is selecing "Trade Offers"
+            let toViewController = UIStoryboard(name:"More", bundle:nil).instantiateViewControllerWithIdentifier("testController") as UIViewController
+            navigationController?.pushViewController(toViewController, animated: true)        }
+        if indexPath.row == 3 {
             //The user is selecing "Trade Offers"
             performSegueWithIdentifier("TradeOffers", sender: self)
         }
-        if indexPath.row == 3 {
-            //The user is selecting "Find Friends"
-            performSegueWithIdentifier("FindFriends", sender: self)
-        }
-        
 
-        
     }
 
     

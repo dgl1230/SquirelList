@@ -155,7 +155,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println(currentlyTrading)
         if currentlyTrading? == true {
             //dismissViewControllerAnimated(true, completion: nil)
             delegate?.SquirrelTradeDelegate!(self, selectedSquirrel: objects[indexPath.row] as PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)

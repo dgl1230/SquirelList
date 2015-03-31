@@ -59,20 +59,10 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return messages.count
-    }
-    
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var messageDic = messages.objectAtIndex(indexPath.row) as [String : String];
-        var msg = messageDic["message"] as NSString!
-        var sizeOFStr = self.getSizeOfString(msg)
-        return sizeOFStr.height + 70
-    }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         var cell : UITableViewCell!
@@ -115,6 +105,19 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         return cell
     }
     
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        var messageDic = messages.objectAtIndex(indexPath.row) as [String : String];
+        var msg = messageDic["message"] as NSString!
+        var sizeOFStr = self.getSizeOfString(msg)
+        return sizeOFStr.height + 70
+    }
+    
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
     func getMessages() {
         
         let P1 = NSPredicate(format: "group = %@", group)
@@ -136,12 +139,16 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
                             self.addMessage(self.messageArray[i], ofType: "1")
 
                         }
-                    //These lines need to go here and not in view did load, because otherwise the query will evaluate
-                    //these lines before it's done querying
-                    self.chatTbl.reloadData()
-                    var indexPath = NSIndexPath(forRow:self.messages.count-1, inSection: 0)
-                    self.chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
                 }
+                //These lines need to go here and not in view did load, because otherwise the query will evaluate
+                    //these lines before it's done querying
+                    if self.messages.count != 0 {
+                        self.chatTbl.reloadData()
+                        var indexPath = NSIndexPath(forRow:self.messages.count-1, inSection: 0)
+                        self.chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+                    }
+            } else {
+                println("woops")
             }
         }
         
@@ -168,7 +175,10 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             self.composeChatView.frame = CGRectMake(self.composeChatView.frame.origin.x, self.composeChatView.frame.origin.y - keyboardFrame.size.height+self.composeChatView.frame.size.height+5, self.composeChatView.frame.size.width, self.composeChatView.frame.size.height)
             }, completion: nil)
         var indexPath = NSIndexPath(forRow:messages.count-1, inSection: 0)
-        chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        if self.messages.count != 0 {
+            chatTbl.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        }
+        
         
 
     }
