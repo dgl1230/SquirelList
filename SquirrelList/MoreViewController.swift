@@ -14,21 +14,16 @@ import UIKit
 
 class MoreTableViewController: UITableViewController {
 
+    @IBOutlet weak var friendsIcon: UILabel!
+    @IBOutlet weak var groupsIcon: UILabel!
+    @IBOutlet weak var settingsIcon: UILabel!
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
     @IBOutlet var tblOptions : UITableView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
-
-    }
-
-
 
     // MARK: - Table view data source
 
@@ -37,45 +32,53 @@ class MoreTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Friends" {
+            let controller = segue.destinationViewController as FriendsViewController
+        }
+        /*
+        Need to think over if trade offers should be its own VC
         if segue.identifier == "TradeOffers" {
             let controller = segue.destinationViewController as NotificationsViewController
             controller.typeOfNotification = "trade"
         }
+        */
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //let indexPathNew = tableView.indexPathForSelectedRow()
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-        if indexPath.row == 1 {
-            //The user is selecing "Trade Offers"
-            let toViewController = UIStoryboard(name:"More", bundle:nil).instantiateViewControllerWithIdentifier("testController") as UIViewController
-            navigationController?.pushViewController(toViewController, animated: true)        }
+        if indexPath.row == 0 {
+            //The user is selecing "Friends"
+            performSegueWithIdentifier("Friends", sender: self)
+        }
         if indexPath.row == 3 {
             //The user is selecing "Trade Offers"
             performSegueWithIdentifier("TradeOffers", sender: self)
         }
 
     }
-
-    
-
-   
     
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
+        //Set the friendsIcon to 'fa-smile-o'
+        friendsIcon.text = "\u{f118}"
+        //Set the groupsIcon to 'fa-users'
+        groupsIcon.text = "\u{f0c0}"
+        //Set the settings icon to 'fa-cog'
+        settingsIcon.text = "\u{f013}"
+        
     }
-    */
+
+    
+
 
 }

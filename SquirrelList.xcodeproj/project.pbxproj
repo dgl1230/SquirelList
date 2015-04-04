@@ -36,8 +36,6 @@
 		186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */; };
 		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
-		18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */; };
-		18921EB81A9C3A9E00D8F012 /* SquirrelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */; };
 		18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */; };
 		18D2466D1AC60283003D560A /* FindFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466C1AC60283003D560A /* FindFriendsViewController.swift */; };
 		18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */; };
@@ -47,12 +45,15 @@
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
 		18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FB1AC9FE8500314DB2 /* More.storyboard */; };
 		18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */; };
+		18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */; };
+		18F769031ACB995C00314DB2 /* FindFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F769011ACB995C00314DB2 /* FindFriendsTableViewCell.swift */; };
+		18F769041ACB995C00314DB2 /* FindFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F769021ACB995C00314DB2 /* FindFriendsTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
 		182595271A8E9B050057BEDD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
-		1845611B1ABE417100026473 /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquirrelList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1845611B1ABE417100026473 /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = SquirrelList.app; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/SquirrelList.app"; sourceTree = "<absolute>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
@@ -82,8 +83,6 @@
 		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelTableViewCell.swift; path = ../SquirrelTableViewCell.swift; sourceTree = "<group>"; };
-		18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SquirrelTableViewCell.xib; path = ../SquirrelTableViewCell.xib; sourceTree = "<group>"; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* FindFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsViewController.swift; sourceTree = "<group>"; };
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +92,9 @@
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		18F769011ACB995C00314DB2 /* FindFriendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		18F769021ACB995C00314DB2 /* FindFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindFriendsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirrelList */,
-				1845611B1ABE417100026473 /* SquirrelList.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,12 +133,12 @@
 			isa = PBXGroup;
 			children = (
 				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
-				18F768FB1AC9FE8500314DB2 /* More.storyboard */,
 				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
 				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
+				18F769011ACB995C00314DB2 /* FindFriendsTableViewCell.swift */,
 				18D2466C1AC60283003D560A /* FindFriendsViewController.swift */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
 				184561201ABFCE3100026473 /* GradientView.swift */,
@@ -148,16 +149,16 @@
 				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
 				18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */,
-				18921EB51A9C3A9E00D8F012 /* SquirrelTableViewCell.swift */,
 				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
 				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
-				18921EB61A9C3A9E00D8F012 /* SquirrelTableViewCell.xib */,
+				18F769021ACB995C00314DB2 /* FindFriendsTableViewCell.xib */,
 				186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */,
 				186B32E71A758E5000A8D4CB /* Main.storyboard */,
+				18F768FB1AC9FE8500314DB2 /* More.storyboard */,
 				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 			);
 			path = SquirrelList;
@@ -166,6 +167,7 @@
 		186B32DF1A758E5000A8D4CB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */,
 				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
 				186B33191A758FDA00A8D4CB /* libz.dylib */,
 				184ED4091AC0A07800F82D50 /* ParseUI.framework */,
@@ -243,9 +245,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18921EB81A9C3A9E00D8F012 /* SquirrelTableViewCell.xib in Resources */,
 				18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */,
 				186B32E91A758E5000A8D4CB /* Main.storyboard in Resources */,
+				18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */,
+				18F769041ACB995C00314DB2 /* FindFriendsTableViewCell.xib in Resources */,
 				186B32EE1A758E5000A8D4CB /* LaunchScreen.xib in Resources */,
 				186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */,
 			);
@@ -265,7 +268,6 @@
 				18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */,
 				184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */,
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
-				18921EB71A9C3A9E00D8F012 /* SquirrelTableViewCell.swift in Sources */,
 				182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */,
 				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
 				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
@@ -274,6 +276,7 @@
 				18625C571AC33DA100093A1B /* MoreViewController.swift in Sources */,
 				18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */,
 				1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */,
+				18F769031ACB995C00314DB2 /* FindFriendsTableViewCell.swift in Sources */,
 				181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */,
 				184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */,
 				18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */,

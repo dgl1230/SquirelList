@@ -22,6 +22,8 @@ class HomeTabViewController: UITabBarController {
         let moreStoryboard = UIStoryboard(name: "More", bundle: nil)
         var moreViewController = moreStoryboard.instantiateViewControllerWithIdentifier("More") as UINavigationController
         moreViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "tabbar_more"), tag: 4)
+        moreViewController.tabBarItem.imageInsets.top = 8
+        moreViewController.tabBarItem.imageInsets.bottom = -8
         moreViewController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.viewControllers = [usersViewController, squirrelsViewController, chatViewController, moreViewController]
     }

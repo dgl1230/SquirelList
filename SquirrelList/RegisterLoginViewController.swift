@@ -75,6 +75,7 @@ class RegisterLoginViewController: UIViewController {
             user.username = usernameRegister.text
             user["num_of_squirrels"] = 0
             user["current_group"] = "first_group"
+            user["friends"] = []
     
             displayLoadingAnimator()
     

@@ -30,11 +30,16 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     var desiredSquirrelOwner: PFUser?
     
     @IBOutlet weak var teamRatingLabel: UILabel!
-    
     @IBOutlet weak var addSquirrelButton: UIBarButtonItem?
+    @IBOutlet weak var tradeOfferButton: UIBarButtonItem!
     
     @IBAction func addSquirrel(sender: AnyObject) {
         self.performSegueWithIdentifier("AddSquirrel", sender: self)
+    }
+    
+    
+    @IBAction func viewTradeOffers(sender: AnyObject) {
+        self.performSegueWithIdentifier("TradeOffers", sender: self)
     }
 
 
@@ -59,34 +64,52 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     
     //Calculates the average, given an array of numbers
-    func calculateAverageRating(ratings:[String]) -> String {
+    func calculateAverageRating(ratings:[Int]) -> Int {
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
-            return "No Ratings"
+            return 999
         }
         numOfRatings = 0
         var sum = 0
         for rating in ratings {
-            if let test = rating.toInt() {
-                 sum += rating.toInt()!
-                 numOfRatings += 1
-            }
+            sum += rating
+            numOfRatings += 1
         }
-        return String(Int(sum/numOfRatings))
+        return Int(sum/numOfRatings)
+    }
+    
+    
+    //Calculates the color that the Squirrel name should be shown in, given the Squirrel's average rating
+    func calculateColor(avg_rating: Int) -> UIColor {
+        if avg_rating >= 9 {
+            //We return a 'bright red' color
+            return UIColor(red: 255, green: 0, blue: 0, alpha: 1)
+        } else if avg_rating >= 7 {
+            //We return a 'orange' color
+            return UIColor(red: 255, green: 127, blue: 0, alpha: 1)
+        } else if avg_rating >= 5 {
+            //We return a 'orange-yellow' color
+            UIColor(red: 255, green: 185, blue: 15, alpha: 1)
+        }
+        //Else we return a 'yellow-brown' color
+        return UIColor(red: 205, green: 173, blue: 0, alpha: 1)
     }
     
     
     //Calculates the average rating of Squirrells owned by a user
-    func calculateTeamRating(username:String) -> String? {
-        var teamRatings: [String] = []
-        for squirrel in self.objects{
+    func calculateTeamRating(username:String) -> Int {
+        var teamRatings: [Int] = []
+        for squirrel in self.objects {
             //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
-            if (squirrel["owner"] as String == username) && (squirrel["avg_rating"] as String != ""){
-                teamRatings.append(squirrel["avg_rating"] as String)
+            if squirrel["avg_rating"] === nil {
+                //Weird parse bug, can only check if nil by using ===
+            }
+            else if (squirrel["owner"] as String == username){
+                teamRatings.append(squirrel["avg_rating"] as Int)
             }
         }
-        var teamRating = calculateAverageRating(teamRatings as [String])
-        return String(teamRating)
+        var teamRating = calculateAverageRating(teamRatings as [Int])
+        return teamRating
     }
     
     
@@ -109,9 +132,16 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let controller = segue.destinationViewController as SquirrelDetailViewController
             //controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            if sender!["owner"] != nil {
-                controller.squirrelOwner = selectedUser?
+            if sender!["owner"] as String != ""{
+                println(2)
+                var query = PFUser.query()
+                query.whereKey("username", equalTo: sender!["owner"])
+                var user = query.getFirstObject()
+                controller.squirrelOwner = user as PFUser!
             }
+        }
+        if segue.identifier == "TradeOffers" {
+            let controller = segue.destinationViewController as NotificationsViewController
         }
     }
     
@@ -121,16 +151,17 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if (self.selectedUser != nil) {
             //We need to calculate the team rating
             var teamRating = calculateTeamRating(selectedUser!["username"] as String)
-            if teamRating == "No Ratings" {
+            if teamRating == 999 {
                 teamRatingLabel.text = "Their Squirrels haven't been rated :("
             } else {
-                teamRatingLabel.text = "Team Rating: \(teamRating!)"
+                teamRatingLabel.text = "Team Rating: \(String(teamRating))"
             }
         }
     }
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery! {
+        println("starting")
         var query = PFQuery(className: "Squirrel")
         if currentlyTrading? == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()["username"])
@@ -138,25 +169,37 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         else if selectedUser != nil {
             query.whereKey("owner", equalTo: selectedUser!["username"])
         } 
-        query.orderByAscending("last_name")
+        query.orderByDescending("avg_rating")
+        println("ending")
         return query
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject) ->PFTableViewCell {
-            var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as SquirrelTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as PFTableViewCell
             var first = cell.viewWithTag(1) as UILabel
             first.text = object["first_name"].capitalizedString
+            //For some reason 2 is already being used as another tag
             var last = cell.viewWithTag(5) as UILabel
             last.text = object["last_name"].capitalizedString
             var ratingLabel = cell.viewWithTag(3) as UILabel
-            ratingLabel.text = object["avg_rating"] as? String
-            return cell 
+            var avgRating: AnyObject! = object["avg_rating"]
+            if avgRating != nil {
+                ratingLabel.text = "\(avgRating!)"
+                var color = calculateColor(avgRating! as Int)
+                first.textColor = color
+                last.textColor = color
+                ratingLabel.textColor = color
+            } else {
+                ratingLabel.text = ""
+            }
+            return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if currentlyTrading? == true {
             //dismissViewControllerAnimated(true, completion: nil)
+            //Then the delegate will store the selected Squirrel and other trade information 
             delegate?.SquirrelTradeDelegate!(self, selectedSquirrel: objects[indexPath.row] as PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)
             
             self.navigationController?.popViewControllerAnimated(true)
@@ -191,10 +234,19 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerNib(UINib(nibName: "SquirrelTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-
+        if selectedUser? == nil {
+            //Set the addSquirrelButton to 'fa-plus-circle'
+            addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+            addSquirrelButton?.title = "\u{f055}"
+            addSquirrelButton?.tintColor = UIColor.whiteColor()
+            //Set the tradeOfferButton to 'fa-user-secret'
+            tradeOfferButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+            tradeOfferButton?.title = "\u{f21b}"
+            tradeOfferButton?.tintColor = UIColor.whiteColor()
+        }
+        
         //If the selected user is nil, then we are now on user squirrels, which has no addSquirrelButton
-        if userCanAddSquirrel() == false || self.selectedUser != nil {
+        if userCanAddSquirrel() == false || self.selectedUser == nil {
             addSquirrelButton?.enabled = false
         }
     }
@@ -218,7 +270,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["ratings"] = []
         newSquirrel["dtd"] = false
         newSquirrel["out"] = false
-        newSquirrel["avg_rating"] = ""
+        newSquirrel["avg_rating"] = 0
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError!) -> Void in
             if (success) {

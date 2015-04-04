@@ -42,13 +42,13 @@ class SquirrelDetailViewController: PopUpViewController {
         } else {
             ratedSquirrel!["raters"] = [rater]
         }
-        
         //check if ["ratings"] is nil. If it is, we create it
         if let check: AnyObject = ratedSquirrel!["ratings"] {
             ratedSquirrel!["ratings"].addObject(rateNumberTextField.text)
         } else {
             ratedSquirrel!["ratings"] = [rateNumberTextField.text]
         }
+        println(ratedSquirrel!)
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as [String])
         ratedSquirrel!.save()
         //delegate?.squirrelDetailViewController(self)
@@ -65,17 +65,19 @@ class SquirrelDetailViewController: PopUpViewController {
     
     
     
-    func calculateAverageRating(ratings:[String]) -> String {
+    func calculateAverageRating(ratings:[String]) -> Int {
+        println(1)
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
-            return "0"
+            return 0
         }
         var sum = 0
 
         for rating in ratings {
             sum += rating.toInt()!
         }
-        return String(Int(Float(sum)/Float(numOfRatings)))
+        println(2)
+        return Int(Float(sum)/Float(numOfRatings))
     }
     
     
@@ -105,7 +107,6 @@ class SquirrelDetailViewController: PopUpViewController {
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        println("touching")
         self.view.endEditing(true)
     }
 
@@ -139,9 +140,9 @@ class SquirrelDetailViewController: PopUpViewController {
         }
         
         //Check if the squirrel has an owner to propose a trade with
-        if ratedSquirrel!["owner"] == nil {
+        if ratedSquirrel!["owner"] as String == "" {
             tradeButton.hidden = true
-            ownerLabel.hidden = true
+            ownerLabel.text = "No owner :("
             squirrelOwnerLabel.hidden = true
         } else if ratedSquirrel!["owner"] as String == PFUser.currentUser()["username"] as String{
             tradeButton.hidden = true
