@@ -45,6 +45,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
                 let owner = self.desiredSquirrelOwner!["username"] as String
                 let message = "You will be notified if \(owner) accepts your trade."
+                //This isn't working right now
                 let alert = UIAlertController(title: "Trade Offered", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)

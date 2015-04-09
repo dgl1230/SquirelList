@@ -8,32 +8,66 @@
 
 import UIKit
 
-class NotificationsViewController: UITableViewController, TradeOfferViewControllerDelegate {
+class NotificationsViewController: PFQueryTableViewController, TradeOfferViewControllerDelegate {
 
     var notifications = [PFObject]()
     
     //For determining if we're going through trade proposals or group invites 
     var typeOfNotification: String?
-
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    
+    // Initialise the PFQueryTable tableview
+    override init!(style: UITableViewStyle, className: String!) {
+        super.init(style: style, className: className)
     }
+	
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+  
+        // Configure the PFQueryTableView
+        if typeOfNotification? == "invite" {
+            self.parseClassName = "GroupInvite"
+            self.textKey = "groupName"
+        } else {
+            //The objects are trade proposals
+            self.parseClassName = "TradeProposal"
+            self.textKey = "offeringUser"
+        }
+        pullToRefreshEnabled = true
+        self.paginationEnabled = false
+    }
+
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tradeOffer" {
             let controller = segue.destinationViewController as TradeOfferViewController
             controller.delegate = self
             controller.tradeProposal = sender as? PFObject
-            
         }
-
+    }
+    
+    
+    // Define the query that will provide the data for the table view
+    override func queryForTable() -> PFQuery! {
+        //Have to have this line to prevent xcode bug from thinking there's a way query wouldn't be returned
+        var query = PFQuery()
+        if typeOfNotification? == "invite" {
+            query = PFQuery(className: "GroupInvite")
+            query.whereKey("invitee", equalTo: PFUser.currentUser().objectId)
+        }
+        else  {
+            query = PFQuery(className: "TradeProposal")
+            query.whereKey("receivingUser", equalTo: PFUser.currentUser()["username"])
+        } 
+        query.orderByDescending("avg_rating")
+        return query
     }
     
     
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if typeOfNotification == "invite" {
-            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as PFTableViewCell
             var inviteLabel = cell.viewWithTag(1) as UILabel
             var inviter = notifications[indexPath.row]["inviterUsername"] as? String
             var groupName = notifications[indexPath.row]["groupName"] as? String
@@ -42,7 +76,7 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
         }
         else {
             //The user is going through their trade proposals 
-            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
             var tradeOfferLabel = cell.viewWithTag(1) as UILabel
             var username = notifications[indexPath.row]["offeringUser"] as? String
             tradeOfferLabel.text = "\(username!) proposes a trade"
@@ -55,45 +89,12 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
             //segue to viewing invite
         }
         else {
+            //They are viewing trade proposals offered to them
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             self.performSegueWithIdentifier("tradeOffer", sender: notifications[indexPath.row])
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if typeOfNotification == "invite" {
-            self.title = "Invitations"
-            var query = PFQuery(className: "Invitation")
-            query.whereKey("receivingUserID", equalTo: PFUser.currentUser().objectId as String)
-            
-            query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-                self.notifications.removeAll(keepCapacity: true)
-                for object in objects {
-                    var notification:PFObject = object as PFObject
-                    self.notifications.append(notification)
-                }
-                self.tableView.reloadData()
-            })
-        } else {
-            var query = PFQuery(className:"TradeProposal")
-            query.whereKey("receivingUser", equalTo: PFUser.currentUser()["username"])
-        
-            query.findObjectsInBackgroundWithBlock({ (objects: [AnyObject]!, error: NSError!) -> Void in
-                self.notifications.removeAll(keepCapacity: true)
-                for object in objects {
-                    var notification:PFObject = object as PFObject
-                    self.notifications.append(notification)
-                }
-                self.tableView.reloadData()
-            })
-        }
-    }
 
 
     //Needs to be its own extension 
@@ -102,24 +103,8 @@ class NotificationsViewController: UITableViewController, TradeOfferViewControll
         self.tableView.reloadData()
     }
     
-    //Needs to be its own extension 
-    
-    /*
-    func popupViewController(controller: PopUpViewController) {
-        self.viewDidLoad()
-    }
-    */
+
  
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,6 +10,17 @@ import UIKit
 
 class UsersViewController: PFQueryTableViewController {
 
+    var currentGroup: PFObject?
+
+
+    @IBOutlet weak var addFriendToGroupButton: UIBarButtonItem?
+
+
+    @IBAction func addFriendToGroup(sender: AnyObject) {
+        self.performSegueWithIdentifier("AddFriendToGroup", sender: self)
+    }
+    
+
     // Initialise the PFQueryTable tableview
     override init!(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
@@ -32,13 +43,22 @@ class UsersViewController: PFQueryTableViewController {
             let controller = segue.destinationViewController as SquirrelViewController
             controller.selectedUser = sender as? PFUser
         }
+        if segue.identifier == "AddFriendToGroup" {
+            let controller = segue.destinationViewController as SearchUsersViewController
+            controller.addingToGroup = true
+        }
 
     }
     
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery! {
+        //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
+        currentGroup = PFUser.currentUser()["currentGroup"] as? PFObject
+        currentGroup!.fetch()
+        
         var query = PFUser.query()
+        query.whereKey("objectId", containedIn: currentGroup!["userIDs"] as [String])
         query.orderByAscending("username")
         return query
     }
@@ -62,13 +82,11 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //We need to get the appropriate group 
-        var currentGroupQuery = PFQuery(className: "Group")
-        PFUser.currentUser().fetch()
-        currentGroupQuery.whereKey("name", equalTo: PFUser.currentUser()["current_group"])
-        var currentGroup = currentGroupQuery.getFirstObject()
-        
+        //Set the addFriendToGroupButton to 'fa-user-plus
+        addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        addFriendToGroupButton?.title = "\u{f234}"
+        addFriendToGroupButton?.tintColor = UIColor.whiteColor()
+
         self.tableView.reloadData()
         self.title = currentGroup!["name"] as? String
     }

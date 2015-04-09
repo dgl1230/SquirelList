@@ -133,7 +133,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             //controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
             if sender!["owner"] as String != ""{
-                println(2)
                 var query = PFUser.query()
                 query.whereKey("username", equalTo: sender!["owner"])
                 var user = query.getFirstObject()
@@ -161,7 +160,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery! {
-        println("starting")
         var query = PFQuery(className: "Squirrel")
         if currentlyTrading? == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()["username"])
@@ -170,7 +168,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             query.whereKey("owner", equalTo: selectedUser!["username"])
         } 
         query.orderByDescending("avg_rating")
-        println("ending")
         return query
     }
     

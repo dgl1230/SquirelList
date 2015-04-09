@@ -227,7 +227,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gec-oo-FDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3690" y="1787.3239436619717"/>
+            <point key="canvasLocation" x="3564" y="2643"/>
         </scene>
         <!--Trade Offer View Controller-->
         <scene sceneID="ueR-g3-5Ha">
@@ -351,7 +351,7 @@
         <!--Find Friends-->
         <scene sceneID="wG4-fp-sgf">
             <objects>
-                <viewController id="dXw-As-5D9" customClass="FindFriendsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dXw-As-5D9" customClass="SearchUsersViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6ff-eN-7Zl" userLabel="User's Name">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -499,8 +499,8 @@
                         <outlet property="groupsIcon" destination="Wwb-pI-lvG" id="W5h-zZ-CXz"/>
                         <outlet property="settingsIcon" destination="kt6-wp-psl" id="gjB-Mm-Nmb"/>
                         <outlet property="tblOptions" destination="7cw-Ap-9hv" id="Wbf-AH-edA"/>
-                        <segue destination="KPB-YO-KQT" kind="show" id="bO3-Qm-E3P"/>
                         <segue destination="ef1-lT-QsA" kind="show" identifier="Friends" id="dOU-cP-DbM"/>
+                        <segue destination="GDH-kA-JbV" kind="show" identifier="GroupInvites" id="3Zt-pC-LMW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uee-8W-UiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -526,6 +526,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QBv-Wm-943" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1732.5" y="1793.6619718309857"/>
+        </scene>
+        <!--Group Invitations-->
+        <scene sceneID="e60-NR-gW7">
+            <objects>
+                <viewController id="GDH-kA-JbV" userLabel="Group Invitations" customClass="NotificationsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" id="ksP-Zl-iee">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="57" id="T3D-8s-cfL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T3D-8s-cfL" id="NFz-bu-68s">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invitation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGm-9l-RXX">
+                                            <rect key="frame" x="21" y="19" width="291" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Group Invites" id="eMc-Qb-yag"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lrd-w8-mAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3690" y="1791"/>
         </scene>
     </scenes>
     <resources>

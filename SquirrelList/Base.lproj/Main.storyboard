@@ -24,9 +24,17 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Users" id="OEK-gL-1f3"/>
+                    <navigationItem key="navigationItem" title="Users" id="OEK-gL-1f3">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="jQH-XT-U2t" userLabel="Add Friend to Group Button">
+                            <connections>
+                                <action selector="addFriendToGroup:" destination="9pv-A4-QxB" id="6xM-8s-c80"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addFriendToGroupButton" destination="jQH-XT-U2t" id="Rtc-4G-gQO"/>
                         <segue destination="Qgd-8Q-Du2" kind="show" identifier="SingleUserSquirrels" id="Zhh-zz-wnn"/>
+                        <segue destination="XSm-0T-jTC" kind="show" identifier="AddFriendToGroup" id="EgT-OD-jDQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -858,7 +866,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="57" id="7ob-qM-btM">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="57" id="7ob-qM-btM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ob-qM-btM" id="jMK-hl-pp9">
@@ -881,7 +889,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzG-X1-J82" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2752" y="1081"/>
+            <point key="canvasLocation" x="2752" y="1134"/>
+        </scene>
+        <!--Search Users View Controller-->
+        <scene sceneID="lmp-z0-56N">
+            <objects>
+                <viewController id="XSm-0T-jTC" customClass="SearchUsersViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3DJ-TJ-ecN" userLabel="User's Name">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="72D-wb-6fO">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="XSm-0T-jTC" id="XbK-Li-cu3"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="BYR-oe-LEV" customClass="FindFriendsTableViewCell" customModule="SquirrelList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BYR-oe-LEV" id="VW0-jW-lJy">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="R10-0n-KJs"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="Kzq-mf-Ik8" id="gsv-r5-81n"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="83X-e4-Jm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="EbS-Mw-yE4">
+                    <connections>
+                        <outlet property="delegate" destination="XSm-0T-jTC" id="xkz-CF-WbO"/>
+                        <outlet property="searchContentsController" destination="XSm-0T-jTC" id="uLD-aZ-Kog"/>
+                        <outlet property="searchResultsDataSource" destination="XSm-0T-jTC" id="vIs-j8-Mil"/>
+                        <outlet property="searchResultsDelegate" destination="XSm-0T-jTC" id="31y-ne-siy"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="g2f-Ii-0lH">
+                    <connections>
+                        <outlet property="delegate" destination="XSm-0T-jTC" id="QWZ-Xt-QJB"/>
+                        <outlet property="searchContentsController" destination="XSm-0T-jTC" id="bEq-sy-IYH"/>
+                        <outlet property="searchResultsDataSource" destination="XSm-0T-jTC" id="7lp-gL-sdn"/>
+                        <outlet property="searchResultsDelegate" destination="XSm-0T-jTC" id="gLD-ed-86a"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="Kzq-mf-Ik8">
+                    <connections>
+                        <outlet property="delegate" destination="XSm-0T-jTC" id="eha-lA-Ng5"/>
+                        <outlet property="searchBar" destination="72D-wb-6fO" id="Sdh-sA-2eE"/>
+                        <outlet property="searchContentsController" destination="XSm-0T-jTC" id="ulX-g2-CVR"/>
+                        <outlet property="searchResultsDataSource" destination="XSm-0T-jTC" id="3fv-xw-Zmi"/>
+                        <outlet property="searchResultsDelegate" destination="XSm-0T-jTC" id="aTm-2s-xjK"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="2752" y="-1100"/>
         </scene>
     </scenes>
     <resources>
@@ -897,7 +965,7 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vxR-tG-TAF"/>
+        <segue reference="U0x-nx-gDC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

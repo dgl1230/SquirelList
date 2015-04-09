@@ -11,11 +11,12 @@
 
 import UIKit
 
-class FriendsViewController: PFQueryTableViewController, FindFriendsViewControllerDelegate {
+class FriendsViewController: PFQueryTableViewController {
 
     var shouldReload: Bool?
   
-    @IBOutlet weak var findFriendsButton: UIBarButtonItem!
+    //Button only occurs when user is in their 'Friends' main page under the 'More' tab
+    @IBOutlet weak var findFriendsButton: UIBarButtonItem?
     
     @IBAction func findFriends(sender: AnyObject) {
         performSegueWithIdentifier("FindFriends", sender: self)
@@ -41,8 +42,7 @@ class FriendsViewController: PFQueryTableViewController, FindFriendsViewControll
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             if segue.identifier == "FindFriends" {
-                let controller = segue.destinationViewController as FindFriendsViewController
-                controller.delegate = self
+                let controller = segue.destinationViewController as SearchUsersViewController
             }
     }
     
@@ -63,26 +63,15 @@ class FriendsViewController: PFQueryTableViewController, FindFriendsViewControll
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        if shouldReload? == true {
-            println("working")
-            self.tableView.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setting the find friend image, which is 'fa-user-plus'
-        findFriendsButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 25)!], forState: UIControlState.Normal)
-        findFriendsButton.title = "\u{f234}"
-        findFriendsButton.tintColor = UIColor.whiteColor()
+        findFriendsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 25)!], forState: UIControlState.Normal)
+        findFriendsButton?.title = "\u{f234}"
+        findFriendsButton?.tintColor = UIColor.whiteColor()
         self.tableView.allowsSelection = false
 
-    }
-    
-    //Should be its own extension
-    func findFriendsViewController(controller: FindFriendsViewController) {
-        shouldReload = true
     }
    
 }
