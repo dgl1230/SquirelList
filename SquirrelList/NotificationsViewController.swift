@@ -6,11 +6,12 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+//TableVieWController for displaying rows of group invitations and trade proposals to the logged in user
+
 import UIKit
 
 class NotificationsViewController: PFQueryTableViewController, TradeOfferViewControllerDelegate {
 
-    var notifications = [PFObject]()
     
     //For determining if we're going through trade proposals or group invites 
     //If it equals 'invite' then we're going through the users Group Invites
@@ -55,7 +56,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             controller.groupInvite = sender as? PFObject
             
         }
-        if segue.identifier == "tradeOffer" {
+        if segue.identifier == "TradeOffer" {
             let controller = segue.destinationViewController as TradeOfferViewController
             controller.delegate = self
             controller.tradeProposal = sender as? PFObject
@@ -84,8 +85,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         if typeOfNotification == "invite" {
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as PFTableViewCell
             var inviteLabel = cell.viewWithTag(1) as UILabel
-            var inviter = notifications[indexPath.row]["inviterUsername"] as? String
-            var groupName = notifications[indexPath.row]["groupName"] as? String
+            var inviter = objects[indexPath.row]["inviterUsername"] as? String
+            var groupName = objects[indexPath.row]["groupName"] as? String
             inviteLabel.text = "\(inviter!) invites you to join \(groupName!)"
             return cell
         }
@@ -93,7 +94,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             //The user is going through their trade proposals 
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
             var tradeOfferLabel = cell.viewWithTag(1) as UILabel
-            var username = notifications[indexPath.row]["offeringUser"] as? String
+            var username = objects[indexPath.row]["offeringUser"] as? String
             tradeOfferLabel.text = "\(username!) proposes a trade"
             return cell
         }
@@ -102,12 +103,12 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if typeOfNotification == "invite" {
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            self.performSegueWithIdentifier("groupInvite", sender: notifications[indexPath.row])
+            self.performSegueWithIdentifier("groupInvite", sender: objects[indexPath.row])
         }
         else {
             //They are viewing trade proposals offered to them
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            self.performSegueWithIdentifier("tradeOffer", sender: notifications[indexPath.row])
+            self.performSegueWithIdentifier("TradeOffer", sender: objects[indexPath.row])
         }
     }
     

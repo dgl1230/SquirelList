@@ -21,7 +21,7 @@ class TradeOfferViewController: PopUpViewController {
     var tradeProposal: PFObject?
     var yourSquirrel: PFObject?
     
-    @IBOutlet weak var offeredSquirrelLabel: UILabel!
+    @IBOutlet weak var offeredlLabel: UILabel!
     @IBOutlet weak var yourSquirrelLabel: UILabel!
     
     
@@ -54,7 +54,7 @@ class TradeOfferViewController: PopUpViewController {
         
         var offeredFirstName = offeredSquirrel!["first_name"] as? String
         var offeredLastName = offeredSquirrel!["last_name"] as? String
-        offeredSquirrelLabel.text = "\(offeredFirstName!) \(offeredLastName!)"
+        offeredlLabel.text = "\(offeredFirstName!) \(offeredLastName!)"
         
         
         var yourSquirrelQuery = PFQuery(className: "Squirrel")
