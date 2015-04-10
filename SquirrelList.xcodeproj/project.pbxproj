@@ -35,7 +35,9 @@
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
 		186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */; };
 		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
+		1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
+		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */; };
 		18D2466D1AC60283003D560A /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466C1AC60283003D560A /* SearchUsersViewController.swift */; };
 		18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */; };
@@ -81,7 +83,9 @@
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
 		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18CA31681AD5A281002285EE /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquirrelList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
@@ -138,10 +142,12 @@
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
 				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
+				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
 				184561201ABFCE3100026473 /* GradientView.swift */,
+				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
@@ -270,6 +276,7 @@
 				184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */,
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
 				182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */,
+				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
 				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
 				18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */,
@@ -283,6 +290,7 @@
 				18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */,
 				18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */,
 				18D2466D1AC60283003D560A /* SearchUsersViewController.swift in Sources */,
+				18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

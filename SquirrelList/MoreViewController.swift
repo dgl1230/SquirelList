@@ -35,13 +35,10 @@ class MoreTableViewController: UITableViewController {
         if segue.identifier == "Friends" {
             let controller = segue.destinationViewController as FriendsViewController
         }
-        /*
-        Need to think over if trade offers should be its own VC
-        if segue.identifier == "TradeOffers" {
+        if segue.identifier == "GroupInvites" {
             let controller = segue.destinationViewController as NotificationsViewController
-            controller.typeOfNotification = "trade"
+            controller.typeOfNotification = "invite"
         }
-        */
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,9 +53,9 @@ class MoreTableViewController: UITableViewController {
             //The user is selecing "Friends"
             performSegueWithIdentifier("Friends", sender: self)
         }
-        if indexPath.row == 3 {
-            //The user is selecing "Trade Offers"
-            performSegueWithIdentifier("TradeOffers", sender: self)
+        if indexPath.row == 1 {
+            //The user is selecing "Groups"
+            performSegueWithIdentifier("GroupInvites", sender: self)
         }
 
     }

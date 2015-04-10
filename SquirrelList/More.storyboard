@@ -227,12 +227,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gec-oo-FDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3564" y="2643"/>
+            <point key="canvasLocation" x="3690" y="2513"/>
         </scene>
-        <!--Trade Offer View Controller-->
+        <!--Group Invite PopUp-->
         <scene sceneID="ueR-g3-5Ha">
             <objects>
-                <viewController id="wIG-oy-ucg" customClass="TradeOfferViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wIG-oy-ucg" userLabel="Group Invite PopUp" customClass="GroupInvitePopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SNl-zQ-izq"/>
                         <viewControllerLayoutGuide type="bottom" id="XEj-cA-44n"/>
@@ -252,19 +252,13 @@
                                             <action selector="close" destination="wIG-oy-ucg" eventType="touchUpInside" id="BzA-A0-Aem"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
-                                        <rect key="frame" x="69" y="61" width="113" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inviter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
+                                        <rect key="frame" x="97" y="62" width="47" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
-                                        <rect key="frame" x="104" y="96" width="21" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourSquirrel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="group name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
                                         <rect key="frame" x="74" y="132" width="93" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -276,6 +270,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="decline:" destination="wIG-oy-ucg" eventType="touchUpInside" id="7Bi-lX-Tbf"/>
                                             <action selector="declineTrade:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OPo-a9-X3e"/>
                                         </connections>
                                     </button>
@@ -285,9 +280,16 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="accept:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OC9-ov-fjm"/>
                                             <action selector="acceptTrade:" destination="wIG-oy-ucg" eventType="touchUpInside" id="CRy-N4-2y1"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wants you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
+                                        <rect key="frame" x="55" y="96" width="131" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                             </view>
@@ -295,6 +297,9 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="decline" destination="i9z-em-gaB" id="PEm-Zo-lOC"/>
+                        <outlet property="groupLabel" destination="Ylf-mO-KUR" id="aUL-eC-kK2"/>
+                        <outlet property="inviterLabel" destination="1v4-GX-kdx" id="Pe8-Yo-bc7"/>
                         <outlet property="offeredSquirrelLabel" destination="1v4-GX-kdx" id="QI4-oE-id1"/>
                         <outlet property="popupView" destination="jlg-8F-B7V" id="wnz-2J-ghX"/>
                         <outlet property="yourSquirrelLabel" destination="Ylf-mO-KUR" id="0K3-aw-HfD"/>
@@ -302,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIe-gd-udb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4745.625" y="2537.3239436619715"/>
+            <point key="canvasLocation" x="4535" y="1793"/>
         </scene>
         <!--My Friends-->
         <scene sceneID="1BU-Hv-LhL">
@@ -406,7 +411,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4646.25" y="1104.9295774647887"/>
+            <point key="canvasLocation" x="4535" y="1104"/>
         </scene>
         <!--More-->
         <scene sceneID="4cT-6B-hZr">
@@ -554,12 +559,75 @@
                         </prototypes>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Group Invites" id="eMc-Qb-yag"/>
+                    <navigationItem key="navigationItem" title="Group Invites" id="eMc-Qb-yag">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="dIf-oJ-BQi" userLabel="Create Group">
+                            <connections>
+                                <action selector="createGroup:" destination="GDH-kA-JbV" id="4lH-Me-QOa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="createGroupButton" destination="dIf-oJ-BQi" id="E4v-3f-p50"/>
+                        <segue destination="wIG-oy-ucg" kind="presentation" identifier="InvitePopUp" id="Eig-eg-el6"/>
+                        <segue destination="Kct-wX-imk" kind="show" identifier="CreateGroup" id="tmq-7q-fxx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lrd-w8-mAH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3690" y="1791"/>
+        </scene>
+        <!--Create Group-->
+        <scene sceneID="9Ap-D9-XYc">
+            <objects>
+                <tableViewController id="Kct-wX-imk" customClass="CreateGroupViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tbq-6a-dj0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection id="vRH-0r-onM">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bhy-q2-73k">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bhy-q2-73k" id="Pi1-I3-NvL">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Group Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfs-e1-Qji">
+                                                    <rect key="frame" x="106" y="8" width="97" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="Kct-wX-imk" id="fv2-we-0GQ"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Kct-wX-imk" id="GLQ-hu-kSa"/>
+                            <outlet property="delegate" destination="Kct-wX-imk" id="cey-ja-V52"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Create Group" id="lo4-6y-PEb">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="aLN-Cr-WR4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="createGroup:" destination="Kct-wX-imk" id="1eT-sd-ADE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="createGroupButton" destination="aLN-Cr-WR4" id="LZb-Nl-4Uq"/>
+                        <outlet property="groupNameTextField" destination="Yfs-e1-Qji" id="8HO-Vp-bGW"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7RG-K6-Ph6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4535" y="2526"/>
         </scene>
     </scenes>
     <resources>

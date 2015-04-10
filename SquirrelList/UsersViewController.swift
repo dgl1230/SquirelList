@@ -15,7 +15,6 @@ class UsersViewController: PFQueryTableViewController {
 
     @IBOutlet weak var addFriendToGroupButton: UIBarButtonItem?
 
-
     @IBAction func addFriendToGroup(sender: AnyObject) {
         self.performSegueWithIdentifier("AddFriendToGroup", sender: self)
     }
@@ -47,7 +46,6 @@ class UsersViewController: PFQueryTableViewController {
             let controller = segue.destinationViewController as SearchUsersViewController
             controller.addingToGroup = true
         }
-
     }
     
     

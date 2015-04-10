@@ -12,7 +12,12 @@ class HomeTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if PFUser.currentUser() == nil {
+            PFUser.logInWithUsername("denis", password: "hotdog")
+        }
 
+        //Setting the tabs programmatically so that we can use multiple storyboards
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let usersViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Users") as UINavigationController
         let squirrelsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Squirrels") as UINavigationController

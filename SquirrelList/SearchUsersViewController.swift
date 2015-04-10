@@ -44,16 +44,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         self.pullToRefreshEnabled = false
         self.paginationEnabled = false
     }
-    
-    /*
-    func addFriend (sender:UIButton!) {
-        let buttonRow = sender.tag
-        //The user that the logged in user is requesting to be friends with
-        let friend = filteredUsers[buttonRow]
-        PFUser.currentUser().addObject(friend.objectId, forKey: "friends")
-        PFUser.currentUser().save()
-    }
-    */
+
     
     //Takes the tag of the button pressed in the tableViewCell and adds the user at the index of the objects array to the appropriate data model
     func addUser(sender:UIButton!) {

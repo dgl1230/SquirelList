@@ -13,8 +13,15 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     var notifications = [PFObject]()
     
     //For determining if we're going through trade proposals or group invites 
+    //If it equals 'invite' then we're going through the users Group Invites
     var typeOfNotification: String?
     
+    
+    @IBOutlet weak var createGroupButton: UIBarButtonItem?
+    
+    @IBAction func createGroup(sender: AnyObject) {
+        performSegueWithIdentifier("CreateGroup", sender: self)
+    }
     
     // Initialise the PFQueryTable tableview
     override init!(style: UITableViewStyle, className: String!) {
@@ -40,6 +47,14 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "CreateGroup" {
+            let controller = segue.destinationViewController as CreateGroupViewController
+        }
+        if segue.identifier == "groupInvite" {
+            let controller = segue.destinationViewController as GroupInvitePopUpViewController
+            controller.groupInvite = sender as? PFObject
+            
+        }
         if segue.identifier == "tradeOffer" {
             let controller = segue.destinationViewController as TradeOfferViewController
             controller.delegate = self
@@ -86,13 +101,23 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if typeOfNotification == "invite" {
-            //segue to viewing invite
+            var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+            self.performSegueWithIdentifier("groupInvite", sender: notifications[indexPath.row])
         }
         else {
             //They are viewing trade proposals offered to them
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
             self.performSegueWithIdentifier("tradeOffer", sender: notifications[indexPath.row])
         }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Set the createGroupButton to 'fa-plus-circle'
+        createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        createGroupButton?.title = "\u{f055}"
+        createGroupButton?.tintColor = UIColor.whiteColor()
     }
     
 
@@ -102,6 +127,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         //Not correctly reloading data. Might need to make it a PQueryTableViewController
         self.tableView.reloadData()
     }
+    
+    
     
 
  
