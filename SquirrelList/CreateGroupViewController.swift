@@ -27,6 +27,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         createGroupButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         createGroupButton.title = "\u{f058}"
         createGroupButton.tintColor = UIColor.whiteColor()
+        groupNameTextField.delegate = self
     }
     
     

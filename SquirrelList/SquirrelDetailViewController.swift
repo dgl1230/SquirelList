@@ -12,7 +12,7 @@ protocol SquirrelDetailViewControllerDelegate: class {
     func squirrelDetailViewController(controller: SquirrelDetailViewController)
 }
 
-class SquirrelDetailViewController: PopUpViewController {
+class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
 
     weak var delegate: SquirrelViewController?
     var ratedSquirrel: PFObject?
@@ -48,7 +48,6 @@ class SquirrelDetailViewController: PopUpViewController {
         } else {
             ratedSquirrel!["ratings"] = [rateNumberTextField.text]
         }
-        println(ratedSquirrel!)
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as [String])
         ratedSquirrel!.save()
         //delegate?.squirrelDetailViewController(self)
@@ -58,15 +57,13 @@ class SquirrelDetailViewController: PopUpViewController {
     
     
     @IBAction func tradeSquirrel(sender: AnyObject) {
-        println("trade touched")
         self.performSegueWithIdentifier("tradeSquirrel", sender: self)
     }
     
     
-    
-    
+
     func calculateAverageRating(ratings:[String]) -> Int {
-        println(1)
+        println("starting average rating")
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
             return 0
@@ -76,7 +73,8 @@ class SquirrelDetailViewController: PopUpViewController {
         for rating in ratings {
             sum += rating.toInt()!
         }
-        println(2)
+        println("ending average rating")
+        println(Int(Float(sum)/Float(numOfRatings)))
         return Int(Float(sum)/Float(numOfRatings))
     }
     
@@ -110,6 +108,14 @@ class SquirrelDetailViewController: PopUpViewController {
         self.view.endEditing(true)
     }
 
+
+    func validRating(rating: String) -> Bool {
+        var validRatings = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        if contains(validRatings, rating) {
+            return true
+        }
+        return false
+    }
 
     
 
@@ -153,6 +159,26 @@ class SquirrelDetailViewController: PopUpViewController {
             ownerLabel.hidden = false
             squirrelOwnerLabel.text = ratedSquirrel!["owner"] as? String
         }
-
+        rateButton.enabled = false
+        rateNumberTextField.delegate = self
+    }
+    
+    
+    
+    //Should be its own extension 
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            var oldRating: NSString = ""
+            var newRating: NSString = ""
+        
+        
+            oldRating = rateNumberTextField.text
+            newRating = oldRating.stringByReplacingCharactersInRange(range, withString: string)
+        
+            if validRating(newRating) == true {
+                rateButton.enabled = true
+            } else {
+                rateButton.enabled = false
+            }
+            return true 
     }
 }

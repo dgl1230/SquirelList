@@ -171,6 +171,13 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         return query
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        //Squirrels can only be deleted if the user is going through their own squirrels
+        if selectedUser?.objectId == PFUser.currentUser().objectId {
+            return true
+        }
+        return false
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject) ->PFTableViewCell {
             var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as PFTableViewCell
@@ -191,6 +198,20 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 ratingLabel.text = ""
             }
             return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let squirrel = objects[indexPath.row] as PFObject
+            squirrel["owner"] = ""
+            var currentSquirrelCount = PFUser.currentUser()["num_of_squirrels"] as Int
+            var newSquirrelCount = currentSquirrelCount - 1
+            //Update Squirrel List average ratings and the number of squirrels owned in that squirrel list
+            squirrel.save()
+            PFUser.currentUser().save()
+            self.loadObjects()
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

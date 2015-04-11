@@ -39,7 +39,6 @@ class FriendsViewController: PFQueryTableViewController {
     }
     
     
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             if segue.identifier == "FindFriends" {
                 let controller = segue.destinationViewController as SearchUsersViewController
@@ -55,12 +54,24 @@ class FriendsViewController: PFQueryTableViewController {
         return query
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
         var name = cell.viewWithTag(1) as UILabel
         name.text = objects[indexPath.row]["username"] as? String
         return cell
-        
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let friend = objects[indexPath.row] as PFUser
+            PFUser.currentUser().removeObject(friend.objectId, forKey: "friends")
+            PFUser.currentUser().save()
+            self.loadObjects()
+        }
     }
     
     
