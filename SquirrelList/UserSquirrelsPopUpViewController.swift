@@ -29,7 +29,7 @@ class UserSquirrelsPopUpViewController: PopUpViewController, SquirrelViewControl
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userSquirrelsEmbed" {
-            let controller = segue.destinationViewController as SquirrelViewController
+            let controller = segue.destinationViewController as! SquirrelViewController
             controller.currentlyTrading = true
             controller.desiredSquirrel = desiredSquirrel
             controller.desiredSquirrelOwner = desiredSquirrelOwner

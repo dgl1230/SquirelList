@@ -20,10 +20,10 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     
     @IBAction func accept(sender: AnyObject) {
-        group!.addObject(PFUser.currentUser().objectId, forKey: "userIDs")
-        PFUser.currentUser()["groups"].addObject(group!.objectId, forKey: "groups")
+        group!.addObject(PFUser.currentUser()!.objectId!, forKey: "userIDs")
+        PFUser.currentUser()!["groups"]!.addObject(group!.objectId!, forKey: "groups")
         group!.save()
-        PFUser.currentUser().save()
+        PFUser.currentUser()!.save()
         groupInvite!.delete()
         dismissViewControllerAnimated(true, completion: nil)
     }

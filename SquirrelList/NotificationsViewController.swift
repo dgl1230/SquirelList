@@ -25,7 +25,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     }
     
     // Initialise the PFQueryTable tableview
-    override init!(style: UITableViewStyle, className: String!) {
+    override init(style: UITableViewStyle, className: String!) {
         super.init(style: style, className: className)
     }
 	
@@ -33,7 +33,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         super.init(coder: aDecoder)
   
         // Configure the PFQueryTableView
-        if typeOfNotification? == "invite" {
+        if typeOfNotification == "invite" {
             self.parseClassName = "GroupInvite"
             self.textKey = "groupName"
         } else {
@@ -49,15 +49,15 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "CreateGroup" {
-            let controller = segue.destinationViewController as CreateGroupViewController
+            let controller = segue.destinationViewController as! CreateGroupViewController
         }
         if segue.identifier == "groupInvite" {
-            let controller = segue.destinationViewController as GroupInvitePopUpViewController
+            let controller = segue.destinationViewController as! GroupInvitePopUpViewController
             controller.groupInvite = sender as? PFObject
             
         }
         if segue.identifier == "TradeOffer" {
-            let controller = segue.destinationViewController as TradeOfferViewController
+            let controller = segue.destinationViewController as! TradeOfferViewController
             controller.delegate = self
             controller.tradeProposal = sender as? PFObject
         }
@@ -65,16 +65,16 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
     
     // Define the query that will provide the data for the table view
-    override func queryForTable() -> PFQuery! {
+    override func queryForTable() -> PFQuery {
         //Have to have this line to prevent xcode bug from thinking there's a way query wouldn't be returned
         var query = PFQuery()
-        if typeOfNotification? == "invite" {
+        if typeOfNotification == "invite" {
             query = PFQuery(className: "GroupInvite")
-            query.whereKey("invitee", equalTo: PFUser.currentUser().objectId)
+            query.whereKey("invitee", equalTo: PFUser.currentUser()!.objectId!)
         }
         else  {
             query = PFQuery(className: "TradeProposal")
-            query.whereKey("receivingUser", equalTo: PFUser.currentUser()["username"])
+            query.whereKey("receivingUser", equalTo: PFUser.currentUser()!["username"]!)
         } 
         query.orderByDescending("avg_rating")
         return query
@@ -83,18 +83,18 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if typeOfNotification == "invite" {
-            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as PFTableViewCell
-            var inviteLabel = cell.viewWithTag(1) as UILabel
-            var inviter = objects[indexPath.row]["inviterUsername"] as? String
-            var groupName = objects[indexPath.row]["groupName"] as? String
+            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! PFTableViewCell
+            var inviteLabel = cell.viewWithTag(1) as! UILabel
+            var inviter = objects![indexPath.row]["inviterUsername"] as? String
+            var groupName = objects![indexPath.row]["groupName"] as? String
             inviteLabel.text = "\(inviter!) invites you to join \(groupName!)"
             return cell
         }
         else {
             //The user is going through their trade proposals 
-            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-            var tradeOfferLabel = cell.viewWithTag(1) as UILabel
-            var username = objects[indexPath.row]["offeringUser"] as? String
+            var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+            var tradeOfferLabel = cell.viewWithTag(1) as! UILabel
+            var username = objects![indexPath.row]["offeringUser"] as? String
             tradeOfferLabel.text = "\(username!) proposes a trade"
             return cell
         }
@@ -103,12 +103,12 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if typeOfNotification == "invite" {
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            self.performSegueWithIdentifier("groupInvite", sender: objects[indexPath.row])
+            self.performSegueWithIdentifier("groupInvite", sender: objects![indexPath.row])
         }
         else {
             //They are viewing trade proposals offered to them
             var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-            self.performSegueWithIdentifier("TradeOffer", sender: objects[indexPath.row])
+            self.performSegueWithIdentifier("TradeOffer", sender: objects![indexPath.row])
         }
     }
     

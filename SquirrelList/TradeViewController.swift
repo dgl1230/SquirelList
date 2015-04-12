@@ -30,7 +30,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
 
     @IBAction func proposeTrade(sender: AnyObject) {
         var tradeProposal = PFObject(className:"TradeProposal")
-        tradeProposal["offeringUser"] = PFUser.currentUser()["username"]
+        tradeProposal["offeringUser"] = PFUser.currentUser()!["username"]
         tradeProposal["offeredSquirrelID"] = offeredSquirrel!.objectId
         tradeProposal["receivingUser"] = desiredSquirrelOwner!["username"]
         tradeProposal["proposedSquirrelID"] = desiredSquirrel!.objectId
@@ -38,12 +38,12 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         
        
         tradeProposal.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError!) -> Void in
+            (success: Bool, error: NSError?) -> Void in
             if (success) {
                 var parent = self.parentViewController
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
-                let owner = self.desiredSquirrelOwner!["username"] as String
+                let owner = self.desiredSquirrelOwner!["username"] as! String
                 let message = "You will be notified if \(owner) accepts your trade."
                 //This isn't working right now
                 let alert = UIAlertController(title: "Trade Offered", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -61,7 +61,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userSquirrels" {
-            let controller = segue.destinationViewController as UserSquirrelsPopUpViewController
+            let controller = segue.destinationViewController as! UserSquirrelsPopUpViewController
             controller.desiredSquirrel = desiredSquirrel
             controller.desiredSquirrelOwner = desiredSquirrelOwner
             controller.delegate = self

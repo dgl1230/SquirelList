@@ -36,19 +36,19 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
     @IBAction func rateSquirrel(sender: AnyObject) {
         //check if ["raters"] is nil. If it is, we create it
-        var rater = PFUser.currentUser()["username"] as String
+        var rater = PFUser.currentUser()!["username"] as! String
         if let check: AnyObject = ratedSquirrel!["raters"] {
-           ratedSquirrel!["raters"].addObject(rater)
+           ratedSquirrel!["raters"]!.addObject(rater)
         } else {
             ratedSquirrel!["raters"] = [rater]
         }
         //check if ["ratings"] is nil. If it is, we create it
         if let check: AnyObject = ratedSquirrel!["ratings"] {
-            ratedSquirrel!["ratings"].addObject(rateNumberTextField.text)
+            ratedSquirrel!["ratings"]!.addObject(rateNumberTextField.text)
         } else {
             ratedSquirrel!["ratings"] = [rateNumberTextField.text]
         }
-        ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as [String])
+        ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
         ratedSquirrel!.save()
         //delegate?.squirrelDetailViewController(self)
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -97,14 +97,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "tradeSquirrel" {
-            let controller = segue.destinationViewController as TradeViewController
+            let controller = segue.destinationViewController as! TradeViewController
             controller.desiredSquirrelOwner = squirrelOwner!
             controller.desiredSquirrel = ratedSquirrel!
         }
 
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
 
@@ -122,8 +122,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var firstName = ratedSquirrel!["first_name"] as String
-        var lastName = ratedSquirrel!["last_name"] as String
+        var firstName = ratedSquirrel!["first_name"] as! String
+        var lastName = ratedSquirrel!["last_name"] as! String
         squirrelNameLabel.text = "\(firstName) \(lastName)"
         
         //Check if the squirrel has an average rating 
@@ -132,11 +132,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         } else {
             avgRatingLabel.text = "No Ratings"
         }
-        var userRatedSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String])
+        var userRatedSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()!["username"] as! String, raters: ratedSquirrel!["raters"] as! [String])
         
         //Check if the user has rated the squirrel
         if userRatedSquirrel {
-            yourRatingLabel.text = getUserRating(PFUser.currentUser()["username"] as String, raters: ratedSquirrel!["raters"] as [String], ratings: ratedSquirrel!["ratings"] as [String])
+            yourRatingLabel.text = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
             rateNumberTextField.hidden = true
             rateButton.hidden = true
         } else {
@@ -146,11 +146,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         }
         
         //Check if the squirrel has an owner to propose a trade with
-        if ratedSquirrel!["owner"] as String == "" {
+        if ratedSquirrel!["owner"] as! String == "" {
             tradeButton.hidden = true
             ownerLabel.text = "No owner :("
             squirrelOwnerLabel.hidden = true
-        } else if ratedSquirrel!["owner"] as String == PFUser.currentUser()["username"] as String{
+        } else if ratedSquirrel!["owner"] as! String == PFUser.currentUser()!["username"] as! String{
             tradeButton.hidden = true
             ownerLabel.hidden = false
             squirrelOwnerLabel.text = "me"
@@ -174,7 +174,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
             oldRating = rateNumberTextField.text
             newRating = oldRating.stringByReplacingCharactersInRange(range, withString: string)
         
-            if validRating(newRating) == true {
+            if validRating(newRating as String) == true {
                 rateButton.enabled = true
             } else {
                 rateButton.enabled = false

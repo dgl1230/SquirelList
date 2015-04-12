@@ -11,7 +11,7 @@ import UIKit
 
 class ChatDetailViewController: UIViewController, UITextFieldDelegate {
 
-    var userName = PFUser.currentUser().username as NSString
+    var userName = PFUser.currentUser()!.username
     var receivers = [String]()
     var group = "$$Bitches"
     
@@ -44,11 +44,11 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         var query = PFQuery(className:"Group")
         query.whereKey("name", equalTo:group)
         query.getFirstObjectInBackgroundWithBlock {
-            (object: PFObject!, error: NSError!) -> Void in
+            (object: PFObject?, error: NSError?) -> Void in
             if error == nil {
-                self.receivers = object["users"] as [String]
+                self.receivers = object!["users"] as! [String]
             } else {
-                NSLog("Error: %@ %@", error, error.userInfo!)
+                NSLog("Error: %@ %@", error!, error!.userInfo!)
             }
         }
     }
@@ -66,18 +66,18 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         var cell : UITableViewCell!
-        var messageDic = messages.objectAtIndex(indexPath.row) as [String : String];
+        var messageDic = messages.objectAtIndex(indexPath.row) as! [String : String];
         var msgType = messageDic["type"] as NSString!
         var msg = messageDic["message"] as NSString!
         var sizeOFStr = self.getSizeOfString(msg)
         
         if (msgType.isEqualToString("1")){
             //Then the message is from someone other than the logged in user
-            cell = chatTbl.dequeueReusableCellWithIdentifier("ChatSentCell") as UITableViewCell
-            var textLable = cell.viewWithTag(12) as UILabel
-            var nameLable = cell.viewWithTag(10) as UILabel
-            var chatImage = cell.viewWithTag(1) as UIImageView
-            var profileImage = cell.viewWithTag(2) as UIImageView
+            cell = chatTbl.dequeueReusableCellWithIdentifier("ChatSentCell") as! UITableViewCell
+            var textLable = cell.viewWithTag(12) as! UILabel
+            var nameLable = cell.viewWithTag(10) as! UILabel
+            var chatImage = cell.viewWithTag(1) as! UIImageView
+            var profileImage = cell.viewWithTag(2) as! UIImageView
             chatImage.frame = CGRectMake(chatImage.frame.origin.x, chatImage.frame.origin.y, ((sizeOFStr.width + 60)  > 100 ? (sizeOFStr.width + 60) : 100), sizeOFStr.height + 40)
             chatImage.image = UIImage(named: "chat_new_receive")?.stretchableImageWithLeftCapWidth(40,topCapHeight: 20);
             textLable.frame = CGRectMake(textLable.frame.origin.x, textLable.frame.origin.y, textLable.frame.size.width, sizeOFStr.height)
@@ -86,11 +86,11 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             nameLable.text = self.senderArray[indexPath.row]
         } else {
             //The logged in user sent this message
-            cell = chatTbl.dequeueReusableCellWithIdentifier("ChatReceivedCell") as UITableViewCell
-            var deliveredLabel = cell.viewWithTag(13) as UILabel
-            var textLable = cell.viewWithTag(12) as UILabel
-            var chatImage = cell.viewWithTag(1) as UIImageView
-            var profileImage = cell.viewWithTag(2) as UIImageView
+            cell = chatTbl.dequeueReusableCellWithIdentifier("ChatReceivedCell") as! UITableViewCell
+            var deliveredLabel = cell.viewWithTag(13) as! UILabel
+            var textLable = cell.viewWithTag(12) as! UILabel
+            var chatImage = cell.viewWithTag(1) as! UIImageView
+            var profileImage = cell.viewWithTag(2) as! UIImageView
             //profileImage.image = UIImage(named: "profileIcon")
             //profileImage.frame.size = CGSizeMake(34, 34)
             //profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
@@ -107,7 +107,7 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var messageDic = messages.objectAtIndex(indexPath.row) as [String : String];
+        var messageDic = messages.objectAtIndex(indexPath.row) as! [String : String];
         var msg = messageDic["message"] as NSString!
         var sizeOFStr = self.getSizeOfString(msg)
         return sizeOFStr.height + 70
@@ -124,11 +124,11 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         var query = PFQuery(className: "Messages", predicate: P1)
         query.addAscendingOrder("createdAt")
         query.findObjectsInBackgroundWithBlock {
-            (objects: [AnyObject]!, error: NSError!) -> Void in
+            (objects: [AnyObject]?, error: NSError?) -> Void in
                 if error == nil {
-                    for object in objects {
-                        self.senderArray.append(object.objectForKey("sender") as String)
-                        self.messageArray.append(object.objectForKey("message") as String)
+                    for object in objects! {
+                        self.senderArray.append(object.objectForKey("sender") as! String)
+                        self.messageArray.append(object.objectForKey("message") as! String)
                     }
                     
                     for var i = 0; i <= self.messageArray.count-1; i++ {
@@ -162,9 +162,9 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         userInfo = notification.userInfo
         
         var duration : NSTimeInterval = 0
-        var curve = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as UInt
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as NSTimeInterval
-        var keyboardF:NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        var curve = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as! UInt
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        var keyboardF:NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         var keyboardFrame = keyboardF.CGRectValue()
     
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
@@ -188,9 +188,9 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         userInfo = notification.userInfo
         
         var duration : NSTimeInterval = 0
-        var curve = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as UInt
-        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as NSTimeInterval
-        var keyboardF:NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as NSValue
+        var curve = userInfo.objectForKey(UIKeyboardAnimationCurveUserInfoKey) as! UInt
+        duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        var keyboardF:NSValue = userInfo.objectForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         var keyboardFrame = keyboardF.CGRectValue()
         
         UIView.animateWithDuration(duration, delay: 0, options:nil, animations: {
@@ -216,10 +216,10 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
             message["message"] = chatTxtField.text
             message["group"] = group
             message.saveInBackgroundWithBlock {
-                (success:Bool!, error:NSError!) -> Void in
+                (success:Bool, error:NSError?) -> Void in
                     if success == true {
                         self.addMessage(self.chatTxtField.text, ofType: "2")
-                        self.senderArray.append(self.userName as String)
+                        self.senderArray.append(self.userName! as String)
                         self.chatTxtField.text = ""
                         //var  cell = self.chatTbl.dequeueReusableCellWithIdentifier("ChatReceivedCell") as! UITableViewCell
                         //var deliveredLabel = cell.viewWithTag(13) as! UILabel

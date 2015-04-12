@@ -17,8 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
         
+        if PFUser.currentUser() == nil {
+            //If the user isn't logged in, we need to present the login/register view controller
+            var loginViewController = RegisterLoginViewController()
+            self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
+        } else {
+        
         self.window!.rootViewController = HomeTabViewController()
         self.window!.makeKeyAndVisible()
+        
+        }
 
         return true
   

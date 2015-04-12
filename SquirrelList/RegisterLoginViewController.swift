@@ -38,12 +38,12 @@ class RegisterLoginViewController: UIViewController {
             displayLoadingAnimator()
  
             PFUser.logInWithUsernameInBackground(usernameLogin.text, password:passwordLogin.text) {
-                (user: PFUser!, signupError: NSError!) -> Void in
+                (user: PFUser?, signupError: NSError?) -> Void in
                     self.resumeInteractionEvents()
                     if signupError ==  nil {
                         self.performSegueWithIdentifier("jumpToHome", sender: self)
                     } else {
-                        if let errorString = signupError.userInfo?["error"] as? String {
+                        if let errorString = signupError!.userInfo?["error"] as? String {
                             error = errorString
                         } else {
                             error = "There was a random bug :( Please try again"
@@ -80,13 +80,13 @@ class RegisterLoginViewController: UIViewController {
             displayLoadingAnimator()
     
             user.signUpInBackgroundWithBlock {
-                (succeeded: Bool!, signupError: NSError!) -> Void in
+                (succeeded: Bool, signupError: NSError?) -> Void in
                     self.resumeInteractionEvents()
             
                 if signupError == nil {
                     self.performSegueWithIdentifier("jumpToHome", sender: self)
                 } else {
-                    if let errorString = signupError.userInfo?["error"] as? String {
+                    if let errorString = signupError!.userInfo?["error"] as? String {
                         error = errorString
                     } else {
                         error = "There was a random bug :( Please try again"
@@ -155,7 +155,7 @@ class RegisterLoginViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         self.view.endEditing(true)
     }
 

@@ -16,9 +16,12 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func createGroup(sender: AnyObject) {
         var group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text as NSString
-        group.addObject(PFUser.currentUser().objectId, forKey: "userIDs")
+        group.addObject(PFUser.currentUser()!.objectId!, forKey: "userIDs")
         //Need to add the current user's squirrel list ID eventually as well
         group.save()
+        PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
+        PFUser.currentUser()!.save()
+        self.dismissViewControllerAnimated(true, completion: nil)
     
     }
     override func viewDidLoad() {

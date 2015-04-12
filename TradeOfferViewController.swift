@@ -26,7 +26,7 @@ class TradeOfferViewController: PopUpViewController {
     
     
     @IBAction func acceptTrade(sender: AnyObject) {
-        offeredSquirrel!["owner"] = PFUser.currentUser()["username"]
+        offeredSquirrel!["owner"] = PFUser.currentUser()!["username"]
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
 
         offeredSquirrel!.save()
@@ -49,7 +49,7 @@ class TradeOfferViewController: PopUpViewController {
         super.viewDidLoad()
         
         var offeredSquirrelQuery = PFQuery(className: "Squirrel")
-        offeredSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["offeredSquirrelID"])
+        offeredSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["offeredSquirrelID"]!)
         offeredSquirrel = offeredSquirrelQuery.getFirstObject()
         
         var offeredFirstName = offeredSquirrel!["first_name"] as? String
@@ -58,7 +58,7 @@ class TradeOfferViewController: PopUpViewController {
         
         
         var yourSquirrelQuery = PFQuery(className: "Squirrel")
-        yourSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["proposedSquirrelID"])
+        yourSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["proposedSquirrelID"]!)
         yourSquirrel = yourSquirrelQuery.getFirstObject()
         
         var yourFirstName = yourSquirrel!["first_name"] as? String
