@@ -25,8 +25,6 @@ class MoreTableViewController: UITableViewController {
     @IBOutlet var tblOptions : UITableView?
     
 
-    // MARK: - Table view data source
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

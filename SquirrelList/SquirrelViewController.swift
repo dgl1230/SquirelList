@@ -160,6 +160,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
+        /*
         var query = PFQuery(className: "Squirrel")
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!["username"]!)
@@ -167,6 +168,16 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         else if selectedUser != nil {
             query.whereKey("owner", equalTo: selectedUser!["username"]!)
         } 
+        query.orderByDescending("avg_rating")
+        return query
+        */
+        var query = PFQuery(className: "Squirrel")
+        query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
+        if currentlyTrading == true {
+            query.whereKey("owner", equalTo: PFUser.currentUser()!["username"]!)
+        } else if selectedUser != nil {
+            query.whereKey("owner", equalTo: selectedUser!["username"]!)
+        }
         query.orderByDescending("avg_rating")
         return query
     }
@@ -289,6 +300,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["dtd"] = false
         newSquirrel["out"] = false
         newSquirrel["avg_rating"] = 0
+        newSquirrel["group"] = PFUser.currentUser()!["group"]
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {

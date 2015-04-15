@@ -1115,7 +1115,7 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="U0x-nx-gDC"/>
+        <segue reference="vxR-tG-TAF"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

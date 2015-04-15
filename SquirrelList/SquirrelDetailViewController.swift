@@ -128,7 +128,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         
         //Check if the squirrel has an average rating 
         if ratedSquirrel!["avg_rating"] != nil {
-            avgRatingLabel.text = ratedSquirrel!["avg_rating"] as? String
+            //We have to cast the rating as an Int first, because casting it directly as a String produces nil
+            var averageRating = ratedSquirrel!["avg_rating"] as? Int
+            avgRatingLabel.text = String(averageRating!)
         } else {
             avgRatingLabel.text = "No Ratings"
         }
