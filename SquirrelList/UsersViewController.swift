@@ -8,9 +8,14 @@
 
 import UIKit
 
-class UsersViewController: PFQueryTableViewController, ChangeCurrentGroupViewControllerDelegate {
+//Notification specific string
+let reloadNotificationKey = "com.denis.reloadNotificationKey"
+
+class UsersViewController: PFQueryTableViewController {
 
     var currentGroup: PFObject?
+    //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
+    var shouldReLoad: Bool?
 
 
     @IBOutlet weak var addFriendToGroupButton: UIBarButtonItem?
@@ -51,7 +56,7 @@ class UsersViewController: PFQueryTableViewController, ChangeCurrentGroupViewCon
         }
         if segue.identifier == "ChangeCurrentGroup" {
             let controller = segue.destinationViewController as! ChangeCurrentGroupViewController
-            controller.delegate = self
+            //controller.delegate = self
         }
         if segue.identifier == "SingleUserSquirrels" {
             let controller = segue.destinationViewController as! SquirrelViewController
@@ -71,6 +76,12 @@ class UsersViewController: PFQueryTableViewController, ChangeCurrentGroupViewCon
         query!.orderByAscending("username")
         return query!
     }
+    
+     //Responds to NSNotication when user has changed their current group
+    func reloadWithNewGroup() {
+        shouldReLoad = true
+    }
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
@@ -103,13 +114,18 @@ class UsersViewController: PFQueryTableViewController, ChangeCurrentGroupViewCon
 
         self.tableView.reloadData()
         self.title = currentGroup!["name"] as? String
+        
+        //Set notification to "listen" for when the the user has changed their currentGroup
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+
     }
     
-    //Should be its own extension
-    func viewWillBeDismissed(controller: ChangeCurrentGroupViewController) {
-        //After the user has selected a new current group, then we need to reload the data and change the title 
-        self.title = PFUser.currentUser()!["currentGroup"]!["name"]! as? String
-        self.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        if shouldReLoad == true {
+            self.viewDidLoad()
+        }
     }
+    
+
 }
 

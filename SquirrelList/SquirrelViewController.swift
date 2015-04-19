@@ -15,8 +15,12 @@ import UIKit
 
 class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
 
-    //Optional value for determing if we're viewing someone else's squirrels
+    //Optional value for determing if we're viewing someone else's squirrels, who's squirrels they are
     var selectedUser: PFUser?
+    //Optional for determing if the user has room to add a Squirrel. Also passed along to SquirrelDetailViewController to allow them to pick up a Squirrel
+    var canPickUpSquirrel: Bool?
+    //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
+    var shouldReLoad: Bool?
     
     weak var delegate: SquirrelViewControllerDelegate?
     
@@ -137,6 +141,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 query!.whereKey("username", equalTo: sender!["owner"]! as! String)
                 var user = query!.getFirstObject()
                 controller.squirrelOwner = user as? PFUser
+                //Need to let controller know if the user can add the squirrel
+                controller.canClaimSquirrel = canPickUpSquirrel!
             }
         }
         if segue.identifier == "TradeOffers" {
@@ -160,17 +166,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        /*
-        var query = PFQuery(className: "Squirrel")
-        if currentlyTrading == true {
-            query.whereKey("owner", equalTo: PFUser.currentUser()!["username"]!)
-        }
-        else if selectedUser != nil {
-            query.whereKey("owner", equalTo: selectedUser!["username"]!)
-        } 
-        query.orderByDescending("avg_rating")
-        return query
-        */
+        
         var query = PFQuery(className: "Squirrel")
         query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         if currentlyTrading == true {
@@ -181,6 +177,13 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         query.orderByDescending("avg_rating")
         return query
     }
+    
+    
+    //Responds to NSNotication when user has changed their current group
+    func reloadWithNewGroup() {
+        shouldReLoad = true
+    }
+    
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         //Squirrels can only be deleted if the user is going through their own squirrels
@@ -199,14 +202,20 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             last.text = object!["last_name"]!.capitalizedString
             var ratingLabel = cell.viewWithTag(3) as! UILabel
             var avgRating: AnyObject! = object!["avg_rating"]
-            if avgRating != nil {
+            if (avgRating != nil) {
                 ratingLabel.text = "\(avgRating!)"
                 var color = calculateColor(avgRating! as! Int)
                 first.textColor = color
                 last.textColor = color
                 ratingLabel.textColor = color
             } else {
+                //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
+                // the squirrel's avgRating not passing the if statemtnt
                 ratingLabel.text = ""
+                var color = UIColor.blackColor()
+                first.textColor = color
+                last.textColor = color
+                ratingLabel.textColor = color
             }
             return cell
     }
@@ -216,11 +225,15 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let squirrel = objects![indexPath.row] as! PFObject
             squirrel["owner"] = ""
+            squirrel.save()
             var currentSquirrelCount = PFUser.currentUser()!["num_of_squirrels"] as! Int
             var newSquirrelCount = currentSquirrelCount - 1
             //Update Squirrel List average ratings and the number of squirrels owned in that squirrel list
-            squirrel.save()
+            //There might be some bugs in this right now
+            PFUser.currentUser()!["num_of_squirrels"]! = newSquirrelCount
             PFUser.currentUser()!.save()
+            var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
+            teamRatingLabel.text = "Team Rating: \(String(teamRating))"
             self.loadObjects()
         }
     }
@@ -244,17 +257,18 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         //Need to fetch in order to update "num_of"squirrels" field
         PFUser.currentUser()!.fetch()
         var query = PFUser.query()
+        query?.whereKey("objectId", containedIn: PFUser.currentUser()!["currentGroup"]!["userIDs"]! as! [String])
         var users = query!.findObjects()
         //The most squirrels owned by one user
         var mostSquirrels = 0
         for user in users! {
-            var userSquirrels = user["num_of_squirrels"]! as! Int
+            var userSquirrels = user["num_of_squirrels"] as! Int
             var username = user["username"]! as! String
             if (userSquirrels > mostSquirrels && username != PFUser.currentUser()!["username"] as! String) {
                 mostSquirrels = userSquirrels
             }
         }
-        if PFUser.currentUser()!["num_of_squirrels"]! as! Int > mostSquirrels {
+        if PFUser.currentUser()!["num_of_squirrels"] as! Int > mostSquirrels {
             return false
         }
         return true
@@ -273,13 +287,23 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             tradeOfferButton?.title = "\u{f21b}"
             tradeOfferButton?.tintColor = UIColor.whiteColor()
         }
+        canPickUpSquirrel = userCanAddSquirrel()
         
         //If the selected user is nil, then we are now on user squirrels, which has no addSquirrelButton
-        if userCanAddSquirrel() == false || self.selectedUser == nil {
+        if canPickUpSquirrel == false || self.selectedUser == nil {
             addSquirrelButton?.enabled = false
         }
+        
+        //Set notification to "listen" for when the the user has changed their currentGroup
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
     }
-   
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        if shouldReLoad == true {
+            self.viewDidLoad()
+        }
+    }
    
    
    //should be made into its own extension 

@@ -7,18 +7,12 @@
 //
 
 
-//This protocol is for reloading the parent view controller after a new group has been selected
-protocol ChangeCurrentGroupViewControllerDelegate: class {
-    func viewWillBeDismissed(controller: ChangeCurrentGroupViewController)
-}
-
 import UIKit
 
 class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
     //Optional for holding which cell should have a checkmark
     var checkMarkedCellIndex: NSIndexPath?
-    var delegate: ChangeCurrentGroupViewControllerDelegate?
     
     
     @IBOutlet weak var doneButton: UIButton!
@@ -26,8 +20,8 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
     @IBAction func done(sender: AnyObject) {
         PFUser.currentUser()!.save()
-        delegate?.viewWillBeDismissed(self)
         self.dismissViewControllerAnimated(true, completion: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
         
     }
 

@@ -22,10 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             var loginViewController = RegisterLoginViewController()
             self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
         } else {
-        
-        self.window!.rootViewController = HomeTabViewController()
-        self.window!.makeKeyAndVisible()
-        
+            self.window!.rootViewController = HomeTabViewController()
+            self.window!.makeKeyAndVisible()
         }
 
         return true

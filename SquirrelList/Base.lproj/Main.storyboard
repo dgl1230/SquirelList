@@ -702,6 +702,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffQ-Ox-wLT">
+                                        <rect key="frame" x="82" y="206" width="85" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Claim Squirrel">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="claimSquirrel:" destination="1gz-ah-LQH" eventType="touchUpInside" id="NLw-wA-2WK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                             </view>
@@ -711,6 +721,7 @@
                     <navigationItem key="navigationItem" id="ypK-0E-YRf"/>
                     <connections>
                         <outlet property="avgRatingLabel" destination="cIP-7j-8Ze" id="gPD-xd-L9h"/>
+                        <outlet property="claimSquirrelButton" destination="ffQ-Ox-wLT" id="ZRn-0k-LaB"/>
                         <outlet property="ownerLabel" destination="nJs-Ll-nGs" id="v7r-f6-P10"/>
                         <outlet property="popupView" destination="2Yf-Ha-EGs" id="VRw-Qx-Gn1"/>
                         <outlet property="rateButton" destination="2Nu-6w-MWA" id="g1D-rQ-T5N"/>

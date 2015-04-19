@@ -37,6 +37,9 @@ class MoreTableViewController: UITableViewController {
             let controller = segue.destinationViewController as! NotificationsViewController
             controller.typeOfNotification = "invite"
         }
+        if segue.identifier == "Settings" {
+            let controller = segue.destinationViewController as! SettingsViewController
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,12 +51,16 @@ class MoreTableViewController: UITableViewController {
         //let indexPathNew = tableView.indexPathForSelectedRow()
         let currentCell = tableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
         if indexPath.row == 0 {
-            //The user is selecing "Friends"
+            //The user is selecting "Friends"
             performSegueWithIdentifier("Friends", sender: self)
         }
         if indexPath.row == 1 {
-            //The user is selecing "Groups"
+            //The user is selecting "Groups"
             performSegueWithIdentifier("GroupInvites", sender: self)
+        }
+        if indexPath.row == 2 {
+            //The user is selecting "Settings"
+            performSegueWithIdentifier("Settings", sender: self)
         }
 
     }
@@ -70,7 +77,6 @@ class MoreTableViewController: UITableViewController {
         groupsIcon.text = "\u{f0c0}"
         //Set the settings icon to 'fa-cog'
         settingsIcon.text = "\u{f013}"
-        
     }
 
     

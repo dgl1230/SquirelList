@@ -122,6 +122,7 @@ class ChatDetailViewController: UIViewController, UITextFieldDelegate {
         
         let P1 = NSPredicate(format: "group = %@", group)
         var query = PFQuery(className: "Messages", predicate: P1)
+        //Need to add a where key with current group
         query.addAscendingOrder("createdAt")
         query.findObjectsInBackgroundWithBlock {
             (objects: [AnyObject]?, error: NSError?) -> Void in

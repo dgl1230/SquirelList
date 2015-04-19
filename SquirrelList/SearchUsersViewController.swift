@@ -27,6 +27,9 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     //Optional for determining if the user has started searching - this optional is used for seeing if the user is adding someone to a group, whether we should be pulling from filteredUsers or objects
     var hasNotFiltered = true
     
+    //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
+    var shouldReLoad: Bool?
+    
     
 
     // Initialise the PFQueryTable tableview
@@ -133,6 +136,11 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         return query!
     }
     
+     //Responds to NSNotication when user has changed their current group
+    func reloadWithNewGroup() {
+        shouldReLoad = true
+    }
+    
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
             self.filterContentForSearchText(searchString)
@@ -185,19 +193,23 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     }
     
     
-    
      override func viewDidLoad() {
         super.viewDidLoad()
         if addingToGroup == true {
-            //Get the current group and fetch it to have the most current data
-            group = PFUser.currentUser()!["currentGroup"] as? PFObject
-            group?.fetch()
             //Configure the title to have the user's current group in it
-            var currentGroup = PFUser.currentUser()!["current_group"] as! String
+            var currentGroup = PFUser.currentUser()!["currentGroup"]!["name"]! as! String
             self.title = "Invite friends to \(currentGroup)"
         }
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
+        //Set notification to "listen" for when the the user has changed their currentGroup
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+    }
+    
+    
+     override func viewWillAppear(animated: Bool) {
+        if shouldReLoad == true {
+            self.viewDidLoad()
+        }
     }
 
     

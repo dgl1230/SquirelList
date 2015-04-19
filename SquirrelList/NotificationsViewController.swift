@@ -85,9 +85,9 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         if typeOfNotification == "invite" {
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! PFTableViewCell
             var inviteLabel = cell.viewWithTag(1) as! UILabel
-            var inviter = objects![indexPath.row]["inviterUsername"] as? String
+            var inviter = objects![indexPath.row]["inviter"] as? String
             var groupName = objects![indexPath.row]["groupName"] as? String
-            inviteLabel.text = "\(inviter!) invites you to join \(groupName!)"
+            inviteLabel.text = "\(inviter!) invites you to join \(groupName)"
             return cell
         }
         else {

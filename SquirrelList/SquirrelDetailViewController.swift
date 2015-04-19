@@ -14,10 +14,15 @@ protocol SquirrelDetailViewControllerDelegate: class {
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
 
+    //Bool that determines if the logged in user has room to pick up another squirrel
+    var canClaimSquirrel: Bool?
     weak var delegate: SquirrelViewController?
     var ratedSquirrel: PFObject?
     var squirrelOwner: PFUser?
     
+    
+    
+    @IBOutlet weak var claimSquirrelButton: UIButton!
     @IBOutlet weak var squirrelNameLabel: UILabel!
     @IBOutlet weak var avgRatingLabel: UILabel!
     
@@ -32,6 +37,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     @IBOutlet weak var userRatingLabel: UILabel!
     //The label that says "Your Rating" - it does not actually display the rating
     @IBOutlet weak var yourRatingLabel: UILabel!
+    
+    
+    
+    @IBAction func claimSquirrel(sender: AnyObject) {
+        ratedSquirrel!["owner"] = PFUser.currentUser()!.username
+        ratedSquirrel!.save()
+    
+    }
     
     
     @IBAction func rateSquirrel(sender: AnyObject) {
@@ -163,6 +176,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         }
         rateButton.enabled = false
         rateNumberTextField.delegate = self
+        //Until I figure out SL data model conundrum
+        claimSquirrelButton.hidden = true
     }
     
     
