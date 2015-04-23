@@ -265,7 +265,6 @@
                                         </state>
                                         <connections>
                                             <action selector="decline:" destination="wIG-oy-ucg" eventType="touchUpInside" id="7Bi-lX-Tbf"/>
-                                            <action selector="declineTrade:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OPo-a9-X3e"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-gY-Ye9">
@@ -275,7 +274,6 @@
                                         </state>
                                         <connections>
                                             <action selector="accept:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OC9-ov-fjm"/>
-                                            <action selector="acceptTrade:" destination="wIG-oy-ucg" eventType="touchUpInside" id="CRy-N4-2y1"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wants you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
@@ -291,12 +289,9 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
-                        <outlet property="decline" destination="i9z-em-gaB" id="PEm-Zo-lOC"/>
                         <outlet property="groupLabel" destination="Ylf-mO-KUR" id="aUL-eC-kK2"/>
                         <outlet property="inviterLabel" destination="1v4-GX-kdx" id="Pe8-Yo-bc7"/>
-                        <outlet property="offeredSquirrelLabel" destination="1v4-GX-kdx" id="QI4-oE-id1"/>
                         <outlet property="popupView" destination="jlg-8F-B7V" id="wnz-2J-ghX"/>
-                        <outlet property="yourSquirrelLabel" destination="Ylf-mO-KUR" id="0K3-aw-HfD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIe-gd-udb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -516,6 +511,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -564,7 +560,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="createGroupButton" destination="dIf-oJ-BQi" id="E4v-3f-p50"/>
-                        <segue destination="wIG-oy-ucg" kind="presentation" identifier="InvitePopUp" id="Eig-eg-el6"/>
+                        <segue destination="wIG-oy-ucg" kind="presentation" identifier="groupInvite" id="Eig-eg-el6"/>
                         <segue destination="Kct-wX-imk" kind="show" identifier="CreateGroup" id="tmq-7q-fxx"/>
                     </connections>
                 </viewController>

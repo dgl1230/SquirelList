@@ -13,6 +13,13 @@ class HomeTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var query = PFQuery(className: "Group")
+        query.whereKey("name", equalTo: "first_group")
+        var group = query.getFirstObject()
+        
+        PFUser.currentUser()!["currentGroup"] = group!
+        PFUser.currentUser()?.save()
+        
         //Setting the tabs programmatically so that we can use multiple storyboards
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let usersViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Users") as! UINavigationController

@@ -103,6 +103,7 @@ class UsersViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"
@@ -117,11 +118,16 @@ class UsersViewController: PFQueryTableViewController {
         
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+        //Customize navigation controller back button to my only the back symbol
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
+
 
     }
     
     override func viewWillAppear(animated: Bool) {
         if shouldReLoad == true {
+            shouldReLoad = false
             self.viewDidLoad()
         }
     }

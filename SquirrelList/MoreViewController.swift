@@ -77,6 +77,10 @@ class MoreTableViewController: UITableViewController {
         groupsIcon.text = "\u{f0c0}"
         //Set the settings icon to 'fa-cog'
         settingsIcon.text = "\u{f013}"
+        //Customize navigation controller back button to my only the back symbol
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
+
     }
 
     

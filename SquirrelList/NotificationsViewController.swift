@@ -16,6 +16,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     //For determining if we're going through trade proposals or group invites 
     //If it equals 'invite' then we're going through the users Group Invites
     var typeOfNotification: String?
+        //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
+    var shouldReLoad: Bool?
     
     
     @IBOutlet weak var createGroupButton: UIBarButtonItem?
@@ -75,9 +77,16 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         else  {
             query = PFQuery(className: "TradeProposal")
             query.whereKey("receivingUser", equalTo: PFUser.currentUser()!["username"]!)
+            query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         } 
         query.orderByDescending("avg_rating")
         return query
+    }
+    
+    
+    //Responds to NSNotication when user has changed their current group
+    func reloadWithNewGroup() {
+        shouldReLoad = true
     }
     
     
@@ -87,7 +96,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             var inviteLabel = cell.viewWithTag(1) as! UILabel
             var inviter = objects![indexPath.row]["inviter"] as? String
             var groupName = objects![indexPath.row]["groupName"] as? String
-            inviteLabel.text = "\(inviter!) invites you to join \(groupName)"
+            inviteLabel.text = "\(inviter!) invites you to join \(groupName!)"
             return cell
         }
         else {
@@ -119,6 +128,22 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         createGroupButton?.title = "\u{f055}"
         createGroupButton?.tintColor = UIColor.whiteColor()
+        if typeOfNotification != "invite" {
+            //Set notification to "listen" for when the the user has changed their currentGroup
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+        }
+        //Customize navigation controller back button to my only the back symbol
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
+
+    }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        if shouldReLoad == true {
+            shouldReLoad = false
+            self.viewDidLoad()
+        }
     }
     
 

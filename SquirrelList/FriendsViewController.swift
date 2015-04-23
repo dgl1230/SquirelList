@@ -48,10 +48,14 @@ class FriendsViewController: PFQueryTableViewController {
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
+        if PFUser.currentUser()!["friends"] == nil {
+            return PFQuery()
+        }
         var query = PFUser.query()
         query!.whereKey("objectId", containedIn: PFUser.currentUser()!["friends"] as! [String])
         query!.orderByAscending("username")
         return query!
+
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -82,6 +86,10 @@ class FriendsViewController: PFQueryTableViewController {
         findFriendsButton?.title = "\u{f234}"
         findFriendsButton?.tintColor = UIColor.whiteColor()
         self.tableView.allowsSelection = false
+        //Customize navigation controller back button to my only the back symbol
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
+
 
     }
    

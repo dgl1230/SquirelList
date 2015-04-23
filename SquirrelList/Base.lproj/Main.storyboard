@@ -170,7 +170,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Squirrel " id="PWj-Qa-X0S">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="x2E-Ks-MC6">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" id="x2E-Ks-MC6" userLabel="Done Button">
                             <connections>
                                 <action selector="done" destination="YAQ-u8-yw6" id="Cyg-pJ-l4T"/>
                             </connections>
@@ -306,6 +306,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EJk-zP-ddt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -477,6 +478,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QoX-oN-HH7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="barTintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1126,7 +1128,7 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vxR-tG-TAF"/>
+        <segue reference="U0x-nx-gDC"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

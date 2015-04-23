@@ -34,7 +34,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal["offeredSquirrelID"] = offeredSquirrel!.objectId
         tradeProposal["receivingUser"] = desiredSquirrelOwner!["username"]
         tradeProposal["proposedSquirrelID"] = desiredSquirrel!.objectId
-        
+        tradeProposal["group"] = PFUser.currentUser()!["currentGroup"] as! PFObject
         
        
         tradeProposal.saveInBackgroundWithBlock {

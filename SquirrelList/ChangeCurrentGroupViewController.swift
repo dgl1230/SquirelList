@@ -21,6 +21,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     @IBAction func done(sender: AnyObject) {
         PFUser.currentUser()!.save()
         self.dismissViewControllerAnimated(true, completion: nil)
+        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
         NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
         
     }

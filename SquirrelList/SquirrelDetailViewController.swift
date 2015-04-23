@@ -43,7 +43,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     @IBAction func claimSquirrel(sender: AnyObject) {
         ratedSquirrel!["owner"] = PFUser.currentUser()!.username
         ratedSquirrel!.save()
-    
+        //Alert SquirrelViewController to reload data
+        println("posting")
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
@@ -63,7 +66,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         }
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
         ratedSquirrel!.save()
-        //delegate?.squirrelDetailViewController(self)
+        //Alert SquirrelViewController to reload data
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -76,7 +80,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
 
     func calculateAverageRating(ratings:[String]) -> Int {
-        println("starting average rating")
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
             return 0
@@ -86,7 +89,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         for rating in ratings {
             sum += rating.toInt()!
         }
-        println("ending average rating")
         println(Int(Float(sum)/Float(numOfRatings)))
         return Int(Float(sum)/Float(numOfRatings))
     }
@@ -163,21 +165,23 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         //Check if the squirrel has an owner to propose a trade with
         if ratedSquirrel!["owner"] as! String == "" {
             tradeButton.hidden = true
-            ownerLabel.text = "No owner :("
+            ownerLabel.hidden = true
             squirrelOwnerLabel.hidden = true
+            claimSquirrelButton.enabled = canClaimSquirrel!
         } else if ratedSquirrel!["owner"] as! String == PFUser.currentUser()!["username"] as! String{
             tradeButton.hidden = true
             ownerLabel.hidden = false
             squirrelOwnerLabel.text = "me"
+            claimSquirrelButton.hidden = true
         } else {
             //Squirrel does have an owner
             ownerLabel.hidden = false
             squirrelOwnerLabel.text = ratedSquirrel!["owner"] as? String
+            claimSquirrelButton.hidden = true
         }
         rateButton.enabled = false
         rateNumberTextField.delegate = self
-        //Until I figure out SL data model conundrum
-        claimSquirrelButton.hidden = true
+        
     }
     
     

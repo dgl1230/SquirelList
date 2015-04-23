@@ -26,9 +26,8 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func done() {
         let first = firstName.text as NSString
         let last = lastName.text as NSString
-        
         delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first, didFinishAddingLastName: last)
-
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     /* Parameters: error, which is the error that the user should see in the UIAlertController
@@ -54,7 +53,13 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         firstName.becomeFirstResponder()
         lastName.becomeFirstResponder()
+    }
     
+    override func viewDidLoad() {
+        //Set the doneBarButton to 'fa-check-circle'
+        doneBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        doneBarButton.title = "\u{f058}"
+        doneBarButton.tintColor = UIColor.whiteColor()
     }
     
     //Should be its own extension 

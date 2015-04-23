@@ -21,7 +21,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     @IBAction func accept(sender: AnyObject) {
         group!.addObject(PFUser.currentUser()!.objectId!, forKey: "userIDs")
-        PFUser.currentUser()!["groups"]!.addObject(group!.objectId!, forKey: "groups")
+        PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
         group!.save()
         PFUser.currentUser()!.save()
         groupInvite!.delete()
@@ -38,10 +38,12 @@ class GroupInvitePopUpViewController: PopUpViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        group = groupInvite!["group"] as? PFObject
+        //Need to fetch to update values of group object
+        group?.fetch()
 
         inviterLabel.text = inviterName
         groupLabel.text = group!["name"] as? String
-        group = groupInvite!["group"] as? PFObject
         inviterName = groupInvite!["inviter"] as? String
     }
 

@@ -100,6 +100,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     //Takes a userID and checks if it is in relevant group
     func isAdded(userID: String) -> Bool {
         var users: [String] = []
+        group = PFUser.currentUser()!["currentGroup"] as? PFObject
         if addingToGroup == true {
             //Check to see if an invite has already been sent to the user
             var query = PFQuery(className: "GroupInvite")
@@ -126,14 +127,19 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     override func queryForTable() -> PFQuery {
         var query = PFUser.query()
         if addingToGroup == true {
-            //We want to just query the logged in user's friends
-            query!.whereKey("objectId", containedIn: PFUser.currentUser()!["friends"]! as! [String])
-        } else {
-            //We need to query all users, for logged in user to add some as friends
-            query!.whereKey("username", notEqualTo: PFUser.currentUser()!["username"]!)
+            //The user has friends and we should list them to be invited to a group
+            query?.whereKey("objectId", containedIn: PFUser.currentUser()?["friends"]! as! [String])
+            query?.orderByAscending("username")
+            return query!
         }
-        query!.orderByAscending("username")
-        return query!
+        else {
+            //We need to query all users, for logged in user to add some as friends
+            query?.whereKey("username", notEqualTo: PFUser.currentUser()!["username"]!)
+            query?.orderByAscending("username")
+            return query!
+        }
+        //Look into seeing if the else if and else are both executed
+        //return query!
     }
     
      //Responds to NSNotication when user has changed their current group
@@ -208,6 +214,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
      override func viewWillAppear(animated: Bool) {
         if shouldReLoad == true {
+            shouldReLoad = false
             self.viewDidLoad()
         }
     }

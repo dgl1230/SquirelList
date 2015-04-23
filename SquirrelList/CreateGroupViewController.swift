@@ -20,9 +20,11 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         //Need to add the current user's squirrel list ID eventually as well
         group.save()
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
+        PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
-        self.dismissViewControllerAnimated(true, completion: nil)
-    
+        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+        self.navigationController?.popViewControllerAnimated(true)    
     }
     override func viewDidLoad() {
         super.viewDidLoad()

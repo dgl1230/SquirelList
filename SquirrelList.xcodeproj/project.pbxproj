@@ -12,6 +12,7 @@
 		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
 		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
 		184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561221ABFD24B00026473 /* BounceAnimationController.swift */; };
+		184841101AE974C300F23551 /* JSQMessagesViewController in Resources */ = {isa = PBXBuildFile; fileRef = 1848410F1AE974C300F23551 /* JSQMessagesViewController */; };
 		184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */; };
 		18625C571AC33DA100093A1B /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C561AC33DA100093A1B /* MoreViewController.swift */; };
 		18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C581AC3610E00093A1B /* TradeOfferViewController.swift */; };
@@ -59,6 +60,7 @@
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
+		1848410F1AE974C300F23551 /* JSQMessagesViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JSQMessagesViewController; sourceTree = "<group>"; };
 		184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelViewController.swift; sourceTree = "<group>"; };
 		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeOfferViewController.swift; path = ../TradeOfferViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1848410E1AE9747200F23551 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				1848410F1AE974C300F23551 /* JSQMessagesViewController */,
+			);
+			name = Messaging;
+			sourceTree = "<group>";
+		};
 		186B32D31A758E5000A8D4CB = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +162,7 @@
 				184561201ABFCE3100026473 /* GradientView.swift */,
 				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
+				1848410E1AE9747200F23551 /* Messaging */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
@@ -255,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184841101AE974C300F23551 /* JSQMessagesViewController in Resources */,
 				18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */,
 				186B32E91A758E5000A8D4CB /* Main.storyboard in Resources */,
 				18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */,
@@ -411,7 +423,7 @@
 					"$(PROJECT_DIR)/SquirrelList",
 				);
 				INFOPLIST_FILE = SquirrelList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
 				PROVISIONING_PROFILE = "";
@@ -434,7 +446,7 @@
 					"$(PROJECT_DIR)/SquirrelList",
 				);
 				INFOPLIST_FILE = SquirrelList/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
 				PROVISIONING_PROFILE = "";
