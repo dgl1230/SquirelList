@@ -84,6 +84,10 @@ class RegisterLoginViewController: UIViewController {
                     self.resumeInteractionEvents()
             
                 if signupError == nil {
+                    //For push notifications/chat real time might cause an error right now. Not sure if user is already logged in at this point
+                    let installation = PFInstallation.currentInstallation()
+                    installation["user"] = PFUser.currentUser()!
+                    installation.saveInBackgroundWithBlock(nil)
                     self.performSegueWithIdentifier("jumpToHome", sender: self)
                 } else {
                     if let errorString = signupError!.userInfo?["error"] as? String {
