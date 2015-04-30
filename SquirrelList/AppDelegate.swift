@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         
+        
+        //This is just to get users who already made an account up to speed
+        /*
+        let installation = PFInstallation.currentInstallation()
+        installation["user"] = PFUser.currentUser()!
+        installation["userID"] = PFUser.currentUser()!.objectId
+        installation.saveInBackgroundWithBlock(nil)
+        */
+        
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register view controller
             var loginViewController = RegisterLoginViewController()
@@ -36,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        println("did register")
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     
@@ -51,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        println("application registered")
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock(nil)

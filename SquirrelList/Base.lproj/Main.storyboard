@@ -320,131 +320,10 @@
             </objects>
             <point key="canvasLocation" x="806.25" y="368.66197183098586"/>
         </scene>
-        <!--Group Chat-->
-        <scene sceneID="2TO-B8-sM4">
-            <objects>
-                <viewController id="Qp0-1h-xG1" userLabel="Group Chat" customClass="ChatDetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sqv-Ty-ufV"/>
-                        <viewControllerLayoutGuide type="bottom" id="HPR-tu-E4f"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kIC-Ne-2KC">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cla-cl-f5T">
-                                <rect key="frame" x="0.0" y="81" width="320" height="1"/>
-                                <color key="backgroundColor" red="0.83141342470000001" green="0.83141342470000001" blue="0.83141342470000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oxW-z6-Bva">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="397"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatSentCell" id="BbI-br-b5w">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BbI-br-b5w" id="1xh-xD-AQ9">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" image="chat_receive" translatesAutoresizingMaskIntoConstraints="NO" id="1e7-pA-lq2">
-                                                    <rect key="frame" x="49" y="14" width="232" height="51"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Its actually pretty good!" lineBreakMode="wordWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCa-g3-FS6">
-                                                    <rect key="frame" x="90" y="38" width="170" height="17"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" fixedFrame="YES" image="profile-pic1" translatesAutoresizingMaskIntoConstraints="NO" id="KPJ-UZ-SCb">
-                                                    <rect key="frame" x="12" y="9" width="52" height="52"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="otherUser" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-qf-3Xf">
-                                                    <rect key="frame" x="163" y="-6" width="47" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatReceivedCell" id="SH8-ie-WCD">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SH8-ie-WCD" id="oQf-qn-NMT">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" image="chat_send" translatesAutoresizingMaskIntoConstraints="NO" id="1JH-DA-mdD">
-                                                    <rect key="frame" x="20" y="7" width="232" height="51"/>
-                                                </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What do you think of this tool!" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aaD-LB-eGz">
-                                                    <rect key="frame" x="36" y="32" width="170" height="17"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="center" fixedFrame="YES" image="profile-pic4" translatesAutoresizingMaskIntoConstraints="NO" id="ozA-Q6-ymr">
-                                                    <rect key="frame" x="237" y="1" width="52" height="52"/>
-                                                </imageView>
-                                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="13" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Delivered" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KWP-ss-1Tp">
-                                                    <rect key="frame" x="185" y="58" width="67" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="Qp0-1h-xG1" id="cry-UG-YWj"/>
-                                    <outlet property="delegate" destination="Qp0-1h-xG1" id="LQi-tJ-WDl"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KMA-aX-XUv">
-                                <rect key="frame" x="0.0" y="410" width="320" height="45"/>
-                                <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="chat_input_background" translatesAutoresizingMaskIntoConstraints="NO" id="84C-Mz-3sW">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="chat_input_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="hz3-sO-xl8">
-                                        <rect key="frame" x="17" y="7" width="249" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Sf-Il-qL4">
-                                        <rect key="frame" x="267" y="7" width="46" height="30"/>
-                                        <state key="normal" title="Send">
-                                            <color key="titleColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="sendMessage" destination="Qp0-1h-xG1" eventType="touchUpInside" id="M4w-vz-ZaM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <rect key="contentStretch" x="0.0" y="1" width="1" height="1"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="League Chat " id="34W-g0-QjH"/>
-                    <connections>
-                        <outlet property="chatTbl" destination="oxW-z6-Bva" id="DYj-s2-O97"/>
-                        <outlet property="chatTxtField" destination="hz3-sO-xl8" id="Dr7-vu-wP3"/>
-                        <outlet property="composeChatView" destination="KMA-aX-XUv" id="3kb-fy-o0Z"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="b5s-7U-6ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1751.25" y="1134.5070422535211"/>
-        </scene>
-        <!--Messages-->
+        <!--Chat Holder View Controller-->
         <scene sceneID="Hwo-5S-Ru0">
             <objects>
-                <viewController id="6mh-0r-nvZ" customClass="ChatViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6mh-0r-nvZ" customClass="ChatHolderViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bAx-Fz-fud"/>
                         <viewControllerLayoutGuide type="bottom" id="3B0-yE-1WB"/>
@@ -468,11 +347,11 @@
                             <constraint firstItem="3B0-yE-1WB" firstAttribute="top" secondItem="KFH-SD-0VK" secondAttribute="bottom" id="yU4-oX-r1F"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Messages" id="GaM-gP-1MD"/>
+                    <navigationItem key="navigationItem" id="GaM-gP-1MD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9yU-7q-hjJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750" y="1829"/>
+            <point key="canvasLocation" x="1657" y="1134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="78e-c5-8dD">
@@ -1146,24 +1025,6 @@
             </objects>
             <point key="canvasLocation" x="3547" y="1134"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Gft-QR-bAs">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="AFy-Cv-Hol" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HPA-Ud-mqA"/>
-                        <viewControllerLayoutGuide type="bottom" id="qi6-bY-Y2a"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lsc-r4-u65">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="52g-ko-gEb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
         <!--Messages View Controller-->
         <scene sceneID="eSB-nD-DYU">
             <objects>
@@ -1181,18 +1042,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OK4-G0-HVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1750" y="2571"/>
+            <point key="canvasLocation" x="1657" y="1850.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="CloseButton" width="15" height="15"/>
-        <image name="chat_input_background" width="320" height="44"/>
-        <image name="chat_input_textfield" width="221" height="29"/>
-        <image name="chat_receive" width="232" height="51"/>
-        <image name="chat_send" width="232" height="51"/>
         <image name="first" width="30" height="30"/>
-        <image name="profile-pic1" width="52" height="52"/>
-        <image name="profile-pic4" width="52" height="52"/>
         <image name="second" width="30" height="30"/>
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>

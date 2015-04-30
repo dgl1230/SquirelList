@@ -102,7 +102,6 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
@@ -124,6 +123,8 @@ class UsersViewController: PFQueryTableViewController {
 
 
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         if shouldReLoad == true {

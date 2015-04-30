@@ -90,7 +90,7 @@
 		18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */; };
 		18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */; };
 		18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */; };
-		18E06FD41AEAD2B100D5F1E2 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E06FD31AEAD2B100D5F1E2 /* ChatViewController.swift */; };
+		18E06FD41AEAD2B100D5F1E2 /* ChatHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */; };
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
 		18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FB1AC9FE8500314DB2 /* More.storyboard */; };
 		18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */; };
@@ -230,7 +230,7 @@
 		18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelDetailViewController.swift; sourceTree = "<group>"; };
 		18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
-		18E06FD31AEAD2B100D5F1E2 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHolderViewController.swift; sourceTree = "<group>"; };
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -459,7 +459,7 @@
 				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
-				18E06FD31AEAD2B100D5F1E2 /* ChatViewController.swift */,
+				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
 				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
@@ -633,7 +633,7 @@
 				1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */,
 				18F769031ACB995C00314DB2 /* FindUserTableViewCell.swift in Sources */,
 				181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */,
-				18E06FD41AEAD2B100D5F1E2 /* ChatViewController.swift in Sources */,
+				18E06FD41AEAD2B100D5F1E2 /* ChatHolderViewController.swift in Sources */,
 				184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */,
 				1848418A1AE976C100F23551 /* JSQMessagesBubbleImage.m in Sources */,
 				18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */,
@@ -763,7 +763,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
-				PROVISIONING_PROFILE = "a3778acb-f7b4-40eb-a861-d0c77d75bff5";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				"TEST_HOST[sdk=*]" = "";
@@ -786,7 +786,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = SquirrelList;
-				PROVISIONING_PROFILE = "a3778acb-f7b4-40eb-a861-d0c77d75bff5";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 			};
 			name = Release;
