@@ -26,7 +26,7 @@ class TradeOfferViewController: PopUpViewController {
     
     
     @IBAction func acceptTrade(sender: AnyObject) {
-        offeredSquirrel!["owner"] = PFUser.currentUser()!["username"]
+        offeredSquirrel!["owner"] = PFUser.currentUser()!
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
 
         offeredSquirrel!.save()
@@ -43,7 +43,7 @@ class TradeOfferViewController: PopUpViewController {
         dismissViewControllerAnimated(true, completion: nil)
         delegate?.tradeOfferViewController(self)
     }
-
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

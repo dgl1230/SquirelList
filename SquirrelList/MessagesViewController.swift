@@ -55,7 +55,6 @@ class MessagesViewController: JSQMessagesViewController {
     
     
     func loadMessages() {
-        println("loading messages")
         var lastMessage: JSQMessage? = nil
         
         if messages.last != nil {
@@ -92,6 +91,7 @@ class MessagesViewController: JSQMessagesViewController {
                 if results!.count > 0 {
                     self.finishReceivingMessage()
                 }
+                self.finishReceivingMessage()
             } else {
                 println("error")
             }
@@ -108,24 +108,18 @@ class MessagesViewController: JSQMessagesViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if shouldReLoad == true {
-            //We need to reset all the array variables so that loadMessages will pull an entirey different set of messages for the new currentGroup
-            PFUser.currentUser()?.fetch()
-            shouldReLoad = false
             self.messages = []
             self.messageObjects = []
             self.users = []
-            //loadMessages()
+            loadMessages()
+            shouldReLoad = false
+
+        } else if firstViewDidLoad == false {
+            loadMessages()
         }
-        //We do this if else clause so that loadMessages isn't called twice (which seems to duplicate the messages) when the view is first shown and viewDidLoad is called
         if firstViewDidLoad == true {
             firstViewDidLoad = false
-        } else {
-            loadMessages()
-            //firstViewDidLoad = true
         }
-
-        //Maybe always loading messages will make it so its always updated?
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadMessages", name: "reloadMessages", object: nil)
     }
     
     
@@ -218,7 +212,6 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        println("num of messages")
         println(messages.count)
         return messages[indexPath.row]
     }

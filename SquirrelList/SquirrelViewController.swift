@@ -19,6 +19,8 @@ import UIKit
 
 class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
 
+
+
     //Optional value for determing if we're viewing someone else's squirrels, who's squirrels they are
     var selectedUser: PFUser?
     //Optional for determing if the user has room to add a Squirrel. Also passed along to SquirrelDetailViewController to allow them to pick up a Squirrel
@@ -37,6 +39,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     //The owner of the squirrel that the logged in user wants
     var desiredSquirrelOwner: PFUser?
     
+    @IBOutlet weak var squirrelSlotsLabel: UILabel?
     @IBOutlet weak var teamRatingLabel: UILabel!
     @IBOutlet weak var addSquirrelButton: UIBarButtonItem?
     @IBOutlet weak var tradeOfferButton: UIBarButtonItem!
@@ -108,11 +111,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     func calculateTeamRating(username:String) -> Int {
         var teamRatings: [Int] = []
         for squirrel in self.objects! {
+            var owner = squirrel["owner"] as? PFUser
             //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
-            if squirrel["avg_rating"] === nil {
+            if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
-            }
-            else if (squirrel["owner"] as! String == username){
+            } else if (owner?.objectId == PFUser.currentUser()!.objectId ){
                 teamRatings.append(squirrel["avg_rating"] as! Int)
             }
         }
@@ -140,11 +143,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let controller = segue.destinationViewController as! SquirrelDetailViewController
             //controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            if sender!["owner"] as! String != ""{
-                var query = PFUser.query()
-                query!.whereKey("username", equalTo: sender!["owner"]! as! String)
-                var user = query!.getFirstObject()
-                controller.squirrelOwner = user as? PFUser
+
+            if sender!["owner"] != nil {
+                var user = sender!["owner"] as? PFUser
+                controller.squirrelOwner = user 
             } else {
                 //The Squirrel doesn't have an owner
                 println(canPickUpSquirrel)
@@ -169,10 +171,26 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             }
         }
         //Also need to calculate if the user can add a squirrel, because the query hasn't been calculated yet in viewDidLoad
-        canPickUpSquirrel = userCanAddSquirrel()
-        if canPickUpSquirrel == false || self.selectedUser != nil {
+        var groupUserIds = PFUser.currentUser()!["currentGroup"]!["userIDs"] as? [String]
+        var numOfUsers = groupUserIds!.count
+        var yourNumSquirrels = 0
+        for squirrel in self.objects! {
+            var owner = squirrel["owner"] as? PFUser
+            if owner?.objectId == PFUser.currentUser()!.objectId {
+                yourNumSquirrels += 1
+            }
+        }
+        
+        if yourNumSquirrels > numOfUsers + 4 || yourNumSquirrels == 15 {
+            squirrelSlotsLabel?.text = "You're Squirrel Team is full!"
             addSquirrelButton?.enabled = false
-        } else {
+        } else if numOfUsers == 1 {
+            squirrelSlotsLabel?.text = "You need at least two users to start squirreling!"
+            addSquirrelButton?.enabled = false
+        }
+        else {
+            var amountCanAdd = (numOfUsers + 4) - yourNumSquirrels
+            squirrelSlotsLabel?.text = "\(amountCanAdd) squirrel slots remaining"
             addSquirrelButton?.enabled = true
         }
 
@@ -184,9 +202,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         var query = PFQuery(className: "Squirrel")
         query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         if currentlyTrading == true {
-            query.whereKey("owner", equalTo: PFUser.currentUser()!["username"]!)
+            query.whereKey("owner", equalTo: PFUser.currentUser()!)
         } else if selectedUser != nil {
-            query.whereKey("owner", equalTo: selectedUser!["username"]!)
+            query.whereKey("owner", equalTo: selectedUser!)
         }
         query.orderByDescending("avg_rating")
         return query
@@ -203,6 +221,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
     
     
+    
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         //Squirrels can only be deleted if the user is going through their own squirrels
         if selectedUser?.objectId == PFUser.currentUser()!.objectId {
@@ -212,7 +231,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
             var first = cell.viewWithTag(1) as! UILabel
             first.text = object!["first_name"]!.capitalizedString
             //For some reason 2 is already being used as another tag
@@ -223,10 +242,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             if avgRating != 0 {
                 ratingLabel.text = "\(avgRating)"
                 var color = calculateColor(avgRating)
-                first.textColor = color
+                //Try experimenting with background color instead
+                cell.backgroundColor = color
+                //first.textColor = color
                 
-                last.textColor = color
-                ratingLabel.textColor = color
+                //last.textColor = color
+                //ratingLabel.textColor = color
             } else {
                 //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
                 // the squirrel's avgRating not passing the if statemtnt
@@ -243,12 +264,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let squirrel = objects![indexPath.row] as! PFObject
-            squirrel["owner"] = ""
+            squirrel["owner"] = nil
             squirrel.save()
-            var currentSquirrelCount = PFUser.currentUser()!["num_of_squirrels"] as! Int
-            var newSquirrelCount = currentSquirrelCount - 1
-            PFUser.currentUser()!["num_of_squirrels"]! = newSquirrelCount
-            PFUser.currentUser()!.save()
             var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
             teamRatingLabel.text = "Team Rating: \(String(teamRating))"
             ///Alert SquirrelViewController to reload data
@@ -256,56 +273,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             self.loadObjects()
         }
     }
-
-
-    /*
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
-            let squirrel = objects![indexPath.row] as! PFObject
-            squirrel["owner"] = ""
-            squirrel.save()
-            var currentSquirrelCount = PFUser.currentUser()!["num_of_squirrels"] as! Int
-            var newSquirrelCount = currentSquirrelCount - 1
-            PFUser.currentUser()!["num_of_squirrels"]! = newSquirrelCount
-            PFUser.currentUser()!.save()
-            var leastSquirrels = PFUser.currentUser()!["currentGroup"]!["leastSquirrelsOwned"] as? Int
-            if leastSquirrels == nil {
-                leastSquirrels = 0
-            }
-            //Number of users in the currentGroup that have the max number of squirrels owned
-            var numLeastOwners = PFUser.currentUser()!["currentGroup"]!["numLeastOwners"] as? Int
-            if numLeastOwners == nil {
-                numLeastOwners = 0
-            }
-            var yourNumSquirrels = 0
-            for squirrel in objects! {
-                if squirrel["owner"] as? String == PFUser.currentUser()!.username! as String {
-                    yourNumSquirrels += 1
-                }
-            }
-            if yourNumSquirrels < leastSquirrels {
-                var oldNumSquirrels = leastSquirrels
-                var group = PFUser.currentUser()!["currentGroup"] as? PFObject
-                group!["leastSquirrelsOwned"] = oldNumSquirrels! - 1
-                group!["numLeastOwner"] = 1
-                group?.save()
-            } else if yourNumSquirrels == leastSquirrels {
-                var oldNumOwners = numLeastOwners! as Int
-                var group = PFUser.currentUser()!["currentGroup"] as? PFObject
-                group!["numLeastOwner"] = oldNumOwners + 1
-                group?.save()
-            }
-
-            
-            
-            var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
-            teamRatingLabel.text = "Team Rating: \(String(teamRating))"
-            ///Alert SquirrelViewController to reload data
-            NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
-            self.loadObjects()
-        }
-    }
-    */
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -319,36 +286,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         else {
             self.performSegueWithIdentifier("SquirrelDetails", sender: objects![indexPath.row])
         }
-    }
-    
-    
-    
-    /*
-        Compares the number of squirrels the logged in user has with the mostSquirrels currently owned in the currentGroup. If the user has more, that becomes the new mostSquirrelsOwned number. If the user has the same number of Squirrels as the most currently owned and that number is not zero, return false. Else it returns true.
-    */
-    func userCanAddSquirrel() -> Bool {
-        if objects!.count == 0 {
-            return true
-        }
-        var leastSquirrels = PFUser.currentUser()!["currentGroup"]!["leastSquirrelsOwned"] as? Int
-        if leastSquirrels == nil {
-            leastSquirrels = 0
-        }
-        //Number of users in the currentGroup that have the max number of squirrels owned
-        var numLeastOwners = PFUser.currentUser()!["currentGroup"]!["numLeastOwners"] as? Int
-        if numLeastOwners == nil {
-            numLeastOwners = 0
-        }
-        var yourNumSquirrels = 0
-        for squirrel in objects! {
-            if squirrel["owner"] as? String == PFUser.currentUser()!.username! as String {
-                yourNumSquirrels += 1
-            }
-        }
-        if yourNumSquirrels == leastSquirrels! + 2 {
-            return false
-        }
-        return true
     }
     
     
@@ -396,7 +333,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         var newSquirrel = PFObject(className:"Squirrel")
         newSquirrel["first_name"] = firstName
         newSquirrel["last_name"] = lastName
-        newSquirrel["owner"] = PFUser.currentUser()!["username"]
+        newSquirrel["owner"] = PFUser.currentUser()!
         newSquirrel["raters"] = []
         newSquirrel["ratings"] = []
         newSquirrel["dtd"] = false
@@ -406,12 +343,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                self.dismissViewControllerAnimated(true, completion: nil)
-                //Update the number of squirrels the user has
-                var currentNum = PFUser.currentUser()!["num_of_squirrels"]! as? Int
-                PFUser.currentUser()!["num_of_squirrels"]! = currentNum! + 1
-                PFUser.currentUser()!.save()
                 
+                self.dismissViewControllerAnimated(true, completion: nil)
                 self.viewDidLoad()
                 
             } else {

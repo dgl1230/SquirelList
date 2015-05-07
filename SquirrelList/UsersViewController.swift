@@ -85,11 +85,12 @@ class UsersViewController: PFQueryTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
+        var username = cell.viewWithTag(1) as! UILabel
         if (objects![indexPath.row]["username"] as? String == PFUser.currentUser()!.username) {
-             cell.textLabel?.text = "me"
+             username.text = "me"
         }
         else {
-            cell.textLabel?.text = objects![indexPath.row]["username"] as? String
+            username.text = objects![indexPath.row]["username"] as? String
         }
         return cell
     }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
-		182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182595271A8E9B050057BEDD /* ChatDetailViewController.swift */; };
 		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
 		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
 		184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561221ABFD24B00026473 /* BounceAnimationController.swift */; };
@@ -101,7 +100,6 @@
 
 /* Begin PBXFileReference section */
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
-		182595271A8E9B050057BEDD /* ChatDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
@@ -439,7 +437,6 @@
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
 				18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */,
-				182595271A8E9B050057BEDD /* ChatDetailViewController.swift */,
 				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
@@ -608,7 +605,6 @@
 				1848418F1AE976C100F23551 /* JSQMessagesCollectionViewCell.m in Sources */,
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
-				182595281A8E9B050057BEDD /* ChatDetailViewController.swift in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
 				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				184841961AE976C100F23551 /* JSQMessagesLabel.m in Sources */,

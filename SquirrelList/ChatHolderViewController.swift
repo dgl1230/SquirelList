@@ -38,7 +38,7 @@ class ChatHolderViewController: UIViewController {
         super.viewDidLoad()
         var groupName = PFUser.currentUser()!["currentGroup"]!["name"] as? String
         self.navigationItem.title = "\(groupName!) Chat"
-        //Set notification to "listen" for when the the user has changed their currentGroup
+        //Set notification to "listen" for when the the user has changed their currentGroup. This is just for changing the title to the new currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
 
 
