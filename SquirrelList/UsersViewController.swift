@@ -72,7 +72,7 @@ class UsersViewController: PFQueryTableViewController {
         currentGroup!.fetch()
         
         var query = PFUser.query()
-        query!.whereKey("objectId", containedIn: currentGroup!["userIDs"] as! [String])
+        query!.whereKey("username", containedIn: currentGroup!["userIDs"] as! [String])
         query!.orderByAscending("username")
         return query!
     }
@@ -103,6 +103,14 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var query = PFQuery(className: "User")
+        query.whereKey("objectId", equalTo: "PcLPTDkbr4")
+        var andreas = query.getFirstObject()
+        
+        andreas?.addObject("jkh", forKey: "friends")
+        andreas?.save()
+        
         
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)

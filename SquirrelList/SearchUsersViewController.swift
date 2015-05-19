@@ -55,24 +55,52 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         if addingToGroup == true {
             //We need to add the user at the objects index to the logged in user's current group
             let user = filteredUsers[buttonRow]
-            //group?.addObject(user.objectId as String, forKey: "userIDs")
-            //group?.save()
             createGroupInvite(user.objectId!)
         } else {
-            //We need to add the user to the logged in user's friends
+            //We need to check and see if a friend request already exists
             let user = filteredUsers[buttonRow]
-            PFUser.currentUser()!.addObject(user.objectId!, forKey: "friends")
-            PFUser.currentUser()!.save()
+
+            var query1 = PFQuery(className: "FriendRequest")
+            query1.whereKey("RequestTo", equalTo: PFUser.currentUser()!)
+            query1.whereKey("RequestFrom", equalTo: user)
+        
+            var query2 = PFQuery(className: "FriendRequest")
+            query2.whereKey("RequestTo", equalTo: user)
+            query2.whereKey("RequestFrom", equalTo: PFUser.currentUser()!)
+            
+            var query = PFQuery.orQueryWithSubqueries([query1, query2])
+            query.findObjectsInBackgroundWithBlock({ (results: [AnyObject]?, error: NSError?) -> Void in
+                    if error == nil {
+                        if results?.count > 0 {
+                            //Then there was already a friend request and there should only be one request
+                            var request = results![0] as! PFObject
+                            request["status"] = "accepted"
+                            PFUser.currentUser()!.addObject(user.username!, forKey: "friends")
+                            PFUser.currentUser()!.save()
+                            request.save()
+                        }
+                        else {
+                            println("creating friend request")
+                            //We need to create a friend request
+                            var request = PFObject(className: "FriendRequest")
+                            request["RequestFrom"] = PFUser.currentUser()!
+                            request["RequestTo"] = user
+                            request["status"] = "pending"
+                            PFUser.currentUser()!.addObject(user.username!, forKey: "pendingFriends")
+                            PFUser.currentUser()!.save()
+                            request.save()
+                        }
+                    }
+            })
         }
     }
+    
     
     //Weird workout function for adding a user if the logged in user hasn't started searching through users yet
     func addUserNoFilter(sender:UIButton!) {
         //We assume the addingToGroup optional is true because a user searching to add friends will not see any users initially 
         let buttonRow = sender.tag
         let user = objects![buttonRow] as! PFUser
-        //group?.addObject(user.objectId as String, forKey: "userIDs")
-        //group?.save()
         createGroupInvite(user.objectId!)
     }
     
@@ -98,14 +126,14 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     }
     
     //Takes a userID and checks if it is in relevant group
-    func isAdded(userID: String) -> Bool {
+    func isAdded(username: String) -> Bool {
         var users: [String] = []
         group = PFUser.currentUser()!["currentGroup"] as? PFObject
         if addingToGroup == true {
             //Check to see if an invite has already been sent to the user
             var query = PFQuery(className: "GroupInvite")
             query.whereKey("group", equalTo: group!)
-            query.whereKey("invitee", equalTo: userID)
+            query.whereKey("invitee", equalTo: username)
             var results = query.countObjects()
             if results > 0 {
                 return true
@@ -114,9 +142,12 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             users = group!["userIDs"] as! [String]
         } else {
             //We're checking if a user is friends with someone
-            users = PFUser.currentUser()!["friends"] as! [String]
+            //users = PFUser.currentUser()!["friends"] as! [String]
+            var friends = PFUser.currentUser()!["friends"] as! [String]
+            var pendingFriends = PFUser.currentUser()!["pendingFriends"] as! [String]
+            users = friends + pendingFriends
         }
-        if contains(users, userID) {
+        if contains(users, username) {
             return true
         }
         return false
@@ -128,8 +159,10 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         var query = PFUser.query()
         if addingToGroup == true {
             //The user has friends and we should list them to be invited to a group
-            query?.whereKey("objectId", containedIn: PFUser.currentUser()?["friends"]! as! [String])
-            query?.orderByAscending("username")
+            if PFUser.currentUser()!["friends"] != nil {
+                query!.whereKey("username", containedIn: PFUser.currentUser()!["friends"] as! [String])
+            }
+
             return query!
         }
         else {
@@ -170,7 +203,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
         cell.nameLabel.text = user["username"] as? String
         cell.addButton.tag = indexPath.row
-        if isAdded(user.objectId!) {
+        if isAdded(user.username!) {
             //The user variable has been already added to the relevant group
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
@@ -201,6 +234,8 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
      override func viewDidLoad() {
         super.viewDidLoad()
+        //To prevent recently added users in FriendsViewController from still showing as pending and other similar problems 
+        PFUser.currentUser()?.fetch()
         if addingToGroup == true {
             //Configure the title to have the user's current group in it
             var currentGroup = PFUser.currentUser()!["currentGroup"]!["name"]! as! String

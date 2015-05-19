@@ -29,6 +29,18 @@ class SettingsViewController: UITableViewController {
 
         //emailTextField.addTarget(self, action: "emailDidBegingEditing", forControlEvents: UIControlEvents.EditingDidBegin)
         }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        if cell.tag == 69 {
+            PFUser.logOut()
+            
+        }
+        
+    
+    }
+    
 
 
    

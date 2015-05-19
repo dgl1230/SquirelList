@@ -22,7 +22,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
-        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
+        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all need to be reloaded when their views appear 
         NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
         self.navigationController?.popViewControllerAnimated(true)    
     }

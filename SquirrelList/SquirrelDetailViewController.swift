@@ -20,6 +20,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     var ratedSquirrel: PFObject?
     var squirrelOwner: PFUser?
     var didRateSquirrel: Bool?
+    //Optional for keeping track up how many squirrel slots the user has
+    var squirrelSlots: Int?
+    //Optional for keeping track of first names of squirrels
+
     
     
     
@@ -42,7 +46,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
     
     @IBAction func claimSquirrel(sender: AnyObject) {
-        ratedSquirrel!["owner"] = PFUser.currentUser()!.username
+        ratedSquirrel!["owner"] = PFUser.currentUser()!
         if didRateSquirrel == true {
             removeOwnerRating(ratedSquirrel!)
             ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
@@ -83,18 +87,30 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
     
 
-    func calculateAverageRating(ratings:[String]) -> Int {
+    func calculateAverageRating(ratings:[String]) -> Double {
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
             return 0
         }
-        var sum = 0
+        var sum = 0.0
 
         for rating in ratings {
-            sum += rating.toInt()!
+            var rating1 = rating as NSString
+            sum += rating1.doubleValue
         }
-        println(Int(Float(sum)/Float(numOfRatings)))
-        return Int(Float(sum)/Float(numOfRatings))
+        var unroundedRating = Double(sum)/Double(numOfRatings)
+        println(unroundedRating)
+        return round((10 * unroundedRating)) / 10
+
+
+    }
+    
+    //Returns true if the user can claim the squirrel, else it returns false
+    func canGetSquirrel() -> Bool {
+        if (ratedSquirrel!["owner"] == nil) || (squirrelSlots > 0) {
+            return true
+        }
+        return false
     }
     
     
@@ -104,6 +120,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         }
         return true
     }
+    
     
     func getUserRating(username:String, raters:[String], ratings:[String]) -> String {
         if (find(raters, username) == nil) {
@@ -195,7 +212,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         } else {
             //Squirrel does have an owner
             ownerLabel.hidden = false
-            squirrelOwnerLabel.text = ratedSquirrel!["owner"] as? String
+            var owner = ratedSquirrel!["owner"] as! PFUser
+            owner.fetch()
+            squirrelOwnerLabel.text = owner.username!
             claimSquirrelButton.hidden = true
         }
         rateButton.enabled = false
