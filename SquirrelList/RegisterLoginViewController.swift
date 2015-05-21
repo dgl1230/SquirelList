@@ -41,7 +41,19 @@ class RegisterLoginViewController: UIViewController {
                 (user: PFUser?, signupError: NSError?) -> Void in
                     self.resumeInteractionEvents()
                     if signupError ==  nil {
-                        self.performSegueWithIdentifier("jumpToHome", sender: self)
+                        if PFUser.currentUser()!["currentGroup"] == nil {
+                            //Then they need to be directed just to the more tab
+                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
+                            let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
+                            moreController.isNewUser = true
+                            let navigationController = UINavigationController(rootViewController: moreController)
+                            navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
+                            appDelegate.window!.rootViewController = navigationController
+                            appDelegate.window!.makeKeyAndVisible()
+                        } else {
+                            self.performSegueWithIdentifier("jumpToHome", sender: self)
+                        }
                     } else {
                         if let errorString = signupError!.userInfo?["error"] as? String {
                             error = errorString
@@ -88,7 +100,15 @@ class RegisterLoginViewController: UIViewController {
                     let installation = PFInstallation.currentInstallation()
                     installation["user"] = PFUser.currentUser()!
                     installation.saveInBackgroundWithBlock(nil)
-                    self.performSegueWithIdentifier("jumpToHome", sender: self)
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
+                    let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
+                    moreController.isNewUser = true
+                    let navigationController = UINavigationController(rootViewController: moreController)
+                    navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
+                    appDelegate.window!.rootViewController = navigationController
+                    appDelegate.window!.makeKeyAndVisible()
+                    //self.performSegueWithIdentifier("jumpToHome", sender: self)
                 } else {
                     if let errorString = signupError!.userInfo?["error"] as? String {
                         error = errorString

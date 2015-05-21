@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
 
+
+        //PFUser.logOut()
         let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
         let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
@@ -35,7 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             //If the user isn't logged in, we need to present the login/register view controller
             var loginViewController = RegisterLoginViewController()
             self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
+        } else if PFUser.currentUser()!["currentGroup"] == nil {
+            //Present just the MoreViewController to the user
+            let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
+            let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
+            moreController.isNewUser = true
+            let navigationController = UINavigationController(rootViewController: moreController)
+            navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
+            self.window!.rootViewController = navigationController
+            self.window!.makeKeyAndVisible()
         } else {
+            //Present the tab bar with all the tabs
             self.window!.rootViewController = HomeTabViewController()
             self.window!.makeKeyAndVisible()
         }
@@ -61,7 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        println("application registered")
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock(nil)

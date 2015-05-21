@@ -33,8 +33,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         let last = lastName.text as NSString
         last.lowercaseString
         if (find(firstNames!, first as String) != nil) && (find(lastNames!, last as String) != nil) {
-            println("detected at least")
-        
             //Then the squirrel already exists and the user can't create it
             let alertController = UIAlertController(title: "That Squirrel already exists!", message: "Try adding another squirrel instead, you monster", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

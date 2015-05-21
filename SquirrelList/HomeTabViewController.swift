@@ -13,15 +13,14 @@ class HomeTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        /*
         var query = PFQuery(className: "Group")
         query.whereKey("name", equalTo: "first_group")
         var group = query.getFirstObject()
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()?.save()
+        */
         
-        
-        //PFUser.logOut()
         
         
         //Setting the tabs programmatically so that we can use multiple storyboards
@@ -32,7 +31,7 @@ class HomeTabViewController: UITabBarController {
 
         //Since the moreViewController isn't hooked up to the HomeTableViewController in the storyboard, we need to set attritbutes
         let moreStoryboard = UIStoryboard(name: "More", bundle: nil)
-        var moreViewController = moreStoryboard.instantiateViewControllerWithIdentifier("More") as! UINavigationController
+        var moreViewController = moreStoryboard.instantiateViewControllerWithIdentifier("MoreNavigationController") as! UINavigationController
         moreViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "tabbar_more"), tag: 4)
         moreViewController.tabBarItem.imageInsets.top = 8
         moreViewController.tabBarItem.imageInsets.bottom = -8

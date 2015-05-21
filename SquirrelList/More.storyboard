@@ -396,7 +396,7 @@
         <!--More-->
         <scene sceneID="4cT-6B-hZr">
             <objects>
-                <tableViewController id="DYx-Dx-55U" customClass="MoreTableViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="More" id="DYx-Dx-55U" customClass="MoreTableViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7cw-Ap-9hv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -496,8 +496,9 @@
         <!--Item-->
         <scene sceneID="nn8-nG-K4y">
             <objects>
-                <navigationController storyboardIdentifier="More" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="tabbar_more" id="jV0-qV-oSf"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QBv-Wm-943" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="1EF8F07C-C707-494F-8422-460277BD2A13" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -510,7 +511,6 @@
                         <segue destination="DYx-Dx-55U" kind="relationship" relationship="rootViewController" id="9IX-AF-gQW"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QBv-Wm-943" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1732.5" y="1793.6619718309857"/>
         </scene>
@@ -613,7 +613,135 @@
         </scene>
     </scenes>
     <resources>
+        <image name="1EF8F07C-C707-494F-8422-460277BD2A13" width="24" height="37">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
+GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
+DBIAwAAAgAKACtISCRMVWk5TLm9iamVjdHOhFIADgAnSEgkXGqIYGYAEgAWACBAA0h0JHh9fEBROU1RJ
+RkZSZXByZXNlbnRhdGlvboAGgAdPERruTU0AKgAADei6vcIKur3CjLq9wvK6vcL/ur3C/7q9wv+6vcL/
+ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcLy
+ur3CjLq9wgq6vcKMur3C/7q9wqq6vcKFur3Cibq9wom6vcKJur3Cibq9wom6vcKJur3Cibq9wom6vcKJ
+ur3Cibq9wom6vcKJur3Cibq9wom6vcKJur3Cibq9woW6vcKqur3C/7q9wou6vcLwur3Cqbq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3Cqbq9wvC6vcL/ur3Chrq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3Chrq9wv+6vcL/
+ur3Chbq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcI2ur3Cwbq9wju6vcKT
+ur3Cxrq9wr+6vcK/ur3Cv7q9wr+6vcK/ur3Cv7q9wr+6vcK/ur3Cv7q9wr+6vcLCur3Ctrq9wiG6vcIA
+ur3Chbq9wv+6vcL/ur3Chbq9wgC6vcI5ur3CzLq9wj+6vcKVur3C0bq9wsq6vcLKur3Cyrq9wsq6vcLK
+ur3Cyrq9wsq6vcLKur3Cyrq9wsq6vcLOur3Cubq9wiO6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIEur3CELq9wgS6vcIGur3CEbq9whC6vcIQ
+ur3CELq9whC6vcIQur3CELq9whC6vcIQur3CELq9whC6vcIRur3CC7q9wgC6vcIAur3Chbq9wv+6vcL/
+ur3Chbq9wgC6vcJFur3C9Lq9wky6vcK+ur3C+rq9wvK6vcLyur3C8rq9wvK6vcLyur3C8rq9wvK6vcLy
+ur3C8rq9wvK6vcL2ur3C57q9wi26vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIpur3ClLq9wiu6vcJp
+ur3CmLq9wpK6vcKSur3Ckrq9wpK6vcKSur3Ckrq9wpK6vcKSur3Ckrq9wpK6vcKVur3Chbq9whS6vcIA
+ur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIS
+ur3CQrq9whG6vcIpur3CRLq9wkG6vcJBur3CQbq9wkG6vcJBur3CQbq9wkG6vcJBur3CQbq9wkG6vcJD
+ur3COLq9wgW6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcJLur3C/7q9wlS6vcLOur3C/7q9wv+6vcL/
+ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C97q9wjO6vcIAur3Chbq9wv+6vcL/
+ur3Chbq9wgC6vcIWur3CT7q9wha6vcI0ur3CUbq9wk66vcJOur3CTrq9wk66vcJOur3CTrq9wk66vcJO
+ur3CTrq9wk66vcJQur3CRLq9wgi6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIjur3CgLq9wiS6vcJRur3Cg7q9wn66vcJ+ur3Cfrq9wn66vcJ+
+ur3Cfrq9wn66vcJ+ur3Cfrq9wn66vcKCur3Ca7q9wg+6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcJG
+ur3C+7q9wk+6vcLGur3C/7q9wvm6vcL5ur3C+bq9wvm6vcL5ur3C+bq9wvm6vcL5ur3C+bq9wvm6vcL9
+ur3C8Lq9wjG6vcIAur3Chbq9wv+6vcL/ur3Chbq9wgC6vcIJur3CIbq9wgi6vcISur3CIrq9wiC6vcIg
+ur3CILq9wiC6vcIgur3CILq9wiC6vcIgur3CILq9wiC6vcIhur3CGrq9wgC6vcIAur3Chbq9wv+6vcL/
+ur3Chbq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3Chbq9wv+6vcL9ur3Ckbq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3Ckbq9wv26vcK2ur3C9bq9wlm6vcIwur3CNbq9wjW6vcI1ur3CNbq9wjW6vcI1ur3CNbq9wjW6vcI1
+ur3CNbq9wjW6vcI1ur3CNbq9wjW6vcI1ur3CNbq9wjC6vcJZur3C9bq9wra6vcIpur3C1bq9wv+6vcL/
+ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/ur3C/7q9wv+6vcL/
+ur3C/7q9wv+6vcL/ur3C1bq9wii6vcIAur3CD7q9wkW6vcJRur3CT7q9wk+6vcJPur3CT7q9wk+6vcJP
+ur3CT7q9wk+6vcJPur3CT7q9wk+6vcJPur3CT7q9wk+6vcJPur3CT7q9wlG6vcJFur3CD7q9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wj26vcKZur3CCrq9wgC6vcID
+ur3Cm7q9wjy6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIAur3CALq9wgC6vcIA
+ur3CALq9wgC6vcIAur3CALq9wlS6vcLjur3CQ7q9wgC6vcI7ur3C2rq9wmK6vcIAur3CBbq9wie6vcIY
+ur3CALq9wgO6vcIGur3CGbq9wgO6vcILur3CKLq9wgu6vcIAur3CALq9wgC6vcIAur3CALq9wmW6vcKu
+ur3Cg7q9wgC6vcJ/ur3Cm7q9wm66vcIAur3CjLq9wpC6vcKlur3CRrq9wim6vcKsur3Cirq9wiC6vcKF
+ur3Cirq9wo26vcILur3CALq9wgC6vcIAur3CALq9wnS6vcJtur3CpLq9wjK6vcKNur3CYbq9wnS6vcJO
+ur3Cjrq9wgC6vcIpur3Cp7q9wkG6vcK5ur3CALq9wmm6vcKfur3CMLq9wri6vcJVur3CALq9wgC6vcIA
+ur3CALq9woy6vcJCur3Cdbq9wqi6vcJhur3CPrq9woC6vcJmur3Ca7q9wgC6vcIQur3Cn7q9wlK6vcKP
+ur3CALq9wom6vcKgur3CZ7q9wnC6vcIour3CALq9wgC6vcIAur3CALq9wpm6vcI1ur3CN7q9wuO6vcIW
+ur3CRLq9wpe6vcIqur3CtLq9wh66vcJsur3Cirq9wje6vcKYur3CALq9wk66vcKaur3CELq9why6vcID
+ur3CALq9wgC6vcIAur3CALq9wlC6vcISur3CBLq9wj66vcIAur3CGbq9wk+6vcIAur3CRLq9wpK6vcJ3
+ur3CC7q9why6vcJJur3CALq9wgC6vcJaur3Clrq9wnK6vcIIur3CALq9wgAADgEAAAMAAAABABgAAAEB
+AAMAAAABACUAAAECAAMAAAAEAAAOlgEDAAMAAAABAAEAAAEGAAMAAAABAAIAAAERAAQAAAABAAAACAES
+AAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABACUAAAEXAAQAAAABAAAN4AEcAAMAAAABAAEAAAFS
+AAMAAAABAAIAAAFTAAMAAAAEAAAOnodzAAcAAAxIAAAOpgAAAAAACAAIAAgACAABAAEAAQABAAAMSExp
+bm8CEAAAbW50clJHQiBYWVogB84AAgAJAAYAMQAAYWNzcE1TRlQAAAAASUVDIHNSR0IAAAAAAAAAAAAA
+AAEAAPbWAAEAAAAA0y1IUCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAARY3BydAAAAVAAAAAzZGVzYwAAAYQAAABsd3RwdAAAAfAAAAAUYmtwdAAAAgQAAAAUclhZWgAA
+AhgAAAAUZ1hZWgAAAiwAAAAUYlhZWgAAAkAAAAAUZG1uZAAAAlQAAABwZG1kZAAAAsQAAACIdnVlZAAA
+A0wAAACGdmlldwAAA9QAAAAkbHVtaQAAA/gAAAAUbWVhcwAABAwAAAAkdGVjaAAABDAAAAAMclRSQwAA
+BDwAAAgMZ1RSQwAABDwAAAgMYlRSQwAABDwAAAgMdGV4dAAAAABDb3B5cmlnaHQgKGMpIDE5OTggSGV3
+bGV0dC1QYWNrYXJkIENvbXBhbnkAAGRlc2MAAAAAAAAAEnNSR0IgSUVDNjE5NjYtMi4xAAAAAAAAAAAA
+AAASc1JHQiBJRUM2MTk2Ni0yLjEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAFhZWiAAAAAAAADzUQABAAAAARbMWFlaIAAAAAAAAAAAAAAAAAAAAABYWVogAAAAAAAA
+b6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9kZXNjAAAAAAAA
+ABZJRUMgaHR0cDovL3d3dy5pZWMuY2gAAAAAAAAAAAAAABZJRUMgaHR0cDovL3d3dy5pZWMuY2gAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZGVzYwAAAAAAAAAuSUVDIDYx
+OTY2LTIuMSBEZWZhdWx0IFJHQiBjb2xvdXIgc3BhY2UgLSBzUkdCAAAAAAAAAAAAAAAuSUVDIDYxOTY2
+LTIuMSBEZWZhdWx0IFJHQiBjb2xvdXIgc3BhY2UgLSBzUkdCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGRl
+c2MAAAAAAAAALFJlZmVyZW5jZSBWaWV3aW5nIENvbmRpdGlvbiBpbiBJRUM2MTk2Ni0yLjEAAAAAAAAA
+AAAAACxSZWZlcmVuY2UgVmlld2luZyBDb25kaXRpb24gaW4gSUVDNjE5NjYtMi4xAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAB2aWV3AAAAAAATpP4AFF8uABDPFAAD7cwABBMLAANcngAAAAFYWVogAAAAAABM
+CVYAUAAAAFcf521lYXMAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAKPAAAAAnNpZyAAAAAAQ1JUIGN1
+cnYAAAAAAAAEAAAAAAUACgAPABQAGQAeACMAKAAtADIANwA7AEAARQBKAE8AVABZAF4AYwBoAG0AcgB3
+AHwAgQCGAIsAkACVAJoAnwCkAKkArgCyALcAvADBAMYAywDQANUA2wDgAOUA6wDwAPYA+wEBAQcBDQET
+ARkBHwElASsBMgE4AT4BRQFMAVIBWQFgAWcBbgF1AXwBgwGLAZIBmgGhAakBsQG5AcEByQHRAdkB4QHp
+AfIB+gIDAgwCFAIdAiYCLwI4AkECSwJUAl0CZwJxAnoChAKOApgCogKsArYCwQLLAtUC4ALrAvUDAAML
+AxYDIQMtAzgDQwNPA1oDZgNyA34DigOWA6IDrgO6A8cD0wPgA+wD+QQGBBMEIAQtBDsESARVBGMEcQR+
+BIwEmgSoBLYExATTBOEE8AT+BQ0FHAUrBToFSQVYBWcFdwWGBZYFpgW1BcUF1QXlBfYGBgYWBicGNwZI
+BlkGagZ7BowGnQavBsAG0QbjBvUHBwcZBysHPQdPB2EHdAeGB5kHrAe/B9IH5Qf4CAsIHwgyCEYIWghu
+CIIIlgiqCL4I0gjnCPsJEAklCToJTwlkCXkJjwmkCboJzwnlCfsKEQonCj0KVApqCoEKmAquCsUK3Arz
+CwsLIgs5C1ELaQuAC5gLsAvIC+EL+QwSDCoMQwxcDHUMjgynDMAM2QzzDQ0NJg1ADVoNdA2ODakNww3e
+DfgOEw4uDkkOZA5/DpsOtg7SDu4PCQ8lD0EPXg96D5YPsw/PD+wQCRAmEEMQYRB+EJsQuRDXEPURExEx
+EU8RbRGMEaoRyRHoEgcSJhJFEmQShBKjEsMS4xMDEyMTQxNjE4MTpBPFE+UUBhQnFEkUahSLFK0UzhTw
+FRIVNBVWFXgVmxW9FeAWAxYmFkkWbBaPFrIW1hb6Fx0XQRdlF4kXrhfSF/cYGxhAGGUYihivGNUY+hkg
+GUUZaxmRGbcZ3RoEGioaURp3Gp4axRrsGxQbOxtjG4obshvaHAIcKhxSHHscoxzMHPUdHh1HHXAdmR3D
+HeweFh5AHmoelB6+HukfEx8+H2kflB+/H+ogFSBBIGwgmCDEIPAhHCFIIXUhoSHOIfsiJyJVIoIiryLd
+IwojOCNmI5QjwiPwJB8kTSR8JKsk2iUJJTglaCWXJccl9yYnJlcmhya3JugnGCdJJ3onqyfcKA0oPyhx
+KKIo1CkGKTgpaymdKdAqAio1KmgqmyrPKwIrNitpK50r0SwFLDksbiyiLNctDC1BLXYtqy3hLhYuTC6C
+Lrcu7i8kL1ovkS/HL/4wNTBsMKQw2zESMUoxgjG6MfIyKjJjMpsy1DMNM0YzfzO4M/E0KzRlNJ402DUT
+NU01hzXCNf02NzZyNq426TckN2A3nDfXOBQ4UDiMOMg5BTlCOX85vDn5OjY6dDqyOu87LTtrO6o76Dwn
+PGU8pDzjPSI9YT2hPeA+ID5gPqA+4D8hP2E/oj/iQCNAZECmQOdBKUFqQaxB7kIwQnJCtUL3QzpDfUPA
+RANER0SKRM5FEkVVRZpF3kYiRmdGq0bwRzVHe0fASAVIS0iRSNdJHUljSalJ8Eo3Sn1KxEsMS1NLmkvi
+TCpMcky6TQJNSk2TTdxOJU5uTrdPAE9JT5NP3VAnUHFQu1EGUVBRm1HmUjFSfFLHUxNTX1OqU/ZUQlSP
+VNtVKFV1VcJWD1ZcVqlW91dEV5JX4FgvWH1Yy1kaWWlZuFoHWlZaplr1W0VblVvlXDVchlzWXSddeF3J
+XhpebF69Xw9fYV+zYAVgV2CqYPxhT2GiYfViSWKcYvBjQ2OXY+tkQGSUZOllPWWSZedmPWaSZuhnPWeT
+Z+loP2iWaOxpQ2maafFqSGqfavdrT2una/9sV2yvbQhtYG25bhJua27Ebx5veG/RcCtwhnDgcTpxlXHw
+cktypnMBc11zuHQUdHB0zHUodYV14XY+dpt2+HdWd7N4EXhueMx5KnmJeed6RnqlewR7Y3vCfCF8gXzh
+fUF9oX4BfmJ+wn8jf4R/5YBHgKiBCoFrgc2CMIKSgvSDV4O6hB2EgITjhUeFq4YOhnKG14c7h5+IBIhp
+iM6JM4mZif6KZIrKizCLlov8jGOMyo0xjZiN/45mjs6PNo+ekAaQbpDWkT+RqJIRknqS45NNk7aUIJSK
+lPSVX5XJljSWn5cKl3WX4JhMmLiZJJmQmfyaaJrVm0Kbr5wcnImc951kndKeQJ6unx2fi5/6oGmg2KFH
+obaiJqKWowajdqPmpFakx6U4pammGqaLpv2nbqfgqFKoxKk3qamqHKqPqwKrdavprFys0K1ErbiuLa6h
+rxavi7AAsHWw6rFgsdayS7LCszizrrQltJy1E7WKtgG2ebbwt2i34LhZuNG5SrnCuju6tbsuu6e8Ibyb
+vRW9j74KvoS+/796v/XAcMDswWfB48JfwtvDWMPUxFHEzsVLxcjGRsbDx0HHv8g9yLzJOsm5yjjKt8s2
+y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo2WzZ8dp2
+2vvbgNwF3IrdEN2W3hzeot8p36/gNuC94UThzOJT4tvjY+Pr5HPk/OWE5g3mlucf56noMui86Ubp0Opb
+6uXrcOv77IbtEe2c7ijutO9A78zwWPDl8XLx//KM8xnzp/Q09ML1UPXe9m32+/eK+Bn4qPk4+cf6V/rn
++3f8B/yY/Sn9uv5L/tz/bf//0iIjJCVaJGNsYXNzbmFtZVgkY2xhc3Nlc18QEE5TQml0bWFwSW1hZ2VS
+ZXCjJicoXxAQTlNCaXRtYXBJbWFnZVJlcFpOU0ltYWdlUmVwWE5TT2JqZWN00iIjKitXTlNBcnJheaIq
+KNIiIy0uXk5TTXV0YWJsZUFycmF5oy0qKNMwMQkyMzRXTlNXaGl0ZVxOU0NvbG9yU3BhY2VEMCAwABAD
+gAvSIiM2N1dOU0NvbG9yojYo0iIjOTpXTlNJbWFnZaI5KF8QD05TS2V5ZWRBcmNoaXZlctE9PlRyb290
+gAEACAARABoAIwAtADIANwBFAEsAVABbAGgAbwB3AHkAfgCAAIIAhwCSAJQAlgCYAJ0AoACiAKQApgCo
+AK0AxADGAMgbuhu/G8ob0xvmG+ob/RwIHBEcFhweHCEcJhw1HDkcQBxIHFUcWhxcHF4cYxxrHG4ccxx7
+HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
+</mutableData>
+        </image>
         <image name="CloseButton" width="15" height="15"/>
-        <image name="tabbar_more" width="24" height="37"/>
     </resources>
 </document>

@@ -18,9 +18,15 @@ class MoreTableViewController: UITableViewController {
     @IBOutlet weak var groupsIcon: UILabel!
     @IBOutlet weak var settingsIcon: UILabel!
     
+    //Optional for keeping track if the user has no currentGroup
+    var isNewUser: Bool?
+    
+    //Not sure if I need this or not, starting to think I don't 
+    /*
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    */
 
     @IBOutlet var tblOptions : UITableView?
     
@@ -68,8 +74,9 @@ class MoreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        if isNewUser == true {
+            self.title = "Home"
+        }
         self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
         //Set the friendsIcon to 'fa-smile-o'
         friendsIcon.text = "\u{f118}"
@@ -80,6 +87,7 @@ class MoreTableViewController: UITableViewController {
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
+        println("viewloaded")
 
     }
 
