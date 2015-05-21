@@ -70,6 +70,17 @@ class RegisterLoginViewController: UIViewController {
     
     
     @IBAction func register(sender: AnyObject) {
+        var username = usernameRegister.text
+        var usernameQuery = PFUser.query()
+        usernameQuery?.whereKey("username", equalTo: username)
+        var usernameCheck = usernameQuery?.getFirstObject()
+        if usernameCheck != nil {
+            //Then this username is already taken
+            let alertController = UIAlertController(title: "That username is taken!", message: "Sorry but someone already has that username", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
         var error = ""
         
         if emailRegister.text == "" || usernameRegister.text == "" || passwordRegister == "" || verifyPasswordRegister == "" {
