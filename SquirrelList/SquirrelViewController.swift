@@ -100,12 +100,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     //Calculates the color that the Squirrel name should be shown in, given the Squirrel's average rating
     func calculateColor(avg_rating: Double) -> UIColor {
-        if avg_rating >= 9 {
+        if avg_rating >= 8.5 {
             return UIColor.redColor()
-        } else if avg_rating >= 8 {
-            //Return fuschia
-            return UIColor(red: 255, green: 0, blue: 255, alpha: 1)
-        } else if avg_rating >= 7 {
+        }else if avg_rating >= 7 {
             return UIColor.orangeColor()
         } else if avg_rating >= 5 {
             return UIColor.yellowColor()

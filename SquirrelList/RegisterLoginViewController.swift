@@ -33,7 +33,7 @@ class RegisterLoginViewController: UIViewController {
         
         if error != "" {
             println(error)
-            displayErrorAlert(error)
+            displayErrorAlert("Whoops! We had a problem", message: error)
         } else {
             displayLoadingAnimator()
  
@@ -60,7 +60,7 @@ class RegisterLoginViewController: UIViewController {
                         } else {
                             error = "There was a random bug :( Please try again"
                         }
-                        self.displayErrorAlert(error)
+                        self.displayErrorAlert("Whoops! We had a problem", message: error)
                     }
             }
         }
@@ -70,32 +70,43 @@ class RegisterLoginViewController: UIViewController {
     
     
     @IBAction func register(sender: AnyObject) {
+        var error = ""
+        var title = ""
         var username = usernameRegister.text
+        var usernameLower = username.lowercaseString
         var usernameQuery = PFUser.query()
-        usernameQuery?.whereKey("username", equalTo: username)
+        //We want to make sure a user can't signup with an exact username that's taken or a username that differs in case
+        usernameQuery?.whereKey("lowerUsername", equalTo: usernameLower)
         var usernameCheck = usernameQuery?.getFirstObject()
         if usernameCheck != nil {
-            //Then this username is already taken
-            let alertController = UIAlertController(title: "That username is taken!", message: "Sorry but someone already has that username", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        
-        var error = ""
-        
-        if emailRegister.text == "" || usernameRegister.text == "" || passwordRegister == "" || verifyPasswordRegister == "" {
+            title = "That username is taken!"
+            error = "Sorry but someone already has that username"
+        } else if count(username) <= 2 {
+            title = "That username is too short!"
+            error = "Please have it be at least three characters"
+        } else if count(username) >= 15 {
+            title = "That username is too short!"
+            error = "Please have it be at least three characters"
+        } else if emailRegister.text == "" || usernameRegister.text == "" || passwordRegister == "" || verifyPasswordRegister == "" {
+            title = "Whoa there cowboy!"
             error = "Please make sure you fill in all fields"
+        } else if count(passwordRegister.text) <= 6 {
+            title = "Whoa there cowboy!"
+            error = "Your password needs to be at least 6 characters"
         } else if passwordRegister.text != verifyPasswordRegister.text {
+            title = "Whoa there cowboy!"
             error = "Please make sure both passwords match"
         }
         
-        if error != "" {
-            displayErrorAlert(error)
+        if title != "" && error != ""{
+            displayErrorAlert(title, message: error)
         } else {
             var user = PFUser()
             user.email = emailRegister.text
             user.password = passwordRegister.text
             user.username = usernameRegister.text
+            //This field is so that we can check and prevent a user from signing up with the same username but different case sensitivity. We don't want two users with usernames "denis" and "Denis"
+            user["lowerUsername"] = usernameRegister.text.lowercaseString
             user["num_of_squirrels"] = 0
             user["current_group"] = "first_group"
             user["friends"] = []
@@ -126,7 +137,7 @@ class RegisterLoginViewController: UIViewController {
                     } else {
                         error = "There was a random bug :( Please try again"
                     }
-                    self.displayErrorAlert(error)
+                    self.displayErrorAlert("Whoops! We had an error", message: error)
                 }
             }
         }
@@ -138,11 +149,9 @@ class RegisterLoginViewController: UIViewController {
     /* Parameters: error, which is the error that the user should see in the UIAlertController
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
-    func displayErrorAlert(error: String) {
-        var alert = UIAlertController(title: "Woops! We had a problem", message: error, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }))
+    func displayErrorAlert(title: String, message: String) {
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
     

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="Ha6-YD-dXk">
+            <objects>
+                <viewController id="6Qu-3R-5KJ" customClass="LoginViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dkt-Hr-hwC"/>
+                        <viewControllerLayoutGuide type="bottom" id="msl-PT-q8r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l54-8I-Faa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mXv-8P-PvC" userLabel="View - Content">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N9I-zc-uxJ" userLabel="View - User">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_chatt" translatesAutoresizingMaskIntoConstraints="NO" id="Fzp-vP-zmL" userLabel="Img - Logo">
+                                                <rect key="frame" x="88" y="22" width="145" height="135"/>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wz9-ZS-Hxk" userLabel="View - Username">
+                                                <rect key="frame" x="28" y="382" width="264" height="56"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_text_background" translatesAutoresizingMaskIntoConstraints="NO" id="Ma4-56-59Z" userLabel="Img - Background">
+                                                        <rect key="frame" x="0.0" y="0.0" width="264" height="56"/>
+                                                    </imageView>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lDC-Se-An3" userLabel="Txt - Email">
+                                                        <rect key="frame" x="20" y="12" width="224" height="32"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="6Qu-3R-5KJ" id="wHe-h6-WIn"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jw0-7D-Lbn" userLabel="View - Password">
+                                                <rect key="frame" x="28" y="460" width="264" height="56"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_text_background" translatesAutoresizingMaskIntoConstraints="NO" id="nHC-CF-F1K" userLabel="Img - Background">
+                                                        <rect key="frame" x="0.0" y="0.0" width="264" height="56"/>
+                                                    </imageView>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9J9-Vw-gfC" userLabel="Txt - Password">
+                                                        <rect key="frame" x="20" y="12" width="224" height="32"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="6Qu-3R-5KJ" id="1Ja-TE-58M"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdv-LO-lNB" userLabel="Btn - Forgot">
+                                                <rect key="frame" x="102" y="337" width="117" height="12"/>
+                                                <state key="normal" image="login_forgot">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="forgotPasswordBtnTapped" destination="6Qu-3R-5KJ" eventType="touchUpInside" id="5W6-qY-gKP"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kho-aQ-ftM" userLabel="Btn - Register">
+                                                <rect key="frame" x="28" y="207" width="264" height="56"/>
+                                                <state key="normal" image="login_register">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="registerBtnTapped" destination="6Qu-3R-5KJ" eventType="touchUpInside" id="kPX-nt-2JU"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBQ-AU-50o">
+                                                <rect key="frame" x="99" y="299" width="123" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <state key="normal" title="Log in">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6Qu-3R-5KJ" id="uFx-LM-VOK"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Jgw-ap-5Mr"/>
+                    <connections>
+                        <outlet property="txtForEmail" destination="lDC-Se-An3" id="vFT-qB-IsP"/>
+                        <outlet property="txtForPassword" destination="9J9-Vw-gfC" id="gzS-AV-wHN"/>
+                        <outlet property="viewForContent" destination="mXv-8P-PvC" id="f0M-9Z-JNm"/>
+                        <segue destination="Fn5-sk-FgC" kind="presentation" id="Gyc-Ud-uMl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aw4-mM-IlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-355" y="-966"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tNH-5N-5rn">
+            <objects>
+                <viewController id="Fn5-sk-FgC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6gH-fm-hoE"/>
+                        <viewControllerLayoutGuide type="bottom" id="z0T-Il-qqT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ea6-d5-zi5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="52C-RE-XGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="389" y="-966"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="login_forgot" width="117" height="10"/>
+        <image name="login_register" width="264" height="56"/>
+        <image name="login_text_background" width="264" height="56"/>
+        <image name="logo_chatt" width="145" height="135"/>
+    </resources>
+</document>
