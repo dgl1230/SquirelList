@@ -128,6 +128,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         createGroupButton?.title = "\u{f055}"
         createGroupButton?.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.orangeColor()]
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
         //Customize navigation controller back button to my only the back symbol

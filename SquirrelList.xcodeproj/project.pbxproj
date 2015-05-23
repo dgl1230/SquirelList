@@ -76,9 +76,17 @@
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
 		186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */; };
 		187547B31B0E6C77009A6EFE /* Login-Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187547B21B0E6C77009A6EFE /* Login-Register.storyboard */; };
+		187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */; };
+		187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */; };
+		187547BB1B0FA1B6009A6EFE /* BebasNeue Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B61B0FA1B6009A6EFE /* BebasNeue Light.otf */; };
+		187547BC1B0FA1B6009A6EFE /* BebasNeue Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */; };
+		187547BD1B0FA1B6009A6EFE /* BebasNeue Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */; };
+		187547C01B0FC907009A6EFE /* UsersCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */; };
+		187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */; };
 		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
 		1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
+		18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18A568D01B0FD6B50019B2C3 /* bosun03.otf */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
@@ -215,9 +223,17 @@
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
 		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
 		187547B21B0E6C77009A6EFE /* Login-Register.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Login-Register.storyboard"; sourceTree = "<group>"; };
+		187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Bold.otf"; sourceTree = "<group>"; };
+		187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Book.otf"; sourceTree = "<group>"; };
+		187547B61B0FA1B6009A6EFE /* BebasNeue Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Light.otf"; sourceTree = "<group>"; };
+		187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Regular.otf"; sourceTree = "<group>"; };
+		187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Thin.otf"; sourceTree = "<group>"; };
+		187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersCellTableViewCell.swift; sourceTree = "<group>"; };
+		187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersCellTableViewCell.xib; sourceTree = "<group>"; };
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -442,6 +458,8 @@
 				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
+				187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */,
+				187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
 				184561201ABFCE3100026473 /* GradientView.swift */,
 				184841141AE9767600F23551 /* Messages */,
@@ -476,6 +494,12 @@
 			isa = PBXGroup;
 			children = (
 				18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */,
+				187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */,
+				187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */,
+				187547B61B0FA1B6009A6EFE /* BebasNeue Light.otf */,
+				187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */,
+				187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */,
+				18A568D01B0FD6B50019B2C3 /* bosun03.otf */,
 				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
 				186B33191A758FDA00A8D4CB /* libz.dylib */,
 				18B794ED1ADA312D000C9E5F /* ParseUI.framework */,
@@ -559,18 +583,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */,
+				187547BB1B0FA1B6009A6EFE /* BebasNeue Light.otf in Resources */,
 				184841731AE976C100F23551 /* JSQMessagesAssets.bundle in Resources */,
 				186B32E91A758E5000A8D4CB /* Main.storyboard in Resources */,
 				1848419D1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */,
 				187547B31B0E6C77009A6EFE /* Login-Register.storyboard in Resources */,
 				1848417D1AE976C100F23551 /* JSQMessagesViewController.xib in Resources */,
 				18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */,
+				187547BD1B0FA1B6009A6EFE /* BebasNeue Thin.otf in Resources */,
+				187547BC1B0FA1B6009A6EFE /* BebasNeue Regular.otf in Resources */,
 				184841981AE976C100F23551 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				18F769041ACB995C00314DB2 /* FindUserTableViewCell.xib in Resources */,
+				187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */,
+				18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */,
 				186B32EE1A758E5000A8D4CB /* LaunchScreen.xib in Resources */,
+				187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */,
 				186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */,
 				184841911AE976C100F23551 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				184841931AE976C100F23551 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
+				187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */,
 				1848419B1AE976C100F23551 /* JSQMessagesToolbarContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +621,7 @@
 				1848418B1AE976C100F23551 /* JSQPhotoMediaItem.m in Sources */,
 				184841761AE976C100F23551 /* NSString+JSQMessages.m in Sources */,
 				18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */,
+				187547C01B0FC907009A6EFE /* UsersCellTableViewCell.swift in Sources */,
 				1848417E1AE976C100F23551 /* JSQMessagesAvatarImageFactory.m in Sources */,
 				1848417C1AE976C100F23551 /* JSQMessagesViewController.m in Sources */,
 				184841851AE976C100F23551 /* JSQMessagesCollectionViewLayoutAttributes.m in Sources */,

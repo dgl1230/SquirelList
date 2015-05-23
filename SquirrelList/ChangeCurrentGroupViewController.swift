@@ -52,9 +52,10 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
-        var name = cell.viewWithTag(1) as! UILabel
-        name.text = objects![indexPath.row]["name"] as? String
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UsersCellTableViewCell
+        //var name = cell.viewWithTag(1) as! UILabel
+        cell.usernameLabel.text = objects![indexPath.row]["name"] as? String
+        cell.usernameLabel.font = UIFont(name: "BebasNeue-Thin", size: 30)
         if objects![indexPath.row].objectId == PFUser.currentUser()!["currentGroup"]!.objectId {
             cell.accessoryType = .Checkmark
             checkMarkedCellIndex = indexPath
@@ -78,11 +79,11 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //Setting the doneButton with the 'fa-check-circle' button
         doneButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
         doneButton.setTitle("\u{f058}", forState: .Normal)
-        
+        //Register the UsersCellTableViewCell for use in the UserViewController tableView
+        tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
     }
 
 

@@ -84,13 +84,15 @@ class UsersViewController: PFQueryTableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as! UITableViewCell
-        var username = cell.viewWithTag(1) as! UILabel
+        var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UsersCellTableViewCell
+        //var username = cell.viewWithTag(1) as! UILabel
         if (objects![indexPath.row]["username"] as? String == PFUser.currentUser()!.username) {
-             username.text = "me"
+             //username.text = "me"
+             cell.usernameLabel.text = "me"
         }
         else {
-            username.text = objects![indexPath.row]["username"] as? String
+            //username.text = objects![indexPath.row]["username"] as? String
+            cell.usernameLabel.text = objects![indexPath.row]["username"] as? String
         }
         return cell
     }
@@ -108,20 +110,24 @@ class UsersViewController: PFQueryTableViewController {
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"
-        addFriendToGroupButton?.tintColor = UIColor.whiteColor()
+        addFriendToGroupButton?.tintColor = UIColor.orangeColor()
         //Set the changeCurrentGroupButton to 'fa-bars'
         changeCurrentGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         changeCurrentGroupButton?.title = "\u{f0c9}"
-        changeCurrentGroupButton?.tintColor = UIColor.whiteColor()
+        changeCurrentGroupButton?.tintColor = UIColor.orangeColor()
 
-        self.tableView.reloadData()
+        //Not sure if I need this line
+        //self.tableView.reloadData()
         self.title = currentGroup!["name"] as? String
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.orangeColor()]
         
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
+        //Register the UsersCellTableViewCell for use in the UserViewController tableView
+        tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
 
 
     }

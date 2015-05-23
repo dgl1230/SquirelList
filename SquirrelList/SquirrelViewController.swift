@@ -315,12 +315,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             //Set the addSquirrelButton to 'fa-plus-circle'
             addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
             addSquirrelButton?.title = "\u{f055}"
-            addSquirrelButton?.tintColor = UIColor.whiteColor()
+            addSquirrelButton?.tintColor = UIColor.orangeColor()
             //Set the tradeOfferButton to 'fa-user-secret'
             tradeOfferButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
             tradeOfferButton?.title = "\u{f21b}"
-            tradeOfferButton?.tintColor = UIColor.whiteColor()
+            tradeOfferButton?.tintColor = UIColor.orangeColor()
         }
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
         //Set notification to "listen" for when the the user has picked up a squirrel or dropped one of theirs
