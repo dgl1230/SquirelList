@@ -19,8 +19,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db6-TW-Uvy">
-                        <rect key="frame" x="63" y="19" width="179" height="32"/>
-                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="26"/>
+                        <rect key="frame" x="63" y="19" width="179" height="47"/>
+                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="31"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>

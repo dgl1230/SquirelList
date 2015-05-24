@@ -83,18 +83,19 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     
     //Calculates the average, given an array of numbers
-    func calculateAverageRating(ratings:[Int]) -> Int {
+    func calculateAverageRating(ratings:[Double]) -> Double {
         var numOfRatings = ratings.count
         if numOfRatings == 0 {
             return 999
         }
         numOfRatings = 0
-        var sum = 0
+        var sum = 0.0
         for rating in ratings {
             sum += rating
             numOfRatings += 1
         }
-        return Int(sum/numOfRatings)
+        var unroundedRating = Double(sum)/Double(numOfRatings)
+        return round((10 * unroundedRating)) / 10
     }
     
     
@@ -113,8 +114,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     
     //Calculates the average rating of Squirrells owned by a user
-    func calculateTeamRating(username:String) -> Int {
-        var teamRatings: [Int] = []
+    func calculateTeamRating(username:String) -> Double {
+        var teamRatings: [Double] = []
         for squirrel in self.objects! {
             var owner = squirrel["owner"] as? PFUser
             //Not sure how efficient fetching is all the time, probably should change this to just checking a string or something
@@ -124,10 +125,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
             } else if (owner?.username == username){
-                teamRatings.append(squirrel["avg_rating"] as! Int)
+                teamRatings.append(squirrel["avg_rating"] as! Double)
             }
         }
-        var teamRating = calculateAverageRating(teamRatings as [Int])
+        var teamRating = calculateAverageRating(teamRatings as [Double])
         return teamRating
     }
     
@@ -184,7 +185,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             if teamRating == 999 {
                 teamRatingLabel.text = "Their Squirrels haven't been rated :("
             } else {
-                teamRatingLabel.text = "Team Rating: \(String(teamRating))"
+                teamRatingLabel.text = "Team Rating: \(teamRating)"
             }
         }
         //Also need to calculate if the user can add a squirrel, because the query hasn't been calculated yet in viewDidLoad
@@ -207,7 +208,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             }
         }
         
-        if yourNumSquirrels > numOfUsers + 4 || yourNumSquirrels == 15 {
+        if yourNumSquirrels >= numOfUsers + 4 || yourNumSquirrels == 15 {
             squirrelSlotsLabel?.text = "You're Squirrel Team is full!"
             addSquirrelButton?.enabled = false
             squirrelSlots = 0
@@ -287,7 +288,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             squirrel.removeObjectForKey("owner")
             squirrel.save()
             var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
-            teamRatingLabel.text = "Team Rating: \(String(teamRating))"
+            teamRatingLabel.text = "Team Rating: \(teamRating)"
             ///Alert SquirrelViewController to reload data
             NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
             self.loadObjects()

@@ -76,7 +76,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         }
         else  {
             query = PFQuery(className: "TradeProposal")
-            query.whereKey("receivingUser", equalTo: PFUser.currentUser()!["username"]!)
+            query.whereKey("receivingUser", equalTo: PFUser.currentUser()!)
             query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         } 
         query.orderByDescending("avg_rating")
@@ -103,8 +103,10 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             //The user is going through their trade proposals 
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
             var tradeOfferLabel = cell.viewWithTag(1) as! UILabel
-            var username = objects![indexPath.row]["offeringUser"] as? String
-            tradeOfferLabel.text = "\(username!) proposes a trade"
+            var user = objects![indexPath.row]["offeringUser"] as! PFUser
+            //Should add in a username field so we don't have to fetch for every row 
+            user.fetch()
+            tradeOfferLabel.text = "\(user.username!) proposes a trade"
             return cell
         }
     }

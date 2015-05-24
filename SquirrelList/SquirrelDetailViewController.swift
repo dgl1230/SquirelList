@@ -99,7 +99,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
             sum += rating1.doubleValue
         }
         var unroundedRating = Double(sum)/Double(numOfRatings)
-        println(unroundedRating)
         return round((10 * unroundedRating)) / 10
 
 

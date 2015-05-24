@@ -502,7 +502,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="F1D3E71C-C1DE-449E-80A7-013DA8C2BD3F" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="A2FC0816-A890-420A-A509-5DED2BBEB2BB" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -621,8 +621,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CloseButton" width="15" height="15"/>
-        <image name="F1D3E71C-C1DE-449E-80A7-013DA8C2BD3F" width="24" height="37">
+        <image name="A2FC0816-A890-420A-A509-5DED2BBEB2BB" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -751,5 +750,6 @@ AK0AxADGAMgbuhu/G8ob0xvmG+ob/RwIHBEcFhweHCEcJhw1HDkcQBxIHFUcWhxcHF4cYxxrHG4ccxx7
 HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
 </mutableData>
         </image>
+        <image name="CloseButton" width="15" height="15"/>
     </resources>
 </document>
