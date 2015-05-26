@@ -149,10 +149,9 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
 
 
-    //Needs to be its own extension 
+    //This is merely for reloading the data everytime the user accepts or declines a trade
     func tradeOfferViewController(controller: TradeOfferViewController) {
-        //Not correctly reloading data. Might need to make it a PQueryTableViewController
-        self.tableView.reloadData()
+        self.viewDidLoad()
     }
     
     

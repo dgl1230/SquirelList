@@ -27,12 +27,10 @@ class RegisterLoginViewController: UIViewController {
         var error = ""
     
         if usernameLogin.text == "" || passwordLogin.text == "" {
-            println("login error")
             error = "We need your username and password to login"
         }
         
         if error != "" {
-            println(error)
             displayErrorAlert("Whoops! We had a problem", message: error)
         } else {
             displayLoadingAnimator()

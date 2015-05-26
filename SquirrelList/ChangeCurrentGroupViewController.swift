@@ -14,17 +14,24 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     //Optional for holding which cell should have a checkmark
     var checkMarkedCellIndex: NSIndexPath?
     
+    //this variable is for checking to see when the user presses done, if they have stayed on the same current group. If they have, then we don't want to send notifications to reload everything
+    var currentGroup = PFUser.currentUser()!["currentGroup"]! as! PFObject
+    
     
     @IBOutlet weak var doneButton: UIButton!
     
     
     @IBAction func done(sender: AnyObject) {
-        PFUser.currentUser()!.save()
+        if currentGroup != PFUser.currentUser()!["currentGroup"] as! PFObject {
+            //We only want to reload everything if the user hasn't selected their same currentGroup
+            PFUser.currentUser()!["currentGroup"] = currentGroup
+            PFUser.currentUser()!.save()
+            //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
-        //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
-        NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
-        
     }
+    
 
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -72,8 +79,8 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         oldCheckMarkedCell?.accessoryType = .None
         //Update checkMarkedCellIndex
         checkMarkedCellIndex = indexPath
-        //Update user's currentGroups
-        PFUser.currentUser()!["currentGroup"] = objects![indexPath.row] as! PFObject
+        //Update the current group variable
+        currentGroup = objects![indexPath.row] as! PFObject
     }
     
     

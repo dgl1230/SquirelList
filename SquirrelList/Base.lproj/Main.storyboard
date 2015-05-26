@@ -5,7 +5,16 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="BebasNeue Bold.otf">
+            <string>BebasNeueBold</string>
+        </mutableArray>
         <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Thin.otf">
@@ -17,6 +26,9 @@
             <string>BebasNeue-Thin</string>
         </mutableArray>
         <mutableArray key="bosun03.otf">
+            <string>bosun-03</string>
+            <string>bosun-03</string>
+            <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
         </mutableArray>
@@ -1062,6 +1074,137 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OK4-G0-HVx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1657" y="1850.5"/>
+        </scene>
+        <!--Squirrel Detail View Controller-->
+        <scene sceneID="QU4-1c-OZa">
+            <objects>
+                <viewController id="dG2-pW-EHr" customClass="SquirrelDetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uBt-Ip-0tL"/>
+                        <viewControllerLayoutGuide type="bottom" id="gHq-OZ-MTm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="onm-FG-kSh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPu-0g-WP9" userLabel="Pop-up View">
+                                <rect key="frame" x="52" y="159" width="240" height="282"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wga-0h-SZl" userLabel="Close">
+                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
+                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
+                                        <state key="normal" image="CloseButton"/>
+                                        <connections>
+                                            <action selector="close" destination="dG2-pW-EHr" eventType="touchUpInside" id="7SQ-PA-LFJ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SW5-cZ-u4p">
+                                        <rect key="frame" x="3" y="8" width="224" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="26"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Owner:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8d5-Jh-5E2">
+                                        <rect key="frame" x="51" y="100" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="rRa-8x-036">
+                                        <rect key="frame" x="126" y="101" width="76" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Avg. Rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HOD-qe-a2N">
+                                        <rect key="frame" x="17" y="37" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-V0-g8G">
+                                        <rect key="frame" x="130" y="32" width="78" height="32"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your rating:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XHZ-2w-Qqp">
+                                        <rect key="frame" x="17" y="71" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="yourRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYJ-g7-hkr">
+                                        <rect key="frame" x="126" y="72" width="84" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaW-Dn-N30">
+                                        <rect key="frame" x="124" y="130" width="88" height="30"/>
+                                        <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="13"/>
+                                        <state key="normal" title="Propose Trade">
+                                            <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tradeSquirrel:" destination="dG2-pW-EHr" eventType="touchUpInside" id="FFC-Cb-lYL"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rating" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-p7-RU6">
+                                        <rect key="frame" x="120" y="168" width="97" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9j0-vP-1JG">
+                                        <rect key="frame" x="23" y="129" width="85" height="30"/>
+                                        <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="13"/>
+                                        <state key="normal" title="Claim Squirrel">
+                                            <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="claimSquirrel:" destination="dG2-pW-EHr" eventType="touchUpInside" id="bkH-PB-om1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-fZ-5cs">
+                                        <rect key="frame" x="67" y="167" width="41" height="30"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
+                                        <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="15"/>
+                                        <state key="normal" title="Rate:">
+                                            <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="rateSquirrel:" destination="dG2-pW-EHr" eventType="touchUpInside" id="t4W-kh-eO8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ANL-MJ-kPn"/>
+                    <connections>
+                        <outlet property="avgRatingLabel" destination="0mb-V0-g8G" id="0fW-Oq-8tk"/>
+                        <outlet property="claimSquirrelButton" destination="9j0-vP-1JG" id="fI1-as-G5u"/>
+                        <outlet property="ownerLabel" destination="8d5-Jh-5E2" id="BPL-Ue-NK1"/>
+                        <outlet property="popupView" destination="UPu-0g-WP9" id="cg0-Ns-90A"/>
+                        <outlet property="rateButton" destination="kKa-fZ-5cs" id="Vnj-7X-KHs"/>
+                        <outlet property="rateNumberTextField" destination="0a2-p7-RU6" id="ZoV-oR-G3I"/>
+                        <outlet property="squirrelNameLabel" destination="SW5-cZ-u4p" id="46D-M0-bIZ"/>
+                        <outlet property="squirrelOwnerLabel" destination="rRa-8x-036" id="RfE-bl-so5"/>
+                        <outlet property="tradeButton" destination="TaW-Dn-N30" id="tC3-CS-H1O"/>
+                        <outlet property="userRatingLabel" destination="XHZ-2w-Qqp" id="k5N-dw-myG"/>
+                        <outlet property="yourRatingLabel" destination="AYJ-g7-hkr" id="1Mi-gN-jpy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1vL-8M-40H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3616" y="351"/>
         </scene>
     </scenes>
     <resources>
