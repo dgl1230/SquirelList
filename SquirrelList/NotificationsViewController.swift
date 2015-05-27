@@ -55,7 +55,10 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         }
         if segue.identifier == "groupInvite" {
             let controller = segue.destinationViewController as! GroupInvitePopUpViewController
-            controller.groupInvite = sender as? PFObject
+            var groupInvite = sender as! PFObject
+            var inviter = groupInvite["inviter"] as! String
+            controller.groupInvite = groupInvite
+            controller.inviterName = inviter
             
         }
         if segue.identifier == "TradeOffer" {

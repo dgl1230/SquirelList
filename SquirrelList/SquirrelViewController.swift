@@ -117,14 +117,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     func calculateTeamRating(username:String) -> Double {
         var teamRatings: [Double] = []
         for squirrel in self.objects! {
-            var owner = squirrel["owner"] as? PFUser
-            //Not sure how efficient fetching is all the time, probably should change this to just checking a string or something
-            owner?.fetch()
-            println(owner)
+            var owner = squirrel["ownerUsername"] as! String
             //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
             if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
-            } else if (owner?.username == username){
+            } else if (owner == username){
                 teamRatings.append(squirrel["avg_rating"] as! Double)
             }
         }
@@ -209,7 +206,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
         
         if yourNumSquirrels >= numOfUsers + 4 || yourNumSquirrels == 15 {
-            squirrelSlotsLabel?.text = "You're Squirrel Team is full!"
+            squirrelSlotsLabel?.text = "Your Squirrel Team is full!"
             addSquirrelButton?.enabled = false
             squirrelSlots = 0
         } else if numOfUsers == 1 {
@@ -363,6 +360,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["out"] = false
         newSquirrel["avg_rating"] = 0
         newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
+        newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {

@@ -79,15 +79,15 @@ class RegisterLoginViewController: UIViewController {
         if usernameCheck != nil {
             title = "That username is taken!"
             error = "Sorry but someone already has that username"
+        } else if emailRegister.text == "" || usernameRegister.text == "" || passwordRegister == "" || verifyPasswordRegister == "" {
+            title = "Whoa there cowboy!"
+            error = "Please make sure you fill in all fields"
         } else if count(username) <= 2 {
             title = "That username is too short!"
             error = "Please have it be at least three characters"
         } else if count(username) >= 15 {
             title = "That username is too short!"
             error = "Please have it be at least three characters"
-        } else if emailRegister.text == "" || usernameRegister.text == "" || passwordRegister == "" || verifyPasswordRegister == "" {
-            title = "Whoa there cowboy!"
-            error = "Please make sure you fill in all fields"
         } else if count(passwordRegister.text) <= 6 {
             title = "Whoa there cowboy!"
             error = "Your password needs to be at least 6 characters"
@@ -128,7 +128,6 @@ class RegisterLoginViewController: UIViewController {
                     navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
                     appDelegate.window!.rootViewController = navigationController
                     appDelegate.window!.makeKeyAndVisible()
-                    //self.performSegueWithIdentifier("jumpToHome", sender: self)
                 } else {
                     if let errorString = signupError!.userInfo?["error"] as? String {
                         error = errorString

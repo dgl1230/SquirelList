@@ -34,8 +34,12 @@ class SettingsViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         if cell.tag == 69 {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginRegisterViewController") as! RegisterLoginViewController
+            appDelegate.window!.rootViewController = loginController
+            appDelegate.window!.makeKeyAndVisible()
             PFUser.logOut()
-            
         }
         
     

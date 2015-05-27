@@ -156,7 +156,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
 
 
     func validRating(rating: String) -> Bool {
-        var validRatings = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+        var validRatings = ["1", "1.5", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5", "6", "6.5", "7", "7.5", "8", "8.5", "9", "9.5", "10"]
         if contains(validRatings, rating) {
             return true
         }
@@ -196,27 +196,28 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         //Check if the squirrel has an owner to propose a trade with
         var owner = ratedSquirrel!["owner"] as? PFUser
         if owner == nil {
-            tradeButton.hidden = true
-            ownerLabel.hidden = true
-            squirrelOwnerLabel.hidden = true
+            tradeButton.enabled = false
+            //ownerLabel.hidden = true
+            //squirrelOwnerLabel.hidden = true
             claimSquirrelButton.enabled = canClaimSquirrel!
         } else if owner?.objectId == PFUser.currentUser()!.objectId {
             //Have to compare ID's - comparing the actual objects will never evaluate as true 
-            tradeButton.hidden = true
-            ownerLabel.hidden = false
+            tradeButton.enabled = false
+            //ownerLabel.hidden = false
             squirrelOwnerLabel.text = "me"
-            claimSquirrelButton.hidden = true
-            rateButton.hidden = true
-            rateNumberTextField.hidden = true
+            claimSquirrelButton.enabled = false
+            rateButton.enabled = false
+            //rateNumberTextField.hidden = true
         } else {
             //Squirrel does have an owner
+            //tradeButton.enabled = false
             ownerLabel.hidden = false
             var owner = ratedSquirrel!["owner"] as! PFUser
             owner.fetch()
             squirrelOwnerLabel.text = owner.username!
-            claimSquirrelButton.hidden = true
+            claimSquirrelButton.enabled = false
         }
-        rateButton.enabled = false
+        //rateButton.enabled = false
         rateNumberTextField.delegate = self
         
     }

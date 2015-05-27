@@ -120,7 +120,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         //Filter the array using the filter method
         hasNotFiltered = false
         self.filteredUsers = (self.objects as! [PFUser]).filter() {( user: PFUser) -> Bool in
-            let stringMatch = (user["username"] as! String).rangeOfString(searchText)
+            let stringMatch = (user["lowerUsername"] as! String).rangeOfString(searchText)
             return stringMatch != nil
         }
     }
@@ -182,7 +182,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-            self.filterContentForSearchText(searchString)
+            self.filterContentForSearchText(searchString.lowercaseString)
             return true
     }
  
