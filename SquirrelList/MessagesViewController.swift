@@ -12,7 +12,8 @@ class MessagesViewController: JSQMessagesViewController {
 
     var group: PFObject!
     var incomingUser: PFUser!
-    var users = [PFUser]()
+    var users = [String]()
+    //var users1 = [String]()
     
     var messages = [JSQMessage]()
     var messageObjects = [PFObject]()
@@ -34,6 +35,7 @@ class MessagesViewController: JSQMessagesViewController {
         message["message"] = text
         message["group"] = PFUser.currentUser()!["currentGroup"] as? PFObject
         message["senderNew"] = PFUser.currentUser()
+        message["sender"] = PFUser.currentUser()!.username
         message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if error == nil {
                 self.loadMessages()
@@ -73,19 +75,18 @@ class MessagesViewController: JSQMessagesViewController {
                 let messageResults = results as? [PFObject]
                 for message in messageResults! {
                     self.messageObjects.append(message)
-                    let user = message["senderNew"] as! PFUser
-                    user.fetch()
+                    let user = message["sender"] as! String
                     self.users.append(user)
                     //Need to exclude the logged in user from being put in an outgoing avatar label
-                    if user.objectId != PFUser.currentUser()!.objectId {
+                    if user != PFUser.currentUser()!.username {
                         let incoming = user
-                        let incomingUsername = incoming.username! as NSString
+                        let incomingUsername = incoming as NSString
                         self.incomingAvatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(incomingUsername.substringWithRange(NSMakeRange(0, 3)), backgroundColor: UIColor.whiteColor(), textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
                     
                     }
 
                     
-                    let chatMessage = JSQMessage(senderId: user.objectId!, senderDisplayName: user.username!, date: message.createdAt!, text: message["message"]! as! String)
+                    let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
                     self.messages.append(chatMessage)
                 }
                 if results!.count > 0 {
@@ -135,7 +136,8 @@ class MessagesViewController: JSQMessagesViewController {
         firstViewDidLoad = true
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
-        self.senderId = PFUser.currentUser()!.objectId
+        //The sender ID doesn't have to be an actual ID, just something unique, so the user's username works too 
+        self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username
         //Disable the attachment button
         self.inputToolbar.contentView.leftBarButtonItem = nil
@@ -212,7 +214,6 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        println(messages.count)
         return messages[indexPath.row]
     }
     

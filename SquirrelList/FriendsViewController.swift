@@ -42,7 +42,6 @@ class FriendsViewController: PFQueryTableViewController {
     
     //Takes the tag of the button pressed in the tableViewCell and adds the user at the index of the objects array to the appropriate data model
     func addUser(sender:UIButton!) {
-        println("going to add user?")
         let buttonRow = sender.tag
         let request = objects![buttonRow] as! PFObject
         request["status"] = "accepted"
@@ -145,15 +144,15 @@ class FriendsViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FindUserTableViewCell
         //Really ghetto way to avoid Xcode thinking that user variable doesn't exist (since it's created in the if/else) needs to be less ghetto soon
-        var user = PFUser.currentUser()!
-        var user1 = objects![indexPath.row]["RequestFrom"] as! PFUser
-        if user1.objectId != PFUser.currentUser()?.objectId {
+        var user = ""
+        var user1 = objects![indexPath.row]["requestFromUsername"] as! String
+        if user1 != PFUser.currentUser()!.username {
             user = user1
         } else {
-            user = objects![indexPath.row]["RequestTo"] as! PFUser
+            user = objects![indexPath.row]["requestToUsername"] as! String
         }
-        user.fetch()
-        cell.nameLabel.text = user.username! as String
+        //user.fetch()
+        cell.nameLabel.text = user 
         cell.addButton.tag = indexPath.row
         if objects![indexPath.row]["status"] as! String == "accepted" {
             //The user variable has been already added to the relevant group

@@ -106,10 +106,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             //The user is going through their trade proposals 
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
             var tradeOfferLabel = cell.viewWithTag(1) as! UILabel
-            var user = objects![indexPath.row]["offeringUser"] as! PFUser
-            //Should add in a username field so we don't have to fetch for every row 
-            user.fetch()
-            tradeOfferLabel.text = "\(user.username!) proposes a trade"
+            var user = objects![indexPath.row]["offeringUsername"] as! String
+            tradeOfferLabel.text = "\(user) proposes a trade"
             return cell
         }
     }

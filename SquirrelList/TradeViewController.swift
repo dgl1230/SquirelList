@@ -31,6 +31,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     @IBAction func proposeTrade(sender: AnyObject) {
         var tradeProposal = PFObject(className:"TradeProposal")
         tradeProposal["offeringUser"] = PFUser.currentUser()!
+        tradeProposal["offeringUsername"] = PFUser.currentUser()!.username
         tradeProposal["offeredSquirrelID"] = offeredSquirrel!.objectId
         tradeProposal["receivingUser"] = desiredSquirrelOwner!
         tradeProposal["proposedSquirrelID"] = desiredSquirrel!.objectId

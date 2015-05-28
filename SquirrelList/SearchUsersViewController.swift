@@ -80,11 +80,12 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
                             request.save()
                         }
                         else {
-                            println("creating friend request")
                             //We need to create a friend request
                             var request = PFObject(className: "FriendRequest")
                             request["RequestFrom"] = PFUser.currentUser()!
+                            request["requestFromUsername"] = PFUser.currentUser()!.username
                             request["RequestTo"] = user
+                            request["requestToUsername"] = user.username
                             request["status"] = "pending"
                             PFUser.currentUser()!.addObject(user.username!, forKey: "pendingFriends")
                             PFUser.currentUser()!.save()
@@ -142,7 +143,6 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             users = group!["userIDs"] as! [String]
         } else {
             //We're checking if a user is friends with someone
-            //users = PFUser.currentUser()!["friends"] as! [String]
             var friends = PFUser.currentUser()!["friends"] as! [String]
             var pendingFriends = PFUser.currentUser()!["pendingFriends"] as! [String]
             users = friends + pendingFriends

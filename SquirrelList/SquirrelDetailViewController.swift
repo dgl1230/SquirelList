@@ -22,12 +22,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     var didRateSquirrel: Bool?
     //Optional for keeping track up how many squirrel slots the user has
     var squirrelSlots: Int?
-    //Optional for keeping track of first names of squirrels
+    //Variable for checking if the user is pressing the claimTradeButton for claiming a squirrel or proposing a trade
+    var claimOrTrade = ""
+    
 
     
     
     
-    @IBOutlet weak var claimSquirrelButton: UIButton!
+    @IBOutlet weak var claimTradeButton: UIButton!
     @IBOutlet weak var squirrelNameLabel: UILabel!
     @IBOutlet weak var avgRatingLabel: UILabel!
     
@@ -37,7 +39,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     @IBOutlet weak var rateNumberTextField: UITextField!
     //Label that displays the owners name
     @IBOutlet weak var squirrelOwnerLabel: UILabel!
-    @IBOutlet weak var tradeButton: UIButton!
     //This label displays the user's actual rating
     @IBOutlet weak var userRatingLabel: UILabel!
     //The label that says "Your Rating" - it does not actually display the rating
@@ -45,26 +46,33 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
     
     
     
-    @IBAction func claimSquirrel(sender: AnyObject) {
-        ratedSquirrel!["owner"] = PFUser.currentUser()!
-        if didRateSquirrel == true {
-            removeOwnerRating(ratedSquirrel!)
-            ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
+    
+    @IBAction func claimOrTrade(sender: AnyObject) {
+        if claimOrTrade == "claim" {
+            ratedSquirrel!["owner"] = PFUser.currentUser()!
+            ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
+            if didRateSquirrel == true {
+                removeOwnerRating(ratedSquirrel!)
+                ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
+            }
+            ratedSquirrel!.save()
+            //Alert SquirrelViewController to reload data
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            self.performSegueWithIdentifier("tradeSquirrel", sender: self)
         }
-        ratedSquirrel!.save()
-        //Alert SquirrelViewController to reload data
-        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     
     
     @IBAction func rateSquirrel(sender: AnyObject) {
         //check if ["raters"] is nil. If it is, we create it
-        var rater = PFUser.currentUser()!["username"] as! String
+        var rater = PFUser.currentUser()!.username
         if let check: AnyObject = ratedSquirrel!["raters"] {
-           ratedSquirrel!["raters"]!.addObject(rater)
+           ratedSquirrel!["raters"]!.addObject(rater!)
         } else {
-            ratedSquirrel!["raters"] = [rater]
+            ratedSquirrel!["raters"] = [rater!]
         }
         //check if ["ratings"] is nil. If it is, we create it
         if let check: AnyObject = ratedSquirrel!["ratings"] {
@@ -78,11 +86,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
         self.dismissViewControllerAnimated(true, completion: nil)
         
-    }
-    
-    
-    @IBAction func tradeSquirrel(sender: AnyObject) {
-        self.performSegueWithIdentifier("tradeSquirrel", sender: self)
     }
     
     
@@ -175,8 +178,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         //Check if the squirrel has an average rating 
         if ratedSquirrel!["avg_rating"] != nil {
             //We have to cast the rating as an Int first, because casting it directly as a String produces nil
-            var averageRating = ratedSquirrel!["avg_rating"] as? Int
-            avgRatingLabel.text = String(averageRating!)
+            var averageRating = ratedSquirrel!["avg_rating"] as! Double
+            avgRatingLabel.text = "\(averageRating)"
         } else {
             avgRatingLabel.text = "No Ratings"
         }
@@ -188,36 +191,39 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
             rateNumberTextField.hidden = true
             rateButton.hidden = true
         } else {
-            //The user did not rate the squirrel 
-            yourRatingLabel.hidden = true
-            userRatingLabel.hidden = true
+            if ratedSquirrel!["ownerUsername"] as? String == PFUser.currentUser()!.username {
+                yourRatingLabel.text = "N/A"
+            } else {
+                yourRatingLabel.text = "No Rating"
+            }
         }
         
         //Check if the squirrel has an owner to propose a trade with
-        var owner = ratedSquirrel!["owner"] as? PFUser
+        var owner = ratedSquirrel!["ownerUsername"] as? String
         if owner == nil {
-            tradeButton.enabled = false
-            //ownerLabel.hidden = true
-            //squirrelOwnerLabel.hidden = true
-            claimSquirrelButton.enabled = canClaimSquirrel!
-        } else if owner?.objectId == PFUser.currentUser()!.objectId {
-            //Have to compare ID's - comparing the actual objects will never evaluate as true 
-            tradeButton.enabled = false
-            //ownerLabel.hidden = false
+            ownerLabel.text = "No one :("
+            var canClaim = canClaimSquirrel!
+            println(canClaim)
+            if canClaim == true {
+                claimTradeButton.setTitle("Claim Squirrel", forState: UIControlState.Normal)
+                claimTradeButton.enabled = true
+                claimOrTrade = "claim"
+            } else {
+                claimTradeButton.hidden = true
+            }
+        } else if owner == PFUser.currentUser()!.username {
             squirrelOwnerLabel.text = "me"
-            claimSquirrelButton.enabled = false
-            rateButton.enabled = false
-            //rateNumberTextField.hidden = true
+            claimTradeButton.hidden = true
+            rateButton.hidden = true
+            rateNumberTextField.hidden = true
         } else {
             //Squirrel does have an owner
-            //tradeButton.enabled = false
             ownerLabel.hidden = false
-            var owner = ratedSquirrel!["owner"] as! PFUser
-            owner.fetch()
-            squirrelOwnerLabel.text = owner.username!
-            claimSquirrelButton.enabled = false
+            var owner = ratedSquirrel!["ownerUsername"] as! String
+            squirrelOwnerLabel.text = owner
+            claimTradeButton.setTitle("Propose Trade", forState: UIControlState.Normal)
+            claimOrTrade = "trade"
         }
-        //rateButton.enabled = false
         rateNumberTextField.delegate = self
         
     }

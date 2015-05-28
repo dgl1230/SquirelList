@@ -103,7 +103,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     func calculateColor(avg_rating: Double) -> UIColor {
         if avg_rating >= 8.5 {
             return UIColor.redColor()
-        }else if avg_rating >= 7 {
+        } else if avg_rating >= 7 {
             return UIColor.orangeColor()
         } else if avg_rating >= 5 {
             return UIColor.yellowColor()
@@ -117,7 +117,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     func calculateTeamRating(username:String) -> Double {
         var teamRatings: [Double] = []
         for squirrel in self.objects! {
-            var owner = squirrel["ownerUsername"] as! String
+            println(squirrel)
+            var owner = squirrel["ownerUsername"] as? String
             //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
             if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
@@ -283,6 +284,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let squirrel = objects![indexPath.row] as! PFObject
             squirrel.removeObjectForKey("owner")
+            squirrel.removeObjectForKey("ownerUsername")
             squirrel.save()
             var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
             teamRatingLabel.text = "Team Rating: \(teamRating)"
