@@ -84,8 +84,6 @@ class MessagesViewController: JSQMessagesViewController {
                         self.incomingAvatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(incomingUsername.substringWithRange(NSMakeRange(0, 3)), backgroundColor: UIColor.whiteColor(), textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
                     
                     }
-
-                    
                     let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
                     self.messages.append(chatMessage)
                 }

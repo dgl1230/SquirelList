@@ -34,7 +34,14 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal["offeringUsername"] = PFUser.currentUser()!.username
         tradeProposal["offeredSquirrelID"] = offeredSquirrel!.objectId
         tradeProposal["receivingUser"] = desiredSquirrelOwner!
+        //Would like to get rid of fetching
+        desiredSquirrelOwner!.fetch()
+        tradeProposal["receivingUsername"] = desiredSquirrelOwner!.username
         tradeProposal["proposedSquirrelID"] = desiredSquirrel!.objectId
+
+        var firstName = desiredSquirrel!["first_name"] as! String
+        var lastName = desiredSquirrel!["last_name"] as! String
+        tradeProposal["desiredSquirrelName"] = "\(firstName) \(lastName)"
         tradeProposal["group"] = PFUser.currentUser()!["currentGroup"] as! PFObject
         
        

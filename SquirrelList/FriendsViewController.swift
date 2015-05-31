@@ -47,7 +47,9 @@ class FriendsViewController: PFQueryTableViewController {
         request["status"] = "accepted"
         //Need to add the user to logged in user's friends and remove them from pendingFriends
         let user1 = request["RequestFrom"] as! PFUser
+        user1.fetch()
         let user2 = request["RequestTo"] as! PFUser
+        user2.fetch()
         if user1.objectId != PFUser.currentUser()?.objectId {
             PFUser.currentUser()!.addObject(user1.username!, forKey: "friends")
             PFUser.currentUser()!.removeObject(user1.username!, forKey: "pendingFriends")
@@ -115,7 +117,6 @@ class FriendsViewController: PFQueryTableViewController {
                 }
             }
         }
-
         PFUser.currentUser()!["friends"] = friends
         PFUser.currentUser()!["pendingFriends"] = pendingFriends
         PFUser.currentUser()!.save()

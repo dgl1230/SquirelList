@@ -87,6 +87,8 @@
 		1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
 		18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18A568D01B0FD6B50019B2C3 /* bosun03.otf */; };
+		18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D21B1811500019B2C3 /* RegisterViewController.swift */; };
+		18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D41B182BBC0019B2C3 /* LoginViewController.swift */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
@@ -234,6 +236,8 @@
 		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
+		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
 				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
+				18A568D21B1811500019B2C3 /* RegisterViewController.swift */,
+				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
 				187547B21B0E6C77009A6EFE /* Login-Register.storyboard */,
 				18D2466C1AC60283003D560A /* SearchUsersViewController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
@@ -672,9 +678,11 @@
 				18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */,
 				184841741AE976C100F23551 /* JSQSystemSoundPlayer+JSQMessages.m in Sources */,
 				18D2466D1AC60283003D560A /* SearchUsersViewController.swift in Sources */,
+				18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */,
 				184841921AE976C100F23551 /* JSQMessagesCollectionViewCellOutgoing.m in Sources */,
 				1848417F1AE976C100F23551 /* JSQMessagesBubbleImageFactory.m in Sources */,
 				184841891AE976C100F23551 /* JSQMessagesAvatarImage.m in Sources */,
+				18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */,
 				18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

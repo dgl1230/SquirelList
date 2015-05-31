@@ -27,12 +27,29 @@ class TradeOfferViewController: PopUpViewController {
     
     @IBAction func acceptTrade(sender: AnyObject) {
         offeredSquirrel!["owner"] = PFUser.currentUser()!
+        offeredSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
+        yourSquirrel!["ownerUsername"] = tradeProposal!["offeringUsername"]
 
         offeredSquirrel!.save()
         yourSquirrel!.save()
-    
-        tradeProposal!.deleteInBackground()
+        
+        tradeProposal?.delete()
+        
+        //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)
+        var query = PFQuery(className: "TradeProposal")
+        query.whereKey("receivingUsername", equalTo: PFUser.currentUser()!.username!)
+        query.whereKey("proposedSquirrelID", equalTo: yourSquirrel!.objectId!)
+        query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                var tradeOffers = trades as? [PFObject]
+                if tradeOffers?.count >= 1 {
+                    for trade in tradeOffers! {
+                        trade.delete()
+                    }
+                }
+            }
+        }
         dismissViewControllerAnimated(true, completion: nil)
         delegate?.tradeOfferViewController(self)
     }

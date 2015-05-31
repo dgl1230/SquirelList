@@ -107,7 +107,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             var cell: UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
             var tradeOfferLabel = cell.viewWithTag(1) as! UILabel
             var user = objects![indexPath.row]["offeringUsername"] as! String
-            tradeOfferLabel.text = "\(user) proposes a trade"
+            var desiredSquirrel = objects![indexPath.row]["desiredSquirrelName"] as! String
+            tradeOfferLabel.text = "\(user) wants \(desiredSquirrel)"
             return cell
         }
     }

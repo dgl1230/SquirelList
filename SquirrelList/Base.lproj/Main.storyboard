@@ -800,7 +800,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cg-gb-KOF" userLabel="Pop-up View">
-                                <rect key="frame" x="51" y="107" width="240" height="225"/>
+                                <rect key="frame" x="51" y="107" width="240" height="226"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNs-RS-jxa">
                                         <rect key="frame" x="0.0" y="23" width="240" height="259"/>
@@ -1193,7 +1193,7 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fTz-t4-p6j"/>
+        <segue reference="pJd-kJ-7kz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>
