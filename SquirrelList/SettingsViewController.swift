@@ -35,8 +35,8 @@ class SettingsViewController: UITableViewController {
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         if cell.tag == 69 {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let loginController = mainStoryboard.instantiateViewControllerWithIdentifier("LoginRegisterViewController") as! RegisterLoginViewController
+            let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
+            let loginController = loginRegisterStoryBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
             appDelegate.window!.rootViewController = loginController
             appDelegate.window!.makeKeyAndVisible()
             PFUser.logOut()

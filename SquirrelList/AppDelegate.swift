@@ -35,8 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register view controller
-            var loginViewController = RegisterLoginViewController()
-            self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
+            let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
+            let loginController = loginRegisterStoryBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
+            self.window!.rootViewController = loginController
+            self.window!.makeKeyAndVisible()
+            //var loginViewController = RegisterLoginViewController()
+            //self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
         } else if PFUser.currentUser()!["currentGroup"] == nil {
             //Present just the MoreViewController to the user
             let mainStoryboard = UIStoryboard(name: "More", bundle: nil)

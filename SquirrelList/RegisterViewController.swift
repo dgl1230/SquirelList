@@ -13,9 +13,14 @@ class RegisterViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var verifyPasswordTextField: UITextField!
+    
+    @IBAction func close(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
 
     @IBAction func register(sender: AnyObject) {
@@ -125,6 +130,14 @@ class RegisterViewController: UIViewController {
         self.activityIndicator.stopAnimating()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
     
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Set the close button icon to 'fa-times'
+        closeButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
+        closeButton.setTitle("\u{f00d}", forState: .Normal)
+
     }
 
 

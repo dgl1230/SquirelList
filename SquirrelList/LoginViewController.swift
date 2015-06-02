@@ -12,15 +12,19 @@ class LoginViewController: UIViewController {
 
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
 
+    
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    //@IBAction func register(sender)
 
+    @IBAction func close(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     @IBAction func login(sender: AnyObject) {
-        var
-        error = ""
+        println("clicked")
+        var error = ""
     
         if usernameTextField.text == "" || passwordTextField.text == "" {
             error = "We need your username and password to login"
@@ -46,7 +50,10 @@ class LoginViewController: UIViewController {
                             appDelegate.window!.rootViewController = navigationController
                             appDelegate.window!.makeKeyAndVisible()
                         } else {
-                            self.performSegueWithIdentifier("jumpToHome", sender: self)
+                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                            //Present the tab bar with all the tabs
+                            appDelegate.window!.rootViewController = HomeTabViewController()
+                            appDelegate.window!.makeKeyAndVisible()
                         }
                     } else {
                         if let errorString = signupError!.userInfo?["error"] as? String {
@@ -85,6 +92,12 @@ class LoginViewController: UIViewController {
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if sender?.identifier == "register" {
+            let controller = segue.destinationViewController as! RegisterViewController
+        }
+    }
+    
     
     /*
     What this does: Stops animating the activity indicator of self and calls endsIgnoringInteractionEvents()
@@ -93,7 +106,13 @@ class LoginViewController: UIViewController {
     func resumeInteractionEvents() {
         self.activityIndicator.stopAnimating()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
+    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Set the close button icon to 'fa-times'
+        closeButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
+        closeButton.setTitle("\u{f00d}", forState: .Normal)
     }
    
 

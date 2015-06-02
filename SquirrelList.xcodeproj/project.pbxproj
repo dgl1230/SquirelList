@@ -89,6 +89,7 @@
 		18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18A568D01B0FD6B50019B2C3 /* bosun03.otf */; };
 		18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D21B1811500019B2C3 /* RegisterViewController.swift */; };
 		18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D41B182BBC0019B2C3 /* LoginViewController.swift */; };
+		18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D81B1D47B40019B2C3 /* HomeViewController.swift */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
@@ -238,12 +239,13 @@
 		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		18A568D81B1D47B40019B2C3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../HomeViewController.swift; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		18B794EA1ADA3124000C9E5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		18CA31681AD5A281002285EE /* SquirrelList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SquirrelList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18CA31681AD5A281002285EE /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -447,7 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirrelList */,
-				18CA31681AD5A281002285EE /* SquirrelList.app */,
+				18CA31681AD5A281002285EE /* Squirrel List.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -469,6 +471,7 @@
 				184841141AE9767600F23551 /* Messages */,
 				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
+				18A568D81B1D47B40019B2C3 /* HomeViewController.swift */,
 				184841A11AE978D100F23551 /* MessagesViewController.swift */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
@@ -542,7 +545,7 @@
 			);
 			name = SquirrelList;
 			productName = SquirelList;
-			productReference = 18CA31681AD5A281002285EE /* SquirrelList.app */;
+			productReference = 18CA31681AD5A281002285EE /* Squirrel List.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -648,6 +651,7 @@
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
+				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,
 				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				184841961AE976C100F23551 /* JSQMessagesLabel.m in Sources */,
 				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
@@ -802,7 +806,7 @@
 				INFOPLIST_FILE = SquirrelList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = SquirrelList;
+				PRODUCT_NAME = "Squirrel List";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -825,7 +829,7 @@
 				INFOPLIST_FILE = SquirrelList/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = SquirrelList;
+				PRODUCT_NAME = "Squirrel List";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 			};
