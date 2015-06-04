@@ -20,7 +20,7 @@
         <!--Settings-->
         <scene sceneID="geC-ji-ue7">
             <objects>
-                <tableViewController id="KPB-YO-KQT" customClass="SettingsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KPB-YO-KQT" customClass="SettingsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cOS-43-G7C">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -230,7 +230,7 @@
         <!--Group Invite PopUp-->
         <scene sceneID="ueR-g3-5Ha">
             <objects>
-                <viewController id="wIG-oy-ucg" userLabel="Group Invite PopUp" customClass="GroupInvitePopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wIG-oy-ucg" userLabel="Group Invite PopUp" customClass="GroupInvitePopUpViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SNl-zQ-izq"/>
                         <viewControllerLayoutGuide type="bottom" id="XEj-cA-44n"/>
@@ -305,13 +305,13 @@
         <!--My Friends-->
         <scene sceneID="1BU-Hv-LhL">
             <objects>
-                <viewController id="ef1-lT-QsA" customClass="FriendsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ef1-lT-QsA" customClass="FriendsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fZG-zm-SVK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kfb-G1-rhC" customClass="FindUserTableViewCell" customModule="SquirrelList" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="kfb-G1-rhC" customClass="FindUserTableViewCell" customModule="Squirrel_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kfb-G1-rhC" id="0zI-1g-yYF">
@@ -323,6 +323,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="My Friends" id="LrS-4h-95N">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="SE2-LH-9YU">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="findFriends:" destination="ef1-lT-QsA" id="UMN-R9-4Mg"/>
                             </connections>
@@ -341,7 +342,7 @@
         <!--Find Friends-->
         <scene sceneID="wG4-fp-sgf">
             <objects>
-                <viewController id="dXw-As-5D9" customClass="SearchUsersViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dXw-As-5D9" customClass="SearchUsersViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6ff-eN-7Zl" userLabel="User's Name">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -355,7 +356,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ZO3-xj-1zd" customClass="FindFriendsTableViewCell" customModule="SquirrelList" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ZO3-xj-1zd" customClass="FindFriendsTableViewCell" customModule="Squirrel_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZO3-xj-1zd" id="f1V-tJ-MXP">
@@ -401,7 +402,7 @@
         <!--More-->
         <scene sceneID="4cT-6B-hZr">
             <objects>
-                <tableViewController storyboardIdentifier="More" id="DYx-Dx-55U" customClass="MoreTableViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="More" id="DYx-Dx-55U" customClass="MoreTableViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7cw-Ap-9hv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -502,7 +503,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="D86EC3C9-EC51-4055-A2DE-858953362168" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="00AE2031-589A-428B-9C8D-A9A5B8022545" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -525,7 +526,7 @@
         <!--Group Invitations-->
         <scene sceneID="e60-NR-gW7">
             <objects>
-                <viewController id="GDH-kA-JbV" userLabel="Group Invitations" customClass="NotificationsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GDH-kA-JbV" userLabel="Group Invitations" customClass="NotificationsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" id="ksP-Zl-iee">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -551,6 +552,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Group Invites" id="eMc-Qb-yag">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="dIf-oJ-BQi" userLabel="Create Group">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="createGroup:" destination="GDH-kA-JbV" id="4lH-Me-QOa"/>
                             </connections>
@@ -570,7 +572,7 @@
         <!--Create Group-->
         <scene sceneID="9Ap-D9-XYc">
             <objects>
-                <tableViewController id="Kct-wX-imk" customClass="CreateGroupViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Kct-wX-imk" customClass="CreateGroupViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tbq-6a-dj0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -621,8 +623,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CloseButton" width="15" height="15"/>
-        <image name="D86EC3C9-EC51-4055-A2DE-858953362168" width="24" height="37">
+        <image name="00AE2031-589A-428B-9C8D-A9A5B8022545" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -751,5 +752,6 @@ AK0AxADGAMgbuhu/G8ob0xvmG+ob/RwIHBEcFhweHCEcJhw1HDkcQBxIHFUcWhxcHF4cYxxrHG4ccxx7
 HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
 </mutableData>
         </image>
+        <image name="CloseButton" width="15" height="15"/>
     </resources>
 </document>

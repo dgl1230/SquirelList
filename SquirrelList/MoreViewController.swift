@@ -87,7 +87,6 @@ class MoreTableViewController: UITableViewController {
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
-        println("viewloaded")
 
     }
 

@@ -74,7 +74,6 @@
 		186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */; };
 		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
-		186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */; };
 		187547B31B0E6C77009A6EFE /* Login-Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187547B21B0E6C77009A6EFE /* Login-Register.storyboard */; };
 		187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */; };
 		187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */; };
@@ -224,7 +223,6 @@
 		186B33191A758FDA00A8D4CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
-		186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterLoginViewController.swift; sourceTree = "<group>"; };
 		187547B21B0E6C77009A6EFE /* Login-Register.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Login-Register.storyboard"; sourceTree = "<group>"; };
 		187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Bold.otf"; sourceTree = "<group>"; };
 		187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Book.otf"; sourceTree = "<group>"; };
@@ -245,7 +243,7 @@
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		18B794EA1ADA3124000C9E5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		18CA31681AD5A281002285EE /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18CA31681AD5A281002285EE /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Squirrel List.app"; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/Squirrel List.app"; sourceTree = "<absolute>"; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -449,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirrelList */,
-				18CA31681AD5A281002285EE /* Squirrel List.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -476,7 +473,6 @@
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
-				186B33201A75AE7600A8D4CB /* RegisterLoginViewController.swift */,
 				18A568D21B1811500019B2C3 /* RegisterViewController.swift */,
 				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
 				187547B21B0E6C77009A6EFE /* Login-Register.storyboard */,
@@ -654,7 +650,6 @@
 				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,
 				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				184841961AE976C100F23551 /* JSQMessagesLabel.m in Sources */,
-				186B33211A75AE7600A8D4CB /* RegisterLoginViewController.swift in Sources */,
 				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
 				184841771AE976C100F23551 /* UIColor+JSQMessages.m in Sources */,
 				18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */,

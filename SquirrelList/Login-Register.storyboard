@@ -25,7 +25,7 @@
         <!--Home View Controller-->
         <scene sceneID="Ha6-YD-dXk">
             <objects>
-                <viewController storyboardIdentifier="Home" id="6Qu-3R-5KJ" customClass="HomeViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" id="6Qu-3R-5KJ" customClass="HomeViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dkt-Hr-hwC"/>
                         <viewControllerLayoutGuide type="bottom" id="msl-PT-q8r"/>
@@ -97,7 +97,7 @@
         <!--Register View Controller-->
         <scene sceneID="tNH-5N-5rn">
             <objects>
-                <viewController id="Fn5-sk-FgC" customClass="RegisterViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Fn5-sk-FgC" customClass="RegisterViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6gH-fm-hoE"/>
                         <viewControllerLayoutGuide type="bottom" id="z0T-Il-qqT"/>
@@ -192,7 +192,7 @@
         <!--Login View Controller-->
         <scene sceneID="3Bi-H5-gJM">
             <objects>
-                <viewController id="vQX-Yw-Y66" customClass="LoginViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vQX-Yw-Y66" customClass="LoginViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RBb-XI-tVz"/>
                         <viewControllerLayoutGuide type="bottom" id="aEs-ec-S3k"/>

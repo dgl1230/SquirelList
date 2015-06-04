@@ -61,7 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
-        println("did register")
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
     

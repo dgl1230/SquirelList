@@ -152,7 +152,6 @@ class FriendsViewController: PFQueryTableViewController {
         } else {
             user = objects![indexPath.row]["requestToUsername"] as! String
         }
-        //user.fetch()
         cell.nameLabel.text = user 
         cell.addButton.tag = indexPath.row
         if objects![indexPath.row]["status"] as! String == "accepted" {
@@ -188,9 +187,9 @@ class FriendsViewController: PFQueryTableViewController {
 
         
         //Setting the find friend image, which is 'fa-user-plus'
-        findFriendsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 25)!], forState: UIControlState.Normal)
+        findFriendsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         findFriendsButton?.title = "\u{f234}"
-        findFriendsButton?.tintColor = UIColor.whiteColor()
+        findFriendsButton?.tintColor = UIColor.orangeColor()
         self.tableView.allowsSelection = false
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)

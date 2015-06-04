@@ -217,7 +217,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
         else {
             squirrelSlots = (numOfUsers + 4) - yourNumSquirrels
-            squirrelSlotsLabel?.text = "\(squirrelSlots!) squirrel slots remaining"
+            if squirrelSlots == 1 {
+                squirrelSlotsLabel?.text = "1 squirrel slot remaining"
+            } else {
+                squirrelSlotsLabel?.text = "\(squirrelSlots!) squirrel slots remaining"
+            }
             addSquirrelButton?.enabled = true
         }
 
@@ -259,6 +263,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
             var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
+            var openLabel = cell.viewWithTag(6) as? UILabel
             var first = cell.viewWithTag(1) as! UILabel
             first.text = object!["first_name"]!.capitalizedString
             //For some reason 2 is already being used as another tag
@@ -266,6 +271,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             last.text = object!["last_name"]!.capitalizedString
             var ratingLabel = cell.viewWithTag(3) as! UILabel
             var avgRating = object!["avg_rating"] as! Double
+            var squirrel = objects![indexPath.row] as! PFObject
+            var owner = squirrel["owner"] as? PFUser
+            if owner == nil {
+                openLabel?.hidden = false
+            } else {
+                openLabel?.hidden = true
+            }
+        
             if avgRating != 0 {
                 ratingLabel.text = "\(avgRating)"
                 var color = calculateColor(avgRating)

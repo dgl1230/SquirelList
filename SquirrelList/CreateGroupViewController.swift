@@ -31,7 +31,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         //Set the createGroupButton to 'fa-check-circle'
         createGroupButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         createGroupButton.title = "\u{f058}"
-        createGroupButton.tintColor = UIColor.whiteColor()
+        createGroupButton.tintColor = UIColor.orangeColor()
         groupNameTextField.delegate = self
     }
     

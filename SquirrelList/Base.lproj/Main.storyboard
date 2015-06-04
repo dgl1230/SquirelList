@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="jeJ-Xr-ha6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -43,14 +43,15 @@
             <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
+            <string>bosun-03</string>
         </mutableArray>
     </customFonts>
     <scenes>
         <!--Users-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" userLabel="Users" customClass="UsersViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" id="UZO-58-L9Y">
+                <viewController id="9pv-A4-QxB" userLabel="Users" customClass="UsersViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" id="UZO-58-L9Y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,7 +95,7 @@
         <!--Squirrels-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" userLabel="Squirrels" customClass="SquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" userLabel="Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="51" sectionHeaderHeight="22" sectionFooterHeight="22" id="bFD-op-ejU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -126,20 +127,29 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="rating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teq-Kn-id4">
-                                            <rect key="frame" x="533" y="4" width="54" height="43"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teq-Kn-id4" userLabel="Rating">
+                                            <rect key="frame" x="572" y="4" width="28" height="43"/>
                                             <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="26"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khI-VM-lBS" userLabel="Open Tag">
+                                            <rect key="frame" x="91" y="4" width="21" height="21"/>
+                                            <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="9"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="WPx-Y0-P5g" firstAttribute="top" secondItem="vrq-jl-kDa" secondAttribute="topMargin" constant="6" id="BkN-Bq-Rcu"/>
-                                        <constraint firstItem="Teq-Kn-id4" firstAttribute="top" secondItem="vrq-jl-kDa" secondAttribute="topMargin" constant="-4" id="DKx-d8-yGt"/>
+                                        <constraint firstItem="Teq-Kn-id4" firstAttribute="top" secondItem="vrq-jl-kDa" secondAttribute="topMargin" constant="-4" id="EnR-Re-Gs3"/>
+                                        <constraint firstItem="khI-VM-lBS" firstAttribute="top" secondItem="vrq-jl-kDa" secondAttribute="topMargin" constant="-4" id="Hp7-hB-3d0"/>
+                                        <constraint firstItem="khI-VM-lBS" firstAttribute="leading" secondItem="WPx-Y0-P5g" secondAttribute="trailing" constant="8" id="PUG-nz-8pa"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="WPx-Y0-P5g" secondAttribute="bottom" constant="8" id="cQK-uK-KlV"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Teq-Kn-id4" secondAttribute="bottom" constant="-4" id="h0I-kc-HjR"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Teq-Kn-id4" secondAttribute="trailing" constant="5" id="nN3-jv-zA1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Teq-Kn-id4" secondAttribute="trailing" constant="-8" id="s4z-yN-Jvw"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Teq-Kn-id4" secondAttribute="bottom" constant="-4" id="yAy-xo-5Qb"/>
                                         <constraint firstItem="WPx-Y0-P5g" firstAttribute="leading" secondItem="vrq-jl-kDa" secondAttribute="leadingMargin" constant="8" id="yu6-6M-YZk"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="khI-VM-lBS" secondAttribute="bottom" constant="18" id="zi1-Il-0WF"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -173,7 +183,7 @@
         <!--Add Squirrel -->
         <scene sceneID="6OE-gP-1Oe">
             <objects>
-                <tableViewController id="YAQ-u8-yw6" customClass="AddSquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YAQ-u8-yw6" customClass="AddSquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LOc-M7-LiO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,99 +248,10 @@
             </objects>
             <point key="canvasLocation" x="2752.5" y="368.66197183098586"/>
         </scene>
-        <!--Register View Controller-->
-        <scene sceneID="0Xa-UT-v4b">
-            <objects>
-                <viewController storyboardIdentifier="LoginRegisterViewController" id="jeJ-Xr-ha6" userLabel="Register View Controller" customClass="RegisterLoginViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ko5-iO-Rcl"/>
-                        <viewControllerLayoutGuide type="bottom" id="5Xl-TE-RF7"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iXI-FP-8Qv">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6O-xq-upy">
-                                <rect key="frame" x="28" y="192" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3le-Vh-6v5">
-                                <rect key="frame" x="28" y="259" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWM-q6-ASL">
-                                <rect key="frame" x="28" y="345" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JT0-uJ-T4K">
-                                <rect key="frame" x="136" y="299" width="57" height="30"/>
-                                <state key="normal" title="Register">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="register:" destination="jeJ-Xr-ha6" eventType="touchUpInside" id="03A-Dc-n6T"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDD-2q-npB">
-                                <rect key="frame" x="137" y="128" width="38" height="30"/>
-                                <state key="normal" title="Login">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="login:" destination="jeJ-Xr-ha6" eventType="touchUpInside" id="jXl-wf-hTq"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aWn-0X-hkU">
-                                <rect key="frame" x="28" y="401" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="13d-p5-jnO">
-                                <rect key="frame" x="28" y="472" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Verify Password " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wyI-Oo-YL0">
-                                <rect key="frame" x="28" y="512" width="264" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Squirrel List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3d-Nk-dKT">
-                                <rect key="frame" x="96" y="30" width="129" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gotta catch em all" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJW-Ar-Myv">
-                                <rect key="frame" x="126" y="70" width="69" height="10"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="emailRegister" destination="gWM-q6-ASL" id="R4S-Zf-irO"/>
-                        <outlet property="passwordLogin" destination="3le-Vh-6v5" id="WPt-Qw-XGd"/>
-                        <outlet property="passwordRegister" destination="13d-p5-jnO" id="hNi-Zf-HPp"/>
-                        <outlet property="usernameLogin" destination="v6O-xq-upy" id="RH7-ky-xyX"/>
-                        <outlet property="usernameRegister" destination="aWn-0X-hkU" id="aDa-2L-Ao3"/>
-                        <outlet property="verifyPasswordRegister" destination="wyI-Oo-YL0" id="X89-0j-xIq"/>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="jumpToHome" id="BB6-eP-H6J"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="w0E-b8-uAm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="10" y="-949"/>
-        </scene>
         <!--HomeTabViewController-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController title="HomeTabViewController" id="49e-Tb-3d3" customClass="HomeTabViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController title="HomeTabViewController" id="49e-Tb-3d3" customClass="HomeTabViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="HMZ-hw-p5O"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
@@ -342,7 +263,6 @@
                         <segue destination="YYC-jh-zkT" kind="relationship" relationship="viewControllers" id="E0s-wp-tPQ"/>
                         <segue destination="mbu-c9-EXM" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="sYW-x8-hS1" kind="relationship" relationship="viewControllers" id="ANP-sw-EeV"/>
-                        <segue destination="jeJ-Xr-ha6" kind="presentation" identifier="LoginRegisterViewController" id="h2C-XU-nQK"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -376,7 +296,7 @@
         <!--Chat Holder View Controller-->
         <scene sceneID="Hwo-5S-Ru0">
             <objects>
-                <viewController id="6mh-0r-nvZ" customClass="ChatHolderViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6mh-0r-nvZ" customClass="ChatHolderViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bAx-Fz-fud"/>
                         <viewControllerLayoutGuide type="bottom" id="3B0-yE-1WB"/>
@@ -460,7 +380,7 @@
         <!--User Squirrels-->
         <scene sceneID="S3v-xI-UKD">
             <objects>
-                <viewController id="Qgd-8Q-Du2" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qgd-8Q-Du2" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" id="7CP-dD-uFx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -523,7 +443,7 @@
         <!--User Squirrels-->
         <scene sceneID="VaJ-Nv-JYk">
             <objects>
-                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="19G-oi-EXZ">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="259"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -574,7 +494,7 @@
         <!--Trade View Controller-->
         <scene sceneID="dUa-GV-r3a">
             <objects>
-                <viewController id="Igs-Gg-p6U" customClass="TradeViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Igs-Gg-p6U" customClass="TradeViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AZg-ub-NyK"/>
                         <viewControllerLayoutGuide type="bottom" id="anX-LK-0Rx"/>
@@ -671,7 +591,7 @@
         <!--User Squirrels Pop Up View Controller-->
         <scene sceneID="hQe-Jk-fm2">
             <objects>
-                <viewController id="Vu5-tu-h7U" customClass="UserSquirrelsPopUpViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vu5-tu-h7U" customClass="UserSquirrelsPopUpViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Uu-CF-9o2"/>
                         <viewControllerLayoutGuide type="bottom" id="nDD-94-KgW"/>
@@ -721,7 +641,7 @@
         <!--Trade Offers-->
         <scene sceneID="BYd-7Z-kYA">
             <objects>
-                <viewController id="5U7-1n-vli" customClass="NotificationsViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5U7-1n-vli" customClass="NotificationsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="22" sectionFooterHeight="22" id="2fF-MS-BJ0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -758,8 +678,8 @@
         <!--Change Current Group View Controller-->
         <scene sceneID="sRO-Vl-Fxf">
             <objects>
-                <viewController id="DK8-TF-ZsR" customClass="ChangeCurrentGroupViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="zA4-L9-Oe6">
+                <viewController id="DK8-TF-ZsR" customClass="ChangeCurrentGroupViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" id="zA4-L9-Oe6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -817,7 +737,7 @@
         <!--Search Users View Controller-->
         <scene sceneID="lmp-z0-56N">
             <objects>
-                <viewController id="XSm-0T-jTC" customClass="SearchUsersViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XSm-0T-jTC" customClass="SearchUsersViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3DJ-TJ-ecN" userLabel="User's Name">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -831,7 +751,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="BYR-oe-LEV" customClass="FindFriendsTableViewCell" customModule="SquirrelList" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="BYR-oe-LEV" customClass="FindFriendsTableViewCell" customModule="Squirrel_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BYR-oe-LEV" id="VW0-jW-lJy">
@@ -877,7 +797,7 @@
         <!--Trade Offer PopUp-->
         <scene sceneID="LcS-rm-MEY">
             <objects>
-                <viewController id="GmS-AJ-vFA" userLabel="Trade Offer PopUp" customClass="TradeOfferViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GmS-AJ-vFA" userLabel="Trade Offer PopUp" customClass="TradeOfferViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Ui-6L-Bz3"/>
                         <viewControllerLayoutGuide type="bottom" id="zjv-z5-3ev"/>
@@ -952,7 +872,7 @@
         <!--Messages View Controller-->
         <scene sceneID="eSB-nD-DYU">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HmY-OS-0Wc" customClass="MessagesViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HmY-OS-0Wc" customClass="MessagesViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f3G-ed-oXQ"/>
                         <viewControllerLayoutGuide type="bottom" id="WMh-cB-geV"/>
@@ -971,7 +891,7 @@
         <!--Squirrel Detail View Controller-->
         <scene sceneID="QU4-1c-OZa">
             <objects>
-                <viewController id="dG2-pW-EHr" customClass="SquirrelDetailViewController" customModule="SquirrelList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dG2-pW-EHr" customClass="SquirrelDetailViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uBt-Ip-0tL"/>
                         <viewControllerLayoutGuide type="bottom" id="gHq-OZ-MTm"/>
@@ -1024,7 +944,7 @@
                                             <action selector="claimOrTrade:" destination="dG2-pW-EHr" eventType="touchUpInside" id="WbB-bJ-iZl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-fZ-5cs">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kKa-fZ-5cs">
                                         <rect key="frame" x="24" y="177" width="72" height="30"/>
                                         <accessibility key="accessibilityConfiguration">
                                             <bool key="isElement" value="NO"/>
@@ -1041,7 +961,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rating" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0a2-p7-RU6">
                                         <rect key="frame" x="104" y="177" width="97" height="30"/>
                                         <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="avgRating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mb-V0-g8G">
                                         <rect key="frame" x="127" y="47" width="78" height="32"/>

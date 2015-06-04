@@ -13,15 +13,12 @@ class HomeTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*
-        var query = PFQuery(className: "Group")
-        query.whereKey("name", equalTo: "first_group")
-        var group = query.getFirstObject()
-        PFUser.currentUser()!["currentGroup"] = group
-        PFUser.currentUser()?.save()
-        */
-        
-        
+        //Configure the colors for the tab bar and tab icons
+        let blue = UIColor(red: 0, green: 191, blue: 255, alpha: 1)
+        self.tabBar.tintColor = UIColor.orangeColor()
+        self.tabBar.barTintColor = blue
+        //self.tabBar.selectedImageTintColor
+
         
         //Setting the tabs programmatically so that we can use multiple storyboards
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
