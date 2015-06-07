@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     @IBAction func register(sender: AnyObject) {
         self.performSegueWithIdentifier("register", sender: self)
     }
-
     
 
 }

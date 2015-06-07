@@ -117,7 +117,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     func calculateTeamRating(username:String) -> Double {
         var teamRatings: [Double] = []
         for squirrel in self.objects! {
-            println(squirrel)
             var owner = squirrel["ownerUsername"] as? String
             //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
             if squirrel["avg_rating"] === 0 {
@@ -165,7 +164,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 controller.squirrelOwner = user 
             } else {
                 //The Squirrel doesn't have an owner
-                println(canPickUpSquirrel)
                 controller.canClaimSquirrel = canPickUpSquirrel!
             }
         }
@@ -263,6 +261,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
             var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
+            //It looks strange to have the row highlighted in gray 
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             var openLabel = cell.viewWithTag(6) as? UILabel
             var first = cell.viewWithTag(1) as! UILabel
             first.text = object!["first_name"]!.capitalizedString
@@ -324,7 +324,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if selectedUser == nil {
+            //We are in the main Squirrels tab
             //Set the addSquirrelButton to 'fa-plus-circle'
             addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
             addSquirrelButton?.title = "\u{f055}"
@@ -333,6 +335,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             tradeOfferButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
             tradeOfferButton?.title = "\u{f21b}"
             tradeOfferButton?.tintColor = UIColor.orangeColor()
+        } else if selectedUser!.username == PFUser.currentUser()!.username {
+            self.title = "My Squirrels"
+        } else {
+            self.title = "\(selectedUser!.username!)'s Squirrels"
         }
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         

@@ -85,13 +85,12 @@ class UsersViewController: PFQueryTableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UsersCellTableViewCell
-        //var username = cell.viewWithTag(1) as! UILabel
+        //It looks strange to have the row highlighted in gray
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         if (objects![indexPath.row]["username"] as? String == PFUser.currentUser()!.username) {
-             //username.text = "me"
              cell.usernameLabel.text = "me"
         }
         else {
-            //username.text = objects![indexPath.row]["username"] as? String
             cell.usernameLabel.text = objects![indexPath.row]["username"] as? String
         }
         return cell

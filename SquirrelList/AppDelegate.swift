@@ -17,32 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
 
-
-        //PFUser.logOut()
         let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
         let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         
-        
-        //This is just to get users who already made an account up to speed
-        /*
-        let installation = PFInstallation.currentInstallation()
-        installation["user"] = PFUser.currentUser()!
-        installation["userID"] = PFUser.currentUser()!.objectId
-        installation.saveInBackgroundWithBlock(nil)
-        */
-        
         if PFUser.currentUser() == nil {
-            //If the user isn't logged in, we need to present the login/register view controller
+            //If the user isn't logged in, we need to present the login/register storyboard
             let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
             let loginController = loginRegisterStoryBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
             self.window!.rootViewController = loginController
             self.window!.makeKeyAndVisible()
-            //var loginViewController = RegisterLoginViewController()
-            //self.window?.rootViewController?.presentViewController(loginViewController, animated: false, completion: nil)
         } else if PFUser.currentUser()!["currentGroup"] == nil {
-            //Present just the MoreViewController to the user
+            //Present just the MoreViewController to the user because they are still new
             let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
             let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
             moreController.isNewUser = true

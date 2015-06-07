@@ -18,12 +18,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db6-TW-Uvy">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db6-TW-Uvy">
                         <rect key="frame" x="63" y="19" width="179" height="47"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="47" id="ZNg-CS-CFZ"/>
+                            <constraint firstAttribute="width" constant="179" id="vHS-MM-lnr"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="31"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="Db6-TW-Uvy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="OCf-k8-Hvh"/>
+                    <constraint firstAttribute="centerY" secondItem="Db6-TW-Uvy" secondAttribute="centerY" constant="-2" id="Rbw-jX-BdI"/>
+                    <constraint firstAttribute="centerX" secondItem="Db6-TW-Uvy" secondAttribute="centerX" constant="7.5" id="dNX-9L-RFK"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="usernameLabel" destination="Db6-TW-Uvy" id="rCA-iV-B8e"/>

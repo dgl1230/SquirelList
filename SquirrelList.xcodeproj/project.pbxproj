@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180AB0B61B223F0100EBF2F0 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 180AB0B51B223F0100EBF2F0 /* Settings.storyboard */; };
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
 		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
 		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
@@ -62,7 +63,6 @@
 		186B32E21A758E5000A8D4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186B32E11A758E5000A8D4CB /* AppDelegate.swift */; };
 		186B32E91A758E5000A8D4CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186B32E71A758E5000A8D4CB /* Main.storyboard */; };
 		186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186B32EA1A758E5000A8D4CB /* Images.xcassets */; };
-		186B32EE1A758E5000A8D4CB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */; };
 		186B33081A758F7E00A8D4CB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33071A758F7E00A8D4CB /* AudioToolbox.framework */; };
 		186B330A1A758F8800A8D4CB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33091A758F8800A8D4CB /* CFNetwork.framework */; };
 		186B330C1A758F9300A8D4CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B330B1A758F9300A8D4CB /* CoreGraphics.framework */; };
@@ -89,11 +89,13 @@
 		18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D21B1811500019B2C3 /* RegisterViewController.swift */; };
 		18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D41B182BBC0019B2C3 /* LoginViewController.swift */; };
 		18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D81B1D47B40019B2C3 /* HomeViewController.swift */; };
+		18A568E01B2133C20019B2C3 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A568DF1B2133C20019B2C3 /* Launch Screen.storyboard */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
 		18B794EC1ADA3124000C9E5F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794EA1ADA3124000C9E5F /* Parse.framework */; };
 		18B794EE1ADA312D000C9E5F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794ED1ADA312D000C9E5F /* ParseUI.framework */; };
+		18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C57B511B237B460068B726 /* ChangeInfoController.swift */; };
 		18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */; };
 		18D2466D1AC60283003D560A /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466C1AC60283003D560A /* SearchUsersViewController.swift */; };
 		18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */; };
@@ -110,6 +112,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180AB0B51B223F0100EBF2F0 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -210,7 +213,6 @@
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E81A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		186B32EA1A758E5000A8D4CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		186B32ED1A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		186B33071A758F7E00A8D4CB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		186B33091A758F8800A8D4CB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		186B330B1A758F9300A8D4CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -238,12 +240,14 @@
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18A568D81B1D47B40019B2C3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../HomeViewController.swift; sourceTree = "<group>"; };
+		18A568DC1B20E9140019B2C3 /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A568DF1B2133C20019B2C3 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Launch Screen.storyboard"; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		18B794EA1ADA3124000C9E5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
-		18CA31681AD5A281002285EE /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Squirrel List.app"; path = "/Users/denisgearylopez/Documents/Programming/Swift/SquirrelList/build/Debug-iphoneos/Squirrel List.app"; sourceTree = "<absolute>"; };
+		18C57B511B237B460068B726 /* ChangeInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeInfoController.swift; sourceTree = "<group>"; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -447,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				186B32DE1A758E5000A8D4CB /* SquirrelList */,
+				18A568DC1B20E9140019B2C3 /* Squirrel List.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -456,41 +461,34 @@
 				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
 				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
-				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
 				18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */,
+				18C57B511B237B460068B726 /* ChangeInfoController.swift */,
+				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
 				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
-				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
-				187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */,
-				187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
-				184561201ABFCE3100026473 /* GradientView.swift */,
-				184841141AE9767600F23551 /* Messages */,
 				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				18A568D81B1D47B40019B2C3 /* HomeViewController.swift */,
+				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
+				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
+				184841141AE9767600F23551 /* Messages */,
 				184841A11AE978D100F23551 /* MessagesViewController.swift */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
-				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
+				18C57B4F1B2379F30068B726 /* Pop Up Controller */,
 				18A568D21B1811500019B2C3 /* RegisterViewController.swift */,
-				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
-				187547B21B0E6C77009A6EFE /* Login-Register.storyboard */,
 				18D2466C1AC60283003D560A /* SearchUsersViewController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
 				18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */,
 				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
+				18C57B501B237A510068B726 /* Storyboards/xibs */,
+				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
-				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
+				187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */,
 				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
-				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
-				18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */,
-				186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */,
-				186B32E71A758E5000A8D4CB /* Main.storyboard */,
-				18F768FB1AC9FE8500314DB2 /* More.storyboard */,
-				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 			);
 			path = SquirrelList;
 			sourceTree = "<group>";
@@ -524,6 +522,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		18C57B4F1B2379F30068B726 /* Pop Up Controller */ = {
+			isa = PBXGroup;
+			children = (
+				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
+				1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */,
+				184561201ABFCE3100026473 /* GradientView.swift */,
+				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
+			);
+			name = "Pop Up Controller";
+			sourceTree = "<group>";
+		};
+		18C57B501B237A510068B726 /* Storyboards/xibs */ = {
+			isa = PBXGroup;
+			children = (
+				18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */,
+				18A568DF1B2133C20019B2C3 /* Launch Screen.storyboard */,
+				187547B21B0E6C77009A6EFE /* Login-Register.storyboard */,
+				186B32E71A758E5000A8D4CB /* Main.storyboard */,
+				18F768FB1AC9FE8500314DB2 /* More.storyboard */,
+				180AB0B51B223F0100EBF2F0 /* Settings.storyboard */,
+				187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */,
+			);
+			name = Storyboards/xibs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -541,7 +564,7 @@
 			);
 			name = SquirrelList;
 			productName = SquirelList;
-			productReference = 18CA31681AD5A281002285EE /* Squirrel List.app */;
+			productReference = 18A568DC1B20E9140019B2C3 /* Squirrel List.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -600,12 +623,13 @@
 				184841981AE976C100F23551 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				18F769041ACB995C00314DB2 /* FindUserTableViewCell.xib in Resources */,
 				187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */,
+				180AB0B61B223F0100EBF2F0 /* Settings.storyboard in Resources */,
 				18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */,
-				186B32EE1A758E5000A8D4CB /* LaunchScreen.xib in Resources */,
 				187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */,
 				186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */,
 				184841911AE976C100F23551 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				184841931AE976C100F23551 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
+				18A568E01B2133C20019B2C3 /* Launch Screen.storyboard in Resources */,
 				187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */,
 				1848419B1AE976C100F23551 /* JSQMessagesToolbarContentView.xib in Resources */,
 			);
@@ -664,6 +688,7 @@
 				184841971AE976C100F23551 /* JSQMessagesLoadEarlierHeaderView.m in Sources */,
 				184841991AE976C100F23551 /* JSQMessagesMediaPlaceholderView.m in Sources */,
 				184841811AE976C100F23551 /* JSQMessagesTimestampFormatter.m in Sources */,
+				18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */,
 				1848417B1AE976C100F23551 /* JSQMessagesKeyboardController.m in Sources */,
 				1848418D1AE976C100F23551 /* JSQMessagesCellTextView.m in Sources */,
 				18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */,
@@ -695,14 +720,6 @@
 				186B32E81A758E5000A8D4CB /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		186B32EC1A758E5000A8D4CB /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				186B32ED1A758E5000A8D4CB /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
