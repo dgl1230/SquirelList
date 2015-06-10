@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BebasNeue Bold.otf">
@@ -107,40 +106,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVa-Ne-1H9">
-                                <rect key="frame" x="159" y="144" width="282" height="54"/>
+                                <rect key="frame" x="172" y="112" width="256" height="35"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="3Er-me-1Rf"/>
-                                    <constraint firstAttribute="width" constant="282" id="8FK-d3-1h3"/>
+                                    <constraint firstAttribute="width" constant="256" id="UCC-qF-MkV"/>
+                                    <constraint firstAttribute="height" constant="35" id="lK5-zG-fao"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTT-dm-8gK">
-                                <rect key="frame" x="159" y="235" width="282" height="54"/>
+                                <rect key="frame" x="172" y="166" width="256" height="35"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="282" id="001-Nq-nlz"/>
-                                    <constraint firstAttribute="height" constant="54" id="OZj-uo-lYr"/>
+                                    <constraint firstAttribute="width" constant="256" id="dRh-Kb-ACh"/>
+                                    <constraint firstAttribute="height" constant="35" id="pbM-Tn-qDS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="23"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="verify password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzq-th-9on">
-                                <rect key="frame" x="159" y="329" width="282" height="54"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="2zE-d3-Ekv"/>
-                                    <constraint firstAttribute="width" constant="282" id="4kz-yh-DSf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJM-al-jXC">
                                 <rect key="frame" x="185" y="28" width="230" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="7s0-v1-WJU"/>
-                                    <constraint firstAttribute="height" constant="70" id="xpY-ke-uPK"/>
+                                    <constraint firstAttribute="height" constant="70" id="0rl-hn-a8b"/>
+                                    <constraint firstAttribute="width" constant="230" id="85o-yH-fSM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Register">
@@ -151,7 +140,7 @@
                                     <action selector="register:" destination="Fn5-sk-FgC" eventType="touchUpInside" id="jfl-03-JjW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txs-5M-icC" userLabel="Close Button">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txs-5M-icC" userLabel="Close Button">
                                 <rect key="frame" x="0.0" y="13" width="30" height="42"/>
                                 <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
                                 <state key="normal" title="X">
@@ -163,19 +152,27 @@
                                     <action selector="close:" destination="vQX-Yw-Y66" eventType="touchUpInside" id="IPB-Me-Oe4"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="verify password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzq-th-9on">
+                                <rect key="frame" x="172" y="223" width="256" height="35"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="YHd-kc-cGl"/>
+                                    <constraint firstAttribute="width" constant="256" id="e1R-xk-SgH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Txs-5M-icC" firstAttribute="leading" secondItem="Ea6-d5-zi5" secondAttribute="leadingMargin" constant="-16" id="BcH-Qn-kMI"/>
-                            <constraint firstItem="sJM-al-jXC" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="28" id="JL3-Th-JBF"/>
-                            <constraint firstAttribute="centerX" secondItem="SVa-Ne-1H9" secondAttribute="centerX" id="Qy1-Kl-U07"/>
-                            <constraint firstItem="DTT-dm-8gK" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="235" id="Z9U-eJ-r0O"/>
-                            <constraint firstAttribute="centerX" secondItem="sJM-al-jXC" secondAttribute="centerX" id="fPc-Lj-haf"/>
-                            <constraint firstItem="yzq-th-9on" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="329" id="kH0-ah-pAC"/>
-                            <constraint firstItem="SVa-Ne-1H9" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="144" id="mzH-ET-qs1"/>
-                            <constraint firstAttribute="centerX" secondItem="yzq-th-9on" secondAttribute="centerX" id="rN3-01-YTp"/>
-                            <constraint firstItem="Txs-5M-icC" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="topMargin" constant="13" id="xI2-LE-45D"/>
-                            <constraint firstAttribute="centerX" secondItem="DTT-dm-8gK" secondAttribute="centerX" id="zeG-uW-gTo"/>
+                            <constraint firstAttribute="centerX" secondItem="yzq-th-9on" secondAttribute="centerX" id="Mll-NS-TGm"/>
+                            <constraint firstItem="sJM-al-jXC" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="28" id="PjO-jt-oJI"/>
+                            <constraint firstAttribute="centerX" secondItem="SVa-Ne-1H9" secondAttribute="centerX" id="RaI-vD-hNs"/>
+                            <constraint firstAttribute="centerX" secondItem="DTT-dm-8gK" secondAttribute="centerX" id="fiv-dW-w1f"/>
+                            <constraint firstAttribute="centerX" secondItem="sJM-al-jXC" secondAttribute="centerX" id="foN-1k-Wil"/>
+                            <constraint firstItem="DTT-dm-8gK" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="166" id="raA-3m-DHA"/>
+                            <constraint firstItem="SVa-Ne-1H9" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="112" id="sP8-s5-zsP"/>
+                            <constraint firstItem="yzq-th-9on" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="223" id="zmu-hH-Dfe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -204,8 +201,8 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g40-e4-MAj">
                                 <rect key="frame" x="200" y="48" width="200" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="5t1-oN-JjF"/>
-                                    <constraint firstAttribute="width" constant="200" id="QBT-HC-kyS"/>
+                                    <constraint firstAttribute="width" constant="200" id="3yI-WB-NFB"/>
+                                    <constraint firstAttribute="height" constant="70" id="Tsr-SP-2CG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Log In">
@@ -218,27 +215,27 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xbf-dP-DB2">
-                                <rect key="frame" x="159" y="149" width="282" height="54"/>
+                                <rect key="frame" x="172" y="126" width="256" height="37"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="282" id="G7y-YW-8c3"/>
-                                    <constraint firstAttribute="height" constant="54" id="xOi-vF-1u7"/>
+                                    <constraint firstAttribute="height" constant="37" id="EXH-cA-ktE"/>
+                                    <constraint firstAttribute="width" constant="256" id="mYW-md-p2r"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lqo-jM-Fkd">
-                                <rect key="frame" x="159" y="261" width="282" height="54"/>
+                                <rect key="frame" x="172" y="190" width="256" height="37"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="dhk-nI-IUz"/>
-                                    <constraint firstAttribute="width" constant="282" id="pbD-7C-VMd"/>
+                                    <constraint firstAttribute="width" constant="256" id="1Wz-aD-PQO"/>
+                                    <constraint firstAttribute="height" constant="37" id="fQ6-5L-aRb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="23"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dO-b0-qpP" userLabel="Close Button">
-                                <rect key="frame" x="0.0" y="20" width="30" height="42"/>
+                                <rect key="frame" x="0.0" y="13" width="30" height="42"/>
                                 <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -251,12 +248,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="lqo-jM-Fkd" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="261" id="9gt-ms-ydC"/>
-                            <constraint firstAttribute="centerX" secondItem="g40-e4-MAj" secondAttribute="centerX" id="OHd-xZ-vF4"/>
-                            <constraint firstAttribute="centerX" secondItem="xbf-dP-DB2" secondAttribute="centerX" id="OPB-4A-x06"/>
-                            <constraint firstItem="xbf-dP-DB2" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="149" id="WaI-WA-4k3"/>
-                            <constraint firstAttribute="centerX" secondItem="lqo-jM-Fkd" secondAttribute="centerX" id="gLF-5t-tyv"/>
-                            <constraint firstItem="g40-e4-MAj" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="48" id="y49-62-qsH"/>
+                            <constraint firstAttribute="centerX" secondItem="xbf-dP-DB2" secondAttribute="centerX" id="0Kn-El-1zn"/>
+                            <constraint firstAttribute="centerX" secondItem="lqo-jM-Fkd" secondAttribute="centerX" id="4Oh-4H-b9N"/>
+                            <constraint firstItem="xbf-dP-DB2" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="126" id="6Yx-mW-EBZ"/>
+                            <constraint firstAttribute="centerX" secondItem="g40-e4-MAj" secondAttribute="centerX" id="GfF-UA-4yq"/>
+                            <constraint firstItem="g40-e4-MAj" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="48" id="qeT-Bt-2eq"/>
+                            <constraint firstItem="lqo-jM-Fkd" firstAttribute="top" secondItem="Vmk-ft-jHD" secondAttribute="top" constant="190" id="zg2-Do-oU8"/>
                         </constraints>
                     </view>
                     <connections>

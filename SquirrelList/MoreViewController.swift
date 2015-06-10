@@ -66,12 +66,14 @@ class MoreTableViewController: UITableViewController {
         }
         if indexPath.row == 2 {
             //The user is selecting "Settings"
-            //performSegueWithIdentifier("Settings", sender: self)
+            performSegueWithIdentifier("Settings", sender: self)
+            /*
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let settingsStoryboard = UIStoryboard(name: "Settings", bundle: nil)
             var navigationViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("NavigationController") as! UINavigationController
             appDelegate.window!.rootViewController = navigationViewController
             appDelegate.window!.makeKeyAndVisible()
+            */
         }
 
     }

@@ -324,7 +324,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let name = selectedUser?["name"] as? String
         if selectedUser == nil {
             //We are in the main Squirrels tab
             //Set the addSquirrelButton to 'fa-plus-circle'
@@ -337,6 +337,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             tradeOfferButton?.tintColor = UIColor.orangeColor()
         } else if selectedUser!.username == PFUser.currentUser()!.username {
             self.title = "My Squirrels"
+        } else if name != nil {
+            self.title = "\(name!)'s Squirrels"
         } else {
             self.title = "\(selectedUser!.username!)'s Squirrels"
         }

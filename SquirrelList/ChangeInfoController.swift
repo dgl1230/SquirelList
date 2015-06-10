@@ -16,7 +16,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     //Optional for determing what kind of info the user is changing. Will either be "name" "email" or "password"
     var infoBeingChanged: String?
     //Variable for storing initial value to check if user has changed their value in the infoField
-    var placeholder :NSString = ""
+    var placeholder : NSString?
     
     @IBOutlet weak var infoField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -37,7 +37,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         if infoBeingChanged == "name" {
             infoField.text = PFUser.currentUser()!["name"] as? String
-            placeholder = infoField.text
+            placeholder = PFUser.currentUser()!["name"] as? String
             self.title = "My Name"
         } else if infoBeingChanged == "email" {
             infoField.text = PFUser.currentUser()!.email
@@ -49,8 +49,11 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            println("placeholder is \(placeholder)")
+            var oldInfo: NSString = infoField.text
             var newInfo: NSString = ""
-            newInfo = placeholder.stringByReplacingCharactersInRange(range, withString: string)
+            newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: string)
+            println("infofield text is \(infoField.text)")
             if newInfo.length > 0 && newInfo != placeholder {
                 saveButton.enabled = true
             } else {

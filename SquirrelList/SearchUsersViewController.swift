@@ -239,7 +239,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         if addingToGroup == true {
             //Configure the title to have the user's current group in it
             var currentGroup = PFUser.currentUser()!["currentGroup"]!["name"]! as! String
-            self.title = "Invite friends to \(currentGroup)"
+            self.title = "Invite to \(currentGroup)"
         }
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         //Set notification to "listen" for when the the user has changed their currentGroup

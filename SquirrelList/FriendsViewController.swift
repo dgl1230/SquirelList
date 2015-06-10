@@ -46,16 +46,16 @@ class FriendsViewController: PFQueryTableViewController {
         let request = objects![buttonRow] as! PFObject
         request["status"] = "accepted"
         //Need to add the user to logged in user's friends and remove them from pendingFriends
-        let user1 = request["RequestFrom"] as! PFUser
-        user1.fetch()
-        let user2 = request["RequestTo"] as! PFUser
-        user2.fetch()
-        if user1.objectId != PFUser.currentUser()?.objectId {
-            PFUser.currentUser()!.addObject(user1.username!, forKey: "friends")
-            PFUser.currentUser()!.removeObject(user1.username!, forKey: "pendingFriends")
+        let user1 = request["RequestFromUsername"] as! String
+        //user1.fetch()
+        let user2 = request["RequestToUsername"] as! String
+        //user2.fetch()
+        if user1 != PFUser.currentUser()?.username {
+            PFUser.currentUser()!.addObject(user1, forKey: "friends")
+            PFUser.currentUser()!.removeObject(user1, forKey: "pendingFriends")
         } else {
-            PFUser.currentUser()!.addObject(user2.username!, forKey: "friends")
-            PFUser.currentUser()!.removeObject(user2.username!, forKey: "pendingFriends")
+            PFUser.currentUser()!.addObject(user2, forKey: "friends")
+            PFUser.currentUser()!.removeObject(user2, forKey: "pendingFriends")
         }
         PFUser.currentUser()!.save()
         request.save()
@@ -156,10 +156,9 @@ class FriendsViewController: PFQueryTableViewController {
         cell.addButton.tag = indexPath.row
         if objects![indexPath.row]["status"] as! String == "accepted" {
             //The user variable has been already added to the relevant group
-            //Setting the addFriendButton with the 'fa-plus-square-o' button
-            cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
-            cell.addButton.setTitle("\u{f196}", forState: .Normal)
+            //Ghetto method for now, need to make it so that the button isn't default
             cell.addButton.enabled = false
+            cell.addButton.hidden = true
         } else if objects![indexPath.row]["status"] as! String == "pending" {
             //The user variable has not already added to the relevant group
             //Setting the addFriendButton with the 'fa-square-o' button

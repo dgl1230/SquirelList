@@ -60,7 +60,6 @@ class RegisterViewController: UIViewController {
             user.username = usernameTextField.text
             //This field is so that we can check and prevent a user from signing up with the same username but different case sensitivity. We don't want two users with usernames "denis" and "Denis"
             user["lowerUsername"] = usernameTextField.text.lowercaseString
-            user["num_of_squirrels"] = 0
             user["friends"] = []
     
             displayLoadingAnimator()
