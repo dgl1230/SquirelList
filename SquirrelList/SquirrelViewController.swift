@@ -209,7 +209,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             addSquirrelButton?.enabled = false
             squirrelSlots = 0
         } else if numOfUsers == 1 {
-            squirrelSlotsLabel?.text = "You need at least two users to start squirreling!"
+            squirrelSlotsLabel?.text = "You need at least two users!"
             addSquirrelButton?.enabled = false
             squirrelSlots = 0
         }
@@ -229,7 +229,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     override func queryForTable() -> PFQuery {
         
         var query = PFQuery(className: "Squirrel")
-        query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
+        //query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
+        //Teting to see if this leads to less of a clusterfuck for querying
+        var currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        currentGroup!.fetch()
+        query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!)
         } else if selectedUser != nil {
@@ -387,6 +391,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
+                var group = PFUser.currentUser()!["currentGroup"] as! PFObject
+                group.fetch()
+                group.addObject(newSquirrel.objectId!, forKey: "squirrels")
+                group.save()
+                
                 
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.viewDidLoad()
@@ -401,7 +410,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     //Should be its own extension 
     func squirrelDetailViewController(controller: SquirrelDetailViewController) {
-            self.tableView.reloadData()
+            self.viewDidLoad()
     }
 
 }

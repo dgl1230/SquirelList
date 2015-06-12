@@ -22,12 +22,15 @@ class HomeTabViewController: UITabBarController {
         
         //Setting the tabs programmatically so that we can use multiple storyboards
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
         let usersViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Users") as! UINavigationController
-        usersViewController.tabBarItem = UITabBarItem(title: "Users", image: UIImage(named: "acorn_tab_icon"), tag: 4)
+        usersViewController.tabBarItem = UITabBarItem(title: "Users", image: UIImage(named: "group"), tag: 4)
+        
         let squirrelsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Squirrels")as! UINavigationController
-        squirrelsViewController.tabBarItem = UITabBarItem(title: "Squirrels", image: UIImage(named: "squirrel_tab_icon"), tag: 4)
-        //squirrelsViewController.tabBarItem.imageInsets.top = 8
-        //squirrelsViewController.tabBarItem.imageInsets.bottom = -8
+        squirrelsViewController.tabBarItem = UITabBarItem(title: "Squirrels", image: UIImage(named: "squirrel"), tag: 4)
+        //squirrelsViewController.tabBarItem.imageInsets.top = 6
+        //squirrelsViewController.tabBarItem.imageInsets.bottom = -6
+        
         let chatViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Chat") as! UINavigationController
 
         //Since the moreViewController isn't hooked up to the HomeTableViewController in the storyboard, we need to set attritbutes

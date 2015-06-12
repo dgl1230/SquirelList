@@ -65,7 +65,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         firstName.becomeFirstResponder()
-        lastName.becomeFirstResponder()
     }
     
     override func viewDidLoad() {

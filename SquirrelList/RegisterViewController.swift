@@ -41,9 +41,9 @@ class RegisterViewController: UIViewController {
         } else if count(username) <= 2 {
             title = "That username is too short!"
             error = "Please have it be at least three characters"
-        } else if count(username) >= 15 {
-            title = "That username is too short!"
-            error = "Please have it be at least three characters"
+        } else if count(username) >= 20 {
+            title = "That username is too long"
+            error = "Please have it be no greater than 20 characters"
         } else if count(passwordTextField.text) <= 6 {
             title = "Whoa there cowboy!"
             error = "Your password needs to be at least 6 characters"
@@ -81,6 +81,8 @@ class RegisterViewController: UIViewController {
                     navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
                     appDelegate.window!.rootViewController = navigationController
                     appDelegate.window!.makeKeyAndVisible()
+                    //Make keyboard disappear
+                    self.view.endEditing(true)
                 } else {
                     if let errorString = signupError!.userInfo?["error"] as? String {
                         error = errorString

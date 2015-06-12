@@ -77,13 +77,6 @@ class MessagesViewController: JSQMessagesViewController {
                     self.messageObjects.append(message)
                     let user = message["sender"] as! String
                     self.users.append(user)
-                    //Need to exclude the logged in user from being put in an outgoing avatar label
-                    if user != PFUser.currentUser()!.username {
-                        let incoming = user
-                        let incomingUsername = incoming as NSString
-                        self.incomingAvatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(incomingUsername.substringWithRange(NSMakeRange(0, 3)), backgroundColor: UIColor.whiteColor(), textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-                    
-                    }
                     let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
                     self.messages.append(chatMessage)
                 }
@@ -97,28 +90,26 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
+    func reloadMessages() {
+        loadMessages()
+    }
+    
     
     //Responds to NSNotication when user has changed their current group
     func reloadWithNewGroup() {
-        shouldReLoad = true
+        //shouldReLoad = true
+        self.messages = []
+        self.messageObjects = []
+        self.users = []
+        //This is goign to lead to lagging eventually, since this will mean that as soon as a user changes current groups, they will also be reloading messages, but it does prevent the array out of index error
+        loadMessages()
     }
     
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if shouldReLoad == true {
-            self.messages = []
-            self.messageObjects = []
-            self.users = []
-            loadMessages()
-            shouldReLoad = false
-
-        } else if firstViewDidLoad == false {
-            loadMessages()
-        }
-        if firstViewDidLoad == true {
-            firstViewDidLoad = false
-        }
+        loadMessages()
+        
     }
     
     
@@ -134,6 +125,8 @@ class MessagesViewController: JSQMessagesViewController {
         firstViewDidLoad = true
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+        //Listen for when a user has pushed a new notification
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: reloadNotificationKey, object: nil)
         //The sender ID doesn't have to be an actual ID, just something unique, so the user's username works too 
         self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username
@@ -151,8 +144,7 @@ class MessagesViewController: JSQMessagesViewController {
         //For when the user touches an obscure area of the view
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "close")
         view.addGestureRecognizer(tap)
-        
-        loadMessages()
+
     }
     
     //For when the user touches an obscure area of the view
@@ -171,6 +163,12 @@ class MessagesViewController: JSQMessagesViewController {
         if message.senderId == self.senderId {
             return selfAvatar
         }
+        //We need to customize each outgoing avatar with the right username
+        let messageObject = messageObjects[indexPath.row] as PFObject
+        let user = messageObject["sender"] as! String
+        var incomingUser = user as NSString
+        var incomingAvatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(incomingUser.substringWithRange(NSMakeRange(0, 3)), backgroundColor: UIColor.whiteColor(), textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
+
         return incomingAvatar
     }
     

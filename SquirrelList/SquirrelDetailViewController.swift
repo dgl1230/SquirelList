@@ -83,7 +83,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate {
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
         ratedSquirrel!.save()
         //Alert SquirrelViewController to reload data
-        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        //NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        //delegate?.squirrelDetailViewController(self)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }

@@ -75,7 +75,8 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
                             //Then there was already a friend request and there should only be one request
                             var request = results![0] as! PFObject
                             request["status"] = "accepted"
-                            PFUser.currentUser()!.addObject(user.username!, forKey: "friends")
+                            PFUser.currentUser()!.addObject(user.objectId!, forKey: "friends")
+                            PFUser.currentUser()!.removeObject(user.objectId!, forKey: "pendingFriends")
                             PFUser.currentUser()!.save()
                             request.save()
                         }
@@ -87,7 +88,9 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
                             request["RequestTo"] = user
                             request["requestToUsername"] = user.username
                             request["status"] = "pending"
-                            PFUser.currentUser()!.addObject(user.username!, forKey: "pendingFriends")
+                            request["requestToUserId"] = user.objectId
+                            request["requestFromUserId"] = PFUser.currentUser()!.objectId
+                            PFUser.currentUser()!.addObject(user.objectId!, forKey: "pendingFriends")
                             PFUser.currentUser()!.save()
                             request.save()
                         }
@@ -160,7 +163,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         if addingToGroup == true {
             //The user has friends and we should list them to be invited to a group
             if PFUser.currentUser()!["friends"] != nil {
-                query!.whereKey("username", containedIn: PFUser.currentUser()!["friends"] as! [String])
+                query!.whereKey("objectId", containedIn: PFUser.currentUser()!["friends"] as! [String])
             }
 
             return query!
@@ -203,7 +206,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
         cell.nameLabel.text = user["username"] as? String
         cell.addButton.tag = indexPath.row
-        if isAdded(user.username!) {
+        if isAdded(user.objectId!) {
             //The user variable has been already added to the relevant group
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)

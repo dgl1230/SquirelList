@@ -23,7 +23,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func login(sender: AnyObject) {
-        println("clicked")
         var error = ""
     
         if usernameTextField.text == "" || passwordTextField.text == "" {
@@ -54,6 +53,8 @@ class LoginViewController: UIViewController {
                             //Present the tab bar with all the tabs
                             appDelegate.window!.rootViewController = HomeTabViewController()
                             appDelegate.window!.makeKeyAndVisible()
+                            //Make keyboard disappear
+                            self.view.endEditing(true)
                         }
                     } else {
                         if let errorString = signupError!.userInfo?["error"] as? String {

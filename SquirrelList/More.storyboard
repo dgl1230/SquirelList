@@ -436,7 +436,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="03D90B56-AE1E-474E-9A52-39AB22A14B63" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="7CB6A7EE-D736-4822-AA11-196637852DA9" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -639,7 +639,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXV-ry-6u5">
-                                                <rect key="frame" x="0.0" y="15" width="600" height="570"/>
+                                                <rect key="frame" x="0.0" y="56" width="600" height="409"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -648,10 +648,10 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yXV-ry-6u5" secondAttribute="bottom" constant="15" id="ASn-1k-ppn"/>
+                                            <constraint firstAttribute="bottom" secondItem="yXV-ry-6u5" secondAttribute="bottom" constant="135" id="ASn-1k-ppn"/>
                                             <constraint firstItem="yXV-ry-6u5" firstAttribute="leading" secondItem="Pz5-eg-yGc" secondAttribute="leading" id="QML-hk-RmH"/>
                                             <constraint firstAttribute="trailing" secondItem="yXV-ry-6u5" secondAttribute="trailing" id="rRL-gB-mG1"/>
-                                            <constraint firstItem="yXV-ry-6u5" firstAttribute="top" secondItem="Pz5-eg-yGc" secondAttribute="top" constant="15" id="yTf-fd-Z5C"/>
+                                            <constraint firstItem="yXV-ry-6u5" firstAttribute="top" secondItem="Pz5-eg-yGc" secondAttribute="top" constant="56" id="yTf-fd-Z5C"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -746,7 +746,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="03D90B56-AE1E-474E-9A52-39AB22A14B63" width="24" height="37">
+        <image name="7CB6A7EE-D736-4822-AA11-196637852DA9" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

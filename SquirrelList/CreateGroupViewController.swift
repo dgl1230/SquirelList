@@ -16,14 +16,25 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func createGroup(sender: AnyObject) {
         var group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text as NSString
-        group.addObject(PFUser.currentUser()!.objectId!, forKey: "userIDs")
+        group.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+        group["squirrels"] = []
         //Need to add the current user's squirrel list ID eventually as well
         group.save()
+
+
+        if PFUser.currentUser()!["currentGroup"] == nil {
+            //The user can now access all tabs, since they have a current group
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window!.rootViewController = HomeTabViewController()
+            appDelegate.window!.makeKeyAndVisible()
+        }
+        
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
+ 
         //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all need to be reloaded when their views appear 
-        NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
         self.navigationController?.popViewControllerAnimated(true)    
     }
     override func viewDidLoad() {

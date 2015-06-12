@@ -692,15 +692,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oB2-7p-s1f" userLabel="Done Button">
-                                    <rect key="frame" x="562" y="24" width="30" height="22"/>
-                                    <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="done:" destination="DK8-TF-ZsR" eventType="touchUpInside" id="U7z-ME-nh0"/>
-                                    </connections>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Current Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57j-ul-hDI">
                                     <rect key="frame" x="190" y="24" width="220" height="27"/>
                                     <constraints>
@@ -715,10 +706,7 @@
                             <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="57j-ul-hDI" firstAttribute="top" secondItem="3Ur-gI-n0w" secondAttribute="top" constant="24" id="Hoz-8Y-IVX"/>
-                                <constraint firstAttribute="bottom" secondItem="oB2-7p-s1f" secondAttribute="bottom" constant="20" id="LMm-RY-K95"/>
                                 <constraint firstAttribute="centerX" secondItem="57j-ul-hDI" secondAttribute="centerX" id="RSF-Cy-IOp"/>
-                                <constraint firstAttribute="trailing" secondItem="oB2-7p-s1f" secondAttribute="trailing" constant="8" id="TAv-EE-29T"/>
-                                <constraint firstItem="oB2-7p-s1f" firstAttribute="top" secondItem="3Ur-gI-n0w" secondAttribute="top" constant="24" id="a0a-p0-vXn"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -731,9 +719,6 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <connections>
-                        <outlet property="doneButton" destination="oB2-7p-s1f" id="xtF-dh-Te1"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5iG-f6-uoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

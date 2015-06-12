@@ -18,20 +18,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     var currentGroup = PFUser.currentUser()!["currentGroup"]! as! PFObject
     
     
-    @IBOutlet weak var doneButton: UIButton!
-    
-    
-    @IBAction func done(sender: AnyObject) {
-        if currentGroup != PFUser.currentUser()!["currentGroup"] as! PFObject {
-            //We only want to reload everything if the user hasn't selected their same currentGroup
-            PFUser.currentUser()!["currentGroup"] = currentGroup
-            PFUser.currentUser()!.save()
-            //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
-            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
-        }
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
 
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -81,14 +67,21 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         checkMarkedCellIndex = indexPath
         //Update the current group variable
         currentGroup = objects![indexPath.row] as! PFObject
+        //Dismiss and potentially save after use has selected different group
+        if currentGroup != PFUser.currentUser()!["currentGroup"] as! PFObject {
+            println("reloading")
+            //We only want to reload everything if the user hasn't selected their same currentGroup
+            PFUser.currentUser()!["currentGroup"] = currentGroup
+            PFUser.currentUser()!.save()
+            //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Setting the doneButton with the 'fa-check-circle' button
-        doneButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
-        doneButton.setTitle("\u{f058}", forState: .Normal)
         //Register the UsersCellTableViewCell for use in the UserViewController tableView
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
     }
