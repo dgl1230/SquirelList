@@ -63,9 +63,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        println("receiving remote notification")
         //PFPush.handlePush(userInfo)
         //Alert the user when a new message has been sent 
-        NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
+        //NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+        
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

@@ -91,6 +91,7 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     func reloadMessages() {
+        println("doing reload messages")
         loadMessages()
     }
     
@@ -126,7 +127,7 @@ class MessagesViewController: JSQMessagesViewController {
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
         //Listen for when a user has pushed a new notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: reloadNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: "reloadMessages", object: nil)
         //The sender ID doesn't have to be an actual ID, just something unique, so the user's username works too 
         self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username
