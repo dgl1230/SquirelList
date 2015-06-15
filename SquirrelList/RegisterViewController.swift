@@ -61,6 +61,8 @@ class RegisterViewController: UIViewController {
             //This field is so that we can check and prevent a user from signing up with the same username but different case sensitivity. We don't want two users with usernames "denis" and "Denis"
             user["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friends"] = []
+            //Give user a fake email address to fill space until they change it in their settings
+            user.email = "testtesttest@test.com"
     
             displayLoadingAnimator()
     
@@ -71,6 +73,7 @@ class RegisterViewController: UIViewController {
                 if signupError == nil {
                     //For push notifications/chat real time might cause an error right now. Not sure if user is already logged in at this point
                     let installation = PFInstallation.currentInstallation()
+                    installation["userID"] = PFUser.currentUser()!.username
                     installation["user"] = PFUser.currentUser()!
                     installation.saveInBackgroundWithBlock(nil)
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

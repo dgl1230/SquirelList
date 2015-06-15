@@ -148,7 +148,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             controller.delegate = self
             
         }
-        if segue.identifier == "SquirrelDetails" {
+        //We have two segues for two different Squirrel Details - one where the squirrel has a picture and one where it does not 
+        if segue.identifier == "SquirrelDetails" || segue.identifier == "SquirrelDetailsPics"{
             let controller = segue.destinationViewController as! SquirrelDetailViewController
             //controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
@@ -319,6 +320,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             delegate?.SquirrelTradeDelegate!(self, selectedSquirrel: objects![indexPath.row] as! PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)
             
             self.navigationController?.popViewControllerAnimated(true)
+        }
+        let squirrel = objects![indexPath.row] as! PFObject
+        if squirrel["picture"] != nil {
+            self.performSegueWithIdentifier("SquirrelDetailsPics", sender: objects![indexPath.row])
         }
         else {
             self.performSegueWithIdentifier("SquirrelDetails", sender: objects![indexPath.row])

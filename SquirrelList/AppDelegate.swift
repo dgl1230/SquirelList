@@ -24,9 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 
-
-        
-        
         
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
@@ -72,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        println("the device token is \(deviceToken)")
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock(nil)
