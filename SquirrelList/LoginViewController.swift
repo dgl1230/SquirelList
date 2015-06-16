@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
 
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -114,6 +115,9 @@ class LoginViewController: UIViewController {
         //Set the close button icon to 'fa-times'
         closeButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
         closeButton.setTitle("\u{f00d}", forState: .Normal)
+        //Set the login button to have rounded edges
+        loginButton.layer.cornerRadius = 5
+        loginButton.layer.masksToBounds = true
     }
    
 

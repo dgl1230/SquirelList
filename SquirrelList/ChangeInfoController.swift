@@ -49,11 +49,9 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-            println("placeholder is \(placeholder)")
             var oldInfo: NSString = infoField.text
             var newInfo: NSString = ""
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: string)
-            println("infofield text is \(infoField.text)")
             if newInfo.length > 0 && newInfo != placeholder {
                 saveButton.enabled = true
             } else {

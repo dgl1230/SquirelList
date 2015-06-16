@@ -17,6 +17,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var verifyPasswordTextField: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
     
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -141,6 +142,9 @@ class RegisterViewController: UIViewController {
         //Set the close button icon to 'fa-times'
         closeButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 30)
         closeButton.setTitle("\u{f00d}", forState: .Normal)
+        //Set the register button to have rounded edges
+        registerButton.layer.cornerRadius = 5
+        registerButton.layer.masksToBounds = true
 
     }
 

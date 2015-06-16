@@ -12,12 +12,26 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+
     @IBAction func login(sender: AnyObject) {
         self.performSegueWithIdentifier("login", sender: self)
     }
 
     @IBAction func register(sender: AnyObject) {
         self.performSegueWithIdentifier("register", sender: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //Set the login and register buttons to have rounded corners
+        loginButton.layer.cornerRadius = 5
+        loginButton.layer.masksToBounds = true
+        registerButton.layer.cornerRadius = 5
+        registerButton.layer.masksToBounds = true
+        
     }
     
 

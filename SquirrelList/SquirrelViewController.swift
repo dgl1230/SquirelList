@@ -148,7 +148,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             controller.delegate = self
             
         }
-        //We have two segues for two different Squirrel Details - one where the squirrel has a picture and one where it does not 
+        //We have two segues for two different Squirrel Details - one where the squirrel has a picture and one where it does not
         if segue.identifier == "SquirrelDetails" || segue.identifier == "SquirrelDetailsPics"{
             let controller = segue.destinationViewController as! SquirrelDetailViewController
             //controller.delegate = self
@@ -230,11 +230,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     override func queryForTable() -> PFQuery {
         
         var query = PFQuery(className: "Squirrel")
-        //query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
-        //Teting to see if this leads to less of a clusterfuck for querying
-        var currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
-        currentGroup!.fetch()
-        query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
+        query.whereKey("objectId", containedIn: PFUser.currentUser()!["currentGroup"]!["squirrels"] as! [String])
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!)
         } else if selectedUser != nil {
@@ -300,15 +296,24 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let squirrel = objects![indexPath.row] as! PFObject
-            squirrel.removeObjectForKey("owner")
-            squirrel.removeObjectForKey("ownerUsername")
-            squirrel.save()
-            var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
-            teamRatingLabel.text = "Team Rating: \(teamRating)"
-            ///Alert SquirrelViewController to reload data
-            NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
-            self.loadObjects()
+            //Give the user a warning to verify that they want to drop their squirrel
+            var message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
+            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
+                let squirrel = self.objects![indexPath.row] as! PFObject
+                squirrel.removeObjectForKey("owner")
+                squirrel.removeObjectForKey("ownerUsername")
+                squirrel.save()
+                var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
+                self.teamRatingLabel.text = "Team Rating: \(teamRating)"
+                ///Alert SquirrelViewController to reload data
+                NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
+                self.loadObjects()
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -330,6 +335,19 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
     }
     
+    //Customize the delete button on swipe left
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var deleteButton = UITableViewRowAction(style: .Default, title: "Drop Squirrel", handler: { (action, indexPath) in
+        self.tableView.dataSource?.tableView?(
+            self.tableView,
+            commitEditingStyle: .Delete,
+            forRowAtIndexPath: indexPath
+        )
+        return
+    })
+        return [deleteButton]
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -344,6 +362,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             tradeOfferButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
             tradeOfferButton?.title = "\u{f21b}"
             tradeOfferButton?.tintColor = UIColor.orangeColor()
+            let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
+            self.title = "\(groupName) Squirrels"
         } else if selectedUser!.username == PFUser.currentUser()!.username {
             self.title = "My Squirrels"
         } else if name != nil {
@@ -362,6 +382,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
+
     }
     
     
@@ -388,8 +409,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["owner"] = PFUser.currentUser()!
         newSquirrel["raters"] = []
         newSquirrel["ratings"] = []
-        newSquirrel["dtd"] = false
-        newSquirrel["out"] = false
         newSquirrel["avg_rating"] = 0
         newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
         newSquirrel["ownerUsername"] = PFUser.currentUser()!.username

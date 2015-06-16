@@ -34,8 +34,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     @IBOutlet weak var squirrelNameLabel: UILabel!
     @IBOutlet weak var avgRatingLabel: UILabel!
     
-    //Label that says "owner:" doesn't actually say the owner's name
-    @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var rateNumberTextField: UITextField!
     //Label that displays the owners name
@@ -185,9 +183,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         if ratedSquirrel!["avg_rating"] != nil {
             //We have to cast the rating as an Int first, because casting it directly as a String produces nil
             var averageRating = ratedSquirrel!["avg_rating"] as! Double
-            avgRatingLabel.text = "\(averageRating)"
+            avgRatingLabel.text = "Squirrel Score:  \(averageRating)"
         } else {
-            avgRatingLabel.text = "No Ratings"
+            avgRatingLabel.text = "No Squirrel Score"
         }
         didRateSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()!["username"] as! String, raters: ratedSquirrel!["raters"] as! [String])
         
@@ -200,7 +198,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         //Check if the squirrel has an owner to propose a trade with
         var owner = ratedSquirrel!["ownerUsername"] as? String
         if owner == nil {
-            squirrelOwnerLabel.text = "No one :("
+            squirrelOwnerLabel.text = "Owner:  No one :("
             var canClaim = canClaimSquirrel!
             if canClaim == true {
                 claimTradePictureButton.setTitle("Claim Squirrel", forState: UIControlState.Normal)
@@ -209,7 +207,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
                 claimTradePictureButton.hidden = true
             }
         } else if owner == PFUser.currentUser()!.username {
-            squirrelOwnerLabel.text = "me"
+            squirrelOwnerLabel.text = "Owner:  me"
             if ratedSquirrel!["picture"] == nil {
                 claimTradePictureButton.setTitle("Upload Picture", forState: UIControlState.Normal)
             } else {
@@ -223,7 +221,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         } else {
             //Squirrel does have an owner that's not the logged in user
             var owner = ratedSquirrel!["ownerUsername"] as! String
-            squirrelOwnerLabel.text = owner
+            squirrelOwnerLabel.text = "Owner:  \(owner)"
             claimTradePictureButton.setTitle("Propose Trade", forState: UIControlState.Normal)
             claimOrTradeOrPicture = "trade"
         }

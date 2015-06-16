@@ -55,6 +55,45 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         }
         return cell
     }
+    
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            //Give the user a warning to verify that they want to leave the group
+            var message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
+            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
+                let squirrelQuery = PFQuery(className: "Squirrel")
+                squirrelQuery.whereKey("objectId", containedIn: PFUser.currentUser()!["currentGroup"]!["squirrels"] as! [String])
+                squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
+                squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
+                    if error == nil {
+                        for object in squirrels! {
+                            //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
+                            let squirrel:PFObject = object as! PFObject
+                            squirrel.removeObjectForKey("ownerUsername")
+                            squirrel.removeObjectForKey("owner")
+                            squirrel.save()
+                        }
+                    }
+                })
+                //Remove user from the group's users
+                let groupToLeave = PFUser.currentUser()!["currentGroup"] as! PFObject
+                groupToLeave.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+                //Remve the group from the user's group
+                PFUser.currentUser()!.removeObject(groupToLeave.objectId!, forKey: "groups")
+                groupToLeave.save()
+                PFUser.currentUser()!.save()
+
+                self.loadObjects()
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -67,9 +106,9 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         checkMarkedCellIndex = indexPath
         //Update the current group variable
         currentGroup = objects![indexPath.row] as! PFObject
-        //Dismiss and potentially save after use has selected different group
-        if currentGroup != PFUser.currentUser()!["currentGroup"] as! PFObject {
-            println("reloading")
+        //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
+        let userCurrentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+        if currentGroup.objectId != userCurrentGroup.objectId {
             //We only want to reload everything if the user hasn't selected their same currentGroup
             PFUser.currentUser()!["currentGroup"] = currentGroup
             PFUser.currentUser()!.save()
@@ -77,6 +116,20 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    //Customize the delete button on swipe left
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var deleteButton = UITableViewRowAction(style: .Default, title: "Leave Group", handler: { (action, indexPath) in
+        self.tableView.dataSource?.tableView?(
+            self.tableView,
+            commitEditingStyle: .Delete,
+            forRowAtIndexPath: indexPath
+        )
+        return
+    })
+        return [deleteButton]
     }
     
     

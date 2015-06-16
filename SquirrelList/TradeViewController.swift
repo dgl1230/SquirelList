@@ -95,6 +95,11 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             offeredSquirrelLabel.hidden = true
             proposeTradeButton.hidden = true
         }
+        //Make the buttons have rounded edges
+        proposeTradeButton.layer.cornerRadius = 5
+        proposeTradeButton.layer.masksToBounds = true
+        selectSquirrelButton.layer.cornerRadius = 5
+        selectSquirrelButton.layer.masksToBounds = true
         
     }
     
