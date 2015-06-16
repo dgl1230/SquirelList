@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UITableViewController, ChangeInfoViewControllerDelegate {
 
-
+    @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -20,12 +20,17 @@ class SettingsViewController: UITableViewController {
         if segue.identifier == "Name" {
             let controller = segue.destinationViewController as! ChangeInfoController
             controller.infoBeingChanged = "name"
+            controller.delegate = self
         }  else if segue.identifier == "Privacy Policy" {
             let controller = segue.destinationViewController as! PoliciesViewController
             controller.policy  = "Privacy Policy"
         } else if segue.identifier == "Terms of Service" {
             let controller = segue.destinationViewController as! PoliciesViewController
             controller.policy = "Terms of Service"
+        } else if segue.identifier == "Email" {
+            let controller = segue.destinationViewController as! ChangeInfoController
+            controller.infoBeingChanged = "email"
+            controller.delegate = self
         }
     }
     
@@ -33,17 +38,20 @@ class SettingsViewController: UITableViewController {
      
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
-        if cell.tag == 1 {
+        if cell.tag == 2 {
             //The user is selecting the "name" row
             self.performSegueWithIdentifier("Name", sender: self)
         } else if cell.tag == 3 {
+            //The user is selecting the "email" row
+            self.performSegueWithIdentifier("Email", sender: self)
+        } else if cell.tag == 4 {
             //The user is selecting "Privacy Policy"
             self.performSegueWithIdentifier("Privacy Policy", sender: self)
-        } else if cell.tag == 4 {
+        } else if cell.tag == 5 {
             //The user is selecting "Terms of Service"
             self.performSegueWithIdentifier("Terms of Service", sender: self)
         }
-        if cell.tag == 5 {
+        if cell.tag == 6 {
             //They clicked the "Log Out" row
             var message = "Are you sure you want to log out?"
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -76,15 +84,28 @@ class SettingsViewController: UITableViewController {
         navigationItem.backBarButtonItem = backItem
         
         let name = PFUser.currentUser()!["name"] as? String
-        println(name)
         if name != nil {
             nameLabel.text = name!
         } else {
             nameLabel.text = ""
         }
+        
+        //For some reason accessing email via currentUser()!.email results in an error
+        let email = PFUser.currentUser()!["email"] as? String
+        if email == "test@test.com" {
+            //This is our rachet, fake email for all users and we should not display it
+            emailLabel.text = ""
+        } else {
+            emailLabel.text = email
+        }
 
         
         }
+    
+    //ChangeInfoViewControllerDelegate function - reloads so we can display the newly saved information
+    func finishedSaving(controller: ChangeInfoController) {
+        self.viewDidLoad()
+    }
     
 
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180253C91B2FE1410094C044 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */; };
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
 		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
 		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
@@ -114,6 +115,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
 				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
+				180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
 				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
@@ -677,6 +680,7 @@
 				184841751AE976C100F23551 /* NSBundle+JSQMessages.m in Sources */,
 				1848418F1AE976C100F23551 /* JSQMessagesCollectionViewCell.m in Sources */,
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
+				180253C91B2FE1410094C044 /* ForgotPasswordViewController.swift in Sources */,
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
 				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,

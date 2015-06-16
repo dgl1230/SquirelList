@@ -281,7 +281,7 @@
         <scene sceneID="UBn-it-ASg">
             <objects>
                 <navigationController storyboardIdentifier="Squirrels" automaticallyAdjustsScrollViewInsets="NO" id="mbu-c9-EXM" userLabel="Squirrels Navigation Controller" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Squirrel " image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Squirrel " image="squirrel" id="cPa-gy-q4n"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EJk-zP-ddt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -365,7 +365,7 @@
         <scene sceneID="rdM-jh-nt3">
             <objects>
                 <navigationController storyboardIdentifier="Users" automaticallyAdjustsScrollViewInsets="NO" id="YYC-jh-zkT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="League" image="first" id="3aq-ZF-hhS"/>
+                    <tabBarItem key="tabBarItem" title="League" image="group" id="3aq-ZF-hhS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="QoX-oN-HH7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1082,13 +1082,13 @@
     </scenes>
     <resources>
         <image name="CloseButton" width="15" height="15"/>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="group" width="48" height="48"/>
+        <image name="squirrel" width="48" height="48"/>
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pJd-kJ-7kz"/>
-        <segue reference="5fv-rG-5fy"/>
+        <segue reference="c3q-1e-3f7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

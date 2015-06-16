@@ -16,9 +16,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
 
+    @IBAction func forgotPassword(sender: AnyObject) {
+        self.performSegueWithIdentifier("forgotPassword", sender: self)
+    }
+    
     @IBAction func login(sender: AnyObject) {
         self.performSegueWithIdentifier("login", sender: self)
     }
+
 
     @IBAction func register(sender: AnyObject) {
         self.performSegueWithIdentifier("register", sender: self)

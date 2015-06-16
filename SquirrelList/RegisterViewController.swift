@@ -63,6 +63,7 @@ class RegisterViewController: UIViewController {
             user["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friends"] = []
             //Give user a fake email address to fill space until they change it in their settings
+            //We can't use the same fake email twice - maybe try saving a fake email tied to the date? 
             user.email = "testtesttest@test.com"
     
             displayLoadingAnimator()
