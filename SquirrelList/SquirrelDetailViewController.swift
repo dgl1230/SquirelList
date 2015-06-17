@@ -48,8 +48,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!["owner"] = PFUser.currentUser()!
             ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
             if didRateSquirrel == true {
-                removeOwnerRating(ratedSquirrel!)
-                ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
+                var ratings = removeRating(ratedSquirrel!)
+                ratedSquirrel!["avg_rating"] = calculateAverageRating(ratings)
+                ratedSquirrel!["ratings"] = ratings
+                ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
             }
             ratedSquirrel!.save()
             //Alert SquirrelViewController to reload data
@@ -69,9 +71,25 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     
     @IBAction func rateSquirrel(sender: AnyObject) {
-        println("rating squirrel being called")
-        //check if ["raters"] is nil. If it is, we create it
         var rater = PFUser.currentUser()!.username
+        //They are re-rating the squirrel
+        //Not efficient, look into way to not duplicate code
+        if didRateSquirrel == true {
+            var raters = ratedSquirrel!["raters"] as! [String]
+            var raterIndex = find(raters, PFUser.currentUser()!.username!)
+            raters.removeAtIndex(raterIndex!)
+            raters.append(PFUser.currentUser()!.username!)
+            var ratings = removeRating(ratedSquirrel!)
+            ratings.append(rateNumberTextField.text)
+            ratedSquirrel!["ratings"] = ratings
+            ratedSquirrel!["raters"] = raters
+            ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
+            ratedSquirrel!.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            delegate?.squirrelDetailViewController(self)
+            return
+        }
+        //check if ["raters"] is nil. If it is, we create it
         if let check: AnyObject = ratedSquirrel!["raters"] {
            ratedSquirrel!["raters"]!.addObject(rater!)
         } else {
@@ -83,11 +101,12 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         } else {
             ratedSquirrel!["ratings"] = [rateNumberTextField.text]
         }
+
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
         ratedSquirrel!.save()
         //Alert SquirrelViewController to reload data
         //NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-        //delegate?.squirrelDetailViewController(self)
+        delegate?.squirrelDetailViewController(self)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -153,13 +172,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
      //Removes the user's username from the squirrel's "raters" field and their rating from the squirrel's "ratings" field
      //Look into changing this up so that it returns the new ratings array and saves the squirrel else where
-    func removeOwnerRating(squirrel: PFObject) -> Void {
+    func removeRating(squirrel: PFObject) -> [String] {
         var ownerIndex = find(squirrel["raters"] as! [String], PFUser.currentUser()!.username!)
-        squirrel.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
         var ratings = squirrel["ratings"] as? [String]
         ratings!.removeAtIndex(ownerIndex!)
-        squirrel["ratings"] = ratings
-        squirrel.save()
+        return ratings!
     }
 
 
@@ -188,14 +205,15 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         } else {
             avgRatingLabel.text = "No Squirrel Score"
         }
-        didRateSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()!["username"] as! String, raters: ratedSquirrel!["raters"] as! [String])
         
         //Check if the user has rated the squirrel
+        didRateSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()!["username"] as! String, raters: ratedSquirrel!["raters"] as! [String])
         if didRateSquirrel == true {
             var rating = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
             rateNumberTextField.placeholder = "Your rating: \(rating)"
             rateButton.setTitle("Rerate", forState: UIControlState.Normal)
         }
+        
         //Check if the squirrel has an owner to propose a trade with
         var owner = ratedSquirrel!["ownerUsername"] as? String
         if owner == nil {
@@ -226,7 +244,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             claimTradePictureButton.setTitle("Propose Trade", forState: UIControlState.Normal)
             claimOrTradeOrPicture = "trade"
         }
-        rateNumberTextField.delegate = self
+        
+        //Check if the squirrel has a picture
         if ratedSquirrel!["picture"] != nil {
             let pic = ratedSquirrel!["picture"] as! PFFile
             pic.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
@@ -245,6 +264,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         claimTradePictureButton.layer.masksToBounds = true
         rateButton.layer.cornerRadius = 5
         rateButton.layer.masksToBounds = true
+        //So that we can tell whether to enable the rate button
+        rateNumberTextField.delegate = self
         
     }
     

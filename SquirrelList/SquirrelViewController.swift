@@ -152,7 +152,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         //We have two segues for two different Squirrel Details - one where the squirrel has a picture and one where it does not
         if segue.identifier == "SquirrelDetails" || segue.identifier == "SquirrelDetailsPics"{
             let controller = segue.destinationViewController as! SquirrelDetailViewController
-            //controller.delegate = self
+            controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
             controller.squirrelSlots = squirrelSlots!
             if squirrelSlots > 0 {
@@ -383,6 +383,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
 
+
     }
     
     
@@ -432,7 +433,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         
     }
     
-    //Should be its own extension 
+    //Delegate function is called for squirrelDetailViewController so that we can reload after a user has rated a squirrel
     func squirrelDetailViewController(controller: SquirrelDetailViewController) {
             self.viewDidLoad()
     }
