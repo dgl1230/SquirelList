@@ -38,11 +38,12 @@ class UserSquirrelsPopUpViewController: PopUpViewController, SquirrelViewControl
     }
     
     
-    //Should be its own extension
+    //Delegate function for passing selected squrirel and other trade info back to the TradeViewController
     func SquirrelTradeDelegate(controller: SquirrelViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
             delegate?.userSquirrelsPopUpViewControllerDelegate!(self, selectedSquirrel: selectedSquirrel, wantedSquirrelOwner: wantedSquirrelOwner, wantedSquirrel: wantedSquirrel)
             dismissViewControllerAnimated(true, completion: nil)
     }
+
     
 
 

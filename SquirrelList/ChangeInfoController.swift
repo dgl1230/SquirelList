@@ -40,6 +40,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             PFUser.currentUser()!.email = infoField.text
             let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to verify your address", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    //We duplicate this code from above because we only want these actions to occur after the user has pressed OK
                     PFUser.currentUser()!.save()
                     self.navigationController?.popViewControllerAnimated(true)
                     //Reloads the SettingsViewContrller

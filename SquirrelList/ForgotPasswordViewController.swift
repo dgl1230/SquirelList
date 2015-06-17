@@ -24,12 +24,20 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func sendEmail(sender: AnyObject) {
         let email = emailTextField.text
         PFUser.requestPasswordResetForEmail(email)
-        let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to reset your password", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+        PFUser.requestPasswordResetForEmailInBackground(email, block: { (succeeded: Bool, error: NSError?) -> Void in
+            if succeeded == true {
+                let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to reset your password", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
                     self.dismissViewControllerAnimated(true, completion: nil)
-            }))
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
+                }))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                //There was an error
+                let alertController = UIAlertController(title: "We had an error!", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        })
     }
     
 

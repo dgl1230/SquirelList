@@ -15,6 +15,8 @@ class GroupInvitePopUpViewController: PopUpViewController {
     var groupInvite: PFObject?
     
 
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var inviterLabel: UILabel!
     @IBOutlet weak var groupLabel: UILabel!
     
@@ -53,6 +55,11 @@ class GroupInvitePopUpViewController: PopUpViewController {
         inviterLabel.text = inviterName
         groupLabel.text = group!["name"] as? String
         inviterName = groupInvite!["inviter"] as? String
+        //Give buttons rounded edges
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.layer.masksToBounds = true
+        declineButton.layer.cornerRadius = 5
+        declineButton.layer.masksToBounds = true
     }
 
 

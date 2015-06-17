@@ -117,9 +117,7 @@ class UsersViewController: PFQueryTableViewController {
         changeCurrentGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         changeCurrentGroupButton?.title = "\u{f0c9}"
         changeCurrentGroupButton?.tintColor = UIColor.orangeColor()
-
-        //Not sure if I need this line
-        //self.tableView.reloadData()
+        
         self.title = currentGroup!["name"] as? String
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         

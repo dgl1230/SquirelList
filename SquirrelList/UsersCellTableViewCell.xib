@@ -19,19 +19,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Db6-TW-Uvy">
-                        <rect key="frame" x="63" y="19" width="179" height="47"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="47" id="ZNg-CS-CFZ"/>
-                            <constraint firstAttribute="width" constant="179" id="vHS-MM-lnr"/>
-                        </constraints>
+                        <rect key="frame" x="110" y="25" width="102" height="31"/>
                         <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="31"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Db6-TW-Uvy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="OCf-k8-Hvh"/>
-                    <constraint firstAttribute="centerY" secondItem="Db6-TW-Uvy" secondAttribute="centerY" constant="-2" id="Rbw-jX-BdI"/>
-                    <constraint firstAttribute="centerX" secondItem="Db6-TW-Uvy" secondAttribute="centerX" constant="7.5" id="dNX-9L-RFK"/>
+                    <constraint firstAttribute="centerY" secondItem="Db6-TW-Uvy" secondAttribute="centerY" id="toh-8n-RHF"/>
+                    <constraint firstAttribute="centerX" secondItem="Db6-TW-Uvy" secondAttribute="centerX" constant="-0.5" id="zeU-L5-f2L"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -12,6 +12,7 @@ let droppedSquirrel = "com.denis.droppedSquirrel"
 
 import UIKit
 
+//For passing back squirrel information when a user is selecting a squirrel to propose a trade to 
 @objc protocol SquirrelViewControllerDelegate: class {
 
     optional func SquirrelTradeDelegate(controller: SquirrelViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject)
@@ -319,15 +320,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let squirrel = objects![indexPath.row] as! PFObject
         if currentlyTrading == true {
-            //dismissViewControllerAnimated(true, completion: nil)
-            //Then the delegate will store the selected Squirrel and other trade information 
+            //Then the delegate will store the selected Squirrel and other trade information and pass it back to the UsersSquirrelsViewController
             delegate?.SquirrelTradeDelegate!(self, selectedSquirrel: objects![indexPath.row] as! PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)
             
             self.navigationController?.popViewControllerAnimated(true)
         }
-        let squirrel = objects![indexPath.row] as! PFObject
-        if squirrel["picture"] != nil {
+        else if squirrel["picture"] != nil {
             self.performSegueWithIdentifier("SquirrelDetailsPics", sender: objects![indexPath.row])
         }
         else {

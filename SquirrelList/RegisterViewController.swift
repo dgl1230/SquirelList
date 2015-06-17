@@ -31,6 +31,7 @@ class RegisterViewController: UIViewController {
         var usernameLower = username.lowercaseString
         var usernameQuery = PFUser.query()
         //We want to make sure a user can't signup with an exact username that's taken or a username that differs in case
+        //Change this, don't want to be getting query error for no results matching if this is what is supposed to happen
         usernameQuery?.whereKey("lowerUsername", equalTo: usernameLower)
         var usernameCheck = usernameQuery?.getFirstObject()
         if usernameCheck != nil {
@@ -62,9 +63,10 @@ class RegisterViewController: UIViewController {
             //This field is so that we can check and prevent a user from signing up with the same username but different case sensitivity. We don't want two users with usernames "denis" and "Denis"
             user["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friends"] = []
-            //Give user a fake email address to fill space until they change it in their settings
-            //We can't use the same fake email twice - maybe try saving a fake email tied to the date? 
-            user.email = "testtesttest@test.com"
+            //Give user a fake, unique email address to fill space until they change it in their settings
+            let randomNumer = Int(arc4random_uniform(1000))
+            let emailName = "\(username)\(randomNumer)"
+            user.email = "\(emailName)@squirrellist.com"
     
             displayLoadingAnimator()
     

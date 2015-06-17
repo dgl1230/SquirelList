@@ -10,6 +10,11 @@
             <string>BebasNeueBold</string>
             <string>BebasNeueBold</string>
         </mutableArray>
+        <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+        </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
             <string>FontAwesome</string>
@@ -40,14 +45,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ata-AK-hFR">
-                                                    <rect key="frame" x="516" y="11" width="76" height="21"/>
+                                                    <rect key="frame" x="493" y="11" width="76" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ata-AK-hFR" secondAttribute="trailing" id="Ctd-WR-5Lz"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Ata-AK-hFR" secondAttribute="trailing" constant="23" id="Ctd-WR-5Lz"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Ata-AK-hFR" secondAttribute="bottom" constant="3" id="Z2D-fD-352"/>
                                                 <constraint firstItem="Ata-AK-hFR" firstAttribute="top" secondItem="lyz-vb-sAa" secondAttribute="topMargin" constant="3" id="lZp-gW-Dmz"/>
                                                 <constraint firstItem="Ata-AK-hFR" firstAttribute="top" secondItem="lyz-vb-sAa" secondAttribute="top" constant="11" id="ySv-tm-1pO"/>
@@ -78,7 +83,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell tag="3" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZIc-HU-pBA">
+                                    <tableViewCell tag="3" contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZIc-HU-pBA">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZIc-HU-pBA" id="p8A-Ul-6zc">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -90,14 +95,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rn7-0v-e6q" userLabel="User's Email">
-                                                    <rect key="frame" x="551" y="11" width="41" height="21"/>
+                                                    <rect key="frame" x="526" y="11" width="41" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="rn7-0v-e6q" secondAttribute="trailing" id="TKc-hb-d41"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="rn7-0v-e6q" secondAttribute="trailing" constant="-8" id="TKc-hb-d41"/>
                                                 <constraint firstItem="rn7-0v-e6q" firstAttribute="top" secondItem="p8A-Ul-6zc" secondAttribute="top" constant="11" id="esZ-IA-5Xh"/>
                                                 <constraint firstItem="rn7-0v-e6q" firstAttribute="top" secondItem="p8A-Ul-6zc" secondAttribute="topMargin" constant="3" id="nKI-Ut-2XU"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="rn7-0v-e6q" secondAttribute="bottom" constant="3" id="wbl-gu-jA0"/>
@@ -150,7 +155,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Actions" id="PZZ-1d-Cde">
                                 <cells>
-                                    <tableViewCell tag="6" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VoM-f8-8MV">
+                                    <tableViewCell tag="6" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VoM-f8-8MV">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VoM-f8-8MV" id="8Vf-7P-2Jn">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -200,60 +205,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jlg-8F-B7V" userLabel="Pop-up View">
-                                <rect key="frame" x="40" y="164" width="240" height="240"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlg-8F-B7V" userLabel="Pop-up View">
+                                <rect key="frame" x="180" y="68" width="240" height="240"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3x-fb-WX2" userLabel="Close">
-                                        <rect key="frame" x="3" y="0.0" width="15" height="22"/>
-                                        <accessibility key="accessibilityConfiguration" label="Close Button"/>
-                                        <state key="normal" image="CloseButton"/>
-                                        <connections>
-                                            <action selector="close" destination="wIG-oy-ucg" eventType="touchUpInside" id="BzA-A0-Aem"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inviter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
-                                        <rect key="frame" x="97" y="62" width="47" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inviter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
+                                        <rect key="frame" x="8" y="41" width="224" height="41"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="group name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
-                                        <rect key="frame" x="74" y="132" width="93" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="group name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
+                                        <rect key="frame" x="8" y="131" width="224" height="42"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9z-em-gaB">
-                                        <rect key="frame" x="8" y="210" width="51" height="30"/>
+                                        <rect key="frame" x="8" y="202" width="51" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Decline">
+                                            <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="decline:" destination="wIG-oy-ucg" eventType="touchUpInside" id="7Bi-lX-Tbf"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="invites you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
+                                        <rect key="frame" x="66" y="96" width="108" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-gY-Ye9">
-                                        <rect key="frame" x="186" y="210" width="49" height="30"/>
+                                        <rect key="frame" x="183" y="202" width="49" height="30"/>
+                                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Accept">
+                                            <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="accept:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OC9-ov-fjm"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="wants you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
-                                        <rect key="frame" x="55" y="96" width="131" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="odB-yg-g9v"/>
+                                    <constraint firstAttribute="height" constant="240" id="wjG-1l-p1I"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="jlg-8F-B7V" secondAttribute="centerX" id="9jf-Jv-Z32"/>
+                            <constraint firstItem="jlg-8F-B7V" firstAttribute="top" secondItem="ARW-aH-czT" secondAttribute="top" constant="68" id="jb2-nl-adw"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="acceptButton" destination="mJ4-gY-Ye9" id="od4-6b-gIu"/>
+                        <outlet property="declineButton" destination="i9z-em-gaB" id="KhT-ue-a5Z"/>
                         <outlet property="groupLabel" destination="Ylf-mO-KUR" id="aUL-eC-kK2"/>
                         <outlet property="inviterLabel" destination="1v4-GX-kdx" id="Pe8-Yo-bc7"/>
                         <outlet property="popupView" destination="jlg-8F-B7V" id="wnz-2J-ghX"/>
@@ -460,11 +471,11 @@
             </objects>
             <point key="canvasLocation" x="2617" y="1791"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Bar-->
         <scene sceneID="nn8-nG-K4y">
             <objects>
-                <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="E24990D0-8161-4E10-B433-40F07F1528AD" id="jV0-qV-oSf"/>
+                <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="73FA3901-F28B-48B1-AA8B-AE3E2718DB23" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -711,12 +722,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uVu-wS-ElL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3482" y="3967"/>
+            <point key="canvasLocation" x="3482" y="4001"/>
         </scene>
-        <!--Privacy Policy Controller-->
+        <!--Terms of Service Controller-->
         <scene sceneID="dRX-H8-0fI">
             <objects>
-                <viewController id="We3-Un-bdN" userLabel="Privacy Policy Controller" customClass="PoliciesViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="We3-Un-bdN" userLabel="Terms of Service Controller" customClass="PoliciesViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aLc-C6-w5V"/>
                         <viewControllerLayoutGuide type="bottom" id="C7Q-RO-wd3"/>
@@ -773,7 +784,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XsE-jT-Ixf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3538" y="4538"/>
+            <point key="canvasLocation" x="3482" y="4688"/>
         </scene>
         <!--Email Controller-->
         <scene sceneID="cT3-Df-upH">
@@ -857,8 +868,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CloseButton" width="15" height="15"/>
-        <image name="E24990D0-8161-4E10-B433-40F07F1528AD" width="24" height="37">
+        <image name="73FA3901-F28B-48B1-AA8B-AE3E2718DB23" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

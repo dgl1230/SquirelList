@@ -83,10 +83,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFr-7l-HDJ">
-                                <rect key="frame" x="240" y="372" width="120" height="30"/>
+                                <rect key="frame" x="240" y="372" width="120" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="Igh-Z2-Pfg"/>
-                                    <constraint firstAttribute="height" constant="30" id="l9p-Jf-vPX"/>
+                                    <constraint firstAttribute="height" constant="13" id="l9p-Jf-vPX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="Forgot your password?">

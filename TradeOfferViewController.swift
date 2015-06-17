@@ -21,6 +21,8 @@ class TradeOfferViewController: PopUpViewController {
     var tradeProposal: PFObject?
     var yourSquirrel: PFObject?
     
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var offeredlLabel: UILabel!
     @IBOutlet weak var yourSquirrelLabel: UILabel!
     
@@ -81,6 +83,11 @@ class TradeOfferViewController: PopUpViewController {
         var yourFirstName = yourSquirrel!["first_name"] as? String
         var yourLastName = yourSquirrel!["last_name"] as? String
         yourSquirrelLabel.text = "\(yourFirstName!) \(yourLastName!)"
+        //Give buttons rounded edges
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.layer.masksToBounds = true
+        declineButton.layer.cornerRadius = 5
+        declineButton.layer.masksToBounds = true
     }
 
 

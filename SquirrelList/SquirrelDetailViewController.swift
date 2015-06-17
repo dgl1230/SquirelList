@@ -152,6 +152,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     
      //Removes the user's username from the squirrel's "raters" field and their rating from the squirrel's "ratings" field
+     //Look into changing this up so that it returns the new ratings array and saves the squirrel else where
     func removeOwnerRating(squirrel: PFObject) -> Void {
         var ownerIndex = find(squirrel["raters"] as! [String], PFUser.currentUser()!.username!)
         squirrel.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
@@ -268,12 +269,15 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+
         let picture = info[UIImagePickerControllerEditedImage] as? UIImage
         let imageData = UIImagePNGRepresentation(picture)
         let imageFile = PFFile(data: imageData)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")
         ratedSquirrel!.save()
         self.dismissViewControllerAnimated(true, completion: nil)
+        //We need to reload the popup with the new picture
+        self.viewDidLoad()
     }
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
