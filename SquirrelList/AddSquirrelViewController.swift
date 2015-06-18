@@ -29,27 +29,27 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func done() {
         let first = firstName.text as String
         let last = lastName.text as String
-        let test = "hi"
+        if count(first) > 10 {
+            displayErrorAlert("Their first name is too long!", error: "Please keep first names to a max of 10 characters.")
+            return
+        } else if count(last) > 15 {
+            displayErrorAlert("Their last name is too long!", error: "Please keep last names to a max of 15 characters")
+            return
+        }
 
         //We want to make sure users can't add a squirrel that starts or ends with a space or have numbers or weird punctuation
-        let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:'<>,.?/_+=")
+        let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:<>,.?/_+=")
         if first.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil || last.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil {
-                //The user is putting in weird punctuations or numbers
-                let alertController = UIAlertController(title: "No numbers or symbols!", message: "Stop trying to cheat the system, you animal", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal")
         } else {
             let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
             let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
             let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
-            println("squirrel name is \(squirrelName)")
             if (find(squirrelNames!, squirrelName) != nil) {
-                //Then the squirrel already exists and the user can't create it
-                let alertController = UIAlertController(title: "That Squirrel already exists!", message: "Try adding another squirrel instead, you monster", preferredStyle: UIAlertControllerStyle.Alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alertController, animated: true, completion: nil)
+                displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster")
+                
         } else {
             delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first.capitalizedString, didFinishAddingLastName: last.capitalizedString)
             self.navigationController?.popViewControllerAnimated(true)
@@ -57,11 +57,11 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    /* Parameters: error, which is the error that the user should see in the UIAlertController
+    /* Parameters: Title, which is the title of the alert, and error, which is the error that the user should see in the UIAlertController
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
-    func displayErrorAlert(error: String) {
-        var alert = UIAlertController(title: "Woops! We had a problem", message: error, preferredStyle: UIAlertControllerStyle.Alert)
+    func displayErrorAlert(title: String, error: String) {
+        var alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
             self.dismissViewControllerAnimated(true, completion: nil)
         }))

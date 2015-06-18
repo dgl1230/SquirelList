@@ -20,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
         let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
         let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-        
-        
+
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 
         

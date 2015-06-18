@@ -31,6 +31,10 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     
     @IBAction func save(sender: AnyObject) {
         if infoBeingChanged == "name" {
+            if count(infoField.text) > 15 {
+                displayErrorAlert("That name is too long!", message: "Please keep it to under 15 characters. Amateur.")
+                return
+            }
             PFUser.currentUser()!["name"] = infoField.text
             PFUser.currentUser()!.save()
             self.navigationController?.popViewControllerAnimated(true)
@@ -49,6 +53,15 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    
+    /* Parameters: error, which is the error that the user should see in the UIAlertController
+    What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
+    */
+    func displayErrorAlert(title: String, message: String) {
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 

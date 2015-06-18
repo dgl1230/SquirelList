@@ -150,7 +150,10 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             var pendingFriends = PFUser.currentUser()!["pendingFriends"] as! [String]
             users = friends + pendingFriends
         }
+        println("users is \(users)")
+        println("username is \(username)")
         if contains(users, username) {
+            //Check to see if the user is already in the group's users or among the user's friends and pending friends
             return true
         }
         return false
@@ -206,7 +209,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
         cell.nameLabel.text = user["username"] as? String
         cell.addButton.tag = indexPath.row
-        if isAdded(user.objectId!) {
+        if isAdded(user.username!) {
             //The user variable has been already added to the relevant group
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)

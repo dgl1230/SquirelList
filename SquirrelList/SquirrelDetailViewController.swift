@@ -291,13 +291,19 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-
         let picture = info[UIImagePickerControllerEditedImage] as? UIImage
         let imageData = UIImagePNGRepresentation(picture)
         let imageFile = PFFile(data: imageData)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")
-        ratedSquirrel!.save()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        println(5)
+        ratedSquirrel!.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError?) -> Void in
+            if error == nil {
+                println(6)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                println(7)
+            }
+        }
+
         //We need to reload the popup with the new picture
         //self.viewDidLoad()
     }

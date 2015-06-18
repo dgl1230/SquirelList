@@ -359,7 +359,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             tradeOfferButton?.title = "\u{f21b}"
             tradeOfferButton?.tintColor = UIColor.orangeColor()
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
-            self.title = "\(groupName) Squirrels"
+            //Setting self.title here for some reason change's the squirrel tab's title as well
+            self.navigationItem.title = "\(groupName) Squirrels"
         } else if selectedUser!.username == PFUser.currentUser()!.username {
             self.title = "My Squirrels"
         } else if name != nil {
