@@ -13,16 +13,12 @@ class MessagesViewController: JSQMessagesViewController {
     var group: PFObject!
     var incomingUser: PFUser!
     var users = [String]()
-    //var users1 = [String]()
     
     var messages = [JSQMessage]()
     var messageObjects = [PFObject]()
     
     var outgoingBubbleImage: JSQMessagesBubbleImage!
     var incomingBubbleImage : JSQMessagesBubbleImage!
-    
-    var selfAvatar: JSQMessagesAvatarImage!
-    var incomingAvatar: JSQMessagesAvatarImage!
     
     //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
     var shouldReLoad: Bool?
@@ -145,6 +141,9 @@ class MessagesViewController: JSQMessagesViewController {
         //For when the user touches an obscure area of the view
         var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "close")
         view.addGestureRecognizer(tap)
+        
+        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 
     }
     
@@ -153,44 +152,36 @@ class MessagesViewController: JSQMessagesViewController {
         view.endEditing(true)
     }
 
-
     
-    // MARK: - DELEGATE METHODS
-    
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let message = messages[indexPath.row]
-        
-        if message.senderId == self.senderId {
-            return selfAvatar
-        }
-        //We need to customize each outgoing avatar with the right username
-        let messageObject = messageObjects[indexPath.row] as PFObject
-        let user = messageObject["sender"] as! String
-        var incomingUser = user as NSString
-        var incomingAvatar = JSQMessagesAvatarImageFactory.avatarImageWithUserInitials(incomingUser.substringWithRange(NSMakeRange(0, 3)), backgroundColor: UIColor.whiteColor(), textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(14), diameter: UInt(kJSQMessagesCollectionViewAvatarSizeDefault))
-
-        return incomingAvatar
-    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        if indexPath.item % 3 == 0 {
-            let message = messages[indexPath.item]
-            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.item]
+        if message.senderId != self.senderId {
+            let NSMessage = message.senderId as NSString
+            return NSMutableAttributedString(string: message.senderDisplayName)
         }
         return nil
+        /*
+        returns the date - need to think when it is best to do this
+        if indexPath.item % 3 == 0 {
+            let message = messages[indexPath.item]
+            let NSMessage = message.senderDisplayName as NSString
+            return NSMutableAttributedString(string: message.senderDisplayName)
+            //return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+        }
+        return nil
+        */
     }
+
     
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as? JSQMessagesCollectionViewCell
+        cell!.textView.textColor = UIColor.blackColor()
+        //Check to see if we are displaying a sender's name. If we are, we want their name to be aligned witht the beggining of the message
         let message = messages[indexPath.row]
-        if message.senderId == self.senderId {
-            cell!.textView.textColor = UIColor.blackColor()
-        } else {
-            cell!.textView.textColor = UIColor.blackColor()
+        if message.senderId != self.senderId {
+            cell!.messageBubbleTopLabel.textInsets.left = 15.0
         }
-        
         cell!.textView.linkTextAttributes = [NSForegroundColorAttributeName:cell!.textView.textColor]
         return cell!
     }
@@ -202,13 +193,13 @@ class MessagesViewController: JSQMessagesViewController {
     
     
     
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        if indexPath.item % 3 == 0 {
-            return kJSQMessagesCollectionViewCellLabelHeightDefault
+    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+            let message = messages[indexPath.row]
+            if message.senderId != self.senderId {
+                    return kJSQMessagesCollectionViewCellLabelHeightDefault
+            }
+            return 0
         }
-        return 0
-    }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
         return messages[indexPath.row]

@@ -475,7 +475,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="73FA3901-F28B-48B1-AA8B-AE3E2718DB23" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="A01E19AB-47D8-4DFC-B5E0-6D3E9747065C" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -552,20 +552,27 @@
                         <sections>
                             <tableViewSection id="vRH-0r-onM">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="bhy-q2-73k">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="87" id="bhy-q2-73k">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bhy-q2-73k" id="Pi1-I3-NvL">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Group Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfs-e1-Qji">
-                                                    <rect key="frame" x="106" y="8" width="97" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Group Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfs-e1-Qji">
+                                                    <rect key="frame" x="8" y="13" width="584" height="65"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="Kct-wX-imk" id="fv2-we-0GQ"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Yfs-e1-Qji" firstAttribute="trailing" secondItem="Pi1-I3-NvL" secondAttribute="trailingMargin" id="2k1-Mg-6fS"/>
+                                                <constraint firstItem="Yfs-e1-Qji" firstAttribute="bottom" secondItem="Pi1-I3-NvL" secondAttribute="bottomMargin" id="36v-b3-pjS"/>
+                                                <constraint firstItem="Yfs-e1-Qji" firstAttribute="top" secondItem="Pi1-I3-NvL" secondAttribute="top" constant="13" id="4ZO-Gn-4PG"/>
+                                                <constraint firstItem="Yfs-e1-Qji" firstAttribute="leading" secondItem="Pi1-I3-NvL" secondAttribute="leadingMargin" id="ARq-9X-x1w"/>
+                                                <constraint firstItem="Yfs-e1-Qji" firstAttribute="top" secondItem="Pi1-I3-NvL" secondAttribute="topMargin" constant="5" id="qqa-hZ-HH2"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -806,7 +813,7 @@
                                     <constraint firstAttribute="width" constant="600" id="T0t-FD-BqI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email will only be used for password recovery" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mN-y4-glI">
                                 <rect key="frame" x="164" y="69" width="272" height="21"/>
@@ -868,7 +875,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="73FA3901-F28B-48B1-AA8B-AE3E2718DB23" width="24" height="37">
+        <image name="A01E19AB-47D8-4DFC-B5E0-6D3E9747065C" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

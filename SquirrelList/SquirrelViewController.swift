@@ -42,9 +42,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     //The owner of the squirrel that the logged in user wants
     var desiredSquirrelOwner: PFUser?
     
-    //Optionals for keeping track of squirrel names to transfer to AddSquirrelViewController to make sure a Squirrel can't be duplicated
-    var firstNames: [String]?
-    var lastNames: [String]?
+    //Optional for keeping track of squirrel names to transfer to AddSquirrelViewController to make sure a Squirrel can't be duplicated. Each object in the array is "firstName LastName"
+    var squirrelNames: [String]?
     
     
     @IBOutlet weak var squirrelSlotsLabel: UILabel?
@@ -144,8 +143,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if segue.identifier == "AddSquirrel" {
             let controller = segue.destinationViewController as! AddSquirrelViewController
             //we need to transer the array of names so that we can make sure the user isn't creating a duplicate squirrel
-            controller.firstNames = firstNames!
-            controller.lastNames = lastNames!
+            controller.squirrelNames = squirrelNames!
             controller.delegate = self
             
         }
@@ -190,15 +188,13 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         var groupUserIds = PFUser.currentUser()!["currentGroup"]!["userIDs"] as? [String]
         var numOfUsers = groupUserIds!.count
         var yourNumSquirrels = 0
-        firstNames = []
-        lastNames = []
+        squirrelNames = []
         for squirrel in self.objects! {
             //We save the names as lowercase, so that when a squirrel name is being created, users can't duplicate a squirrel by using a different casing
             let firstName = squirrel["first_name"] as! String
             let lastName = squirrel["last_name"] as! String
-
-            firstNames!.append(firstName.lowercaseString)
-            lastNames!.append(lastName.lowercaseString)
+            let name = "\(firstName.lowercaseString) \(lastName.lowercaseString)"
+            squirrelNames!.append(name)
             
             var owner = squirrel["owner"] as? PFUser
             if owner?.objectId == PFUser.currentUser()!.objectId {
@@ -389,10 +385,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     
     override func viewWillAppear(animated: Bool) {
+        /*
         if shouldReLoad == true {
             shouldReLoad = false
             self.viewDidLoad()
         }
+        */
+        //It'd be better to always reload - but this may be too inefficent. Testing it for now
+        self.viewDidLoad()
     }
    
    

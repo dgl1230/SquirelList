@@ -248,6 +248,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         //Check if the squirrel has a picture
         if ratedSquirrel!["picture"] != nil {
             let pic = ratedSquirrel!["picture"] as! PFFile
+            
             pic.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
                 if error == nil {
                     let image = UIImage(data: imageData!)
@@ -298,7 +299,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         ratedSquirrel!.save()
         self.dismissViewControllerAnimated(true, completion: nil)
         //We need to reload the popup with the new picture
-        self.viewDidLoad()
+        //self.viewDidLoad()
     }
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

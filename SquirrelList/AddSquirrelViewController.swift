@@ -21,25 +21,39 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
-    //Optional for keeping track of first names of squirrels
-    var firstNames: [String]?
-    //Optional for keeping track of last names of squirrels
-    var lastNames: [String]?
+    //Have one array with their full names in it
+    var squirrelNames: [String]?
+
     
     
     @IBAction func done() {
-        let first = firstName.text as NSString
-        first.lowercaseString
-        let last = lastName.text as NSString
-        last.lowercaseString
-        if (find(firstNames!, first as String) != nil) && (find(lastNames!, last as String) != nil) {
-            //Then the squirrel already exists and the user can't create it
-            let alertController = UIAlertController(title: "That Squirrel already exists!", message: "Try adding another squirrel instead, you monster", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alertController, animated: true, completion: nil)
+        let first = firstName.text as String
+        let last = lastName.text as String
+        let test = "hi"
+
+        //We want to make sure users can't add a squirrel that starts or ends with a space or have numbers or weird punctuation
+        let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:'<>,.?/_+=")
+        if first.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil || last.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil {
+                //The user is putting in weird punctuations or numbers
+                let alertController = UIAlertController(title: "No numbers or symbols!", message: "Stop trying to cheat the system, you animal", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
         } else {
-            delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first, didFinishAddingLastName: last)
+            let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
+            let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
+            let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
+            println("squirrel name is \(squirrelName)")
+            if (find(squirrelNames!, squirrelName) != nil) {
+                //Then the squirrel already exists and the user can't create it
+                let alertController = UIAlertController(title: "That Squirrel already exists!", message: "Try adding another squirrel instead, you monster", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first.capitalizedString, didFinishAddingLastName: last.capitalizedString)
             self.navigationController?.popViewControllerAnimated(true)
+        }
         }
     }
     
@@ -72,6 +86,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         doneBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         doneBarButton.title = "\u{f058}"
         doneBarButton.tintColor = UIColor.whiteColor()
+        println(squirrelNames!)
     }
     
     //Should be its own extension 

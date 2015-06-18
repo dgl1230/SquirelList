@@ -40,7 +40,8 @@ class TradeOfferViewController: PopUpViewController {
         
         //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)
         var query = PFQuery(className: "TradeProposal")
-        query.whereKey("receivingUsername", equalTo: PFUser.currentUser()!.username!)
+        //This line is redundant, I thinks
+        //query.whereKey("receivingUsername", equalTo: PFUser.currentUser()!.username!)
         query.whereKey("proposedSquirrelID", equalTo: yourSquirrel!.objectId!)
         query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
