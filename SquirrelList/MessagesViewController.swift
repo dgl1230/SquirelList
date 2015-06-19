@@ -130,7 +130,7 @@ class MessagesViewController: JSQMessagesViewController {
         //Disable the attachment button
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
-        let lightBlue = UIColor(red: 0, green: 191, blue: 255, alpha: 1)
+        let lightBlue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
         
         let selfUsername = PFUser.currentUser()!.username! as NSString
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero

@@ -92,13 +92,12 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
         
         //For some reason accessing email via currentUser()!.email results in an error
         let email = PFUser.currentUser()!["email"] as? String
-        if email == "test@test.com" {
+        if email!.rangeOfString("squirrellist") != nil {
             //This is our rachet, fake email for all users and we should not display it
             emailLabel.text = ""
         } else {
             emailLabel.text = email
         }
-
         
         }
     

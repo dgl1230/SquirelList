@@ -291,9 +291,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        let picture = info[UIImagePickerControllerEditedImage] as? UIImage
-        let imageData = UIImagePNGRepresentation(picture)
-        let imageFile = PFFile(data: imageData)
+        let picture = info[UIImagePickerControllerEditedImage] as! UIImage
+        //let imageData = UIImagePNGRepresentation(picture)
+        let imageTest = picture.lowestQualityJPEGNSData
+        let imageFile = PFFile(data: imageTest)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")
         println(5)
         ratedSquirrel!.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError?) -> Void in
@@ -311,4 +312,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+}
+
+
+extension UIImage {
+    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
+    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}
+    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5) }
+    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
+    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
 }

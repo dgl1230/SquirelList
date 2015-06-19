@@ -46,13 +46,15 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
             let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
             let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            
             let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
             if (find(squirrelNames!, squirrelName) != nil) {
                 displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster")
                 
-        } else {
-            delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first.capitalizedString, didFinishAddingLastName: last.capitalizedString)
-            self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                //Reloads the parent squirrelViewController
+                delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first.capitalizedString, didFinishAddingLastName: last.capitalizedString)
+                self.navigationController?.popViewControllerAnimated(true)
         }
         }
     }
@@ -86,7 +88,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         doneBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         doneBarButton.title = "\u{f058}"
         doneBarButton.tintColor = UIColor.whiteColor()
-        println(squirrelNames!)
     }
     
     //Should be its own extension 

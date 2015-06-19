@@ -41,6 +41,10 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             //Reloads the SettingsViewContrller
             delegate!.finishedSaving(self)
         } else if infoBeingChanged == "email" {
+            if count(infoField.text) > 30 {
+                displayErrorAlert("That email is too long!", message: "Please keep it to under 30 characters. Amateur.")
+                return
+            }
             PFUser.currentUser()!.email = infoField.text
             let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to verify your address", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
@@ -72,8 +76,15 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             placeholder = PFUser.currentUser()!["name"] as? String
             self.title = "My Name"
         } else if infoBeingChanged == "email" {
-            infoField.text = PFUser.currentUser()!.email
-            placeholder = infoField.text
+            //For some reason accessing email via currentUser()!.email results in an error
+            let email = PFUser.currentUser()!["email"] as? String
+            if email!.rangeOfString("squirrellist") != nil {
+                //This is our rachet, fake email for all users and we should not display it
+                infoField.text = ""
+            } else {
+                infoField.text = PFUser.currentUser()!.email
+            }
+            placeholder = email
             self.title = "My Email"
         }
         //So we can detect what the user is typing and whether or not to enable the save button

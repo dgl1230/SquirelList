@@ -14,10 +14,12 @@ class HomeTabViewController: UITabBarController {
         super.viewDidLoad()
         
         //Configure the colors for the tab bar and tab icons
-        let blue = UIColor(red: 0, green: 191, blue: 255, alpha: 1)
+        let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
         self.tabBar.tintColor = UIColor.orangeColor()
         self.tabBar.barTintColor = blue
-        //self.tabBar.selectedImageTintColor
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState:.Normal)
+        
+
 
         
         //Setting the tabs programmatically so that we can use multiple storyboards
@@ -42,5 +44,35 @@ class HomeTabViewController: UITabBarController {
         moreViewController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.viewControllers = [usersViewController, squirrelsViewController, chatViewController, moreViewController]
         
+        //Set each tab image to white
+        for item in self.tabBar.items as! [UITabBarItem] {
+            if let image = item.image {
+                item.image = image.imageWithColor(UIColor.whiteColor()).imageWithRenderingMode(.AlwaysOriginal)
+            }
+        }
+        
+    }
+    
+}
+
+// Image extension to customize default color of each tab image
+    extension UIImage {
+        func imageWithColor(tintColor: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+
+        let context = UIGraphicsGetCurrentContext() as CGContextRef
+        CGContextTranslateCTM(context, 0, self.size.height)
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextSetBlendMode(context, kCGBlendModeNormal)
+
+        let rect = CGRectMake(0, 0, self.size.width, self.size.height) as CGRect
+        CGContextClipToMask(context, rect, self.CGImage)
+        tintColor.setFill()
+        CGContextFillRect(context, rect)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext() as UIImage
+        UIGraphicsEndImageContext()
+
+        return newImage
     }
 }
