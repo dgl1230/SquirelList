@@ -19,7 +19,7 @@ protocol ChangeInfoViewControllerDelegate: class {
 
 class ChangeInfoController: UIViewController, UITextFieldDelegate {
     
-    //Optional for determing what kind of info the user is changing. Will either be "name" or "email"
+    //Optional for determing what kind of info the user is changing. Will either be "name" or "email" or "report"
     var infoBeingChanged: String?
     //Variable for storing initial value to check if user has changed their value in the infoField
     var placeholder : NSString?
@@ -28,8 +28,10 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var infoField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var reportExplanationField: UITextView?
     
     @IBAction func save(sender: AnyObject) {
+        println("save being pressed")
         if infoBeingChanged == "name" {
             if count(infoField.text) > 15 {
                 displayErrorAlert("That name is too long!", message: "Please keep it to under 15 characters. Amateur.")
@@ -55,6 +57,20 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
                     self.delegate!.finishedSaving(self)
             }))
             
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else if infoBeingChanged == "report" {
+            println("regitering as report")
+            let report = PFObject(className: "Report")
+            report["offendingUsername"] = infoField.text
+            report["explanation"] = reportExplanationField!.text
+            report["offendedUSer"] = PFUser.currentUser()!.username!
+            let alertController = UIAlertController(title: "Report sent!", message: "Thanks for letting us know. We'll get to the bottom of this quickly.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+                    //We duplicate this code from above because we only want these actions to occur after the user has pressed OK
+                    report.save()
+                    self.navigationController?.popViewControllerAnimated(true)
+                    //Reloads the SettingsViewContrller
+            }))
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
@@ -86,6 +102,8 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             }
             placeholder = email
             self.title = "My Email"
+        } else if infoBeingChanged == "report" {
+            self.title = "Support"
         }
         //So we can detect what the user is typing and whether or not to enable the save button
         infoField.delegate = self

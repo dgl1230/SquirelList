@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
 
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+        
+        PFUser.logOut()
 
         
         if PFUser.currentUser() == nil {

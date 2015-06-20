@@ -170,8 +170,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     }
     
     
-     //Removes the user's username from the squirrel's "raters" field and their rating from the squirrel's "ratings" field
-     //Look into changing this up so that it returns the new ratings array and saves the squirrel else where
+     //Removes the user's rating from the squirrel's "ratings" field
     func removeRating(squirrel: PFObject) -> [String] {
         var ownerIndex = find(squirrel["raters"] as! [String], PFUser.currentUser()!.username!)
         var ratings = squirrel["ratings"] as? [String]
@@ -214,8 +213,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             rateButton.setTitle("Rerate", forState: UIControlState.Normal)
         }
         
-        //Check if the squirrel has an owner to propose a trade with
+        //Check if the squirrel has an owner to propose a trade with and if they have a unique picture
         var owner = ratedSquirrel!["ownerUsername"] as? String
+        let pic = ratedSquirrel!["picture"] as! PFFile
         if owner == nil {
             squirrelOwnerLabel.text = "Owner:  No one :("
             var canClaim = canClaimSquirrel!
@@ -227,7 +227,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             }
         } else if owner == PFUser.currentUser()!.username {
             squirrelOwnerLabel.text = "Owner:  me"
-            if ratedSquirrel!["picture"] == nil {
+            //Check if the squirrel has a default picture
+            if pic.name.rangeOfString("Squirrel_Profile_Pic") != nil {
                 claimTradePictureButton.setTitle("Upload Picture", forState: UIControlState.Normal)
             } else {
                 claimTradePictureButton.setTitle("Change Picture", forState: UIControlState.Normal)
@@ -245,11 +246,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             claimOrTradeOrPicture = "trade"
         }
         
-        //Check if the squirrel has a picture
-        if ratedSquirrel!["picture"] != nil {
-            let pic = ratedSquirrel!["picture"] as! PFFile
-            
-            pic.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
+        //Fetch picture file
+        pic.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
                 if error == nil {
                     let image = UIImage(data: imageData!)
                     self.squirrelPic!.image = image
@@ -257,9 +255,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
                     self.squirrelPic!.layer.cornerRadius = 5
                     self.squirrelPic!.layer.masksToBounds = true
                 }
-            })
-            
-        }
+        })
+        
         //Give the buttons rounded corners
         claimTradePictureButton.layer.cornerRadius = 5
         claimTradePictureButton.layer.masksToBounds = true
@@ -296,17 +293,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         let imageTest = picture.lowestQualityJPEGNSData
         let imageFile = PFFile(data: imageTest)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")
-        println(5)
         ratedSquirrel!.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError?) -> Void in
             if error == nil {
-                println(6)
                 self.dismissViewControllerAnimated(true, completion: nil)
-                println(7)
             }
         }
 
         //We need to reload the popup with the new picture
-        //self.viewDidLoad()
+        self.viewDidLoad()
     }
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {

@@ -147,8 +147,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             controller.delegate = self
             
         }
-        //We have two segues for two different Squirrel Details - one where the squirrel has a picture and one where it does not
-        if segue.identifier == "SquirrelDetails" || segue.identifier == "SquirrelDetailsPics"{
+        if segue.identifier == "SquirrelDetails" {
             let controller = segue.destinationViewController as! SquirrelDetailViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
@@ -220,6 +219,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             }
             addSquirrelButton?.enabled = true
         }
+        
+        
+        
 
     }
     
@@ -323,9 +325,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             
             self.navigationController?.popViewControllerAnimated(true)
         }
-        else if squirrel["picture"] != nil {
-            self.performSegueWithIdentifier("SquirrelDetailsPics", sender: objects![indexPath.row])
-        }
         else {
             self.performSegueWithIdentifier("SquirrelDetails", sender: objects![indexPath.row])
         }
@@ -414,6 +413,11 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["avg_rating"] = 0
         newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
         newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
+        let picture = UIImage(named: "Squirrel_Profile_Pic")
+        let imageData = UIImagePNGRepresentation(picture)
+        let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData)
+        newSquirrel["picture"] = imageFile
+        
         newSquirrel.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {

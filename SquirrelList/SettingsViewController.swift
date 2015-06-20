@@ -31,6 +31,10 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
             let controller = segue.destinationViewController as! ChangeInfoController
             controller.infoBeingChanged = "email"
             controller.delegate = self
+        } else if segue.identifier == "Report" {
+            let controller = segue.destinationViewController as! ChangeInfoController
+            controller.infoBeingChanged = "report"
+            controller.delegate = self
         }
     }
     
@@ -50,8 +54,11 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
         } else if cell.tag == 5 {
             //The user is selecting "Terms of Service"
             self.performSegueWithIdentifier("Terms of Service", sender: self)
+        } else if cell.tag == 6 {
+            //The user is selecting "Report"
+            self.performSegueWithIdentifier("Report", sender: self)
         }
-        if cell.tag == 6 {
+        if cell.tag == 7 {
             //They clicked the "Log Out" row
             var message = "Are you sure you want to log out?"
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)

@@ -26,7 +26,7 @@ class HomeTabViewController: UITabBarController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
         let usersViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Users") as! UINavigationController
-        usersViewController.tabBarItem = UITabBarItem(title: "Users", image: UIImage(named: "group"), tag: 4)
+        usersViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "group"), tag: 4)
         
         let squirrelsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Squirrels")as! UINavigationController
         squirrelsViewController.tabBarItem = UITabBarItem(title: "Squirrels", image: UIImage(named: "squirrel"), tag: 4)
