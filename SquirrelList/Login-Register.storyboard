@@ -23,6 +23,8 @@
             <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
+            <string>bosun-03</string>
+            <string>bosun-03</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -193,16 +195,34 @@
                                     <action selector="register:" destination="Fn5-sk-FgC" eventType="touchUpInside" id="jfl-03-JjW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3DV-mX-YQJ">
+                                <rect key="frame" x="255" y="95" width="91" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="2ef-tF-NPV"/>
+                                    <constraint firstAttribute="width" constant="91" id="d2B-Z3-RLj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="Privacy Policy">
+                                    <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forgotPassword:" destination="6Qu-3R-5KJ" eventType="touchUpInside" id="aQn-Y4-gh7"/>
+                                    <action selector="termsOfService:" destination="Fn5-sk-FgC" eventType="touchUpInside" id="kOc-H4-dNg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="yzq-th-9on" secondAttribute="centerX" id="Mll-NS-TGm"/>
                             <constraint firstItem="sJM-al-jXC" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="40" id="PjO-jt-oJI"/>
                             <constraint firstAttribute="centerX" secondItem="SVa-Ne-1H9" secondAttribute="centerX" id="RaI-vD-hNs"/>
+                            <constraint firstItem="3DV-mX-YQJ" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="95" id="UCM-wU-Q1y"/>
                             <constraint firstAttribute="centerX" secondItem="DTT-dm-8gK" secondAttribute="centerX" id="fiv-dW-w1f"/>
                             <constraint firstAttribute="centerX" secondItem="sJM-al-jXC" secondAttribute="centerX" id="foN-1k-Wil"/>
                             <constraint firstItem="DTT-dm-8gK" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="176" id="raA-3m-DHA"/>
                             <constraint firstItem="SVa-Ne-1H9" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="121" id="sP8-s5-zsP"/>
+                            <constraint firstAttribute="centerX" secondItem="3DV-mX-YQJ" secondAttribute="centerX" id="yZu-MB-S2r"/>
                             <constraint firstItem="yzq-th-9on" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="228" id="zmu-hH-Dfe"/>
                         </constraints>
                     </view>
@@ -212,6 +232,7 @@
                         <outlet property="registerButton" destination="sJM-al-jXC" id="BqT-Ff-jGv"/>
                         <outlet property="usernameTextField" destination="SVa-Ne-1H9" id="BMl-PD-FQp"/>
                         <outlet property="verifyPasswordTextField" destination="yzq-th-9on" id="cdv-hc-AjZ"/>
+                        <segue destination="wNK-Ak-92m" kind="presentation" identifier="termsOfService" id="UTb-j5-G40"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52C-RE-XGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -380,6 +401,131 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O18-vU-weh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="389" y="-1706"/>
+        </scene>
+        <!--Terms of Service View Controller-->
+        <scene sceneID="kVE-K5-GYp">
+            <objects>
+                <viewController id="pRf-97-wCN" userLabel="Terms of Service View Controller" customClass="PoliciesViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AE9-s0-XuN"/>
+                        <viewControllerLayoutGuide type="bottom" id="3wy-w6-Dpj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2wU-7W-7oK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yKZ-Xr-IBz">
+                                <rect key="frame" x="0.0" y="68" width="600" height="600"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jaD-Pd-Jb3">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfp-IZ-UHD" userLabel="Close Button">
+                                <rect key="frame" x="0.0" y="13" width="30" height="42"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="vQX-Yw-Y66" eventType="touchUpInside" id="Odo-KH-MRt"/>
+                                    <action selector="close:" destination="pRf-97-wCN" eventType="touchUpInside" id="VZ0-YE-Yxn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Vfp-IZ-UHD" id="hqZ-XA-XCW"/>
+                        <outlet property="scrollView" destination="yKZ-Xr-IBz" id="i0a-vf-2fe"/>
+                        <outlet property="textView" destination="jaD-Pd-Jb3" id="Ut9-Xz-lD5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ISb-7Y-hST" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1163" y="-940"/>
+        </scene>
+        <!--Privacy Policy Controller-->
+        <scene sceneID="qkW-dM-MG3">
+            <objects>
+                <viewController id="wNK-Ak-92m" userLabel="Privacy Policy Controller" customClass="PoliciesViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8Lb-FG-bJC"/>
+                        <viewControllerLayoutGuide type="bottom" id="G4x-hh-HNm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yG2-VS-yg1">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZTk-B5-cAC">
+                                <rect key="frame" x="0.0" y="45" width="600" height="555"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I24-bO-3we">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="575"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kim-gQ-nmf">
+                                                <rect key="frame" x="0.0" y="31" width="600" height="409"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="kim-gQ-nmf" firstAttribute="leading" secondItem="I24-bO-3we" secondAttribute="leading" id="2Uu-CX-NhH"/>
+                                            <constraint firstAttribute="trailing" secondItem="kim-gQ-nmf" secondAttribute="trailing" id="TXx-3I-6Y5"/>
+                                            <constraint firstItem="kim-gQ-nmf" firstAttribute="top" secondItem="I24-bO-3we" secondAttribute="top" constant="31" id="n3u-hw-S75"/>
+                                            <constraint firstAttribute="bottom" secondItem="kim-gQ-nmf" secondAttribute="bottom" constant="135" id="p8v-lE-5Ml"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="I24-bO-3we" firstAttribute="top" secondItem="ZTk-B5-cAC" secondAttribute="top" id="6sn-00-lP6"/>
+                                    <constraint firstAttribute="trailing" secondItem="I24-bO-3we" secondAttribute="trailing" id="FZl-Oo-pY7"/>
+                                    <constraint firstItem="I24-bO-3we" firstAttribute="leading" secondItem="ZTk-B5-cAC" secondAttribute="leading" id="efp-CQ-Tyh"/>
+                                    <constraint firstAttribute="bottom" secondItem="I24-bO-3we" secondAttribute="bottom" constant="-20" id="xWU-Fh-jX0"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZMH-mk-DBK" userLabel="Close Button">
+                                <rect key="frame" x="0.0" y="13" width="30" height="42"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="vQX-Yw-Y66" eventType="touchUpInside" id="gkK-U6-fSx"/>
+                                    <action selector="close:" destination="wNK-Ak-92m" eventType="touchUpInside" id="hdm-WP-bGL"/>
+                                    <action selector="close:" destination="pRf-97-wCN" eventType="touchUpInside" id="sNt-W9-Zq2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="I24-bO-3we" secondAttribute="width" id="6Dt-bj-m8n"/>
+                            <constraint firstAttribute="height" secondItem="I24-bO-3we" secondAttribute="height" priority="250" constant="25" id="JLM-DD-lE3"/>
+                            <constraint firstAttribute="trailing" secondItem="ZTk-B5-cAC" secondAttribute="trailing" id="ZVU-L1-3ge"/>
+                            <constraint firstItem="ZTk-B5-cAC" firstAttribute="top" secondItem="8Lb-FG-bJC" secondAttribute="bottom" constant="25" id="c3t-Vp-tZZ"/>
+                            <constraint firstItem="ZTk-B5-cAC" firstAttribute="leading" secondItem="yG2-VS-yg1" secondAttribute="leading" id="cCy-RN-EDx"/>
+                            <constraint firstItem="G4x-hh-HNm" firstAttribute="top" secondItem="ZTk-B5-cAC" secondAttribute="bottom" id="ewN-av-SwP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="ZMH-mk-DBK" id="TqX-5q-YKy"/>
+                        <outlet property="scrollView" destination="ZTk-B5-cAC" id="2ia-N0-ZQq"/>
+                        <outlet property="textView" destination="kim-gQ-nmf" id="dXz-JZ-Wa8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Edb-v0-pdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1163" y="-235"/>
         </scene>
     </scenes>
 </document>

@@ -22,6 +22,11 @@ class RegisterViewController: UIViewController {
     @IBAction func close(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func termsOfService(sender: AnyObject) {
+        println("button being pressed")
+        self.performSegueWithIdentifier("termsOfService", sender: self)
+    }
 
 
     @IBAction func register(sender: AnyObject) {
@@ -127,6 +132,13 @@ class RegisterViewController: UIViewController {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "termsOfService" {
+            let controller = segue.destinationViewController as! PoliciesViewController
+            controller.policy = "Privacy Policy"
+        }
     }
     
     

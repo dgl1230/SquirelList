@@ -35,6 +35,8 @@ class MessagesViewController: JSQMessagesViewController {
         message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if error == nil {
                 self.loadMessages()
+                //Disabling push notifications until we get live chat fully figured out
+                /*
                 let pushQuery = PFInstallation.query()
                 
                 //We want to get all installations that have the same userID's that are in the user's currentGroup
@@ -46,6 +48,7 @@ class MessagesViewController: JSQMessagesViewController {
                 let pushDict = ["alert": text, "badge":"increment", "sounds":""]
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
+                */
             }
         }
         self.finishSendingMessage()

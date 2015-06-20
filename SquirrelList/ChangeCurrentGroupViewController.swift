@@ -60,6 +60,16 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             //Give the user a warning to verify that they want to leave the group
+            let groups = PFUser.currentUser()!["groups"] as! [String]
+            if groups.count == 1 {
+                //This is their only group, and they can't leave it then
+                var message = "This is your only group! You can only leave it if you have at least one other group to go to."
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:  { (action: UIAlertAction!) in
+                    return
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
             var message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
