@@ -227,9 +227,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        
+        let group = PFUser.currentUser()!["currentGroup"] as! PFObject
+        group.fetch()
         var query = PFQuery(className: "Squirrel")
-        query.whereKey("objectId", containedIn: PFUser.currentUser()!["currentGroup"]!["squirrels"] as! [String])
+        query.whereKey("objectId", containedIn: group["squirrels"] as! [String])
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!)
         } else if selectedUser != nil {
@@ -333,14 +334,17 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     //Customize the delete button on swipe left
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         var deleteButton = UITableViewRowAction(style: .Default, title: "Drop Squirrel", handler: { (action, indexPath) in
-        self.tableView.dataSource?.tableView?(
-            self.tableView,
-            commitEditingStyle: .Delete,
-            forRowAtIndexPath: indexPath
-        )
+            self.tableView.dataSource?.tableView?(
+                self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
+            )
         return
     })
         return [deleteButton]
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewDidLoad()
     }
     
     
@@ -392,7 +396,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
         */
         //It'd be better to always reload - but this may be too inefficent. Testing it for now
-        self.viewDidLoad()
+        //self.viewDidLoad()
     }
    
    

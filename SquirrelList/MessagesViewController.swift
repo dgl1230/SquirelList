@@ -35,7 +35,6 @@ class MessagesViewController: JSQMessagesViewController {
         message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if error == nil {
                 self.loadMessages()
-                //Disabling push notifications until we get live chat fully figured out
                 
                 let pushQuery = PFInstallation.query()
                 
@@ -45,7 +44,7 @@ class MessagesViewController: JSQMessagesViewController {
                 let push = PFPush()
                 push.setQuery(pushQuery)
                 
-                let pushDict = ["alert": text, "badge":"increment", "sounds":""]
+                let pushDict = ["alert": "", "badge":"increment", "sounds":"", "content-available": 1]
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
                 
@@ -107,7 +106,7 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //Since we stop listening whenever the view dissappears, we need to add an observer everytime the view does appear 
+        //Listen for when a user has pushed a new notification
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: "reloadMessages", object: nil)
         loadMessages()
         

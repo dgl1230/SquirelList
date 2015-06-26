@@ -35,16 +35,19 @@ class TradeOfferViewController: PopUpViewController {
         let yourSquirrelRaters = yourSquirrel!["raters"] as! [String]
         if find(offeredSquirrelRaters, PFUser.currentUser()!.username!) != nil{
             //Then the logged in user has rated the offered squirrel, and we need to remove their rating and remove them from raters
-            let ratings = removeRating(offeredSquirrel!, user: PFUser.currentUser()!.username!)
+            let offeredRatings = removeRating(offeredSquirrel!, user: PFUser.currentUser()!.username!)
+            offeredSquirrel!["ratings"] = offeredRatings
             offeredSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
+            offeredSquirrel!["avg_rating"] = calculateAverageRating(offeredRatings)
+            
         }
         if find(yourSquirrelRaters, offeredUsername) != nil {
             //Then the offering user has rated your squirrel, and we need to remove their rating and remove them from the raters
-            let ratings = removeRating(yourSquirrel!, user: offeredUsername)
+            let yourRatings = removeRating(yourSquirrel!, user: offeredUsername)
+            yourSquirrel!["ratings"] = yourRatings
             yourSquirrel!.removeObject(offeredUsername, forKey: "raters")
+            yourSquirrel!["avg_rating"] = calculateAverageRating(yourRatings)
         }
-
-
     
         offeredSquirrel!["owner"] = PFUser.currentUser()!
         offeredSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
@@ -54,7 +57,7 @@ class TradeOfferViewController: PopUpViewController {
         offeredSquirrel!.save()
         yourSquirrel!.save()
         
-        tradeProposal?.delete()
+        tradeProposal!.delete()
         
         //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)
         var query = PFQuery(className: "TradeProposal")
@@ -83,13 +86,28 @@ class TradeOfferViewController: PopUpViewController {
         delegate?.tradeOfferViewController(self)
     }
     
+    func calculateAverageRating(ratings:[String]) -> Double {
+        var numOfRatings = ratings.count
+        if numOfRatings == 0 {
+            return 0
+        }
+        var sum = 0.0
+
+        for rating in ratings {
+            var rating1 = rating as NSString
+            sum += rating1.doubleValue
+        }
+        var unroundedRating = Double(sum)/Double(numOfRatings)
+        return round((10 * unroundedRating)) / 10
+    }
+    
     
      //Removes the user's rating from the squirrel's "ratings" field and returns the new array 
     func removeRating(squirrel: PFObject, user: String) -> [String] {
         var index = find(squirrel["raters"] as! [String], user)
-        var ratings = squirrel["ratings"] as? [String]
-        ratings!.removeAtIndex(index!)
-        return ratings!
+        var ratings = squirrel["ratings"] as! [String]
+        ratings.removeAtIndex(index!)
+        return ratings
     }
     
 

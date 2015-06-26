@@ -126,8 +126,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         }
         var unroundedRating = Double(sum)/Double(numOfRatings)
         return round((10 * unroundedRating)) / 10
-
-
     }
     
     //Returns true if the user can claim the squirrel, else it returns false
@@ -264,7 +262,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         rateButton.layer.masksToBounds = true
         //So that we can tell whether to enable the rate button
         rateNumberTextField.delegate = self
-        
     }
     
     

@@ -59,7 +59,6 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         } else if infoBeingChanged == "report" {
-            println("regitering as report")
             let report = PFObject(className: "Report")
             report["offendingUsername"] = infoField.text
             report["explanation"] = reportExplanationField!.text
