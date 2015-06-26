@@ -70,37 +70,52 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
-            var message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-                alert.dismissViewControllerAnimated(true, completion: nil)
-            }))
-            alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
+            
+            let group = objects![indexPath.row] as! PFObject
+            let users = group["userIDs"] as! [String]
+            if users.count == 1 {
+                var message = "Are you sure you want to leave this group? You're the only member right now, so leaving this group will delete it."
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
+                    group.delete()
+                    self.loadObjects()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            } else {
+                //The user will leave the group and we will update their squirrels
+                var message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
                 let squirrelQuery = PFQuery(className: "Squirrel")
-                squirrelQuery.whereKey("objectId", containedIn: PFUser.currentUser()!["currentGroup"]!["squirrels"] as! [String])
+                squirrelQuery.whereKey("objectId", containedIn: group["currentGroup"]!["squirrels"] as! [String])
                 squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
                 squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
                     if error == nil {
                         for object in squirrels! {
-                            //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
-                            let squirrel:PFObject = object as! PFObject
-                            squirrel.removeObjectForKey("ownerUsername")
-                            squirrel.removeObjectForKey("owner")
-                            squirrel.save()
+                                //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
+                                let squirrel:PFObject = object as! PFObject
+                                squirrel.removeObjectForKey("ownerUsername")
+                                squirrel.removeObjectForKey("owner")
+                                    squirrel.save()
+                            }
                         }
-                    }
-                })
-                //Remove user from the group's users
-                let groupToLeave = PFUser.currentUser()!["currentGroup"] as! PFObject
-                groupToLeave.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
-                //Remve the group from the user's group
-                PFUser.currentUser()!.removeObject(groupToLeave.objectId!, forKey: "groups")
-                groupToLeave.save()
-                PFUser.currentUser()!.save()
-
-                self.loadObjects()
-            }))
-            self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                    //Remove user from the group's users
+                    group.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+                    //Remve the group from the user's group
+                    PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
+                    group.save()
+                    PFUser.currentUser()!.save()
+                    self.loadObjects()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
     }
 

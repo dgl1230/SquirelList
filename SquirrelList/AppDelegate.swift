@@ -20,13 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
         //Disabling push notifications until we get live chat fully figured out
 
-        //let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        //let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+        let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
         
-        //UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-        
-        PFUser.logOut()
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+
 
         
         if PFUser.currentUser() == nil {
@@ -69,6 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         //Alert the user when a new message has been sent 
         NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
         //NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+        println("finishing up did receiveRemoteNotification")
         
     }
     

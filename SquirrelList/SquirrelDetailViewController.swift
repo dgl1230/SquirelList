@@ -290,8 +290,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let picture = info[UIImagePickerControllerEditedImage] as! UIImage
         //let imageData = UIImagePNGRepresentation(picture)
-        let imageTest = picture.lowestQualityJPEGNSData
-        let imageFile = PFFile(data: imageTest)
+        let imageData = picture.lowestQualityJPEGNSData
+        let imageFile = PFFile(data: imageData)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")
         ratedSquirrel!.saveInBackgroundWithBlock { (succeeded: Bool, error: NSError?) -> Void in
             if error == nil {
@@ -308,7 +308,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     }
 }
 
-
+//Extending the UIImage class so we can save pictures in much lower quality (which is also much faster)
 extension UIImage {
     var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
     var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}

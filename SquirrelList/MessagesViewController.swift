@@ -36,7 +36,7 @@ class MessagesViewController: JSQMessagesViewController {
             if error == nil {
                 self.loadMessages()
                 //Disabling push notifications until we get live chat fully figured out
-                /*
+                
                 let pushQuery = PFInstallation.query()
                 
                 //We want to get all installations that have the same userID's that are in the user's currentGroup
@@ -48,7 +48,7 @@ class MessagesViewController: JSQMessagesViewController {
                 let pushDict = ["alert": text, "badge":"increment", "sounds":""]
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
-                */
+                
             }
         }
         self.finishSendingMessage()
@@ -97,7 +97,6 @@ class MessagesViewController: JSQMessagesViewController {
     
     //Responds to NSNotication when user has changed their current group
     func reloadWithNewGroup() {
-        //shouldReLoad = true
         self.messages = []
         self.messageObjects = []
         self.users = []
@@ -108,6 +107,8 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        //Since we stop listening whenever the view dissappears, we need to add an observer everytime the view does appear 
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: "reloadMessages", object: nil)
         loadMessages()
         
     }
@@ -125,8 +126,6 @@ class MessagesViewController: JSQMessagesViewController {
         firstViewDidLoad = true
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
-        //Listen for when a user has pushed a new notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: "reloadMessages", object: nil)
         //The sender ID doesn't have to be an actual ID, just something unique, so the user's username works too 
         self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username

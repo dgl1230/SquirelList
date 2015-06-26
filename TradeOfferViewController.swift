@@ -28,19 +28,22 @@ class TradeOfferViewController: PopUpViewController {
     
     
     @IBAction func acceptTrade(sender: AnyObject) {
-        /* Finish implementing remove ratings later
+        //Finish implementing remove ratings later
         let offeredUsername = offeredSquirrel!["ownerUsername"] as! String
         //First we need to check if either user has rated the squirrel that they'll be receiving, and if they have, we need to remove their rating 
         let offeredSquirrelRaters = offeredSquirrel!["raters"] as! [String]
-        let yourSquirrelRaters = yourSquirrel!["raters"] as! String
+        let yourSquirrelRaters = yourSquirrel!["raters"] as! [String]
         if find(offeredSquirrelRaters, PFUser.currentUser()!.username!) != nil{
-            //Then the logged in user has rated the offered squirrel, and we need to remove their rating
-            let ratings = removeRating(offeredSquirrel!, user: offeredUsername)
-            offeredSquirrel!.removeObject("offeredUsername, forKey: "raters")
-            
-            
+            //Then the logged in user has rated the offered squirrel, and we need to remove their rating and remove them from raters
+            let ratings = removeRating(offeredSquirrel!, user: PFUser.currentUser()!.username!)
+            offeredSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
         }
-        */
+        if find(yourSquirrelRaters, offeredUsername) != nil {
+            //Then the offering user has rated your squirrel, and we need to remove their rating and remove them from the raters
+            let ratings = removeRating(yourSquirrel!, user: offeredUsername)
+            yourSquirrel!.removeObject(offeredUsername, forKey: "raters")
+        }
+
 
     
         offeredSquirrel!["owner"] = PFUser.currentUser()!
@@ -81,7 +84,7 @@ class TradeOfferViewController: PopUpViewController {
     }
     
     
-     //Removes the user's rating from the squirrel's "ratings" field
+     //Removes the user's rating from the squirrel's "ratings" field and returns the new array 
     func removeRating(squirrel: PFObject, user: String) -> [String] {
         var index = find(squirrel["raters"] as! [String], user)
         var ratings = squirrel["ratings"] as? [String]
