@@ -69,6 +69,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     return
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
+                return
             }
             
             let group = objects![indexPath.row] as! PFObject

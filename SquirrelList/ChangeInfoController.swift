@@ -31,7 +31,6 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var reportExplanationField: UITextView?
     
     @IBAction func save(sender: AnyObject) {
-        println("save being pressed")
         if infoBeingChanged == "name" {
             if count(infoField.text) > 15 {
                 displayErrorAlert("That name is too long!", message: "Please keep it to under 15 characters. Amateur.")
@@ -48,6 +47,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
                 return
             }
             PFUser.currentUser()!.email = infoField.text
+            //Users will get an email by dint of us changing their email field
             let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to verify your address", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
                     //We duplicate this code from above because we only want these actions to occur after the user has pressed OK

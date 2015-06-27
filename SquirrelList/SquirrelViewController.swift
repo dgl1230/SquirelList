@@ -118,7 +118,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         var teamRatings: [Double] = []
         for squirrel in self.objects! {
             var owner = squirrel["ownerUsername"] as? String
-            //For some reason a nil check always passes, but converting "avg_rating" to a string and then checking works
             if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
             } else if (owner == username){
@@ -199,6 +198,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             if owner?.objectId == PFUser.currentUser()!.objectId {
                 yourNumSquirrels += 1
             }
+            
         }
         
         if yourNumSquirrels >= numOfUsers + 4 || yourNumSquirrels == 15 {
@@ -256,6 +256,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         //Squirrels can only be deleted if the user is going through their own squirrels
         if selectedUser?.objectId == PFUser.currentUser()!.objectId {
             return true
+        } else if selectedUser == nil {
+            return true
         }
         return false
     }
@@ -296,24 +298,99 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            //Give the user a warning to verify that they want to drop their squirrel
-            var message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
+            if selectedUser != nil {
+                //The logged in user is trying to drop a squirrel
+                var message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
+                    let squirrel = self.objects![indexPath.row] as! PFObject
+                    squirrel.removeObjectForKey("owner")
+                    squirrel.removeObjectForKey("ownerUsername")
+                    squirrel.save()
+                    var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
+                    self.teamRatingLabel.text = "Team Rating: \(teamRating)"
+                    ///Alert SquirrelViewController to reload data
+                    NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
+                    self.loadObjects()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            // Else the user is trying to delete a squirrel from the group
+            let squirrel = objects![indexPath.row] as! PFObject
+            var message = ""
+            var owner = squirrel["ownerUsername"] as? String
+            if owner == PFUser.currentUser()!.username! {
+                message = "Whoa there! If you want to delete your squirrel, drop them from your team first"
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler:  { (action: UIAlertAction!) in
+                    return
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            //Users can't delete squirrels with an owner
+            if squirrel["ownerUsername"] != nil  {
+                message = "Only squirrels that are ownerless can be deleted! This is someone's beloved squirrel. What's wrong with you?"
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "My bad", style: .Cancel, handler:  { (action: UIAlertAction!) in
+                    return
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            let droppers = squirrel["droppers"] as! [String]
+            if find(droppers, PFUser.currentUser()!.username!) != nil {
+                message = "You already voted to delete this squirrel! Just leave it alone."
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "My bad", style: .Cancel, handler:  { (action: UIAlertAction!) in
+                    return
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            let group = PFUser.currentUser()!["currentGroup"] as! PFObject
+            let numOfUsers = (group["userIDs"] as! [String]).count
+            //We get half of the users to see if this user will be the deciding vote to drop the squirrel (dropping a squirrel is done by simple majority)
+            let halfOfUsers = (numOfUsers/2)
+            //The user can delete the squirrel if no one has rated it yet, or if a majority of users vote to delete it
+            if squirrel["avg_rating"] as! Int == 0 || squirrel["dropVotes"] as! Int == halfOfUsers {
+                //Find the appropriate message to display, since both of these alerts give the user the option to immediately delete the squirrel
+                if squirrel["avg_rating"] as! Int == 0 {
+                    message = "Are you sure you want to do this? Since no one has rated this squirrel, your vote will delete it from the group."
+                } else {
+                    message = "Are you sure you want to do this? With your vote, enough users will have voted to drop this squirrel. Your vote will delete it from the group."
+                }
+                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Delete Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
+                        squirrel.delete()
+                        self.loadObjects()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            //Else user is casting their vote to delete the squirrel, but a majority of the users haven't voted for this option yet
+            message = "Are you sure you want to vote to delete this squirrel? If the majority of users in this group vote to delete it, then it will be removed from the group."
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-                alert.dismissViewControllerAnimated(true, completion: nil)
+                    alert.dismissViewControllerAnimated(true, completion: nil)
             }))
-            alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
-                let squirrel = self.objects![indexPath.row] as! PFObject
-                squirrel.removeObjectForKey("owner")
-                squirrel.removeObjectForKey("ownerUsername")
-                squirrel.save()
-                var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
-                self.teamRatingLabel.text = "Team Rating: \(teamRating)"
-                ///Alert SquirrelViewController to reload data
-                NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
-                self.loadObjects()
+            alert.addAction(UIAlertAction(title: "Vote to Delete", style: .Default, handler:  { (action: UIAlertAction!) in
+                    let oldVotes = squirrel["dropVotes"] as! Int
+                    let newVotes = oldVotes + 1
+                    squirrel["dropVotes"] = newVotes
+                    squirrel.addObject(PFUser.currentUser()!.username!, forKey: "droppers")
+                    squirrel.save()
+                    self.loadObjects()
             }))
             self.presentViewController(alert, animated: true, completion: nil)
+            
         }
     }
 
@@ -333,12 +410,23 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     //Customize the delete button on swipe left
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var deleteButton = UITableViewRowAction(style: .Default, title: "Drop Squirrel", handler: { (action, indexPath) in
+        if selectedUser != nil {
+            //The user is going through their squirrels and can potentially drop them
+            var deleteButton = UITableViewRowAction(style: .Default, title: "Drop", handler: { (action, indexPath) in
+                self.tableView.dataSource?.tableView?(
+                    self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
+                )
+            return
+            })
+            return [deleteButton]
+        }
+        //Else the user is going through all squirrels and can potentially delete them
+        var deleteButton = UITableViewRowAction(style: .Default, title: "Delete", handler: { (action, indexPath) in
             self.tableView.dataSource?.tableView?(
                 self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
             )
-        return
-    })
+            return
+        })
         return [deleteButton]
     }
     
@@ -385,19 +473,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
 
 
     }
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        /*
-        if shouldReLoad == true {
-            shouldReLoad = false
-            self.viewDidLoad()
-        }
-        */
-        //It'd be better to always reload - but this may be too inefficent. Testing it for now
-        //self.viewDidLoad()
-    }
    
    
    //should be made into its own extension 
@@ -417,6 +492,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         newSquirrel["avg_rating"] = 0
         newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
         newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
+        newSquirrel["dropVotes"] = 0
+        newSquirrel["droppers"] = []
         let picture = UIImage(named: "Squirrel_Profile_Pic")
         let imageData = UIImagePNGRepresentation(picture)
         let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData)
