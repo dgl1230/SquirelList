@@ -286,7 +286,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let picture = info[UIImagePickerControllerEditedImage] as! UIImage
-        //let imageData = UIImagePNGRepresentation(picture)
         let imageData = picture.lowestQualityJPEGNSData
         let imageFile = PFFile(data: imageData)
         ratedSquirrel!.setObject(imageFile, forKey: "picture")

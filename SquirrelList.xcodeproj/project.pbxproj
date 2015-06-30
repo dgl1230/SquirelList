@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		180253C91B2FE1410094C044 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */; };
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
-		1828B76A1B3108CF0081AAD4 /* TutorialContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B7691B3108CF0081AAD4 /* TutorialContentViewController.swift */; };
+		1828B76A1B3108CF0081AAD4 /* TutorialPageItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */; };
+		1828B76C1B3F411B0081AAD4 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1828B76B1B3F411B0081AAD4 /* Tutorial.storyboard */; };
+		1828B76E1B3F4ED30081AAD4 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */; };
 		1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */; };
 		184561211ABFCE3100026473 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561201ABFCE3100026473 /* GradientView.swift */; };
 		184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184561221ABFD24B00026473 /* BounceAnimationController.swift */; };
@@ -118,7 +120,9 @@
 /* Begin PBXFileReference section */
 		180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
-		1828B7691B3108CF0081AAD4 /* TutorialContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialContentViewController.swift; sourceTree = "<group>"; };
+		1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageItemViewController.swift; sourceTree = "<group>"; };
+		1828B76B1B3F411B0081AAD4 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
@@ -496,7 +500,8 @@
 				186B32DF1A758E5000A8D4CB /* Supporting Files */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
-				1828B7691B3108CF0081AAD4 /* TutorialContentViewController.swift */,
+				1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */,
+				1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */,
 				187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */,
 				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
@@ -554,6 +559,7 @@
 				187547B21B0E6C77009A6EFE /* Login-Register.storyboard */,
 				186B32E71A758E5000A8D4CB /* Main.storyboard */,
 				18F768FB1AC9FE8500314DB2 /* More.storyboard */,
+				1828B76B1B3F411B0081AAD4 /* Tutorial.storyboard */,
 				187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */,
 			);
 			name = Storyboards/xibs;
@@ -644,6 +650,7 @@
 				184841931AE976C100F23551 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,
 				18A568E01B2133C20019B2C3 /* LaunchScreen.storyboard in Resources */,
 				187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */,
+				1828B76C1B3F411B0081AAD4 /* Tutorial.storyboard in Resources */,
 				1848419B1AE976C100F23551 /* JSQMessagesToolbarContentView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -657,7 +664,7 @@
 			files = (
 				18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */,
 				184841801AE976C100F23551 /* JSQMessagesMediaViewBubbleImageMasker.m in Sources */,
-				1828B76A1B3108CF0081AAD4 /* TutorialContentViewController.swift in Sources */,
+				1828B76A1B3108CF0081AAD4 /* TutorialPageItemViewController.swift in Sources */,
 				184841951AE976C100F23551 /* JSQMessagesInputToolbar.m in Sources */,
 				187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */,
 				1848419A1AE976C100F23551 /* JSQMessagesToolbarContentView.m in Sources */,
@@ -677,6 +684,7 @@
 				184841A21AE978D100F23551 /* MessagesViewController.swift in Sources */,
 				18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */,
 				184841901AE976C100F23551 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
+				1828B76E1B3F4ED30081AAD4 /* TutorialViewController.swift in Sources */,
 				184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */,
 				184841841AE976C100F23551 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,
 				18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */,

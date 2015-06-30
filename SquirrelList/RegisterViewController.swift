@@ -68,6 +68,10 @@ class RegisterViewController: UIViewController {
             //This field is so that we can check and prevent a user from signing up with the same username but different case sensitivity. We don't want two users with usernames "denis" and "Denis"
             user["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friends"] = []
+            user["pendingFriends"] = []
+            user["newUserTab"] = true
+            user["newSquirrelTab"] = true
+            user["newMoreTab"] = true
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
             let emailName = "\(username)\(randomNumer)"

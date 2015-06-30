@@ -68,7 +68,7 @@ class FriendsViewController: PFQueryTableViewController {
     
     override func objectsDidLoad(error: NSError?) {
         super.objectsDidLoad(error)
-        println("objectsDidLoad being called")
+        //Do some check to see if number of new and old friends/pending friends differs to see if we need to actually save anything
         //This way we have an up to date friends and pendingFriends list
         PFUser.currentUser()!.fetch()
         //Bools to keep track of whether we need to save the current's users friends and pendingFriends (if users have been added to either one)

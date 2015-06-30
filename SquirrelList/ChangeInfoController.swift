@@ -39,7 +39,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             PFUser.currentUser()!["name"] = infoField.text
             PFUser.currentUser()!.save()
             self.navigationController?.popViewControllerAnimated(true)
-            //Reloads the SettingsViewContrller
+            //Reloads the SettingsViewContrller with the new name
             delegate!.finishedSaving(self)
         } else if infoBeingChanged == "email" {
             if count(infoField.text) > 30 {
@@ -53,7 +53,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
                     //We duplicate this code from above because we only want these actions to occur after the user has pressed OK
                     PFUser.currentUser()!.save()
                     self.navigationController?.popViewControllerAnimated(true)
-                    //Reloads the SettingsViewContrller
+                    //Reloads the SettingsViewContrller with the new email
                     self.delegate!.finishedSaving(self)
             }))
             

@@ -150,8 +150,6 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             var pendingFriends = PFUser.currentUser()!["pendingFriends"] as! [String]
             users = friends + pendingFriends
         }
-        println("users is \(users)")
-        println("username is \(username)")
         if contains(users, username) {
             //Check to see if the user is already in the group's users or among the user's friends and pending friends
             return true

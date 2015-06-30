@@ -107,6 +107,18 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Check to see if we need to show a new user tutorial screens first
+        if PFUser.currentUser()!["newUserTab"] as! Bool == true {
+            println("should be showing user screens")
+            //If new user, show them the tutorial screens
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
+            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
+            contentController.typeOfContent = "user"
+            appDelegate.window!.rootViewController = contentController
+            appDelegate.window!.makeKeyAndVisible()
+        
+        }
 
         
         //Set the addFriendToGroupButton to 'fa-user-plus

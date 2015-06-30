@@ -507,7 +507,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="0B9ABA34-2210-424A-8BC9-A8B792AD82A2" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="E92921BC-892F-418A-99FE-241B04C84E54" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -927,6 +927,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMH-oA-4k2">
+                                <rect key="frame" x="229" y="354" width="142" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="aIF-QR-NYC"/>
+                                    <constraint firstAttribute="width" constant="142" id="yzX-9o-Hlu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="save:" destination="AYZ-1C-6YZ" eventType="touchUpInside" id="mg5-as-wW2"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Offender's username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="r9N-vD-1Iu">
                                 <rect key="frame" x="0.0" y="131" width="600" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -953,36 +969,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please fill out the fields below and we will get this sorted out very soon. " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTe-ZU-rXF">
-                                <rect key="frame" x="102" y="91" width="397" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please fill out the fields below and we will get this sorted out soon. " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="FTe-ZU-rXF">
+                                <rect key="frame" x="134" y="89" width="332" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="397" id="T2c-7X-Oqc"/>
+                                    <constraint firstAttribute="width" constant="332" id="T2c-7X-Oqc"/>
                                     <constraint firstAttribute="height" constant="21" id="txf-XT-4l9"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMH-oA-4k2">
-                                <rect key="frame" x="229" y="354" width="142" height="47"/>
-                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="aIF-QR-NYC"/>
-                                    <constraint firstAttribute="width" constant="142" id="yzX-9o-Hlu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="save:" destination="AYZ-1C-6YZ" eventType="touchUpInside" id="mg5-as-wW2"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="FTe-ZU-rXF" firstAttribute="top" secondItem="JIi-Kz-g3D" secondAttribute="top" constant="91" id="0Mk-MH-Chl"/>
+                            <constraint firstItem="FTe-ZU-rXF" firstAttribute="top" secondItem="JIi-Kz-g3D" secondAttribute="top" constant="89" id="0Mk-MH-Chl"/>
                             <constraint firstAttribute="centerX" secondItem="Fz7-gA-PKc" secondAttribute="centerX" id="4pM-Xl-aUd"/>
                             <constraint firstItem="Fz7-gA-PKc" firstAttribute="top" secondItem="JIi-Kz-g3D" secondAttribute="top" constant="72" id="8IJ-68-RKV"/>
                             <constraint firstItem="fMH-oA-4k2" firstAttribute="top" secondItem="JIi-Kz-g3D" secondAttribute="top" constant="354" id="F3s-I2-80a"/>
@@ -1006,7 +1006,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0B9ABA34-2210-424A-8BC9-A8B792AD82A2" width="24" height="37">
+        <image name="E92921BC-892F-418A-99FE-241B04C84E54" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

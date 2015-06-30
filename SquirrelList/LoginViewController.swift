@@ -29,13 +29,12 @@ class LoginViewController: UIViewController {
         if usernameTextField.text == "" || passwordTextField.text == "" {
             error = "We need your username and password to login"
         }
-        
+        let username = usernameTextField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         if error != "" {
             displayErrorAlert("Whoops! We had a problem", message: error)
         } else {
             displayLoadingAnimator()
- 
-            PFUser.logInWithUsernameInBackground(usernameTextField.text, password:passwordTextField.text) {
+            PFUser.logInWithUsernameInBackground(username, password:passwordTextField.text) {
                 (user: PFUser?, signupError: NSError?) -> Void in
                     self.resumeInteractionEvents()
                     if signupError ==  nil {

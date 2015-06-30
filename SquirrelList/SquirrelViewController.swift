@@ -33,14 +33,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     weak var delegate: SquirrelViewControllerDelegate?
     
-    //Optional values for if the user is currently trying to trade
+    //Optional values for if the user is currently trying to trade - this to to pass back the relevant data to TradeOfferViewController after the user has selected a squirrel of theirs to offer in the trade 
     
-    //Optional value for determining if user is going through their Squirrels to select a trade
-    var currentlyTrading: Bool?
-    //Squirrel that the logged in user wants in return for one of their squirrels
-    var desiredSquirrel: PFObject?
-    //The owner of the squirrel that the logged in user wants
-    var desiredSquirrelOwner: PFUser?
+        //Optional value for determining if user is going through their Squirrels to select a trade
+        var currentlyTrading: Bool?
+        //Squirrel that the logged in user wants in return for one of their squirrels
+        var desiredSquirrel: PFObject?
+        //The owner of the squirrel that the logged in user wants
+        var desiredSquirrelOwner: PFUser?
     
     //Optional for keeping track of squirrel names to transfer to AddSquirrelViewController to make sure a Squirrel can't be duplicated. Each object in the array is "firstName LastName"
     var squirrelNames: [String]?
@@ -438,6 +438,17 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Check to see if we need to show a new user tutorial screens first
+        if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
+            //If new user, show them the tutorial screens
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
+            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
+            contentController.typeOfContent = "squirrel"
+            appDelegate.window!.rootViewController = contentController
+            appDelegate.window!.makeKeyAndVisible()
+        
+        }
         let name = selectedUser?["name"] as? String
         if selectedUser == nil {
             //We are in the main Squirrels tab

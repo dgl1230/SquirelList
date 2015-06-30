@@ -81,6 +81,19 @@ class MoreTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Check to see if we need to show a new user tutorial screens first
+        if PFUser.currentUser()!["newMoreTab"] as! Bool == true {
+            println("should be showing more screens")
+            //If new user, show them the tutorial screens
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
+            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
+            contentController.typeOfContent = "more"
+            appDelegate.window!.rootViewController = contentController
+            appDelegate.window!.makeKeyAndVisible()
+        
+        }
+        
         if isNewUser == true {
             self.title = "Home"
         }

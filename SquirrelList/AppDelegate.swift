@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 
 
-        
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
             let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
@@ -40,7 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
             moreController.isNewUser = true
             let navigationController = UINavigationController(rootViewController: moreController)
-            navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
+            let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
+            navigationController.navigationBar.barTintColor = blue
             self.window!.rootViewController = navigationController
             self.window!.makeKeyAndVisible()
         } else {
