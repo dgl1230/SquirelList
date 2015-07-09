@@ -288,7 +288,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 cell.backgroundColor = color
             } else {
                 //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
-                // the squirrel's avgRating not passing the if statemtnt
                 ratingLabel.text = ""
                 cell.backgroundColor = UIColor.whiteColor()
             }
@@ -342,6 +341,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
             }
+            //Check to see if the user already voted to drop the Squirrel
             let droppers = squirrel["droppers"] as! [String]
             if find(droppers, PFUser.currentUser()!.username!) != nil {
                 message = "You already voted to delete this squirrel! Just leave it alone."

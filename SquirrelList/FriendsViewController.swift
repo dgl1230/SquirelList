@@ -212,7 +212,7 @@ class FriendsViewController: PFQueryTableViewController {
         findFriendsButton?.title = "\u{f234}"
         findFriendsButton?.tintColor = UIColor.orangeColor()
         self.tableView.allowsSelection = false
-        //Customize navigation controller back button to my only the back symbol
+        //Customize navigation controller back button to only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")

@@ -107,6 +107,18 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //We check to see if the user has been recently given a strike for offensive content
+        if PFUser.currentUser()!["recentStrike"] as! Bool == true {
+            let query  = PFQuery(className: "Report")
+            query.whereKey("offendingUsername", equalTo: PFUser.currentUser()!.username!)
+            let report = query.getFirstObject()
+            let warning = report!["warningToOffender"] as! String
+            var alert = UIAlertController(title: "This is a warning for posting offensive material", message: warning, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            PFUser.currentUser()!["recentStrike"] = false
+            PFUser.currentUser()!.save()
+        }
         //Check to see if we need to show a new user tutorial screens first
         if PFUser.currentUser()!["newUserTab"] as! Bool == true {
             println("should be showing user screens")

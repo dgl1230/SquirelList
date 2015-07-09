@@ -48,6 +48,8 @@ class LoginViewController: UIViewController {
                             navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
                             appDelegate.window!.rootViewController = navigationController
                             appDelegate.window!.makeKeyAndVisible()
+                            //Make keyboard disappear
+                            self.view.endEditing(true)
                         } else {
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             //Present the tab bar with all the tabs

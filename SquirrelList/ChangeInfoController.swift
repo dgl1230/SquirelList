@@ -59,10 +59,12 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         } else if infoBeingChanged == "report" {
+            println("setting button titlte")
+            saveButton.setTitle("Report", forState: UIControlState.Normal)
             let report = PFObject(className: "Report")
             report["offendingUsername"] = infoField.text
             report["explanation"] = reportExplanationField!.text
-            report["offendedUSer"] = PFUser.currentUser()!.username!
+            report["offendedUser"] = PFUser.currentUser()!.username!
             let alertController = UIAlertController(title: "Report sent!", message: "Thanks for letting us know. We'll get to the bottom of this quickly.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
                     //We duplicate this code from above because we only want these actions to occur after the user has pressed OK

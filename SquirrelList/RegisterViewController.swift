@@ -23,10 +23,15 @@ class RegisterViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func privacyPolicy(sender: AnyObject) {
+        self.performSegueWithIdentifier("privacyPolicy", sender: self)
+    }
+    
     @IBAction func termsOfService(sender: AnyObject) {
-        println("button being pressed")
         self.performSegueWithIdentifier("termsOfService", sender: self)
     }
+    
+    
 
 
     @IBAction func register(sender: AnyObject) {
@@ -72,6 +77,8 @@ class RegisterViewController: UIViewController {
             user["newUserTab"] = true
             user["newSquirrelTab"] = true
             user["newMoreTab"] = true
+            user["strikes"] = 0
+            user["recentStrike"] = false
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
             let emailName = "\(username)\(randomNumer)"
@@ -139,9 +146,12 @@ class RegisterViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "termsOfService" {
+        if segue.identifier == "privacyPolicy" {
             let controller = segue.destinationViewController as! PoliciesViewController
             controller.policy = "Privacy Policy"
+        } else if segue.identifier == "termsOfService" {
+            let controller = segue.destinationViewController as! PoliciesViewController
+            controller.policy = "Terms of Service"
         }
     }
     

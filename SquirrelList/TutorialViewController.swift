@@ -90,8 +90,6 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         let itemController = pendingViewControllers[0] as? TutorialPageItemViewController
         //Then the casting failed, and the user has swiped through all of the tutorialPageItemControllers
         if itemController == nil {
-            self.dismissViewControllerAnimated(true, completion: nil)
-            /*
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
             if PFUser.currentUser()!["currentGroup"] == nil {
@@ -108,7 +106,9 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
                 appDelegate.window!.rootViewController = HomeTabViewController()
                 appDelegate.window!.makeKeyAndVisible()
             }
-            */
+            //Make keyboard disappear
+            self.view.endEditing(true)
+
             //We want to show these screens to users only once
             if typeOfContent == "more" {
                PFUser.currentUser()!["newMoreTab"] = false
