@@ -18,6 +18,9 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
 
     var filteredUsers = [PFUser]()
     
+    //Variable for seeing what to search usernames for, updates everytime user changes the text in the search field
+    var searchParameters = ""
+    
     //Optional for determining if User is adding a friend to the group. If they are, then we don't want to be querying all users, only their friends
     var addingToGroup: Bool?
     
@@ -166,17 +169,19 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             if PFUser.currentUser()!["friends"] != nil {
                 query!.whereKey("objectId", containedIn: PFUser.currentUser()!["friends"] as! [String])
             }
-
-            return query!
-        }
-        else {
-            //We need to query all users, for logged in user to add some as friends
+        } else if searchParameters == "" {
+            println("search paramters empty old chap")
+            //Then the user is searching users to add, but hasn't entered any text in the search field, so we don't query users yet
+        } else {
+            println("search paramters not empty old chap")
+            println("the search paramters are: \(searchParameters)")
+            //We query for users that have a prefix that matches the text in the searchField
             query?.whereKey("username", notEqualTo: PFUser.currentUser()!["username"]!)
+            //query?.whereKey("username", hasPrefix: searchParameters)
             query?.orderByAscending("username")
-            return query!
         }
         //Look into seeing if the else if and else are both executed
-        //return query!
+        return query!
     }
     
      //Responds to NSNotication when user has changed their current group
@@ -187,12 +192,27 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
     func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
             self.filterContentForSearchText(searchString.lowercaseString)
+            //println("shouldReloadForSearchString")
+            //searchParameters = searchString
+            //queryForTable()
+            //loadObjects()
+        
+            
+            //println("the number of objects now is \(objects!.count)")
             return true
     }
- 
+    
+    /*
+    override func objectsDidLoad(error: NSError?) {
+        super.objectsDidLoad(error)
+        self.tableView.numberOfRowsInSection(objects!.count)
+        self.tableView.reloadData()
+    }
+    */
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        println("cellForRowAtIndexPath")
         var user: PFUser
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FindUserTableViewCell
         if tableView == self.searchDisplayController!.searchResultsTableView {
@@ -224,13 +244,16 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        println("the number of rows in the section are: \(section)")
         if tableView == self.searchDisplayController!.searchResultsTableView {
             return self.filteredUsers.count
         } else if addingToGroup == true {
             //If the user is inviting friends to a group, we want to show all of their friends immediately on the screen
             return self.objects!.count
         } else {
+            println("going to else")
             //Else they are searching for friends, so the tableView shouldn't be populated with every user
+            //return objects!.count
             return 0
         }
     }

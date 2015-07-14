@@ -59,8 +59,6 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         } else if infoBeingChanged == "report" {
-            println("setting button titlte")
-            saveButton.setTitle("Report", forState: UIControlState.Normal)
             let report = PFObject(className: "Report")
             report["offendingUsername"] = infoField.text
             report["explanation"] = reportExplanationField!.text
@@ -105,6 +103,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
             self.title = "My Email"
         } else if infoBeingChanged == "report" {
             self.title = "Support"
+            saveButton.setTitle("Report", forState: UIControlState.Normal)
         }
         //So we can detect what the user is typing and whether or not to enable the save button
         infoField.delegate = self

@@ -8,11 +8,17 @@
 
 import UIKit
 
+//Delegate for reloading notificationsViewController after the user has either accepted or declined group invitation
+@objc protocol GroupInvitePopUpDelegate: class {
+    optional func reloadAfterGroupInviteDecision(controller: GroupInvitePopUpViewController)
+}
+
 class GroupInvitePopUpViewController: PopUpViewController {
 
     var inviterName: String?
     var group: PFObject?
     var groupInvite: PFObject?
+    var delegate: GroupInvitePopUpDelegate?
     
 
     @IBOutlet weak var acceptButton: UIButton!
@@ -35,14 +41,17 @@ class GroupInvitePopUpViewController: PopUpViewController {
         group!.save()
         PFUser.currentUser()!.save()
         groupInvite!.delete()
+        //Reload the notificationsViewController
+        delegate?.reloadAfterGroupInviteDecision!(self)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     @IBAction func decline(sender: AnyObject) {
         groupInvite!.delete()
+        //Reload the notificationsViewController
         dismissViewControllerAnimated(true, completion: nil)
-        //Delegate reload
+        delegate?.reloadAfterGroupInviteDecision!(self)
     
     }
 

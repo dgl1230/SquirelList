@@ -10,7 +10,7 @@
 
 import UIKit
 
-class NotificationsViewController: PFQueryTableViewController, TradeOfferViewControllerDelegate {
+class NotificationsViewController: PFQueryTableViewController, TradeOfferViewControllerDelegate, GroupInvitePopUpDelegate {
 
     
     //For determining if we're going through trade proposals or group invites 
@@ -59,7 +59,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             var inviter = groupInvite["inviter"] as! String
             controller.groupInvite = groupInvite
             controller.inviterName = inviter
-            
+            controller.delegate = self
         }
         if segue.identifier == "TradeOffer" {
             let controller = segue.destinationViewController as! TradeOfferViewController
@@ -153,6 +153,11 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
 
     //This is merely for reloading the data everytime the user accepts or declines a trade
     func tradeOfferViewController(controller: TradeOfferViewController) {
+        self.viewDidLoad()
+    }
+    
+    //For relading after a user has accepted or declined a group inviation
+    func reloadAfterGroupInviteDecision(controller: GroupInvitePopUpViewController) {
         self.viewDidLoad()
     }
     

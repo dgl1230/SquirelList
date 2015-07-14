@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+//Controller for the User's Tab 
+
 import UIKit
 
 //Notification specific string
 let reloadNotificationKey = "com.denis.reloadNotificationKey"
+
 
 class UsersViewController: PFQueryTableViewController {
 

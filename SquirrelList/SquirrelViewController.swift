@@ -282,14 +282,14 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 openLabel?.hidden = true
             }
         
-            if avgRating != 0 {
+            if avgRating != 0 && avgRating >= 8 {
                 ratingLabel.text = "\(avgRating)"
                 var color = calculateColor(avgRating)
                 cell.backgroundColor = color
             } else {
                 //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
                 ratingLabel.text = ""
-                cell.backgroundColor = UIColor.whiteColor()
+                cell.backgroundColor = UIColor.yellowColor()
             }
             return cell
     }

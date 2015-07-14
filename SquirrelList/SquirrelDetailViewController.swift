@@ -8,6 +8,7 @@
 
 import UIKit
 
+//For telling SquirrelViewController to reload after updating Squirrel information
 protocol SquirrelDetailViewControllerDelegate: class {
     func squirrelDetailViewController(controller: SquirrelDetailViewController)
 }
@@ -196,13 +197,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         let squirrelRating = ratedSquirrel!["avg_rating"] as? Double
         
         //Check if the squirrel has an average rating 
-        if squirrelRating != 0 {
+        if squirrelRating != 0 && squirrelRating >= 8 {
             //We have to cast the rating as an Int first, because casting it directly as a String produces nil
             //var averageRating = ratedSquirrel!["avg_rating"] as! Double
             avgRatingLabel.text = "Squirrel Score:  \(squirrelRating!)"
         } else  {
             //The squirrel has a rating, but it is too low to show or the squirrel has no rating
-            avgRatingLabel.text = "Not Rated"
+            avgRatingLabel.text = "Squirrel Score: ???"
         }
         
         //Check if the user has rated the squirrel

@@ -94,7 +94,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                 }))
                 alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
                 let squirrelQuery = PFQuery(className: "Squirrel")
-                squirrelQuery.whereKey("objectId", containedIn: group["currentGroup"]!["squirrels"] as! [String])
+                squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
                 squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
                 squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
                     if error == nil {
