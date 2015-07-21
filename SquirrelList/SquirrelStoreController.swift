@@ -28,7 +28,10 @@ class SquirrelStoreController: UITableViewController {
         individualGroupData["acorns"] = acorns
         individualGroupData["squirrelSlots"] = squirrelSlots
         individualGroupData.save()
-        acornsLabel.text = "Acorns: \(acorns)"
+        acornsLabel.text = "\(acorns)"
+        if acorns < 500 {
+            buySquirrelSlotsButton.enabled = false
+        }
         
     }
 
@@ -38,7 +41,9 @@ class SquirrelStoreController: UITableViewController {
         individualGroupData["acorns"] = acorns
         individualGroupData["canRerate"] = true
         individualGroupData.save()
-        acornsLabel.text = "Acorns: \(acorns)"
+        acornsLabel.text = "\(acorns)"
+        //Users can only buy one rerate at a time
+        buyReratingButton.enabled = false
     }
     
     func reload() {
@@ -65,6 +70,7 @@ class SquirrelStoreController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        println("VIEW DID LOAD")
         super.viewDidLoad()
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
@@ -72,7 +78,7 @@ class SquirrelStoreController: UITableViewController {
         individualGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
         individualGroupData.fetch()
         let acorns = individualGroupData["acorns"] as! Int
-        acornsLabel.text = "Acorns: \(acorns)"
+        acornsLabel.text = "\(acorns)"
         let canRerate = individualGroupData["canRerate"] as! Bool
         if acorns < 500 {
             buySquirrelSlotsButton.enabled = false

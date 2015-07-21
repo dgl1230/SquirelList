@@ -40,20 +40,23 @@ class GroupInvitePopUpViewController: PopUpViewController {
         userGroupData["squirrelSlots"] = squirrelSlots
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = numOfUsers + 1
+        userGroupData["canRerate"] = false
+        userGroupData["cumulativeDaysVisited"] = 1
+        userGroupData.save()
+        group!.save()
+        PFUser.currentUser()!.save()
+        groupInvite!.delete()
         if PFUser.currentUser()!["currentGroup"] == nil {
             //Then the user is new, and they need a current group
             PFUser.currentUser()!["currentGroup"] = group!
             //The user is new and needs a currentGroupData
             PFUser.currentUser()!["currentGroupData"] = userGroupData
             //The user can now access all tabs, since they have a current group
+            PFUser.currentUser()!.save()
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()
         }
-        userGroupData.save()
-        group!.save()
-        PFUser.currentUser()!.save()
-        groupInvite!.delete()
         //Reload the notificationsViewController
         delegate?.reloadAfterGroupInviteDecision!(self)
         dismissViewControllerAnimated(true, completion: nil)

@@ -201,6 +201,18 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if PFUser.currentUser()!["currentGroupData"] == nil {
+            let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+            let query = PFQuery(className: "UserGroupData")
+            query.whereKey("user", equalTo: PFUser.currentUser()!)
+            query.whereKey("group", equalTo: currentGroup)
+            let individualGroupData = query.getFirstObject()
+            PFUser.currentUser()!["currentGroupData"] = individualGroupData
+            PFUser.currentUser()!.save()
+            PFUser.currentUser()!.fetch()
+            
+        }
+        currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"

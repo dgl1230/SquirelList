@@ -87,6 +87,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
                     currentGroupData.delete()
                     PFUser.currentUser()!.removeObjectForKey("currentGroupData")
+                    PFUser.currentUser()!.save()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
@@ -133,11 +134,11 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
+        //Update checkMarkedCellIndex
+        checkMarkedCellIndex = indexPath
         //Remove checkmark from old cell
         let oldCheckMarkedCell = tableView.cellForRowAtIndexPath(checkMarkedCellIndex!)
         oldCheckMarkedCell?.accessoryType = .None
-        //Update checkMarkedCellIndex
-        checkMarkedCellIndex = indexPath
         //Update the current group variable
         currentGroup = objects![indexPath.row] as! PFObject
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
@@ -152,7 +153,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             PFUser.currentUser()!["currentGroupData"] = individualGroupData
             PFUser.currentUser()!.save()
             //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
-
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
         }
         self.dismissViewControllerAnimated(true, completion: nil)

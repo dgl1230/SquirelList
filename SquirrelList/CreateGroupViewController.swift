@@ -36,6 +36,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         userGroupData["canRerate"] = false
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = 1
+        userGroupData["cumulativeDaysVisited"] = 1
         userGroupData.save()
 
 
@@ -47,6 +48,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         }
         
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
+        PFUser.currentUser()!["currentGroupData"] = userGroupData
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
  

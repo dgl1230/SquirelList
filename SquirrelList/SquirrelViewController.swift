@@ -158,6 +158,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             } else {
                 controller.canClaimSquirrel = false
             }
+            println("individual group data is \(individualGroupData)!")
             let canRerate = individualGroupData!["canRerate"] as! Bool
             controller.canRerate = canRerate
             if sender!["owner"] != nil {
@@ -490,7 +491,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             individualGroupData?.fetch()
             //Set the number of acorns to display 
             let userAcorns = individualGroupData!["acorns"] as! Int
-            acornsLabel?.text = "Acorns: \(userAcorns)"
+            acornsLabel?.text = "\(userAcorns)"
             //Set the number of squirrel slots to display
             squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
             var groupUserIds = PFUser.currentUser()!["currentGroup"]!["userIDs"] as? [String]

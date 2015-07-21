@@ -89,7 +89,6 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     func reloadMessages() {
-        println("doing reload messages")
         loadMessages()
     }
     

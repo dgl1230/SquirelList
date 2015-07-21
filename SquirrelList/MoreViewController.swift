@@ -52,6 +52,10 @@ class MoreTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //If the user doesn't have a current group, then we hide the Squirrel Store
+        if PFUser.currentUser()!["currentGroup"] == nil {
+            return 3
+        }
         return 4
     }
     

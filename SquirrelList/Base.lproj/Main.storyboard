@@ -117,22 +117,31 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acorns" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="lDG-8A-ypo">
-                                    <rect key="frame" x="340" y="15" width="252" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="lDG-8A-ypo" userLabel="Acorns Label">
+                                    <rect key="frame" x="528" y="15" width="48" height="21"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="252" id="kPI-DE-7aB"/>
-                                        <constraint firstAttribute="height" constant="21" id="kit-tC-1ZT"/>
+                                        <constraint firstAttribute="width" constant="48" id="BA8-VQ-6La"/>
+                                        <constraint firstAttribute="height" constant="21" id="ICp-Y6-e73"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acorn" translatesAutoresizingMaskIntoConstraints="NO" id="fp7-CP-SYQ">
+                                    <rect key="frame" x="578" y="16" width="14" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="2Dm-JG-Usm"/>
+                                        <constraint firstAttribute="width" constant="14" id="DXx-I3-Dt1"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="lDG-8A-ypo" secondAttribute="trailing" constant="8" id="7By-sm-VGY"/>
-                                <constraint firstItem="lDG-8A-ypo" firstAttribute="top" secondItem="cic-SL-uSJ" secondAttribute="top" constant="15" id="pND-1W-vEQ"/>
+                                <constraint firstAttribute="trailing" secondItem="fp7-CP-SYQ" secondAttribute="trailing" constant="8" id="Kdu-Xg-ekM"/>
+                                <constraint firstItem="fp7-CP-SYQ" firstAttribute="top" secondItem="cic-SL-uSJ" secondAttribute="top" constant="16" id="MJW-yz-9Nr"/>
+                                <constraint firstItem="fp7-CP-SYQ" firstAttribute="leading" secondItem="lDG-8A-ypo" secondAttribute="trailing" constant="2" id="gPy-2J-nrL"/>
+                                <constraint firstItem="lDG-8A-ypo" firstAttribute="top" secondItem="cic-SL-uSJ" secondAttribute="top" constant="15" id="vPQ-gU-MOW"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -1116,6 +1125,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="acorn" width="128" height="128"/>
         <image name="group" width="76" height="76"/>
         <image name="squirrel" width="48" height="48"/>
         <image name="tabbar_chat" width="23" height="36"/>

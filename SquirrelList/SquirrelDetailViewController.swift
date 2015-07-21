@@ -304,6 +304,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             return true 
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        println("doing ish here")
+        return true
+    }
+    
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let picture = info[UIImagePickerControllerEditedImage] as! UIImage
