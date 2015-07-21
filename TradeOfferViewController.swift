@@ -25,6 +25,7 @@ class TradeOfferViewController: PopUpViewController {
     @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var offeredlLabel: UILabel!
     @IBOutlet weak var yourSquirrelLabel: UILabel!
+    @IBOutlet weak var offeredAcornsLabel: UILabel!
     
     
     @IBAction func acceptTrade(sender: AnyObject) {
@@ -48,6 +49,15 @@ class TradeOfferViewController: PopUpViewController {
             yourSquirrel!.removeObject(offeredUsername, forKey: "raters")
             yourSquirrel!["avg_rating"] = calculateAverageRating(yourRatings)
         }
+        if tradeProposal!["offeredAcorns"] != nil {
+            let currentGroupdata  = PFUser.currentUser()!["currentGroupData"] as! PFObject
+            currentGroupdata.fetch()
+            var acorns = currentGroupdata["acorns"] as! Int
+            let offeredAcorns = tradeProposal!["offeredAcorns"] as! Int
+            acorns += offeredAcorns
+            currentGroupdata["acorns"] = acorns
+            currentGroupdata.save()
+        }
     
         offeredSquirrel!["owner"] = PFUser.currentUser()!
         offeredSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
@@ -56,6 +66,7 @@ class TradeOfferViewController: PopUpViewController {
 
         offeredSquirrel!.save()
         yourSquirrel!.save()
+        
         
         tradeProposal!.delete()
         
@@ -135,6 +146,17 @@ class TradeOfferViewController: PopUpViewController {
         acceptButton.layer.masksToBounds = true
         declineButton.layer.cornerRadius = 5
         declineButton.layer.masksToBounds = true
+        
+        if tradeProposal!["offeredAcorns"] == nil {
+            offeredAcornsLabel.hidden = true
+        } else {
+            var acorns = tradeProposal!["offeredAcorns"] as! Int
+            if acorns == 1 {
+                offeredAcornsLabel.text = "And 1 acorns"
+            } else {
+                offeredAcornsLabel.text = "And \(acorns) acorns"
+            }
+        }
     }
 
 

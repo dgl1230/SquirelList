@@ -83,6 +83,10 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                 alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
                     group.delete()
                     self.loadObjects()
+                    //Need to delete the UserGroupData instance too
+                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+                    currentGroupData.delete()
+                    PFUser.currentUser()!.removeObjectForKey("currentGroupData")
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
@@ -107,6 +111,10 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                             }
                         }
                     })
+                    //Need to delete the UserGroupData instance too
+                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+                    currentGroupData.delete()
+                    PFUser.currentUser()!.removeObjectForKey("currentGroupData")
                     //Remove user from the group's users
                     group.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
                     //Remve the group from the user's group
@@ -137,9 +145,15 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         if currentGroup.objectId != userCurrentGroup.objectId {
             //We only want to reload everything if the user hasn't selected their same currentGroup
             PFUser.currentUser()!["currentGroup"] = currentGroup
+            let query = PFQuery(className: "UserGroupData")
+            query.whereKey("user", equalTo: PFUser.currentUser()!)
+            query.whereKey("group", equalTo: currentGroup)
+            let individualGroupData = query.getFirstObject()
+            PFUser.currentUser()!["currentGroupData"] = individualGroupData
             PFUser.currentUser()!.save()
-            //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear 
-            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+            //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
+
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }

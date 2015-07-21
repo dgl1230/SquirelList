@@ -46,10 +46,13 @@ class MoreTableViewController: UITableViewController {
         if segue.identifier == "Settings" {
             let controller = segue.destinationViewController as! SettingsViewController
         }
+        if segue.identifier == "Squirrel Store" {
+            let controller = segue.destinationViewController as! SquirrelStoreController
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     
@@ -67,13 +70,10 @@ class MoreTableViewController: UITableViewController {
         if indexPath.row == 2 {
             //The user is selecting "Settings"
             performSegueWithIdentifier("Settings", sender: self)
-            /*
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let settingsStoryboard = UIStoryboard(name: "Settings", bundle: nil)
-            var navigationViewController = settingsStoryboard.instantiateViewControllerWithIdentifier("NavigationController") as! UINavigationController
-            appDelegate.window!.rootViewController = navigationViewController
-            appDelegate.window!.makeKeyAndVisible()
-            */
+        }
+        if indexPath.row == 3 {
+            //The user is selecting "Squirrel Store"
+            performSegueWithIdentifier("Squirrel Store", sender: self)
         }
 
     }

@@ -108,6 +108,7 @@
 		18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */; };
 		18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */; };
 		18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */; };
+		18DC68281B59A82200364A4E /* SquirrelStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC68271B59A82200364A4E /* SquirrelStoreController.swift */; };
 		18E06FD41AEAD2B100D5F1E2 /* ChatHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */; };
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
 		18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FB1AC9FE8500314DB2 /* More.storyboard */; };
@@ -119,7 +120,7 @@
 
 /* Begin PBXFileReference section */
 		180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSquirrelViewController.swift; sourceTree = "<group>"; };
+		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddSquirrelViewController.swift; path = SquirrelList/AddSquirrelViewController.swift; sourceTree = "<group>"; };
 		1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageItemViewController.swift; sourceTree = "<group>"; };
 		1828B76B1B3F411B0081AAD4 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
@@ -215,9 +216,9 @@
 		1848419E1AE9770400F23551 /* JSQSystemSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQSystemSoundPlayer.h; sourceTree = "<group>"; };
 		1848419F1AE9770400F23551 /* JSQSystemSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQSystemSoundPlayer.m; sourceTree = "<group>"; };
 		184841A11AE978D100F23551 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelViewController.swift; sourceTree = "<group>"; };
-		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
-		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeOfferViewController.swift; path = ../TradeOfferViewController.swift; sourceTree = "<group>"; };
+		184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelViewController.swift; path = SquirrelList/SquirrelViewController.swift; sourceTree = "<group>"; };
+		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = SquirrelList/MoreViewController.swift; sourceTree = "<group>"; };
+		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeOfferViewController.swift; sourceTree = "<group>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E81A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -242,17 +243,17 @@
 		187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Thin.otf"; sourceTree = "<group>"; };
 		187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersCellTableViewCell.swift; sourceTree = "<group>"; };
 		187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersCellTableViewCell.xib; sourceTree = "<group>"; };
-		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
-		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
-		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsViewController.swift; path = SquirrelList/NotificationsViewController.swift; sourceTree = "<group>"; };
+		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupInvitePopUpViewController.swift; path = SquirrelList/GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
+		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = SquirrelList/SettingsViewController.swift; sourceTree = "<group>"; };
 		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18A568D81B1D47B40019B2C3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../HomeViewController.swift; sourceTree = "<group>"; };
 		18A568DC1B20E9140019B2C3 /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
-		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
-		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupViewController.swift; sourceTree = "<group>"; };
+		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeCurrentGroupViewController.swift; path = SquirrelList/ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
+		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = SquirrelList/CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		18B794EA1ADA3124000C9E5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
@@ -260,16 +261,17 @@
 		18C57B511B237B460068B726 /* ChangeInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeInfoController.swift; sourceTree = "<group>"; };
 		18C57B541B24F8B70068B726 /* Privacy_Policy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Privacy_Policy.rtf; sourceTree = "<group>"; };
 		18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoliciesViewController.swift; sourceTree = "<group>"; };
-		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
-		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
-		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSquirrelsPopUpViewController.swift; path = SquirrelList/UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
+		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUsersViewController.swift; path = SquirrelList/SearchUsersViewController.swift; sourceTree = "<group>"; };
+		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersViewController.swift; path = SquirrelList/UsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
-		18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelDetailViewController.swift; sourceTree = "<group>"; };
-		18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeViewController.swift; sourceTree = "<group>"; };
+		18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelDetailViewController.swift; path = SquirrelList/SquirrelDetailViewController.swift; sourceTree = "<group>"; };
+		18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeViewController.swift; path = SquirrelList/TradeViewController.swift; sourceTree = "<group>"; };
+		18DC68271B59A82200364A4E /* SquirrelStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelStoreController.swift; path = SquirrelList/SquirrelStoreController.swift; sourceTree = "<group>"; };
 		18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHolderViewController.swift; sourceTree = "<group>"; };
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
-		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsViewController.swift; path = SquirrelList/FriendsViewController.swift; sourceTree = "<group>"; };
 		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserTableViewCell.swift; sourceTree = "<group>"; };
 		18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindUserTableViewCell.xib; sourceTree = "<group>"; };
@@ -471,40 +473,27 @@
 			isa = PBXGroup;
 			children = (
 				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
-				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
-				18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */,
 				18C57B511B237B460068B726 /* ChangeInfoController.swift */,
 				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
-				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
 				180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */,
-				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
-				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				18A568D81B1D47B40019B2C3 /* HomeViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
 				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
 				184841141AE9767600F23551 /* Messages */,
 				184841A11AE978D100F23551 /* MessagesViewController.swift */,
-				18625C561AC33DA100093A1B /* MoreViewController.swift */,
-				187960D11AB6732400538306 /* NotificationsViewController.swift */,
-				18C57B4F1B2379F30068B726 /* Pop Up Controller */,
+				18C57B4F1B2379F30068B726 /* Pop Up Controller Base */,
+				18DC68251B588FEC00364A4E /* Pop Up Controllers */,
 				18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */,
 				18A568D21B1811500019B2C3 /* RegisterViewController.swift */,
-				18D2466C1AC60283003D560A /* SearchUsersViewController.swift */,
-				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
-				18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */,
-				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
 				18C57B501B237A510068B726 /* Storyboards/xibs */,
 				186B32DF1A758E5000A8D4CB /* Supporting Files */,
-				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
-				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
+				18DC68261B58903D00364A4E /* TableViewControllers */,
 				1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */,
 				1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */,
 				187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */,
-				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
-				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
 			);
 			path = SquirrelList;
 			sourceTree = "<group>";
@@ -540,7 +529,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		18C57B4F1B2379F30068B726 /* Pop Up Controller */ = {
+		18C57B4F1B2379F30068B726 /* Pop Up Controller Base */ = {
 			isa = PBXGroup;
 			children = (
 				184561221ABFD24B00026473 /* BounceAnimationController.swift */,
@@ -548,7 +537,7 @@
 				184561201ABFCE3100026473 /* GradientView.swift */,
 				18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */,
 			);
-			name = "Pop Up Controller";
+			name = "Pop Up Controller Base";
 			sourceTree = "<group>";
 		};
 		18C57B501B237A510068B726 /* Storyboards/xibs */ = {
@@ -563,6 +552,38 @@
 				187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */,
 			);
 			name = Storyboards/xibs;
+			sourceTree = "<group>";
+		};
+		18DC68251B588FEC00364A4E /* Pop Up Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
+				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
+				18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */,
+				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
+				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
+			);
+			name = "Pop Up Controllers";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		18DC68261B58903D00364A4E /* TableViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */,
+				18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */,
+				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
+				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
+				18625C561AC33DA100093A1B /* MoreViewController.swift */,
+				187960D11AB6732400538306 /* NotificationsViewController.swift */,
+				18D2466C1AC60283003D560A /* SearchUsersViewController.swift */,
+				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
+				18DC68271B59A82200364A4E /* SquirrelStoreController.swift */,
+				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
+				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
+			);
+			name = TableViewControllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -701,6 +722,7 @@
 				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
 				184841771AE976C100F23551 /* UIColor+JSQMessages.m in Sources */,
 				18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */,
+				18DC68281B59A82200364A4E /* SquirrelStoreController.swift in Sources */,
 				188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */,
 				184841791AE976C100F23551 /* UIImage+JSQMessages.m in Sources */,
 				184841A01AE9770400F23551 /* JSQSystemSoundPlayer.m in Sources */,

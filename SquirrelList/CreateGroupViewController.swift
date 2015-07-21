@@ -24,12 +24,23 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group["name"] = groupNameTextField.text as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
         group["squirrels"] = []
+        group["acorns"] = ["500"]
         //Need to add the current user's squirrel list ID eventually as well
         group.save()
+        
+        let userGroupData = PFObject(className: "UserGroupData")
+        userGroupData["user"] = PFUser.currentUser()!
+        userGroupData["group"] = group
+        userGroupData["acorns"] = 1000
+        userGroupData["squirrelSlots"] = 5
+        userGroupData["canRerate"] = false
+        userGroupData["lastVisit"] = NSDate()
+        userGroupData["numOfGroupUsers"] = 1
+        userGroupData.save()
 
 
         if PFUser.currentUser()!["currentGroup"] == nil {
-            //The user can now access all tabs, since they have a current group
+            //The user can now access all tabs, since they now have a current group
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()

@@ -10,7 +10,7 @@ import UIKit
 
 //For telling SquirrelViewController to reload after updating Squirrel information
 protocol SquirrelDetailViewControllerDelegate: class {
-    func squirrelDetailViewController(controller: SquirrelDetailViewController)
+    func squirrelDetailViewController(controller: SquirrelDetailViewController, usedRerate: Bool)
 }
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -26,6 +26,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     //Variable for checking if the user is pressing the claimTradeButton for claiming a squirrel or proposing a trade or uploading a picture
     //Value can be either "claim", "trade", or "uploadPicture"
     var claimOrTradeOrPicture = ""
+    //Optional for keeping track of if the user can rerate the squirrel - accessed from the UserGroupData model
+    var canRerate = false
     
 
     
@@ -54,6 +56,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
                 ratedSquirrel!["ratings"] = ratings
                 ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
             }
+            let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+            var squirrelSlots = userGroupData["squirrelSlots"] as! Int
+            squirrelSlots -= 1
+            userGroupData["squirrelSlots"] = squirrelSlots
+            userGroupData.save()
             ratedSquirrel!.save()
             //Alert SquirrelViewController to reload data
             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
@@ -86,8 +93,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!["raters"] = raters
             ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
             ratedSquirrel!.save()
+            //Since the user already rated the squirrel, they had to have purchased a rerate in order to do this, so we need to set userGroupDate["canRerate"] to false
+            delegate?.squirrelDetailViewController(self, usedRerate: true)
             self.dismissViewControllerAnimated(true, completion: nil)
-            delegate?.squirrelDetailViewController(self)
             return
         }
         //check if ["raters"] is nil. If it is, we create it
@@ -107,7 +115,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         ratedSquirrel!.save()
         //Alert SquirrelViewController to reload data
         //NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-        delegate?.squirrelDetailViewController(self)
+        delegate?.squirrelDetailViewController(self, usedRerate: false)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
@@ -211,7 +219,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         if didRateSquirrel == true {
             var rating = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
             rateNumberTextField.placeholder = "Your rating: \(rating)"
-            rateButton.setTitle("Rerate", forState: UIControlState.Normal)
+            if canRerate == true {
+                println("canRerate is true")
+                rateButton.setTitle("Rerate", forState: UIControlState.Normal)
+            } else {
+                println("rate button should not be enabled")
+                rateButton.enabled = false
+            }
         }
         
         //Check if the squirrel has an owner to propose a trade with and if they have a unique picture
@@ -263,8 +277,12 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         claimTradePictureButton.layer.masksToBounds = true
         rateButton.layer.cornerRadius = 5
         rateButton.layer.masksToBounds = true
-        //So that we can tell whether to enable the rate button
-        rateNumberTextField.delegate = self
+        //We only need to know what the user is entering in the rateNumberTextField if they can rate the squirrel
+        if didRateSquirrel == false || canRerate == true {
+            println("canRerate is \(canRerate)")
+            println("passing checks")
+            rateNumberTextField.delegate = self
+        }
     }
     
     
