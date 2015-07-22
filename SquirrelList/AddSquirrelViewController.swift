@@ -33,14 +33,19 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
             displayErrorAlert("Their first name is too long!", error: "Please keep first names to a max of 10 characters.")
             return
         } else if count(last) > 15 {
-            displayErrorAlert("Their last name is too long!", error: "Please keep last names to a max of 15 characters")
+            displayErrorAlert("Their last name is too long!", error: "Please keep last names to a max of 15 characters.")
             return
         }
-
+        //Check to make user didn't just enter spaces for either name 
+        let spaces = NSCharacterSet(charactersInString: " ")
+        if count(first.stringByTrimmingCharactersInSet(spaces)) == 0 || count(last.stringByTrimmingCharactersInSet(spaces)) == 0 {
+            displayErrorAlert("That's not a name!", error: "Please provide letters (not whitespaces) for a Squirrel name. I expected better of you.")
+            return
+        }
         //We want to make sure users can't add a squirrel that starts or ends with a space or have numbers or weird punctuation
         let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:<>,.?/_+=")
         if first.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil || last.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil {
-                displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal")
+                displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal.")
         } else {
             let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
             let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
@@ -49,11 +54,11 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
             
             let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
             if (find(squirrelNames!, squirrelName) != nil) {
-                displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster")
+                displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
                 
             } else {
                 //Reloads the parent squirrelViewController
-                delegate?.addSquirrelViewController(self, didFinishAddingFirstName: first.capitalizedString, didFinishAddingLastName: last.capitalizedString)
+                delegate?.addSquirrelViewController(self, didFinishAddingFirstName: trimmedFirst2.capitalizedString, didFinishAddingLastName: trimmedLast2.capitalizedString)
                 self.navigationController?.popViewControllerAnimated(true)
         }
         }

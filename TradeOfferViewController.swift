@@ -30,25 +30,32 @@ class TradeOfferViewController: PopUpViewController {
     
     @IBAction func acceptTrade(sender: AnyObject) {
         //Finish implementing remove ratings later
-        let offeredUsername = offeredSquirrel!["ownerUsername"] as! String
-        //First we need to check if either user has rated the squirrel that they'll be receiving, and if they have, we need to remove their rating 
-        let offeredSquirrelRaters = offeredSquirrel!["raters"] as! [String]
-        let yourSquirrelRaters = yourSquirrel!["raters"] as! [String]
-        if find(offeredSquirrelRaters, PFUser.currentUser()!.username!) != nil{
-            //Then the logged in user has rated the offered squirrel, and we need to remove their rating and remove them from raters
-            let offeredRatings = removeRating(offeredSquirrel!, user: PFUser.currentUser()!.username!)
-            offeredSquirrel!["ratings"] = offeredRatings
-            offeredSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
-            offeredSquirrel!["avg_rating"] = calculateAverageRating(offeredRatings)
+        if tradeProposal!["offeredSquirrelID"] != nil {
+            //Check to see if the user is offering a squirrel
+            let offeredUsername = offeredSquirrel!["ownerUsername"] as! String
+            //First we need to check if either user has rated the squirrel that they'll be receiving, and if they have, we need to remove their rating
+            let offeredSquirrelRaters = offeredSquirrel!["raters"] as! [String]
+            let yourSquirrelRaters = yourSquirrel!["raters"] as! [String]
+            if find(offeredSquirrelRaters, PFUser.currentUser()!.username!) != nil{
+                //Then the logged in user has rated the offered squirrel, and we need to remove their rating and remove them from raters
+                let offeredRatings = removeRating(offeredSquirrel!, user: PFUser.currentUser()!.username!)
+                offeredSquirrel!["ratings"] = offeredRatings
+                offeredSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
+                offeredSquirrel!["avg_rating"] = calculateAverageRating(offeredRatings)
             
+            }
+            if find(yourSquirrelRaters, offeredUsername) != nil {
+                //Then the offering user has rated your squirrel, and we need to remove their rating and remove them from the raters
+                let yourRatings = removeRating(yourSquirrel!, user: offeredUsername)
+                yourSquirrel!["ratings"] = yourRatings
+                yourSquirrel!.removeObject(offeredUsername, forKey: "raters")
+                yourSquirrel!["avg_rating"] = calculateAverageRating(yourRatings)
+            }
+            offeredSquirrel!["owner"] = PFUser.currentUser()!
+            offeredSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
+            offeredSquirrel!.save()
         }
-        if find(yourSquirrelRaters, offeredUsername) != nil {
-            //Then the offering user has rated your squirrel, and we need to remove their rating and remove them from the raters
-            let yourRatings = removeRating(yourSquirrel!, user: offeredUsername)
-            yourSquirrel!["ratings"] = yourRatings
-            yourSquirrel!.removeObject(offeredUsername, forKey: "raters")
-            yourSquirrel!["avg_rating"] = calculateAverageRating(yourRatings)
-        }
+        
         if tradeProposal!["offeredAcorns"] != nil {
             let currentGroupdata  = PFUser.currentUser()!["currentGroupData"] as! PFObject
             currentGroupdata.fetch()
@@ -58,16 +65,10 @@ class TradeOfferViewController: PopUpViewController {
             currentGroupdata["acorns"] = acorns
             currentGroupdata.save()
         }
-    
-        offeredSquirrel!["owner"] = PFUser.currentUser()!
-        offeredSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
+
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
         yourSquirrel!["ownerUsername"] = tradeProposal!["offeringUsername"]
-
-        offeredSquirrel!.save()
         yourSquirrel!.save()
-        
-        
         tradeProposal!.delete()
         
         //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)
@@ -125,15 +126,6 @@ class TradeOfferViewController: PopUpViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var offeredSquirrelQuery = PFQuery(className: "Squirrel")
-        offeredSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["offeredSquirrelID"]!)
-        offeredSquirrel = offeredSquirrelQuery.getFirstObject()
-        
-        var offeredFirstName = offeredSquirrel!["first_name"] as? String
-        var offeredLastName = offeredSquirrel!["last_name"] as? String
-        offeredlLabel.text = "\(offeredFirstName!) \(offeredLastName!)"
-        
-        
         var yourSquirrelQuery = PFQuery(className: "Squirrel")
         yourSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["proposedSquirrelID"]!)
         yourSquirrel = yourSquirrelQuery.getFirstObject()
@@ -146,16 +138,31 @@ class TradeOfferViewController: PopUpViewController {
         acceptButton.layer.masksToBounds = true
         declineButton.layer.cornerRadius = 5
         declineButton.layer.masksToBounds = true
+
+        if tradeProposal!["offeredSquirrelID"] != nil {
+            println("pass1")
+            //Then the offerer is offering a Squirrel
+            var offeredSquirrelQuery = PFQuery(className: "Squirrel")
+            offeredSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["offeredSquirrelID"]!)
+            offeredSquirrel = offeredSquirrelQuery.getFirstObject()
+            var offeredFirstName = offeredSquirrel!["first_name"] as? String
+            var offeredLastName = offeredSquirrel!["last_name"] as? String
+            offeredlLabel.text = "\(offeredFirstName!) \(offeredLastName!)"
+        }
         
-        if tradeProposal!["offeredAcorns"] == nil {
-            offeredAcornsLabel.hidden = true
-        } else {
+        if tradeProposal!["offeredAcorns"] != nil {
+            println("pass3")
             var acorns = tradeProposal!["offeredAcorns"] as! Int
-            if acorns == 1 {
-                offeredAcornsLabel.text = "And 1 acorns"
+            if tradeProposal!["offeredSquirrelID"] == nil {
+                println("pass4")
+                offeredlLabel.text = "\(acorns) acorns"
+                offeredAcornsLabel.hidden = true
             } else {
-                offeredAcornsLabel.text = "And \(acorns) acorns"
+                println("pass5")
+                offeredAcornsLabel.text = "\(acorns) acorns +"
             }
+        } else {
+            offeredAcornsLabel.hidden = true
         }
     }
 

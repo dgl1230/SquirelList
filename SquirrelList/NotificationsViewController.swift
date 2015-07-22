@@ -128,6 +128,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         //Set the createGroupButton to 'fa-plus-circle'
         createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         createGroupButton?.title = "\u{f055}"
@@ -138,6 +139,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
+
 
     }
     

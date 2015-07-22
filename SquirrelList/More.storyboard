@@ -533,7 +533,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="9A36A871-03F3-476E-863B-D402EEC18097" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="F185CEA5-F6E6-4E68-ADA4-573320F434BE" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1052,7 +1052,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acorn" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-N5-dOy" userLabel="Acorn Image">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acorn_orange" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-N5-dOy" userLabel="Acorn Image">
                                     <rect key="frame" x="314" y="12" width="20" height="18"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="20" id="bMM-Sj-D4Z"/>
@@ -1154,7 +1154,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="9A36A871-03F3-476E-863B-D402EEC18097" width="24" height="37">
+        <image name="F185CEA5-F6E6-4E68-ADA4-573320F434BE" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1283,7 +1283,7 @@ AK0AxADGAMgbuhu/G8ob0xvmG+ob/RwIHBEcFhweHCEcJhw1HDkcQBxIHFUcWhxcHF4cYxxrHG4ccxx7
 HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
 </mutableData>
         </image>
-        <image name="acorn" width="128" height="128"/>
+        <image name="acorn_orange" width="128" height="128"/>
         <image name="store" width="128" height="128"/>
     </resources>
 </document>
