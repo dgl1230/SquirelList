@@ -14,9 +14,9 @@ import UIKit
 
 class MoreTableViewController: UITableViewController {
 
-    @IBOutlet weak var friendsIcon: UILabel!
-    @IBOutlet weak var groupsIcon: UILabel!
-    @IBOutlet weak var settingsIcon: UILabel!
+    //@IBOutlet weak var friendsIcon: UILabel!
+    //@IBOutlet weak var groupsIcon: UILabel!
+    //@IBOutlet weak var settingsIcon: UILabel!
     
     //Optional for keeping track if the user has no currentGroup
     var isNewUser: Bool?
@@ -103,11 +103,11 @@ class MoreTableViewController: UITableViewController {
         }
         self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
         //Set the friendsIcon to 'fa-smile-o'
-        friendsIcon.text = "\u{f118}"
+        //friendsIcon.text = "\u{f118}"
         //Set the groupsIcon to 'fa-users'
-        groupsIcon.text = "\u{f0c0}"
+        //groupsIcon.text = "\u{f0c0}"
         //Set the settings icon to 'fa-cog'
-        settingsIcon.text = "\u{f013}"
+        //settingsIcon.text = "\u{f013}"
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem

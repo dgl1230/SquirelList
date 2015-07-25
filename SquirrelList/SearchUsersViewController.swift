@@ -58,7 +58,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         if addingToGroup == true {
             //We need to add the user at the objects index to the logged in user's current group
             let user = filteredUsers[buttonRow]
-            createGroupInvite(user.objectId!)
+            createGroupInvite(user.objectId!, inviteeUsername: user.username!)
         } else {
             //We need to check and see if a friend request already exists
             let user = filteredUsers[buttonRow]
@@ -96,6 +96,17 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
                             PFUser.currentUser()!.addObject(user.objectId!, forKey: "pendingFriends")
                             PFUser.currentUser()!.save()
                             request.save()
+                            //Alert the invited user that they have been invited to a group
+                            let pushQuery = PFInstallation.query()
+                            //We want to get all installations that have the same userID's that are in the user's currentGroup
+                            pushQuery!.whereKey("userID", equalTo: user.username!)
+                            let push = PFPush()
+                            push.setQuery(pushQuery)
+                            let message = "\(PFUser.currentUser()!.username!) wants to be friends!"
+                            let inviteMessage = message as NSString
+                            let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+                            push.setData(pushDict)
+                            push.sendPushInBackgroundWithBlock(nil)
                         }
                     }
             })
@@ -108,18 +119,30 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         //We assume the addingToGroup optional is true because a user searching to add friends will not see any users initially 
         let buttonRow = sender.tag
         let user = objects![buttonRow] as! PFUser
-        createGroupInvite(user.objectId!)
+        createGroupInvite(user.objectId!, inviteeUsername: user.username!)
     }
     
     //Creates a group invite notification for the invitee
-    func createGroupInvite(invitee: String) {
+    func createGroupInvite(inviteeID: String, inviteeUsername: String) {
         var invite = PFObject(className: "GroupInvite")
         invite["inviter"] = PFUser.currentUser()!.username
-        invite["invitee"] = invitee
+        invite["invitee"] = inviteeID
         invite["group"] = group!
         invite["groupName"] = group!["name"]
-        
         invite.save()
+        
+        //Alert the invited user that they have been invited to a group
+        let pushQuery = PFInstallation.query()
+        //We want to get all installations that have the same userID's that are in the user's currentGroup
+        pushQuery!.whereKey("userID", equalTo: inviteeUsername)
+        let push = PFPush()
+        push.setQuery(pushQuery)
+        let groupName = group!["name"] as! String
+        let message = "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)"
+        let inviteMessage = message as NSString
+        let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+        push.setData(pushDict)
+        push.sendPushInBackgroundWithBlock(nil)
         
     }
     
@@ -132,29 +155,34 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
     }
     
-    //Takes a userID and checks if it is in relevant group
-    func isAdded(username: String) -> Bool {
+    //Takes a userID and checks if it is in relevant group. Right now we also take the username paramater, because the group["userIDs"] array is composed of usernames and the users friends and pendings friends array is composed of userIDs. Convoluted and should be uniform and have everything be usernames and userIDs
+    func isAdded(userID: String, username: String) -> Bool {
         var users: [String] = []
         group = PFUser.currentUser()!["currentGroup"] as? PFObject
         if addingToGroup == true {
             //Check to see if an invite has already been sent to the user
             var query = PFQuery(className: "GroupInvite")
             query.whereKey("group", equalTo: group!)
-            query.whereKey("invitee", equalTo: username)
+            query.whereKey("invitee", equalTo: userID)
+            let testQ = query.getFirstObject()
             var results = query.countObjects()
-            if results > 0 {
+            if results != 0 {
+                println("ITS TRUE ITS TRUE")
                 return true
             }
             //We're checking to see if a user's friend is in their current group
             users = group!["userIDs"] as! [String]
+            if contains(users, username) {
+                return true
+            }
         } else {
             //We're checking if a user is friends with someone
             var friends = PFUser.currentUser()!["friends"] as! [String]
             var pendingFriends = PFUser.currentUser()!["pendingFriends"] as! [String]
             users = friends + pendingFriends
         }
-        if contains(users, username) {
-            //Check to see if the user is already in the group's users or among the user's friends and pending friends
+        if contains(users, userID) {
+            //Check to see if the user is already among the user's friends and pending friends
             return true
         }
         return false
@@ -227,7 +255,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
         cell.nameLabel.text = user["username"] as? String
         cell.addButton.tag = indexPath.row
-        if isAdded(user.username!) {
+        if isAdded(user.objectId!, username: user.username!) {
             //The user variable has been already added to the relevant group
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)

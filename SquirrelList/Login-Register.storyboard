@@ -12,12 +12,14 @@
             <string>BebasNeueBold</string>
             <string>BebasNeueBold</string>
         </mutableArray>
+        <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+            <string>BebasNeueBook</string>
+        </mutableArray>
         <mutableArray key="bosun03.otf">
-            <string>bosun-03</string>
-            <string>bosun-03</string>
-            <string>bosun-03</string>
-            <string>bosun-03</string>
-            <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
@@ -139,22 +141,22 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SVa-Ne-1H9">
                                 <rect key="frame" x="172" y="155" width="256" height="35"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="UCC-qF-MkV"/>
                                     <constraint firstAttribute="height" constant="35" id="lK5-zG-fao"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTT-dm-8gK">
                                 <rect key="frame" x="172" y="199" width="256" height="35"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="dRh-Kb-ACh"/>
                                     <constraint firstAttribute="height" constant="35" id="pbM-Tn-qDS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txs-5M-icC" userLabel="Close Button">
@@ -169,16 +171,6 @@
                                     <action selector="close:" destination="vQX-Yw-Y66" eventType="touchUpInside" id="IPB-Me-Oe4"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="verify password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzq-th-9on">
-                                <rect key="frame" x="172" y="243" width="256" height="35"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="YHd-kc-cGl"/>
-                                    <constraint firstAttribute="width" constant="256" id="e1R-xk-SgH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJM-al-jXC">
                                 <rect key="frame" x="198" y="40" width="204" height="56"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -243,6 +235,18 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="verify password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m31-1Z-viE">
+                                <rect key="frame" x="172" y="247" width="256" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="3fq-eJ-KBk"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="256" id="9nC-Em-ygX"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="iyx-p8-THk"/>
+                                    <constraint firstAttribute="width" constant="256" id="jrD-yf-zlo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -251,8 +255,8 @@
                             <constraint firstItem="3DV-mX-YQJ" firstAttribute="height" secondItem="Xvj-9O-Pow" secondAttribute="height" constant="-4" id="CHL-og-SYq"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="119" id="DMr-Sn-UBQ"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="leading" secondItem="qOy-Oa-G5f" secondAttribute="trailing" constant="3" id="MK6-iZ-CYp"/>
-                            <constraint firstAttribute="centerX" secondItem="yzq-th-9on" secondAttribute="centerX" id="Mll-NS-TGm"/>
                             <constraint firstItem="sJM-al-jXC" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="40" id="PjO-jt-oJI"/>
+                            <constraint firstItem="m31-1Z-viE" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="247" id="QoP-2x-rJV"/>
                             <constraint firstAttribute="centerX" secondItem="SVa-Ne-1H9" secondAttribute="centerX" id="RaI-vD-hNs"/>
                             <constraint firstItem="3DV-mX-YQJ" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="100" id="biz-ba-atU"/>
                             <constraint firstAttribute="centerX" secondItem="DTT-dm-8gK" secondAttribute="centerX" id="fiv-dW-w1f"/>
@@ -264,8 +268,8 @@
                             <constraint firstItem="SVa-Ne-1H9" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="155" id="sP8-s5-zsP"/>
                             <constraint firstAttribute="centerX" secondItem="qOy-Oa-G5f" secondAttribute="centerX" constant="35.5" id="uQ2-DQ-cAr"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="height" secondItem="qOy-Oa-G5f" secondAttribute="height" constant="-4" id="upx-bb-oQS"/>
+                            <constraint firstAttribute="centerX" secondItem="m31-1Z-viE" secondAttribute="centerX" id="wjY-SK-Cbp"/>
                             <constraint firstItem="3DV-mX-YQJ" firstAttribute="width" secondItem="Xvj-9O-Pow" secondAttribute="width" constant="-94" id="yBf-wz-wdg"/>
-                            <constraint firstItem="yzq-th-9on" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="243" id="zmu-hH-Dfe"/>
                         </constraints>
                     </view>
                     <connections>
@@ -273,7 +277,7 @@
                         <outlet property="passwordTextField" destination="DTT-dm-8gK" id="pmF-RP-lSH"/>
                         <outlet property="registerButton" destination="sJM-al-jXC" id="BqT-Ff-jGv"/>
                         <outlet property="usernameTextField" destination="SVa-Ne-1H9" id="BMl-PD-FQp"/>
-                        <outlet property="verifyPasswordTextField" destination="yzq-th-9on" id="cdv-hc-AjZ"/>
+                        <outlet property="verifyPasswordTextField" destination="m31-1Z-viE" id="sML-6N-LG7"/>
                         <segue destination="wNK-Ak-92m" kind="presentation" identifier="termsOfService" id="UTb-j5-G40"/>
                         <segue destination="rgc-yi-Bs0" kind="presentation" identifier="privacyPolicy" id="XW0-Pa-JuK"/>
                     </connections>
@@ -296,12 +300,12 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xbf-dP-DB2">
                                 <rect key="frame" x="172" y="131" width="256" height="37"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="AUj-wf-gne"/>
                                     <constraint firstAttribute="width" constant="256" id="pwq-Hn-7u6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dO-b0-qpP" userLabel="Close Button">
@@ -334,12 +338,12 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lqo-jM-Fkd">
                                 <rect key="frame" x="172" y="190" width="256" height="37"/>
-                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Gdh-gp-M83"/>
                                     <constraint firstAttribute="width" constant="256" id="VFr-PH-F3s"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>

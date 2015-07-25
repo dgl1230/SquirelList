@@ -32,6 +32,9 @@ class SquirrelStoreController: UITableViewController {
         if acorns < 500 {
             buySquirrelSlotsButton.enabled = false
         }
+        if acorns < 50 {
+            buyReratingButton.enabled = false
+        }
         
     }
 
@@ -44,6 +47,9 @@ class SquirrelStoreController: UITableViewController {
         acornsLabel.text = "\(acorns)"
         //Users can only buy one rerate at a time
         buyReratingButton.enabled = false
+        if acorns < 500 {
+            buySquirrelSlotsButton.enabled = false
+        }
     }
     
     func reload() {
@@ -86,6 +92,7 @@ class SquirrelStoreController: UITableViewController {
         if (acorns < 50) || (canRerate == true) {
             buyReratingButton.enabled = false
         }
+        
     }
     
 

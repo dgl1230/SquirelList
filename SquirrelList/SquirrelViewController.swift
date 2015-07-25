@@ -461,6 +461,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             //We don't need to load or calculate anything else if we're just displaying the user's squirrels to offer for a trade
             return
         }
+        //Get the UserGroupData instance
+        individualGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
+        individualGroupData?.fetch()
+
         if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
             //If new user, show them the tutorial screens
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -486,9 +490,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
             //Setting self.title here for some reason change's the squirrel tab's title as well
             self.navigationItem.title = "\(groupName) Squirrels"
-            //Get the UserGroupData instance
-            individualGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
-            individualGroupData?.fetch()
             //Set the number of acorns to display 
             let userAcorns = individualGroupData!["acorns"] as! Int
             acornsLabel?.text = "\(userAcorns)"
@@ -497,7 +498,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             var groupUserIds = PFUser.currentUser()!["currentGroup"]!["userIDs"] as? [String]
             var numOfUsers = groupUserIds!.count
             
-            if squirrelSlots == 15 {
+            if squirrelSlots == 0 {
                 squirrelSlotsLabel!.text = "Squirrel Slots: 0"
                 addSquirrelButton!.enabled = false
             } else if numOfUsers == 1 {

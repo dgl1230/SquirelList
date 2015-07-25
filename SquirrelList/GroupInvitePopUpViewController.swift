@@ -41,7 +41,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = numOfUsers + 1
         userGroupData["canRerate"] = false
-        userGroupData["cumulativeDaysVisited"] = 1
+        userGroupData["cumulativeDaysVisited"] = 0
         userGroupData.save()
         group!.save()
         PFUser.currentUser()!.save()

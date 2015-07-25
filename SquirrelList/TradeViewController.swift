@@ -48,6 +48,19 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         
         if acornTextField.text != "" {
             //Then the user is offering acorns and we need to run some checks
+            //First we need to check and make sure they only entered in digits
+            let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            for char in acornTextField.text {
+                if find(digits, String(char)) == nil {
+                    let title = ""
+                    let message = "Only enter in numbers! You weirdo."
+                    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                    return
+                }
+            }
+            
             let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
             currentGroupData.fetch()
             let acorns  = currentGroupData["acorns"] as! Int
@@ -74,6 +87,19 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }))
+                //Alert the desired Squirrel owner that a trade has been proposed
+                let pushQuery = PFInstallation.query()
+                let offeringUsername = PFUser.currentUser()!.username
+                let desiredSquirrelName = "\(firstName) \(lastName)"
+                pushQuery!.whereKey("userID", equalTo: self.desiredSquirrelOwner!.username!)
+                let push = PFPush()
+                push.setQuery(pushQuery)
+                let proposal = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)!"
+                let inviteMessage = proposal as NSString
+                let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+                push.setData(pushDict)
+                push.sendPushInBackgroundWithBlock(nil)
+                
                 self.presentViewController(alert, animated: true, completion: nil)
                 
             } else {
@@ -108,13 +134,16 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             var lastName = offeredSquirrel!["last_name"] as? String
             offeredSquirrelLabel.text = "\(firstName!) \(lastName!)"
             selectSquirrelButton.hidden = true
-            proposeTradeButton.hidden = false
             proposeTradeButton.enabled = true
-        } else if count(acornTextField.text) == 0 {
+        } else if count(acornTextField.text) != 0 {
             //We need to first display the select squirrel button and hide the trade button, since there is no offered squirrel and no proposed acorns
             offeredSquirrelLabel.hidden = true
-            proposeTradeButton.hidden = true
+            proposeTradeButton.enabled = true
+        } else {
+            //The user hasn't offered anything
             proposeTradeButton.enabled = false
+            proposeTradeButton.alpha = 0.5
+            offeredSquirrelLabel.hidden = true
         }
         //Make the buttons have rounded edges
         proposeTradeButton.layer.cornerRadius = 5
@@ -141,14 +170,21 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             selectSquirrelButton.hidden = true
         
     }
+    
+    //For dismissing the keyboard after pressing "done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 
     //UITextFieldDelate used for seeing whether the user has proposed acorns, and if they have,to show the trade button
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+            println(string)
             if count(string) > 0 || count(acornTextField.text) >= 2 {
-                proposeTradeButton.hidden = false
+                proposeTradeButton.alpha = 1
                 proposeTradeButton.enabled = true
             } else if offeredSquirrel == nil {
-                proposeTradeButton.hidden = true
+                proposeTradeButton.alpha = 0.5
                 proposeTradeButton.enabled = false
             }
             return true 

@@ -225,6 +225,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             } else {
                 println("rate button should not be enabled")
                 rateButton.enabled = false
+                //We want it to be obvious that they can't use the rate button
+                rateButton.alpha = 0.5
             }
         }
         
@@ -279,10 +281,22 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         rateButton.layer.masksToBounds = true
         //We only need to know what the user is entering in the rateNumberTextField if they can rate the squirrel
         if didRateSquirrel == false || canRerate == true {
-            println("canRerate is \(canRerate)")
-            println("passing checks")
             rateNumberTextField.delegate = self
         }
+        /*
+        //Make the font adjust depending on the size of the button for claimTradePictureButton
+        claimTradePictureButton.titleLabel!.numberOfLines = 1
+        claimTradePictureButton.titleLabel!.font = UIFont(name: "bosun-03", size: 100)
+        claimTradePictureButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        claimTradePictureButton.titleLabel!.baselineAdjustment = .AlignCenters
+        claimTradePictureButton.titleLabel!.sizeToFit()
+        //Make the font adjust depending on the size of the button for rateButton
+        rateButton.titleLabel!.numberOfLines = 1
+        rateButton.titleLabel!.font = UIFont(name: "bosun-03", size: 100)
+        rateButton.titleLabel!.adjustsFontSizeToFitWidth = true
+        rateButton.titleLabel!.baselineAdjustment = .AlignCenters
+        rateButton.titleLabel!.sizeToFit()
+        */
     }
     
     
@@ -304,8 +318,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             return true 
     }
     
+    //For dismissing the keyboard after pressing "done"
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        println("doing ish here")
+        self.view.endEditing(true)
         return true
     }
     

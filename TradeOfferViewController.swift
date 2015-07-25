@@ -64,11 +64,36 @@ class TradeOfferViewController: PopUpViewController {
             acorns += offeredAcorns
             currentGroupdata["acorns"] = acorns
             currentGroupdata.save()
+            //We need to subtract the offered amount of acorns from the proposer of the trade
+            let offeringUserGroupDataQuery = PFQuery(className: "UserGroupData")
+            offeringUserGroupDataQuery.whereKey("user", equalTo: tradeProposal!["offeringUser"] as! PFObject)
+            offeringUserGroupDataQuery.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"] as! PFObject)
+            let offeringUserGroupData = offeringUserGroupDataQuery.getFirstObject()
+            var proposerAcorns = offeringUserGroupData!["acorns"] as! Int
+            proposerAcorns -= offeredAcorns
+            offeringUserGroupData!["acorns"] = proposerAcorns
+            offeringUserGroupData!.save()
+            
         }
 
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
         yourSquirrel!["ownerUsername"] = tradeProposal!["offeringUsername"]
         yourSquirrel!.save()
+        
+        //Alert the offering user that their proposal has been accepted
+        let pushQuery = PFInstallation.query()
+        let offeringUsername = tradeProposal!["offeringUsername"] as! String
+        let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
+        pushQuery!.whereKey("userID", equalTo: offeringUsername)
+        let push = PFPush()
+        push.setQuery(pushQuery)
+        let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)!"
+        let inviteMessage = message as NSString
+        let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+        push.setData(pushDict)
+        push.sendPushInBackgroundWithBlock(nil)
+        
+        
         tradeProposal!.delete()
         
         //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)

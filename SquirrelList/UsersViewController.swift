@@ -122,6 +122,7 @@ class UsersViewController: PFQueryTableViewController {
                 }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        //It's already been fetched by this point in viewDidLoad, so we don't need to again
         let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
         //Check to see if we should alert them that their are new members in their group (and thus they have more Squirrel Slots)
         if contains(alerts, "newUSers") {
@@ -159,7 +160,14 @@ class UsersViewController: PFQueryTableViewController {
             cumulativeDays += 1
             var acorns = userGroupData["acorns"] as! Int
             acorns += 5
-            var message = "Here's five acorns for being a daily visitor of this group!"
+            let squirrelScore = userGroupData["squirrelSlots"] as! Int
+            let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
+            var message = "Here's five acorns for visiting \(groupName) everyday!"
+            //Reward them for having a full squirrel team
+            if squirrelScore == 0 {
+                acorns += 10
+                message = "Here's 15 acorns for visiting \(groupName) daily and having a full squirrel team!"
+            }
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
                 //Update and save userGroupData
@@ -212,7 +220,7 @@ class UsersViewController: PFQueryTableViewController {
             PFUser.currentUser()!.fetch()
             
         }
-        currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+        currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"

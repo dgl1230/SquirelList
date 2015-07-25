@@ -24,11 +24,6 @@
         <mutableArray key="bosun03.otf">
             <string>bosun-03</string>
         </mutableArray>
-        <mutableArray key="fontawesome-webfont.ttf">
-            <string>FontAwesome</string>
-            <string>FontAwesome</string>
-            <string>FontAwesome</string>
-        </mutableArray>
     </customFonts>
     <scenes>
         <!--Settings-->
@@ -427,18 +422,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nsj-HI-BLg" userLabel="Friends Icon">
-                                                    <rect key="frame" x="19" y="16" width="20" height="21"/>
-                                                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mY-Qe-iNF">
-                                                    <rect key="frame" x="47" y="15" width="131" height="30"/>
+                                                    <rect key="frame" x="48" y="11" width="131" height="30"/>
                                                     <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="26"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="happy" translatesAutoresizingMaskIntoConstraints="NO" id="0qA-Ew-De9" userLabel="Squirrel Store Image">
+                                                    <rect key="frame" x="17" y="11" width="23" height="23"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -449,18 +441,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwb-pI-lvG" userLabel="Groups Icon">
-                                                    <rect key="frame" x="17" y="14" width="20" height="21"/>
-                                                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Groups" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yc8-0a-ogF">
-                                                    <rect key="frame" x="45" y="13" width="90" height="30"/>
+                                                    <rect key="frame" x="48" y="11" width="90" height="30"/>
                                                     <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="26"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="group_more" translatesAutoresizingMaskIntoConstraints="NO" id="8R8-Ys-RYK" userLabel="Squirrel Store Image">
+                                                    <rect key="frame" x="17" y="11" width="23" height="23"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -471,18 +460,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kt6-wp-psl" userLabel="Settings Icon">
-                                                    <rect key="frame" x="17" y="14" width="20" height="21"/>
-                                                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWW-nV-IzJ">
-                                                    <rect key="frame" x="45" y="11" width="90" height="28"/>
+                                                    <rect key="frame" x="48" y="11" width="90" height="28"/>
                                                     <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="26"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="7Kl-vo-kFU" userLabel="Squirrel Store Image">
+                                                    <rect key="frame" x="17" y="11" width="23" height="23"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -515,9 +501,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="More" id="ZwE-0v-9Mg"/>
                     <connections>
-                        <outlet property="friendsIcon" destination="Nsj-HI-BLg" id="2By-pA-JEl"/>
-                        <outlet property="groupsIcon" destination="Wwb-pI-lvG" id="W5h-zZ-CXz"/>
-                        <outlet property="settingsIcon" destination="kt6-wp-psl" id="gjB-Mm-Nmb"/>
                         <outlet property="tblOptions" destination="7cw-Ap-9hv" id="Wbf-AH-edA"/>
                         <segue destination="ef1-lT-QsA" kind="show" identifier="Friends" id="dOU-cP-DbM"/>
                         <segue destination="GDH-kA-JbV" kind="show" identifier="GroupInvites" id="3Zt-pC-LMW"/>
@@ -533,7 +516,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="F185CEA5-F6E6-4E68-ADA4-573320F434BE" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="35F94BA8-7AC2-40E1-B4EA-76ECDC606C7F" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1082,13 +1065,13 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hou-0T-rd2" userLabel="Buy SquirrelSlots">
-                                                    <rect key="frame" x="546" y="16" width="46" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hou-0T-rd2" userLabel="Buy SquirrelSlots">
+                                                    <rect key="frame" x="552" y="11" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="0We-sY-lUs"/>
-                                                        <constraint firstAttribute="width" constant="46" id="Ffy-w8-mhp"/>
+                                                        <constraint firstAttribute="height" constant="40" id="0We-sY-lUs"/>
+                                                        <constraint firstAttribute="width" constant="40" id="Ffy-w8-mhp"/>
                                                     </constraints>
-                                                    <state key="normal" title="Buy">
+                                                    <state key="normal" title="Buy" image="money-bag-blue">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -1097,7 +1080,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="hou-0T-rd2" firstAttribute="top" secondItem="hDH-8H-owQ" secondAttribute="top" constant="16" id="CrX-GQ-SVf"/>
+                                                <constraint firstItem="hou-0T-rd2" firstAttribute="top" secondItem="hDH-8H-owQ" secondAttribute="top" constant="11" id="CrX-GQ-SVf"/>
                                                 <constraint firstItem="hou-0T-rd2" firstAttribute="trailing" secondItem="hDH-8H-owQ" secondAttribute="trailingMargin" id="wz5-S8-vdW"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1113,13 +1096,13 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aep-bx-ZYU" userLabel="Buy Rerating">
-                                                    <rect key="frame" x="546" y="13" width="46" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aep-bx-ZYU" userLabel="Buy Rerating">
+                                                    <rect key="frame" x="552" y="11" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="JdW-FY-1NO"/>
-                                                        <constraint firstAttribute="width" constant="46" id="v8P-db-qu3"/>
+                                                        <constraint firstAttribute="height" constant="40" id="JdW-FY-1NO"/>
+                                                        <constraint firstAttribute="width" constant="40" id="v8P-db-qu3"/>
                                                     </constraints>
-                                                    <state key="normal" title="Buy">
+                                                    <state key="normal" title="Buy" image="money-bag-blue">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -1128,7 +1111,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aep-bx-ZYU" firstAttribute="top" secondItem="qdK-4S-SfQ" secondAttribute="top" constant="13" id="dhP-yR-T4z"/>
+                                                <constraint firstItem="aep-bx-ZYU" firstAttribute="top" secondItem="qdK-4S-SfQ" secondAttribute="top" constant="11" id="dhP-yR-T4z"/>
                                                 <constraint firstItem="aep-bx-ZYU" firstAttribute="trailing" secondItem="qdK-4S-SfQ" secondAttribute="trailingMargin" id="msy-sg-gNt"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1154,7 +1137,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="F185CEA5-F6E6-4E68-ADA4-573320F434BE" width="24" height="37">
+        <image name="35F94BA8-7AC2-40E1-B4EA-76ECDC606C7F" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1284,6 +1267,10 @@ HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
 </mutableData>
         </image>
         <image name="acorn_orange" width="128" height="128"/>
+        <image name="group_more" width="128" height="128"/>
+        <image name="happy" width="128" height="128"/>
+        <image name="money-bag-blue" width="128" height="128"/>
+        <image name="settings" width="128" height="128"/>
         <image name="store" width="128" height="128"/>
     </resources>
 </document>
