@@ -81,13 +81,27 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
-                    group.delete()
                     self.loadObjects()
+                    //Need to delete all of the squirrels in the group
+                    let squirrelQuery = PFQuery(className: "Squirrel")
+                    squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
+                    squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
+                    if error == nil {
+                        for object in squirrels! {
+                                //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
+                                let squirrel:PFObject = object as! PFObject
+                                squirrel.delete()
+                            }
+                        }
+                    })
                     //Need to delete the UserGroupData instance too
-                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-                    currentGroupData.delete()
+                    //Not forcing a downcast because the user might already not have a currentGroupData (if they have already left another group in this controller before doing anything else. We don't have this problem with currentGroupData because we don't have to worry about deleting the group itself
+                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
+                    currentGroupData?.delete()
                     PFUser.currentUser()!.removeObjectForKey("currentGroupData")
+                    PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
+                    group.delete()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
@@ -113,8 +127,9 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         }
                     })
                     //Need to delete the UserGroupData instance too
-                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-                    currentGroupData.delete()
+                    //Not forcing a downcast because the user might already not have a currentGroupData (if they have already left another group in this controller before doing anything else. We don't have this problem with currentGroupData because we don't have to worry about deleting the group itself
+                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
+                    currentGroupData?.delete()
                     PFUser.currentUser()!.removeObjectForKey("currentGroupData")
                     //Remove user from the group's users
                     group.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")

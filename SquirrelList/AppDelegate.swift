@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             self.window!.rootViewController = loginController
             self.window!.makeKeyAndVisible()
         } else if PFUser.currentUser()!["currentGroup"] == nil {
+            println("ITS FUCKING NIL")
             //Present just the MoreViewController to the user because they are still new
             let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
             let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController

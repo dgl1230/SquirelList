@@ -557,11 +557,11 @@
 		18DC68251B588FEC00364A4E /* Pop Up Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
 				18D4DF9C1AC1335800C55E48 /* SquirrelDetailViewController.swift */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
+				18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */,
 			);
 			name = "Pop Up Controllers";
 			path = ..;

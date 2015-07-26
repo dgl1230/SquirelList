@@ -24,7 +24,6 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group["name"] = groupNameTextField.text as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
         group["squirrels"] = []
-        group["acorns"] = ["500"]
         //Need to add the current user's squirrel list ID eventually as well
         group.save()
         
@@ -37,6 +36,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = 1
         userGroupData["cumulativeDaysVisited"] = 1
+        userGroupData["groupName"] = groupNameTextField.text as NSString
         userGroupData.save()
 
 

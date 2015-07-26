@@ -19,6 +19,7 @@ class SquirrelStoreController: UITableViewController {
     @IBOutlet weak var acornsLabel: UILabel!
     @IBOutlet weak var buySquirrelSlotsButton: UIButton!
     @IBOutlet weak var buyReratingButton: UIButton!
+    @IBOutlet weak var purchaseReratingLabel: UILabel!
 
     @IBAction func buySquirrelSlots(sender: AnyObject) {
         var acorns = individualGroupData["acorns"] as! Int
@@ -76,7 +77,6 @@ class SquirrelStoreController: UITableViewController {
     }
     
     override func viewDidLoad() {
-        println("VIEW DID LOAD")
         super.viewDidLoad()
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
@@ -92,6 +92,14 @@ class SquirrelStoreController: UITableViewController {
         if (acorns < 50) || (canRerate == true) {
             buyReratingButton.enabled = false
         }
+        if canRerate == true {
+            purchaseReratingLabel.text = "Purchase Rerating (1/1)"
+        } else {
+            purchaseReratingLabel.text = "Purchase Rerating (0/1)"
+        }
+        println("CAN REREATE is \(canRerate)")
+        let groupName = individualGroupData["groupName"] as! String
+        self.title = "\(groupName) Squirrel Store"
         
     }
     

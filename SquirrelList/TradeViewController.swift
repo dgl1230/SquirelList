@@ -54,9 +54,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 if find(digits, String(char)) == nil {
                     let title = ""
                     let message = "Only enter in numbers! You weirdo."
-                    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    displayErrorAlert(title, message: message)
                     return
                 }
             }
@@ -65,12 +63,16 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             currentGroupData.fetch()
             let acorns  = currentGroupData["acorns"] as! Int
             let offeredAcorns = acornTextField.text.toInt()
+            //Next we check to make sure the user hasn't offered zero acorns 
+            if offeredAcorns == 0 {
+                let title = ""
+                let message = "Offer at least one acorn you swindler!"
+                displayErrorAlert(title, message: message)
+            }
             if offeredAcorns > acorns {
                 let title = "You don't have that many acorns!"
                 let message = ":("
-                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                displayErrorAlert(title, message: message)
                 return
             } else {
                 tradeProposal["offeredAcorns"] = offeredAcorns
@@ -107,8 +109,20 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             }
         }
     }
+    
+    
     @IBAction func selectSquirrel(sender: AnyObject) {
         self.performSegueWithIdentifier("userSquirrels", sender: self)
+    }
+    
+    
+    /* Parameters: error, which is the error that the user should see in the UIAlertController
+    What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
+    */
+    func displayErrorAlert(title: String, message: String) {
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

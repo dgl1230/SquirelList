@@ -490,7 +490,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
             //Setting self.title here for some reason change's the squirrel tab's title as well
             self.navigationItem.title = "\(groupName) Squirrels"
-            //Set the number of acorns to display 
+            //Set the number of rerates 
             let userAcorns = individualGroupData!["acorns"] as! Int
             acornsLabel?.text = "\(userAcorns)"
             //Set the number of squirrel slots to display

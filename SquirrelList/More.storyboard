@@ -23,6 +23,8 @@
         </mutableArray>
         <mutableArray key="bosun03.otf">
             <string>bosun-03</string>
+            <string>bosun-03</string>
+            <string>bosun-03</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -516,7 +518,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="35F94BA8-7AC2-40E1-B4EA-76ECDC606C7F" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="3129B0E8-05C7-4E70-A7AC-4B1C40F2A2A8" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1059,9 +1061,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eag-3U-cB7" id="hDH-8H-owQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Purchase Squirrel Slots (500 acorns)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iae-0m-xxG">
-                                                    <rect key="frame" x="8" y="14" width="239" height="21"/>
-                                                    <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Purchase Squirrel Slots " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iae-0m-xxG">
+                                                    <rect key="frame" x="8" y="22" width="185" height="21"/>
+                                                    <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1078,9 +1080,30 @@
                                                         <action selector="buySquirrelSlots:" destination="rjs-PX-k9I" eventType="touchUpInside" id="fN0-pu-RK1"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acorn_orange" translatesAutoresizingMaskIntoConstraints="NO" id="47k-a3-wnX">
+                                                    <rect key="frame" x="518" y="22" width="20" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="4XD-ho-foG"/>
+                                                        <constraint firstAttribute="height" constant="18" id="M8O-Aw-xK1"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffk-dA-SEI">
+                                                    <rect key="frame" x="487" y="22" width="33" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="33" id="FqY-g0-qHR"/>
+                                                        <constraint firstAttribute="height" constant="21" id="pcz-ml-qAn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="47k-a3-wnX" firstAttribute="leading" secondItem="ffk-dA-SEI" secondAttribute="trailing" constant="-2" id="5Gs-7k-tdz"/>
                                                 <constraint firstItem="hou-0T-rd2" firstAttribute="top" secondItem="hDH-8H-owQ" secondAttribute="top" constant="11" id="CrX-GQ-SVf"/>
+                                                <constraint firstItem="hou-0T-rd2" firstAttribute="leading" secondItem="47k-a3-wnX" secondAttribute="trailing" constant="14" id="GVI-bA-oSv"/>
+                                                <constraint firstItem="47k-a3-wnX" firstAttribute="top" secondItem="hDH-8H-owQ" secondAttribute="topMargin" constant="14" id="KSL-nf-11J"/>
+                                                <constraint firstItem="ffk-dA-SEI" firstAttribute="top" secondItem="hDH-8H-owQ" secondAttribute="topMargin" constant="14" id="Vd3-GL-23T"/>
                                                 <constraint firstItem="hou-0T-rd2" firstAttribute="trailing" secondItem="hDH-8H-owQ" secondAttribute="trailingMargin" id="wz5-S8-vdW"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1090,9 +1113,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gJy-a2-73G" id="qdK-4S-SfQ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Purchase ReRating (50 acorns)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0C-9W-C7C">
-                                                    <rect key="frame" x="8" y="17" width="235" height="21"/>
-                                                    <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Purchase ReRating " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0C-9W-C7C">
+                                                    <rect key="frame" x="8" y="22" width="235" height="22"/>
+                                                    <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="22"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1109,10 +1132,31 @@
                                                         <action selector="buyRerating:" destination="rjs-PX-k9I" eventType="touchUpInside" id="dTp-ZF-bjg"/>
                                                     </connections>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="acorn_orange" translatesAutoresizingMaskIntoConstraints="NO" id="FsT-68-REA">
+                                                    <rect key="frame" x="518" y="22" width="20" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="tc4-7d-ZMS"/>
+                                                        <constraint firstAttribute="height" constant="18" id="xMq-vY-ypa"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1S-m2-jKB">
+                                                    <rect key="frame" x="496" y="22" width="23" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="23" id="SbT-C6-tZS"/>
+                                                        <constraint firstAttribute="height" constant="21" id="gop-rg-onn"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="FsT-68-REA" firstAttribute="leading" secondItem="O1S-m2-jKB" secondAttribute="trailing" constant="-1" id="0Ao-Vf-wyT"/>
+                                                <constraint firstItem="O1S-m2-jKB" firstAttribute="top" secondItem="qdK-4S-SfQ" secondAttribute="topMargin" constant="14" id="Lth-8y-CeA"/>
+                                                <constraint firstItem="FsT-68-REA" firstAttribute="top" secondItem="qdK-4S-SfQ" secondAttribute="topMargin" constant="14" id="QCe-kH-eBL"/>
                                                 <constraint firstItem="aep-bx-ZYU" firstAttribute="top" secondItem="qdK-4S-SfQ" secondAttribute="top" constant="11" id="dhP-yR-T4z"/>
                                                 <constraint firstItem="aep-bx-ZYU" firstAttribute="trailing" secondItem="qdK-4S-SfQ" secondAttribute="trailingMargin" id="msy-sg-gNt"/>
+                                                <constraint firstItem="aep-bx-ZYU" firstAttribute="leading" secondItem="FsT-68-REA" secondAttribute="trailing" constant="14" id="pEj-od-BXv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1129,6 +1173,7 @@
                         <outlet property="acornsLabel" destination="4nX-21-HyG" id="B3j-fn-UzR"/>
                         <outlet property="buyReratingButton" destination="aep-bx-ZYU" id="ywK-gA-FDR"/>
                         <outlet property="buySquirrelSlotsButton" destination="hou-0T-rd2" id="Jce-wg-AN1"/>
+                        <outlet property="purchaseReratingLabel" destination="c0C-9W-C7C" id="zNt-Q1-vgr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FG9-Dr-SWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1137,7 +1182,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="35F94BA8-7AC2-40E1-B4EA-76ECDC606C7F" width="24" height="37">
+        <image name="3129B0E8-05C7-4E70-A7AC-4B1C40F2A2A8" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

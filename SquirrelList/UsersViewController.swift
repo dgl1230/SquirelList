@@ -24,7 +24,6 @@ class UsersViewController: PFQueryTableViewController {
     //Variable for storing potential alerts for the user - values it can hold are: "recentStrike", "newUsers", and "cumulativeDay"
     var alerts: [String] = []
 
-
     @IBOutlet weak var addFriendToGroupButton: UIBarButtonItem?
     @IBOutlet weak var changeCurrentGroupButton: UIBarButtonItem?
     
@@ -89,6 +88,11 @@ class UsersViewController: PFQueryTableViewController {
         //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
+        /*
+        PFUser.currentUser()!.removeObjectForKey("currentGroup")
+        PFUser.currentUser()!.removeObjectForKey("currentGroupData")
+        PFUser.currentUser()!.save()
+        */
         
         var query = PFUser.query()
         query!.whereKey("username", containedIn: currentGroup!["userIDs"] as! [String])
@@ -132,17 +136,20 @@ class UsersViewController: PFQueryTableViewController {
             let numOFNewUsers = numOfUsers - oldNumOfUsers
             var acorns = userGroupData["acorns"] as! Int
             acorns += (50 * numOFNewUsers)
+            var squirrelSlots = userGroupData["squirrelSlots"] as! Int
+            squirrelSlots += numOFNewUsers
             //Show popup
             var message = ""
             if numOFNewUsers == 1 {
-                message = "One new user has joined, so enjoy 50 more acorns!"
+                message = "One new user has joined, so enjoy 50 more acorns and one more squirrel slot!"
             } else {
-                message = "\(numOFNewUsers) have joined, so enjoy your \(50 * numOFNewUsers) acorns!"
+                message = "\(numOFNewUsers) have joined, so enjoy \(50 * numOFNewUsers) acorns and \(numOFNewUsers) squirrel slots!"
             }
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
                 userGroupData["acorns"] = acorns
                 userGroupData["numOfGroupUsers"] = numOfUsers
+                userGroupData["squirrelSlots"] = squirrelSlots
                 userGroupData.save()
                 self.alerts.removeAtIndex(0)
                 //We recursively call showAlerts() until the alerts array is empty
@@ -215,12 +222,33 @@ class UsersViewController: PFQueryTableViewController {
             query.whereKey("user", equalTo: PFUser.currentUser()!)
             query.whereKey("group", equalTo: currentGroup)
             let individualGroupData = query.getFirstObject()
-            PFUser.currentUser()!["currentGroupData"] = individualGroupData
-            PFUser.currentUser()!.save()
-            PFUser.currentUser()!.fetch()
+            if individualGroupData == nil {
+                //We need to create a new groupDataInstance
+                let userGroupData = PFObject(className: "UserGroupData")
+                let group = PFUser.currentUser()!["currentGroup"] as! PFObject
+                group.fetch()
+                userGroupData["user"] = PFUser.currentUser()!
+                userGroupData["group"] = group
+                userGroupData["acorns"] = 1000
+                userGroupData["squirrelSlots"] = 5
+                userGroupData["canRerate"] = false
+                userGroupData["lastVisit"] = NSDate()
+                userGroupData["numOfGroupUsers"] = 1
+                userGroupData["cumulativeDaysVisited"] = 1
+                userGroupData["groupName"] = group["name"] as! String
+                PFUser.currentUser()!["currentGroupData"] = userGroupData
+                PFUser.currentUser()!.save()
+                PFUser.currentUser()!.fetch()
+            } else {
+                PFUser.currentUser()!["currentGroupData"] = individualGroupData
+                PFUser.currentUser()!.save()
+                PFUser.currentUser()!.fetch()
+            }
+
             
         }
         currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
+        currentGroup!.fetch()
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"
@@ -278,7 +306,6 @@ class UsersViewController: PFQueryTableViewController {
         if alerts.count > 0 {
             showAlerts()
         }
-        
     }
     
     

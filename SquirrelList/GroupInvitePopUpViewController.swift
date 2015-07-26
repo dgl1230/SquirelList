@@ -29,7 +29,6 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     @IBAction func accept(sender: AnyObject) {
         group!.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
-        group!.addObject("500", forKey: "acorns")
         PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
         let numOfUsers = (group!["userIDs"] as! [String]).count
         let squirrelSlots = numOfUsers + 5
@@ -42,6 +41,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
         userGroupData["numOfGroupUsers"] = numOfUsers + 1
         userGroupData["canRerate"] = false
         userGroupData["cumulativeDaysVisited"] = 0
+        userGroupData["groupName"] = group!["name"] as! String
         userGroupData.save()
         group!.save()
         PFUser.currentUser()!.save()
@@ -51,8 +51,8 @@ class GroupInvitePopUpViewController: PopUpViewController {
             PFUser.currentUser()!["currentGroup"] = group!
             //The user is new and needs a currentGroupData
             PFUser.currentUser()!["currentGroupData"] = userGroupData
-            //The user can now access all tabs, since they have a current group
             PFUser.currentUser()!.save()
+            //The user can now access all tabs, since they have a current group
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()
