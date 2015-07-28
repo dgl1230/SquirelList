@@ -95,10 +95,13 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         }
                     })
                     //Need to delete the UserGroupData instance too
-                    //Not forcing a downcast because the user might already not have a currentGroupData (if they have already left another group in this controller before doing anything else. We don't have this problem with currentGroupData because we don't have to worry about deleting the group itself
-                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
-                    currentGroupData?.delete()
-                    PFUser.currentUser()!.removeObjectForKey("currentGroupData")
+                    //We need to query and get the right UserGroupData instance
+                    let userGroupDataQ = PFQuery(className: "UserGroupData")
+                    userGroupDataQ.whereKey("group", equalTo: group)
+                    userGroupDataQ.whereKey("user", equalTo: PFUser.currentUser()!)
+                    //There should only ever be one result for this query
+                    let groupDataInstance = userGroupDataQ.getFirstObject()
+                    groupDataInstance!.delete()
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
                     group.delete()
@@ -127,10 +130,13 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         }
                     })
                     //Need to delete the UserGroupData instance too
-                    //Not forcing a downcast because the user might already not have a currentGroupData (if they have already left another group in this controller before doing anything else. We don't have this problem with currentGroupData because we don't have to worry about deleting the group itself
-                    let currentGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
-                    currentGroupData?.delete()
-                    PFUser.currentUser()!.removeObjectForKey("currentGroupData")
+                    //We need to query and get the right UserGroupData instance
+                    let userGroupDataQ = PFQuery(className: "UserGroupData")
+                    userGroupDataQ.whereKey("group", equalTo: group)
+                    userGroupDataQ.whereKey("user", equalTo: PFUser.currentUser()!)
+                    //There should only ever be one result for this query
+                    let groupDataInstance = userGroupDataQ.getFirstObject()
+                    groupDataInstance!.delete()
                     //Remove user from the group's users
                     group.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
                     //Remve the group from the user's group

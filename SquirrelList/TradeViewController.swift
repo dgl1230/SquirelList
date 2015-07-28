@@ -136,6 +136,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     
     
     override func viewDidLoad() {
+        println("VIEW DID LOAD")
         super.viewDidLoad()
         var firstName = desiredSquirrel!["first_name"] as? String
         var lastName = desiredSquirrel!["last_name"] as? String
@@ -143,6 +144,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         
         //Check whether we should be displaying the "choose a squirrel to offer" button
         if offeredSquirrel != nil {
+            println(12)
             //The user has already selected a squirrel for trading
             var firstName = offeredSquirrel!["first_name"] as? String
             var lastName = offeredSquirrel!["last_name"] as? String
@@ -150,10 +152,12 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             selectSquirrelButton.hidden = true
             proposeTradeButton.enabled = true
         } else if count(acornTextField.text) != 0 {
+            println(34)
             //We need to first display the select squirrel button and hide the trade button, since there is no offered squirrel and no proposed acorns
             offeredSquirrelLabel.hidden = true
             proposeTradeButton.enabled = true
         } else {
+            println(56)
             //The user hasn't offered anything
             proposeTradeButton.enabled = false
             proposeTradeButton.alpha = 0.5
@@ -181,6 +185,9 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             offeredSquirrelLabel.text = "\(firstName!) \(lastName!)"
             offeredSquirrelLabel.hidden = false
             proposeTradeButton.hidden = false
+            //Make it obvious that the button is now enabled
+            proposeTradeButton.alpha = 1
+            proposeTradeButton.enabled = true
             selectSquirrelButton.hidden = true
         
     }

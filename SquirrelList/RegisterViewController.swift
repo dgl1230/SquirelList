@@ -44,6 +44,8 @@ class RegisterViewController: UIViewController {
         //Change this, don't want to be getting query error for no results matching if this is what is supposed to happen
         usernameQuery?.whereKey("lowerUsername", equalTo: usernameLower)
         var usernameCheck = usernameQuery?.getFirstObject()
+        //We also only want one account registered to a device for now, since making multiple accounts overrides previous installation instances
+        //var installationQuery = PFInstallation.query()
         if usernameCheck != nil {
             title = "That username is taken!"
             error = "Sorry but someone already has that username"
@@ -77,6 +79,7 @@ class RegisterViewController: UIViewController {
             user["newUserTab"] = true
             user["newSquirrelTab"] = true
             user["newMoreTab"] = true
+            user["newRatingAlert"] = true
             user["strikes"] = 0
             user["recentStrike"] = false
             //Give user a fake, unique email address to fill space until they change it in their settings

@@ -73,7 +73,6 @@
 		186B33101A758FA800A8D4CB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */; };
 		186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33111A758FB100A8D4CB /* QuartzCore.framework */; };
 		186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33131A758FBC00A8D4CB /* Security.framework */; };
-		186B33161A758FC600A8D4CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33151A758FC600A8D4CB /* StoreKit.framework */; };
 		186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */; };
 		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
@@ -230,7 +229,6 @@
 		186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		186B33111A758FB100A8D4CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		186B33131A758FBC00A8D4CB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		186B33151A758FC600A8D4CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		186B33191A758FDA00A8D4CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -287,7 +285,6 @@
 				18B794EE1ADA312D000C9E5F /* ParseUI.framework in Frameworks */,
 				186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */,
 				18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */,
-				186B33161A758FC600A8D4CB /* StoreKit.framework in Frameworks */,
 				186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */,
 				18B794EC1ADA3124000C9E5F /* Parse.framework in Frameworks */,
 				186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */,
@@ -516,7 +513,6 @@
 				18B794E91ADA3124000C9E5F /* Bolts.framework */,
 				18B794EA1ADA3124000C9E5F /* Parse.framework */,
 				186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */,
-				186B33151A758FC600A8D4CB /* StoreKit.framework */,
 				186B33131A758FBC00A8D4CB /* Security.framework */,
 				186B33111A758FB100A8D4CB /* QuartzCore.framework */,
 				186B330F1A758FA800A8D4CB /* MobileCoreServices.framework */,
@@ -621,6 +617,9 @@
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
 							};
 						};
 					};
@@ -888,7 +887,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Squirrel List";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "87388129-4f40-46a3-9a33-e2931337eca7";
 				SWIFT_OBJC_BRIDGING_HEADER = "SquirrelList/SquirelList-Bridging-Header.h";
 			};
 			name = Release;

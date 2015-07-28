@@ -57,9 +57,9 @@ class GroupInvitePopUpViewController: PopUpViewController {
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()
         }
+        dismissViewControllerAnimated(true, completion: nil)
         //Reload the notificationsViewController
         delegate?.reloadAfterGroupInviteDecision!(self)
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     

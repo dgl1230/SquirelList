@@ -193,12 +193,27 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         }
         return false
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        //We need to present the potential alert controller here, because if we try presenting it in viewDidLoad() we get a "view is not in window hierarchy" error
+        let ratingAlert = PFUser.currentUser()!["newRatingAlert"] as! Bool
+        if ratingAlert == true {
+            //The user is new and we need to give them an alert about what ratings they can use and then update their "newRatingAlert" field
+            let message = "Rate Squirrels starting at 1 and in increments of 0.5, up to 10."
+            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+                    //We only want to show this alert to users once, so we update their "newRatingAlert" field afterwards
+                    PFUser.currentUser()!["newRatingAlert"] = false
+                    PFUser.currentUser()!.save()
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
 
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         var firstName = ratedSquirrel!["first_name"] as! String
         var lastName = ratedSquirrel!["last_name"] as! String
         squirrelNameLabel.text = "\(firstName) \(lastName)"
@@ -222,14 +237,17 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             if canRerate == true {
                 println("canRerate is true")
                 rateButton.setTitle("Rerate", forState: UIControlState.Normal)
+                rateButton.enabled = true
             } else {
-                println("rate button should not be enabled")
                 rateButton.enabled = false
                 //We want it to be obvious that they can't use the rate button
                 rateButton.alpha = 0.5
             }
+        } else {
+            rateButton.enabled = false
+            //We want it to be obvious that they can't use the rate button
+            rateButton.alpha = 0.5
         }
-        
         //Check if the squirrel has an owner to propose a trade with and if they have a unique picture
         var owner = ratedSquirrel!["ownerUsername"] as? String
         let pic = ratedSquirrel!["picture"] as! PFFile
@@ -312,8 +330,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         
             if validRating(newRating as String) == true {
                 rateButton.enabled = true
+                rateButton.alpha = 1
             } else {
                 rateButton.enabled = false
+                rateButton.alpha = 0.5
             }
             return true 
     }
@@ -345,7 +365,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     }
 }
 
-//Extending the UIImage class so we can save pictures in much lower quality (which is also much faster)
+//Extending the UIImage class so we can save pictures in much lower quality (which is much faster)
 extension UIImage {
     var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
     var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}

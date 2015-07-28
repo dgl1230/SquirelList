@@ -51,6 +51,7 @@ class SquirrelStoreController: UITableViewController {
         if acorns < 500 {
             buySquirrelSlotsButton.enabled = false
         }
+        purchaseReratingLabel.text = "Purchase Rerating (1/1)"
     }
     
     func reload() {
