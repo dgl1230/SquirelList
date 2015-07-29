@@ -15,6 +15,7 @@ class FriendsViewController: PFQueryTableViewController {
 
 
     var shouldReload: Bool?
+    
   
     //Button only occurs when user is in their 'Friends' main page under the 'More' tab
     @IBOutlet weak var findFriendsButton: UIBarButtonItem?

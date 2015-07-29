@@ -106,6 +106,7 @@ class RegisterViewController: UIViewController {
                     let navigationController = UINavigationController(rootViewController: moreController)
                     let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
                     navigationController.navigationBar.barTintColor = blue
+                    
                     appDelegate.window!.rootViewController = navigationController
                     appDelegate.window!.makeKeyAndVisible()
                     //Make keyboard disappear

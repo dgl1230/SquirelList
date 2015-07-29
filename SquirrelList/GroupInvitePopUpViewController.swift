@@ -29,6 +29,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     @IBAction func accept(sender: AnyObject) {
         group!.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+        group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
         PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
         let numOfUsers = (group!["userIDs"] as! [String]).count
         let squirrelSlots = numOfUsers + 5

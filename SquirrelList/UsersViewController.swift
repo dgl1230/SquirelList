@@ -297,7 +297,7 @@ class UsersViewController: PFQueryTableViewController {
         let daysApart = dayDifferences(lastCheckedDate, date2: today)
         if daysApart == 1 {
             alerts.append("cumulativeDay")
-        } else if daysApart < 0 {
+        } else if daysApart != 0 {
             //They haven't visited this group in more than a day, and so we need to update their last visit
             userGroupData["lastVisit"] = today
             userGroupData["cumulitveDaysVisited"] = 0

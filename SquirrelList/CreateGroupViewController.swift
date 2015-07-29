@@ -23,6 +23,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         var group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+        group["pendingUsers"] = []
         group["squirrels"] = []
         //Need to add the current user's squirrel list ID eventually as well
         group.save()

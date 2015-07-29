@@ -98,7 +98,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
                 let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
                 moreController.isNewUser = true
                 let navigationController = UINavigationController(rootViewController: moreController)
-                navigationController.navigationBar.barTintColor = UIColor(red: 0, green: 50, blue: 255, alpha: 1)
+                let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
+                navigationController.navigationBar.barTintColor = blue
                 appDelegate.window!.rootViewController = navigationController
                 appDelegate.window!.makeKeyAndVisible()
             } else {
