@@ -110,6 +110,8 @@
 		18DC68281B59A82200364A4E /* SquirrelStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC68271B59A82200364A4E /* SquirrelStoreController.swift */; };
 		18E06FD41AEAD2B100D5F1E2 /* ChatHolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */; };
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
+		18F43A841B68761100CCE2C3 /* NewFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F43A831B68761100CCE2C3 /* NewFriendsViewController.swift */; };
+		18F43A861B69808800CCE2C3 /* NewSearchUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F43A851B69808800CCE2C3 /* NewSearchUsersController.swift */; };
 		18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FB1AC9FE8500314DB2 /* More.storyboard */; };
 		18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */; };
 		18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */; };
@@ -268,6 +270,8 @@
 		18DC68271B59A82200364A4E /* SquirrelStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelStoreController.swift; path = SquirrelList/SquirrelStoreController.swift; sourceTree = "<group>"; };
 		18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHolderViewController.swift; sourceTree = "<group>"; };
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
+		18F43A831B68761100CCE2C3 /* NewFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFriendsViewController.swift; sourceTree = "<group>"; };
+		18F43A851B69808800CCE2C3 /* NewSearchUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSearchUsersController.swift; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsViewController.swift; path = SquirrelList/FriendsViewController.swift; sourceTree = "<group>"; };
 		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -570,9 +574,11 @@
 				18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */,
 				18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */,
 				18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */,
+				18F43A831B68761100CCE2C3 /* NewFriendsViewController.swift */,
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				18D2466C1AC60283003D560A /* SearchUsersViewController.swift */,
+				18F43A851B69808800CCE2C3 /* NewSearchUsersController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
 				18DC68271B59A82200364A4E /* SquirrelStoreController.swift */,
 				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
@@ -735,6 +741,7 @@
 				184841811AE976C100F23551 /* JSQMessagesTimestampFormatter.m in Sources */,
 				18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */,
 				1848417B1AE976C100F23551 /* JSQMessagesKeyboardController.m in Sources */,
+				18F43A841B68761100CCE2C3 /* NewFriendsViewController.swift in Sources */,
 				1848418D1AE976C100F23551 /* JSQMessagesCellTextView.m in Sources */,
 				18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */,
 				1845611F1ABFAB8D00026473 /* DimmingPresentationViewController.swift in Sources */,
@@ -742,6 +749,7 @@
 				181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */,
 				18E06FD41AEAD2B100D5F1E2 /* ChatHolderViewController.swift in Sources */,
 				184561231ABFD24B00026473 /* BounceAnimationController.swift in Sources */,
+				18F43A861B69808800CCE2C3 /* NewSearchUsersController.swift in Sources */,
 				1848418A1AE976C100F23551 /* JSQMessagesBubbleImage.m in Sources */,
 				18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */,
 				18D4DF9D1AC1335800C55E48 /* SquirrelDetailViewController.swift in Sources */,

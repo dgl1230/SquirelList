@@ -82,6 +82,9 @@ class RegisterViewController: UIViewController {
             user["newRatingAlert"] = true
             user["strikes"] = 0
             user["recentStrike"] = false
+            //Create a UserFriendsData instance and have user "userFriendsData" field point to it 
+            let userFriendsData = PFObject(className: "UserFriendsData")
+            user["userFriendsData"] = userFriendsData
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
             let emailName = "\(username)\(randomNumer)"
@@ -99,6 +102,14 @@ class RegisterViewController: UIViewController {
                     installation["userID"] = PFUser.currentUser()!.username
                     installation["user"] = PFUser.currentUser()!
                     installation.saveInBackgroundWithBlock(nil)
+                    //Update userFriendsData instance and save it
+                    userFriendsData["user"] = PFUser.currentUser()!
+                    userFriendsData["username"] = PFUser.currentUser()!.username!
+                    userFriendsData["friends"] = []
+                    userFriendsData["pendingInviters"] = []
+                    userFriendsData["pendingInvitees"] = []
+                    userFriendsData.save()
+                    
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
                     let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController

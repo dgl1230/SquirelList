@@ -12,13 +12,6 @@
             <string>BebasNeueBold</string>
             <string>BebasNeueBold</string>
         </mutableArray>
-        <mutableArray key="BebasNeue Book.otf">
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
-        </mutableArray>
         <mutableArray key="bosun03.otf">
             <string>bosun-03</string>
             <string>bosun-03</string>
@@ -146,7 +139,7 @@
                                     <constraint firstAttribute="width" constant="256" id="UCC-qF-MkV"/>
                                     <constraint firstAttribute="height" constant="35" id="lK5-zG-fao"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DTT-dm-8gK">
@@ -156,7 +149,7 @@
                                     <constraint firstAttribute="width" constant="256" id="dRh-Kb-ACh"/>
                                     <constraint firstAttribute="height" constant="35" id="pbM-Tn-qDS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txs-5M-icC" userLabel="Close Button">
@@ -244,7 +237,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="iyx-p8-THk"/>
                                     <constraint firstAttribute="width" constant="256" id="jrD-yf-zlo"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
@@ -305,7 +298,7 @@
                                     <constraint firstAttribute="height" constant="37" id="AUj-wf-gne"/>
                                     <constraint firstAttribute="width" constant="256" id="pwq-Hn-7u6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dO-b0-qpP" userLabel="Close Button">
@@ -343,7 +336,7 @@
                                     <constraint firstAttribute="height" constant="37" id="Gdh-gp-M83"/>
                                     <constraint firstAttribute="width" constant="256" id="VFr-PH-F3s"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>

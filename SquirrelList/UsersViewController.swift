@@ -69,8 +69,9 @@ class UsersViewController: PFQueryTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddFriendToGroup" {
-            let controller = segue.destinationViewController as! SearchUsersViewController
-            controller.addingToGroup = true
+            let controller = segue.destinationViewController as! NewFriendsViewController
+            controller.invitingToGroup = true
+            controller.group = PFUser.currentUser()!["currentGroup"] as! PFObject
         }
         if segue.identifier == "ChangeCurrentGroup" {
             let controller = segue.destinationViewController as! ChangeCurrentGroupViewController
@@ -216,36 +217,18 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if PFUser.currentUser()!["currentGroupData"] == nil {
-            let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
-            let query = PFQuery(className: "UserGroupData")
-            query.whereKey("user", equalTo: PFUser.currentUser()!)
-            query.whereKey("group", equalTo: currentGroup)
-            let individualGroupData = query.getFirstObject()
-            if individualGroupData == nil {
-                //We need to create a new groupDataInstance
-                let userGroupData = PFObject(className: "UserGroupData")
-                let group = PFUser.currentUser()!["currentGroup"] as! PFObject
-                group.fetch()
-                userGroupData["user"] = PFUser.currentUser()!
-                userGroupData["group"] = group
-                userGroupData["acorns"] = 1000
-                userGroupData["squirrelSlots"] = 5
-                userGroupData["canRerate"] = false
-                userGroupData["lastVisit"] = NSDate()
-                userGroupData["numOfGroupUsers"] = 1
-                userGroupData["cumulativeDaysVisited"] = 1
-                userGroupData["groupName"] = group["name"] as! String
-                PFUser.currentUser()!["currentGroupData"] = userGroupData
-                PFUser.currentUser()!.save()
-                PFUser.currentUser()!.fetch()
-            } else {
-                PFUser.currentUser()!["currentGroupData"] = individualGroupData
-                PFUser.currentUser()!.save()
-                PFUser.currentUser()!.fetch()
-            }
-
-            
+        if PFUser.currentUser()!["friendData"] == nil {
+            println(1)
+            let q = PFQuery(className: "UserFriendsData")
+            println(2)
+            q.whereKey("username", equalTo: PFUser.currentUser()!.username!)
+            println(3)
+            let friendData = q.getFirstObject()
+            println(4)
+            PFUser.currentUser()!["friendData"] = friendData
+            println(5)
+            PFUser.currentUser()!.save()
+            println(6)
         }
         currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
         currentGroup!.fetch()
@@ -306,6 +289,8 @@ class UsersViewController: PFQueryTableViewController {
         if alerts.count > 0 {
             showAlerts()
         }
+        
+        
     }
     
     

@@ -37,7 +37,7 @@ class MoreTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Friends" {
-            let controller = segue.destinationViewController as! FriendsViewController
+            let controller = segue.destinationViewController as! NewFriendsViewController
         }
         if segue.identifier == "GroupInvites" {
             let controller = segue.destinationViewController as! NotificationsViewController

@@ -158,7 +158,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             } else {
                 controller.canClaimSquirrel = false
             }
-            println("individual group data is \(individualGroupData)!")
             let canRerate = individualGroupData!["canRerate"] as! Bool
             controller.canRerate = canRerate
             if sender!["owner"] != nil {
@@ -196,32 +195,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let lastName = squirrel["last_name"] as! String
             let name = "\(firstName.lowercaseString) \(lastName.lowercaseString)"
             squirrelNames!.append(name)
-            
-            //var owner = squirrel["owner"] as? PFUser
-            //if owner?.objectId == PFUser.currentUser()!.objectId {
-             //   yourNumSquirrels += 1
         }
-            
-        
-        
-        /*
-        if yourNumSquirrels >= numOfUsers + 4 || yourNumSquirrels == 15 {
-            squirrelSlotsLabel?.text = "Squirrel Slots: 0"
-            addSquirrelButton?.enabled = false
-            squirrelSlots = 0
-        } else if numOfUsers == 1 {
-            squirrelSlotsLabel?.text = "You need at least two users!"
-            addSquirrelButton?.enabled = false
-            squirrelSlots = 0
-        }
-        else {
-            squirrelSlots = (numOfUsers + 4) - yourNumSquirrels
-            squirrelSlotsLabel?.text = "Squirrel Slots: \(squirrelSlots!)"
-            addSquirrelButton?.enabled = true
-        }
-        */
-        
-        
         
 
     }
@@ -422,22 +396,18 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     //Customize the delete button on swipe left
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        var title = ""
         if selectedUser != nil {
             //The user is going through their squirrels and can potentially drop them
-            var deleteButton = UITableViewRowAction(style: .Default, title: "Drop", handler: { (action, indexPath) in
-                self.tableView.dataSource?.tableView?(
-                    self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
-                )
-            return
-            })
-            return [deleteButton]
+            title = "Drop"
+        } else {
+            //Else the user is going through all squirrels and can potentially delete them
+            title = "Delete"
         }
-        //Else the user is going through all squirrels and can potentially delete them
-        var deleteButton = UITableViewRowAction(style: .Default, title: "Delete", handler: { (action, indexPath) in
+        var deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
             self.tableView.dataSource?.tableView?(
                 self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
             )
-            return
         })
         return [deleteButton]
     }

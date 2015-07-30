@@ -791,10 +791,10 @@
             </objects>
             <point key="canvasLocation" x="2752" y="-1829"/>
         </scene>
-        <!--Search Users View Controller-->
+        <!--New Friends View Controller-->
         <scene sceneID="lmp-z0-56N">
             <objects>
-                <viewController id="XSm-0T-jTC" customClass="SearchUsersViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XSm-0T-jTC" customClass="NewFriendsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3DJ-TJ-ecN" userLabel="User's Name">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

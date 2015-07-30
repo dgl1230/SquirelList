@@ -75,7 +75,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         var query = PFQuery()
         if typeOfNotification == "invite" {
             query = PFQuery(className: "GroupInvite")
-            query.whereKey("invitee", equalTo: PFUser.currentUser()!.objectId!)
+            query.whereKey("invitee", equalTo: PFUser.currentUser()!.username!)
         }
         else  {
             query = PFQuery(className: "TradeProposal")
