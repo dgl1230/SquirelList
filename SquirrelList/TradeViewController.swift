@@ -83,13 +83,44 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
-                let owner = self.desiredSquirrelOwner!["username"] as! String
-                let message = "You will be notified if \(owner) accepts your trade."
-                let alert = UIAlertController(title: "Trade Offered!", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }))
-                //Alert the desired Squirrel owner that a trade has been proposed
+                //Check to see whether we should prompt the user to enable push notifications
+                let hasProposedTrade = PFUser.currentUser()!["hasProposedTrade"] as! Bool
+                let hasBeenAskedForPush = PFUser.currentUser()!["hasBeenAskedForPush"] as! Bool
+                if (hasBeenAskedForPush == false) && (hasProposedTrade == false) {
+                    //This is the first type that the user has proposed a trade and they haven't enabled push notification, so we can   prompt them
+                    let title = "Let Squirrel List Access Notifications?"
+                    let message = "You'll be alerted if \(self.desiredSquirrelOwner!.username!) accepts your trade."
+                    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                        PFUser.currentUser()!["hasProposedTrade"] = true
+                        PFUser.currentUser()!.save()
+                    }))
+                    alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                        //We ask the user for push notification permission in chat because it's easier to explain why they might need it
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+                        let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        
+                        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+                        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+                        PFUser.currentUser()!["hasProposedTrade"] = true
+                        PFUser.currentUser()!["hasBeenAskedForPush"] = true
+                        PFUser.currentUser()!.save()
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    //Show the usual trade alert
+                    let owner = self.desiredSquirrelOwner!["username"] as! String
+                    let message = "You will be notified if \(owner) accepts your trade."
+                    let alert = UIAlertController(title: "Trade Offered!", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            
                 let pushQuery = PFInstallation.query()
                 let offeringUsername = PFUser.currentUser()!.username
                 let desiredSquirrelName = "\(firstName) \(lastName)"
@@ -102,7 +133,6 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
                 
-                self.presentViewController(alert, animated: true, completion: nil)
                 
             } else {
                 println(error)

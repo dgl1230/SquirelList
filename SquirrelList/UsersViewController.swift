@@ -71,7 +71,7 @@ class UsersViewController: PFQueryTableViewController {
         if segue.identifier == "AddFriendToGroup" {
             let controller = segue.destinationViewController as! NewFriendsViewController
             controller.invitingToGroup = true
-            controller.group = PFUser.currentUser()!["currentGroup"] as! PFObject
+            controller.group = PFUser.currentUser()!["currentGroup"] as? PFObject
         }
         if segue.identifier == "ChangeCurrentGroup" {
             let controller = segue.destinationViewController as! ChangeCurrentGroupViewController
@@ -167,14 +167,14 @@ class UsersViewController: PFQueryTableViewController {
             var cumulativeDays = userGroupData["cumulativeDaysVisited"] as! Int
             cumulativeDays += 1
             var acorns = userGroupData["acorns"] as! Int
-            acorns += 5
+            acorns += 25
             let squirrelScore = userGroupData["squirrelSlots"] as! Int
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
-            var message = "Here's five acorns for visiting \(groupName) everyday!"
+            var message = "Here's 25 acorns for visiting \(groupName) everyday!"
             //Reward them for having a full squirrel team
             if squirrelScore == 0 {
-                acorns += 10
-                message = "Here's 15 acorns for visiting \(groupName) daily and having a full squirrel team!"
+                acorns += 25
+                message = "Here's 50 acorns for visiting \(groupName) daily and having a full squirrel team!"
             }
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
@@ -217,18 +217,14 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if PFUser.currentUser()!["friendData"] == nil {
-            println(1)
             let q = PFQuery(className: "UserFriendsData")
-            println(2)
             q.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-            println(3)
             let friendData = q.getFirstObject()
-            println(4)
             PFUser.currentUser()!["friendData"] = friendData
-            println(5)
             PFUser.currentUser()!.save()
-            println(6)
+            PFUser.currentUser()!.fetch()
         }
         currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
         currentGroup!.fetch()

@@ -99,7 +99,6 @@
 		18B794EE1ADA312D000C9E5F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794ED1ADA312D000C9E5F /* ParseUI.framework */; };
 		18C279B91B4E227A001D932A /* Terms_Of_Service.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */; };
 		18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C57B511B237B460068B726 /* ChangeInfoController.swift */; };
-		18C57B551B24F8B70068B726 /* Privacy_Policy.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18C57B541B24F8B70068B726 /* Privacy_Policy.rtf */; };
 		18C57B571B24F8EF0068B726 /* PoliciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */; };
 		18D2466B1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */; };
 		18D2466D1AC60283003D560A /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2466C1AC60283003D560A /* SearchUsersViewController.swift */; };
@@ -112,6 +111,7 @@
 		18E4FEFE1A78C77F001E7028 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */; };
 		18F43A841B68761100CCE2C3 /* NewFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F43A831B68761100CCE2C3 /* NewFriendsViewController.swift */; };
 		18F43A861B69808800CCE2C3 /* NewSearchUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F43A851B69808800CCE2C3 /* NewSearchUsersController.swift */; };
+		18F43A881B6AA5E700CCE2C3 /* Privacy_Policy.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */; };
 		18F768FC1AC9FE8500314DB2 /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FB1AC9FE8500314DB2 /* More.storyboard */; };
 		18F768FE1ACA5C4400314DB2 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */; };
 		18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */; };
@@ -259,7 +259,6 @@
 		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Terms_Of_Service.rtf; sourceTree = "<group>"; };
 		18C57B511B237B460068B726 /* ChangeInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeInfoController.swift; sourceTree = "<group>"; };
-		18C57B541B24F8B70068B726 /* Privacy_Policy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Privacy_Policy.rtf; sourceTree = "<group>"; };
 		18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoliciesViewController.swift; sourceTree = "<group>"; };
 		18D2466A1AC5E39F003D560A /* UserSquirrelsPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSquirrelsPopUpViewController.swift; path = SquirrelList/UserSquirrelsPopUpViewController.swift; sourceTree = "<group>"; };
 		18D2466C1AC60283003D560A /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUsersViewController.swift; path = SquirrelList/SearchUsersViewController.swift; sourceTree = "<group>"; };
@@ -272,6 +271,7 @@
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		18F43A831B68761100CCE2C3 /* NewFriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFriendsViewController.swift; sourceTree = "<group>"; };
 		18F43A851B69808800CCE2C3 /* NewSearchUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSearchUsersController.swift; sourceTree = "<group>"; };
+		18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Privacy_Policy.rtf; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		18F768FD1ACA5C4400314DB2 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsViewController.swift; path = SquirrelList/FriendsViewController.swift; sourceTree = "<group>"; };
 		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -509,7 +509,7 @@
 				187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */,
 				187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */,
 				18A568D01B0FD6B50019B2C3 /* bosun03.otf */,
-				18C57B541B24F8B70068B726 /* Privacy_Policy.rtf */,
+				18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */,
 				18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */,
 				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
 				186B33191A758FDA00A8D4CB /* libz.dylib */,
@@ -663,13 +663,13 @@
 				1848417D1AE976C100F23551 /* JSQMessagesViewController.xib in Resources */,
 				18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */,
 				187547BD1B0FA1B6009A6EFE /* BebasNeue Thin.otf in Resources */,
+				18F43A881B6AA5E700CCE2C3 /* Privacy_Policy.rtf in Resources */,
 				187547BC1B0FA1B6009A6EFE /* BebasNeue Regular.otf in Resources */,
 				184841981AE976C100F23551 /* JSQMessagesLoadEarlierHeaderView.xib in Resources */,
 				18F769041ACB995C00314DB2 /* FindUserTableViewCell.xib in Resources */,
 				187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */,
 				18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */,
 				187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */,
-				18C57B551B24F8B70068B726 /* Privacy_Policy.rtf in Resources */,
 				186B32EB1A758E5000A8D4CB /* Images.xcassets in Resources */,
 				184841911AE976C100F23551 /* JSQMessagesCollectionViewCellIncoming.xib in Resources */,
 				184841931AE976C100F23551 /* JSQMessagesCollectionViewCellOutgoing.xib in Resources */,

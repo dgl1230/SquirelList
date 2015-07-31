@@ -18,6 +18,8 @@ class HomeTabViewController: UITabBarController {
         self.tabBar.tintColor = UIColor.orangeColor()
         self.tabBar.barTintColor = blue
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState:.Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Selected)
+        
         
 
 

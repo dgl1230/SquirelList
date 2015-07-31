@@ -105,6 +105,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
                     group.delete()
+                    self.loadObjects()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {

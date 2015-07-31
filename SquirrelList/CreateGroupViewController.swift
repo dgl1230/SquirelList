@@ -32,7 +32,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         userGroupData["user"] = PFUser.currentUser()!
         userGroupData["group"] = group
         userGroupData["acorns"] = 1000
-        userGroupData["squirrelSlots"] = 5
+        userGroupData["squirrelSlots"] = 4
         userGroupData["canRerate"] = false
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = 1

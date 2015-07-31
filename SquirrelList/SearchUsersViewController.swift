@@ -277,8 +277,6 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
      override func viewDidLoad() {
         super.viewDidLoad()
-        println("VIEW DID LOAD BEING CALLED")
-        println("searchPAramters is \(searchParameters)")
         //To prevent recently added users in FriendsViewController from still showing as pending and other similar problems 
         PFUser.currentUser()?.fetch()
         if addingToGroup == true {

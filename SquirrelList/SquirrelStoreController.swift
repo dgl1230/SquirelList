@@ -81,6 +81,8 @@ class SquirrelStoreController: UITableViewController {
         super.viewDidLoad()
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
+        //Set notification to "listen" for when the the user has used their Rerate
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "didUseRerate", object: nil)
         //Update the UserGroupData instance, the individualGroupData variable refers to an old instance if the user changes their currentGroup
         individualGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
         individualGroupData.fetch()

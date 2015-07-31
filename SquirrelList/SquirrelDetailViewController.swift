@@ -95,6 +95,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!.save()
             //Since the user already rated the squirrel, they had to have purchased a rerate in order to do this, so we need to set userGroupDate["canRerate"] to false
             delegate?.squirrelDetailViewController(self, usedRerate: true)
+            //Alert SquirrelStoreController that Rerate was used, so that it can reload
+            NSNotificationCenter.defaultCenter().postNotificationName("didUseRerate", object: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
             return
         }

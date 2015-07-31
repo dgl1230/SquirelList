@@ -47,7 +47,38 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
     func addUser(sender:UIButton!) {
         let buttonRow = sender.tag
         let user = objects![buttonRow] as! PFUser
-        //We need to check and see if a friend request already exists
+        //We want to prevent the user from being able to quickly press the add friend button multiple times
+        let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
+        var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
+        cell.addButton.enabled = false
+        //Check to see whether we should prompt the user to enable push notifications
+        let hasFriended = PFUser.currentUser()!["hasFriended"] as! Bool
+        let hasBeenAskedForPush = PFUser.currentUser()!["hasBeenAskedForPush"] as! Bool
+        if  (hasBeenAskedForPush == false) && (hasFriended == false) {
+            //This is the first type that the user has friended someone and they haven't enabled push notification, so we can prompt them
+            let title = "Let Squirrel List Access Notifications?"
+            let message = "You'll be alerted when \(user.username!) has accepted your request. "
+            var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                alert.dismissViewControllerAnimated(true, completion: nil)
+                PFUser.currentUser()!["hasFriended"] = true
+                PFUser.currentUser()!.save()
+            }))
+            alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                //We ask the user for push notification permission in chat because it's easier to explain why they might need it
+                alert.dismissViewControllerAnimated(true, completion: nil)
+                let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+                let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        
+                UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+                UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+                PFUser.currentUser()!["hasFriended"] = true
+                PFUser.currentUser()!["hasBeenAskedForPush"] = true
+                PFUser.currentUser()!.save()
+            }))
+        self.presentViewController(alert, animated: true, completion: nil)
+        }
+
         //We need to query and get the other user's UserFriendsData
         let query = PFQuery(className: "UserFriendsData")
         query.whereKey("username", equalTo: user.username!)
@@ -60,6 +91,7 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
         
         currentUserFriendsData.save()
         otherUserFriendData!.save()
+        
         
         //Alert the invited user that the logged in user has requested them as a friend
         let pushQuery = PFInstallation.query()
@@ -83,9 +115,8 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
             query!.limit = 0
         } else {
             //We query for users that have a prefix that matches the text in the searchField
-            //query?.whereKey("username", notEqualTo: PFUser.currentUser()!["username"]!)
-            query?.whereKey("username", equalTo: searchedString)
-            query?.orderByAscending("username")
+            //We want to search users regardless of capitalization
+            query?.whereKey("lowerUsername", hasPrefix: searchedString)
         }
         //Look into seeing if the else if and else are both executed
         return query!
@@ -130,13 +161,24 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
     }
-    
+
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchedString = searchBar.text
+        //We want to search users regardless of capitalization
+        searchedString = searchBar.text.lowercaseString
         viewDidLoad()
         searchController.setActive(false, animated: true)
     }
+    
+    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if count(searchBar.text) >= 3 {
+            searchBar.enablesReturnKeyAutomatically = true
+        } else {
+            searchBar.enablesReturnKeyAutomatically = false
+        }
+        return true
+    }
+    
 
     
 

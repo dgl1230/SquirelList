@@ -18,14 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
 
-        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-        let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-        
-        
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-
-
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
             let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
@@ -62,17 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println("receiving remote notification")
-        //PFPush.handlePush(userInfo)
         //Alert the user when a new message has been sent 
         NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
-        //NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
-        println("finishing up did receiveRemoteNotification")
         
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        println("the device token is \(deviceToken)")
         let currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.saveInBackgroundWithBlock(nil)

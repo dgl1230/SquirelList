@@ -97,11 +97,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     
     //Should be its own extension 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-    
-            //if (find(firstnames, firstName as String) != nil) && (find(lastnames, lastName as String) != nil) {
-            //Then the squirrel already exists and the user can't create it
-            //println("squirrel already exists!")
-            //}
             var untouchedName: NSString = ""
             var oldName: NSString = ""
             var newName: NSString = ""

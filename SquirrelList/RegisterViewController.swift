@@ -44,8 +44,7 @@ class RegisterViewController: UIViewController {
         //Change this, don't want to be getting query error for no results matching if this is what is supposed to happen
         usernameQuery?.whereKey("lowerUsername", equalTo: usernameLower)
         var usernameCheck = usernameQuery?.getFirstObject()
-        //We also only want one account registered to a device for now, since making multiple accounts overrides previous installation instances
-        //var installationQuery = PFInstallation.query()
+        let whitespace = NSCharacterSet.whitespaceCharacterSet()
         if usernameCheck != nil {
             title = "That username is taken!"
             error = "Sorry but someone already has that username"
@@ -55,15 +54,21 @@ class RegisterViewController: UIViewController {
         } else if count(username) <= 2 {
             title = "That username is too short!"
             error = "Please have it be at least three characters"
-        } else if count(username) >= 20 {
+        } else if count(username) >= 10 {
             title = "That username is too long"
-            error = "Please have it be no greater than 20 characters"
+            error = "Please have it be no greater than 10 characters"
         } else if count(passwordTextField.text) <= 6 {
             title = "Whoa there cowboy!"
             error = "Your password needs to be at least 6 characters"
         } else if passwordTextField.text != verifyPasswordTextField.text {
             title = "Whoa there cowboy!"
             error = "Please make sure both passwords match"
+        } else if (username.rangeOfCharacterFromSet(whitespace, options: nil, range: nil) != nil) {
+            title = "Whoa there cowboy!"
+            error = "Please don't have any whitespaces in your username"
+        } else if (passwordTextField.text.rangeOfCharacterFromSet(whitespace, options: nil, range: nil)) != nil {
+            title = "Whoa there cowboy!"
+            error = "Please don't have any whitespaces in your password"
         }
         
         if title != "" && error != ""{
@@ -80,11 +85,19 @@ class RegisterViewController: UIViewController {
             user["newSquirrelTab"] = true
             user["newMoreTab"] = true
             user["newRatingAlert"] = true
+            user["hasFriended"] = false
+            user["hasProposedTrade"] = false
+            user["hasSeenChat"] = false
+            user["hasBeenAskedForPush"] = false
             user["strikes"] = 0
             user["recentStrike"] = false
             //Create a UserFriendsData instance and have user "userFriendsData" field point to it 
             let userFriendsData = PFObject(className: "UserFriendsData")
-            user["userFriendsData"] = userFriendsData
+            userFriendsData["username"] = usernameTextField.text
+            userFriendsData["friends"] = []
+            userFriendsData["pendingInviters"] = []
+            userFriendsData["pendingInvitees"] = []
+            user["friendData"] = userFriendsData
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
             let emailName = "\(username)\(randomNumer)"
@@ -102,12 +115,7 @@ class RegisterViewController: UIViewController {
                     installation["userID"] = PFUser.currentUser()!.username
                     installation["user"] = PFUser.currentUser()!
                     installation.saveInBackgroundWithBlock(nil)
-                    //Update userFriendsData instance and save it
-                    userFriendsData["user"] = PFUser.currentUser()!
-                    userFriendsData["username"] = PFUser.currentUser()!.username!
-                    userFriendsData["friends"] = []
-                    userFriendsData["pendingInviters"] = []
-                    userFriendsData["pendingInvitees"] = []
+                    //We only want to save the UserFriendsData instance if the user successfully registered
                     userFriendsData.save()
                     
                     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

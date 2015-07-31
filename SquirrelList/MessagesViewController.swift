@@ -44,7 +44,7 @@ class MessagesViewController: JSQMessagesViewController {
                 let push = PFPush()
                 push.setQuery(pushQuery)
                 //We want silent push notifications
-                let pushDict = ["alert": "", "badge":"increment", "sounds":"", "content-available": 1]
+                let pushDict = ["alert": "", "badge":0, "sounds":"", "content-available": 1]
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
                 

@@ -45,6 +45,11 @@ class FriendsViewController: PFQueryTableViewController {
     func addUser(sender:UIButton!) {
         let buttonRow = sender.tag
         let request = objects![buttonRow] as! PFObject
+        //We want to prevent the user from being able to quickly press the add friend button multiple times
+        let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
+        var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
+        cell.addButton.enabled = false
+        
         request["status"] = "accepted"
         //Need to add the user to logged in user's friends and remove them from pendingFriends
         let user1 = request["requestFromUserId"] as! String

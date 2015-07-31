@@ -342,6 +342,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let numOfUsers = (group["userIDs"] as! [String]).count
             //We get half of the users to see if this user will be the deciding vote to drop the squirrel (dropping a squirrel is done by simple majority)
             let halfOfUsers = (numOfUsers/2)
+            println("Number of users is \(numOfUsers)")
+            println("half of users is \(halfOfUsers)")
             //The user can delete the squirrel if no one has rated it yet, or if a majority of users vote to delete it
             if squirrel["avg_rating"] as! Int == 0 || squirrel["dropVotes"] as! Int == halfOfUsers {
                 //Find the appropriate message to display, since both of these alerts give the user the option to immediately delete the squirrel
@@ -424,8 +426,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("View Did load is being called")
-        println("the selected user is \(selectedUser)")
         //Check to see if we need to show a new user tutorial screens first
         if currentlyTrading == true {
             //We don't need to load or calculate anything else if we're just displaying the user's squirrels to offer for a trade
@@ -447,7 +447,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
         let name = selectedUser?["name"] as? String
         if selectedUser == nil && currentlyTrading == nil{
-            println("doing main squirrel tab stuff")
             //We are in the main Squirrels tab
             //Set the addSquirrelButton to 'fa-plus-circle'
             addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
@@ -550,10 +549,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     //Delegate function is called for squirrelDetailViewController so that we can reload after a user has rated a squirrel
     func squirrelDetailViewController(controller: SquirrelDetailViewController, usedRerate: Bool) {
         if usedRerate == true {
-            println("resetting back to false")
             //Then the user used their rerate and it needs to be set back to false
             let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-            println(userGroupData)
             userGroupData["canRerate"] = false
             userGroupData.save()
         }
