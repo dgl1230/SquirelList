@@ -135,20 +135,17 @@ class UsersViewController: PFQueryTableViewController {
             let oldNumOfUsers = userGroupData["numOfGroupUsers"] as! Int
             //Then new users have joined the group
             let numOFNewUsers = numOfUsers - oldNumOfUsers
-            var acorns = userGroupData["acorns"] as! Int
-            acorns += (50 * numOFNewUsers)
             var squirrelSlots = userGroupData["squirrelSlots"] as! Int
             squirrelSlots += numOFNewUsers
             //Show popup
             var message = ""
             if numOFNewUsers == 1 {
-                message = "One new user has joined, so enjoy 50 more acorns and one more squirrel slot!"
+                message = "One new user has joined, so enjoy one more Squirrel Slot!"
             } else {
-                message = "\(numOFNewUsers) have joined, so enjoy \(50 * numOFNewUsers) acorns and \(numOFNewUsers) squirrel slots!"
+                message = "\(numOFNewUsers) have joined, so enjoy \(numOFNewUsers) squirrel slots!"
             }
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
-                userGroupData["acorns"] = acorns
                 userGroupData["numOfGroupUsers"] = numOfUsers
                 userGroupData["squirrelSlots"] = squirrelSlots
                 userGroupData.save()

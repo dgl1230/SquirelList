@@ -16,8 +16,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     var textContent: [String] = []
     
     let moreContent = ["Wait for friends to invite you to a group", "Or create a group and invite them"]
-    let squirrelTabContent = ["Squirrel slots = # of squirrels you can get", "Every user in a group = +1 Squirrel Slots", "Swipe left to vote to delete a squirrel", "Use acorns to buy cool stuff"]
-    let userTabContent = ["Check out all of your friends' squirrels", "Swipe left on your squirrels to drop them"]
+    let squirrelTabContent = ["Squirrel slots = # of squirrels you can get", "Every user in a group = +1 Squirrel Slots", "Swipe left to delete a squirrel", "You have different acorns in each group", "Use acorns to buy Squirrel Slots or Rerates"]
+    let userTabContent = ["Check out all of your friends' squirrels", "Swipe left on your squirrels to drop them", "Get acorns for visiting groups daily"]
     
     //Variable for keeping track of what content to show, depending on what tab the user is on. Value will either be "more" "squirrel" or "user"
     var typeOfContent = ""

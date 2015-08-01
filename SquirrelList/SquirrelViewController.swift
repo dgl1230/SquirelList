@@ -181,8 +181,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if (self.selectedUser != nil) {
             //We need to calculate the team rating
             var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
-            if teamRating == 999 {
-                teamRatingLabel.text = "Their Squirrels haven't been rated :("
+            if teamRating == 999 && selectedUser != PFUser.currentUser()! {
+                teamRatingLabel.text = ""
             } else {
                 teamRatingLabel.text = "Team Rating: \(teamRating)"
             }
