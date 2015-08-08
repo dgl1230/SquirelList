@@ -171,6 +171,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if segue.identifier == "TradeOffers" {
             let controller = segue.destinationViewController as! NotificationsViewController
         }
+        if segue.identifier == "NewUserScreens" {
+            let controller = segue.destinationViewController as! TutorialViewController
+            controller.typeOfContent = "squirrel"
+        }
     }
     
     
@@ -339,11 +343,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 return
             }
             let group = PFUser.currentUser()!["currentGroup"] as! PFObject
-            let numOfUsers = (group["userIDs"] as! [String]).count
+            let numOfUsers = (group["users"] as! [String]).count
             //We get half of the users to see if this user will be the deciding vote to drop the squirrel (dropping a squirrel is done by simple majority)
             let halfOfUsers = (numOfUsers/2)
-            println("Number of users is \(numOfUsers)")
-            println("half of users is \(halfOfUsers)")
             //The user can delete the squirrel if no one has rated it yet, or if a majority of users vote to delete it
             if squirrel["avg_rating"] as! Int == 0 || squirrel["dropVotes"] as! Int == halfOfUsers {
                 //Find the appropriate message to display, since both of these alerts give the user the option to immediately delete the squirrel
@@ -418,7 +420,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if selectedUser == nil {
-            println("reloading squirrels")
             viewDidLoad()
         }
     }
@@ -437,14 +438,9 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
 
         if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
             //If new user, show them the tutorial screens
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
-            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
-            contentController.typeOfContent = "squirrel"
-            appDelegate.window!.rootViewController = contentController
-            appDelegate.window!.makeKeyAndVisible()
-        
+            performSegueWithIdentifier("NewUserScreens", sender: self)
         }
+        
         let name = selectedUser?["name"] as? String
         if selectedUser == nil && currentlyTrading == nil{
             //We are in the main Squirrels tab
@@ -464,8 +460,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             acornsLabel?.text = "\(userAcorns)"
             //Set the number of squirrel slots to display
             squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
-            var groupUserIds = PFUser.currentUser()!["currentGroup"]!["userIDs"] as? [String]
-            var numOfUsers = groupUserIds!.count
+            var groupUsers = PFUser.currentUser()!["currentGroup"]!["users"] as? [String]
+            var numOfUsers = groupUsers!.count
             
             if squirrelSlots == 0 {
                 squirrelSlotsLabel!.text = "Squirrel Slots: 0"

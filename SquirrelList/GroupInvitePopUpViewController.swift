@@ -28,10 +28,10 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     
     @IBAction func accept(sender: AnyObject) {
-        group!.addObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+        group!.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
         PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
-        let numOfUsers = (group!["userIDs"] as! [String]).count
+        let numOfUsers = (group!["users"] as! [String]).count
         let squirrelSlots = numOfUsers + 5
         let userGroupData = PFObject(className: "UserGroupData")
         userGroupData["user"] = PFUser.currentUser()!
@@ -58,6 +58,17 @@ class GroupInvitePopUpViewController: PopUpViewController {
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()
         }
+        //Alert the inviter that the logged in user has accepted their group invite 
+        let pushQuery = PFInstallation.query()
+        pushQuery!.whereKey("username", equalTo: inviterName!)
+        let push = PFPush()
+        push.setQuery(pushQuery)
+        let groupName = group!["name"] as? String
+        let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)!"
+        let inviteMessage = message as NSString
+        let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+        push.setData(pushDict)
+        push.sendPushInBackgroundWithBlock(nil)
         dismissViewControllerAnimated(true, completion: nil)
         //Reload the notificationsViewController
         delegate?.reloadAfterGroupInviteDecision!(self)

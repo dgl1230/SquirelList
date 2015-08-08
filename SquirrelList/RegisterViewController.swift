@@ -112,8 +112,7 @@ class RegisterViewController: UIViewController {
                 if signupError == nil {
                     //For push notifications/chat real time might cause an error right now. Not sure if user is already logged in at this point
                     let installation = PFInstallation.currentInstallation()
-                    installation["userID"] = PFUser.currentUser()!.username
-                    installation["user"] = PFUser.currentUser()!
+                    installation["username"] = PFUser.currentUser()!.username
                     installation.saveInBackgroundWithBlock(nil)
                     //We only want to save the UserFriendsData instance if the user successfully registered
                     userFriendsData.save()

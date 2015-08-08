@@ -84,7 +84,7 @@ class TradeOfferViewController: PopUpViewController {
         let pushQuery = PFInstallation.query()
         let offeringUsername = tradeProposal!["offeringUsername"] as! String
         let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
-        pushQuery!.whereKey("userID", equalTo: offeringUsername)
+        pushQuery!.whereKey("username", equalTo: offeringUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
         let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)!"

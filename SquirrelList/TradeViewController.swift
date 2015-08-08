@@ -124,7 +124,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 let pushQuery = PFInstallation.query()
                 let offeringUsername = PFUser.currentUser()!.username
                 let desiredSquirrelName = "\(firstName) \(lastName)"
-                pushQuery!.whereKey("userID", equalTo: self.desiredSquirrelOwner!.username!)
+                pushQuery!.whereKey("username", equalTo: self.desiredSquirrelOwner!.username!)
                 let push = PFPush()
                 push.setQuery(pushQuery)
                 let proposal = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)!"

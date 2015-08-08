@@ -104,8 +104,9 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
                 appDelegate.window!.makeKeyAndVisible()
             } else {
                 //Present the tab bar with all the tabs
-                appDelegate.window!.rootViewController = HomeTabViewController()
-                appDelegate.window!.makeKeyAndVisible()
+                //appDelegate.window!.rootViewController = HomeTabViewController()
+                //appDelegate.window!.makeKeyAndVisible()
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
             //Make keyboard disappear
             self.view.endEditing(true)

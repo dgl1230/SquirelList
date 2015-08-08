@@ -54,7 +54,7 @@ class NewFriendsViewController: UITableViewController {
             
             //Alert the requester that their friend request has been accepted
             let pushQuery = PFInstallation.query()
-            pushQuery!.whereKey("userID", equalTo: username)
+            pushQuery!.whereKey("username", equalTo: username)
             let push = PFPush()
             push.setQuery(pushQuery)
             let message = "\(PFUser.currentUser()!.username!) has accepted your friend request!"
@@ -70,7 +70,7 @@ class NewFriendsViewController: UITableViewController {
         var users: [String] = []
         if invitingToGroup == true {
             //Check to see if the user is already in the group or has already been invited
-            let groupUsers = group!["userIDs"] as! [String]
+            let groupUsers = group!["users"] as! [String]
             let pendingUsers = group!["pendingUsers"] as! [String]
             users = groupUsers + pendingUsers
             
@@ -101,8 +101,8 @@ class NewFriendsViewController: UITableViewController {
         
         //Alert the invited user that they have been invited to a group
         let pushQuery = PFInstallation.query()
-        //We want to get all installations that have the same userID's that are in the user's currentGroup
-        pushQuery!.whereKey("userID", equalTo: inviteeUsername)
+        //We want to get all installations that have the same users that are in the user's currentGroup
+        pushQuery!.whereKey("username", equalTo: inviteeUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
         let groupName = group!["name"] as! String

@@ -38,8 +38,8 @@ class MessagesViewController: JSQMessagesViewController {
                 
                 let pushQuery = PFInstallation.query()
                 
-                //We want to get all installations that have the same userID's that are in the user's currentGroup
-                pushQuery?.whereKey("userID", containedIn: PFUser.currentUser()!["currentGroup"]!["userIDs"] as! [String])
+                //We want to get all installations that have the same users that are in the user's currentGroup
+                pushQuery?.whereKey("username", containedIn: PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
                 
                 let push = PFPush()
                 push.setQuery(pushQuery)
@@ -157,19 +157,12 @@ class MessagesViewController: JSQMessagesViewController {
         let message = messages[indexPath.item]
         if message.senderId != self.senderId {
             let NSMessage = message.senderId as NSString
+            if indexPath.item % 3 == 0 {
+                return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+            }
             return NSMutableAttributedString(string: message.senderDisplayName)
         }
         return nil
-        /*
-        returns the date - need to think when it is best to do this
-        if indexPath.item % 3 == 0 {
-            let message = messages[indexPath.item]
-            let NSMessage = message.senderDisplayName as NSString
-            return NSMutableAttributedString(string: message.senderDisplayName)
-            //return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
-        }
-        return nil
-        */
     }
 
     

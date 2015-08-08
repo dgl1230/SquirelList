@@ -81,6 +81,10 @@ class UsersViewController: PFQueryTableViewController {
             let controller = segue.destinationViewController as! SquirrelViewController
             controller.selectedUser = sender as? PFUser
         }
+        if segue.identifier == "NewUserScreens" {
+            let controller = segue.destinationViewController as! TutorialViewController
+            controller.typeOfContent = "user"
+        }
     }
     
     
@@ -89,14 +93,8 @@ class UsersViewController: PFQueryTableViewController {
         //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
-        /*
-        PFUser.currentUser()!.removeObjectForKey("currentGroup")
-        PFUser.currentUser()!.removeObjectForKey("currentGroupData")
-        PFUser.currentUser()!.save()
-        */
-        
         var query = PFUser.query()
-        query!.whereKey("username", containedIn: currentGroup!["userIDs"] as! [String])
+        query!.whereKey("username", containedIn: currentGroup!["users"] as! [String])
         query!.orderByAscending("username")
         return query!
     }
@@ -131,7 +129,7 @@ class UsersViewController: PFQueryTableViewController {
         let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
         //Check to see if we should alert them that their are new members in their group (and thus they have more Squirrel Slots)
         if contains(alerts, "newUSers") {
-            let numOfUsers = (currentGroup!["userIDs"] as! [String]).count
+            let numOfUsers = (currentGroup!["users"] as! [String]).count
             let oldNumOfUsers = userGroupData["numOfGroupUsers"] as! Int
             //Then new users have joined the group
             let numOFNewUsers = numOfUsers - oldNumOfUsers
@@ -247,20 +245,17 @@ class UsersViewController: PFQueryTableViewController {
         
         //Check to see if we need to show a new user tutorial screens first
         if PFUser.currentUser()!["newUserTab"] as! Bool == true {
-            //If new user, show them the tutorial screens
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
-            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
-            contentController.typeOfContent = "user"
-            appDelegate.window!.rootViewController = contentController
-            appDelegate.window!.makeKeyAndVisible()
+            performSegueWithIdentifier("NewUserScreens", sender: self)
+            //If this is a new user, we want them to be shown the tutorial screens first
+            return
         }
+        
         //We check to see if the user has been recently given a strike for offensive content
         if PFUser.currentUser()!["recentStrike"] as! Bool == true {
             alerts.append("recentStrike")
         }
         //Check to see if we should alert them that their are new members in their group (and thus they have more Squirrel Slots)
-        let numOfUsers = (currentGroup!["userIDs"] as! [String]).count
+        let numOfUsers = (currentGroup!["users"] as! [String]).count
         let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
         userGroupData.fetch()
         let oldNumOfUsers = userGroupData["numOfGroupUsers"] as! Int

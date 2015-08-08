@@ -104,8 +104,8 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
                             request.save()
                             //Alert the invited user that they have been invited to a group
                             let pushQuery = PFInstallation.query()
-                            //We want to get all installations that have the same userID's that are in the user's currentGroup
-                            pushQuery!.whereKey("userID", equalTo: user.username!)
+                            //We want to get all installations that have the same users that are in the user's currentGroup
+                            pushQuery!.whereKey("username", equalTo: user.username!)
                             let push = PFPush()
                             push.setQuery(pushQuery)
                             let message = "\(PFUser.currentUser()!.username!) wants to be friends!"
@@ -144,8 +144,8 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         
         //Alert the invited user that they have been invited to a group
         let pushQuery = PFInstallation.query()
-        //We want to get all installations that have the same userID's that are in the user's currentGroup
-        pushQuery!.whereKey("userID", equalTo: inviteeUsername)
+        //We want to get all installations that have the same users that are in the user's currentGroup
+        pushQuery!.whereKey("username", equalTo: inviteeUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
         let groupName = group!["name"] as! String
@@ -288,7 +288,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             //We need to fetch the current group and update pendingUsers and groupUsers to check which friends the logged in user can invite
             let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
             currentGroup.fetch()
-            groupUsers = currentGroup["userIDs"] as! [String]
+            groupUsers = currentGroup["users"] as! [String]
             pendingUsers = currentGroup["pendingUsers"] as! [String]
         }
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -12,6 +12,7 @@
             <string>BebasNeueBold</string>
         </mutableArray>
         <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
@@ -492,6 +493,7 @@
                         <segue destination="GDH-kA-JbV" kind="show" identifier="GroupInvites" id="3Zt-pC-LMW"/>
                         <segue destination="KPB-YO-KQT" kind="show" identifier="Settings" id="nzh-GJ-Cbn"/>
                         <segue destination="rjs-PX-k9I" kind="show" identifier="Squirrel Store" id="9aT-iJ-JHA"/>
+                        <segue destination="vPM-P8-B2D" kind="presentation" identifier="NewUserScreens" id="lIG-Zj-3jE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uee-8W-UiR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -502,7 +504,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="9790A117-BA6D-4403-9989-CF27E735ADC6" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="DC7C5759-EEA0-46E1-91FD-BA6E56002FE5" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1164,9 +1166,72 @@
             </objects>
             <point key="canvasLocation" x="3482" y="1886"/>
         </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="QJs-WX-afB">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="vPM-P8-B2D" customClass="TutorialViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oNb-ob-FFQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="gvi-SE-SxX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sNQ-dd-a23">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dqw-pa-6SJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1606" y="454"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="veA-UE-3sE">
+            <objects>
+                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="LtC-Ic-frz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gLd-4L-7gi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2267" y="454"/>
+        </scene>
+        <!--Tutorial Page Item View Controller-->
+        <scene sceneID="UvP-3X-Gah">
+            <objects>
+                <viewController storyboardIdentifier="PageItemController" id="yIW-u9-ZYJ" customClass="TutorialPageItemViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cMt-BQ-olK"/>
+                        <viewControllerLayoutGuide type="bottom" id="nN9-I1-Ihh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cqC-6L-fIg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Gwu-Q5-bFs">
+                                <rect key="frame" x="16" y="233" width="568" height="98"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="Jtg-A2-Nww"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Gwu-Q5-bFs" secondAttribute="width" constant="32" id="IpF-iR-KGa"/>
+                            <constraint firstItem="Gwu-Q5-bFs" firstAttribute="top" secondItem="cqC-6L-fIg" secondAttribute="top" constant="233" id="dtn-t5-fyi"/>
+                            <constraint firstAttribute="centerX" secondItem="Gwu-Q5-bFs" secondAttribute="centerX" id="tyv-jb-yuT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textLabel" destination="Gwu-Q5-bFs" id="PdL-Zx-LJs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bs7-Ww-p51" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2907" y="454"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="9790A117-BA6D-4403-9989-CF27E735ADC6" width="24" height="37">
+        <image name="DC7C5759-EEA0-46E1-91FD-BA6E56002FE5" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

@@ -95,7 +95,7 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
         
         //Alert the invited user that the logged in user has requested them as a friend
         let pushQuery = PFInstallation.query()
-        pushQuery!.whereKey("userID", equalTo: user.username!)
+        pushQuery!.whereKey("username", equalTo: user.username!)
         let push = PFPush()
         push.setQuery(pushQuery)
         let message = "\(PFUser.currentUser()!.username!) wants to be friends!"

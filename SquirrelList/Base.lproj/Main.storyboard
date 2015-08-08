@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -11,6 +11,7 @@
             <string>BebasNeueBold</string>
         </mutableArray>
         <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
@@ -89,6 +90,7 @@
                         <segue destination="Qgd-8Q-Du2" kind="show" identifier="SingleUserSquirrels" id="Zhh-zz-wnn"/>
                         <segue destination="XSm-0T-jTC" kind="show" identifier="AddFriendToGroup" id="EgT-OD-jDQ"/>
                         <segue destination="DK8-TF-ZsR" kind="presentation" identifier="ChangeCurrentGroup" id="UOY-id-d0N"/>
+                        <segue destination="OVg-e1-uqn" kind="presentation" identifier="NewUserScreens" id="dAj-Ue-6qY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -212,6 +214,7 @@
                         <segue destination="YAQ-u8-yw6" kind="show" identifier="AddSquirrel" id="JST-aR-Mpe"/>
                         <segue destination="5U7-1n-vli" kind="show" identifier="TradeOffers" id="2Cm-GT-kAX"/>
                         <segue destination="quq-DM-V0e" kind="presentation" identifier="SquirrelDetails" id="N0u-lI-g44"/>
+                        <segue destination="OVg-e1-uqn" kind="presentation" identifier="NewUserScreens" id="DWb-jW-mwr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -434,7 +437,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s3G-vv-SuF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806.25" y="-364.43661971830983"/>
+            <point key="canvasLocation" x="856" y="-357"/>
         </scene>
         <!--User Squirrels-->
         <scene sceneID="S3v-xI-UKD">
@@ -1048,6 +1051,69 @@
             </objects>
             <point key="canvasLocation" x="3557" y="357"/>
         </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="wzt-9k-D3e">
+            <objects>
+                <viewController storyboardIdentifier="ContentViewController" id="OVg-e1-uqn" customClass="TutorialViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H5c-f1-Aam"/>
+                        <viewControllerLayoutGuide type="bottom" id="2OZ-5m-mdu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mpb-Ka-qAn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UYA-XT-2f7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="250" y="-1588"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="R17-pk-cu2">
+            <objects>
+                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IpB-Hf-9KF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pwz-IP-WK2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="-1596"/>
+        </scene>
+        <!--Tutorial Page Item View Controller-->
+        <scene sceneID="qhT-A4-Khd">
+            <objects>
+                <viewController storyboardIdentifier="PageItemController" id="7P6-Lm-Kzc" customClass="TutorialPageItemViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7eh-IR-JEv"/>
+                        <viewControllerLayoutGuide type="bottom" id="LsD-3y-hNt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="H3x-0n-fCP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qPZ-0X-YMv">
+                                <rect key="frame" x="16" y="233" width="568" height="98"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="YYK-FV-aSJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="qPZ-0X-YMv" secondAttribute="width" constant="32" id="PI3-jr-4qx"/>
+                            <constraint firstItem="qPZ-0X-YMv" firstAttribute="top" secondItem="H3x-0n-fCP" secondAttribute="top" constant="233" id="Qsf-dl-tvX"/>
+                            <constraint firstAttribute="centerX" secondItem="qPZ-0X-YMv" secondAttribute="centerX" id="UWz-MM-zGM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textLabel" destination="qPZ-0X-YMv" id="VPi-xZ-kbx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eNY-RM-6yq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="-1588"/>
+        </scene>
     </scenes>
     <resources>
         <image name="acorn_orange" width="128" height="128"/>
@@ -1057,6 +1123,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N0u-lI-g44"/>
+        <segue reference="DWb-jW-mwr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

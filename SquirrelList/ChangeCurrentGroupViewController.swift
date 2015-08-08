@@ -73,7 +73,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             }
             
             let group = objects![indexPath.row] as! PFObject
-            let users = group["userIDs"] as! [String]
+            let users = group["users"] as! [String]
             if users.count == 1 {
                 var message = "Are you sure you want to leave this group? You're the only member right now, so leaving this group will delete it."
                 var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -139,7 +139,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     let groupDataInstance = userGroupDataQ.getFirstObject()
                     groupDataInstance!.delete()
                     //Remove user from the group's users
-                    group.removeObject(PFUser.currentUser()!.username!, forKey: "userIDs")
+                    group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
                     //Remve the group from the user's group
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     group.save()

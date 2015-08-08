@@ -49,6 +49,10 @@ class MoreTableViewController: UITableViewController {
         if segue.identifier == "Squirrel Store" {
             let controller = segue.destinationViewController as! SquirrelStoreController
         }
+        if segue.identifier == "NewUserScreens" {
+            let controller = segue.destinationViewController as! TutorialViewController
+            controller.typeOfContent = "more"
+        }
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,14 +91,8 @@ class MoreTableViewController: UITableViewController {
         super.viewDidLoad()
         //Check to see if we need to show a new user tutorial screens first
         if PFUser.currentUser()!["newMoreTab"] as! Bool == true {
-            println("should be showing more screens")
             //If new user, show them the tutorial screens
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let tutorialTestStoryBoard = UIStoryboard(name: "Tutorial", bundle: nil)
-            let contentController = tutorialTestStoryBoard.instantiateViewControllerWithIdentifier("ContentViewController") as! TutorialViewController
-            contentController.typeOfContent = "more"
-            appDelegate.window!.rootViewController = contentController
-            appDelegate.window!.makeKeyAndVisible()
+            performSegueWithIdentifier("NewUserScreens", sender: self)
         
         }
         
@@ -102,12 +100,6 @@ class MoreTableViewController: UITableViewController {
             self.title = "Home"
         }
         self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
-        //Set the friendsIcon to 'fa-smile-o'
-        //friendsIcon.text = "\u{f118}"
-        //Set the groupsIcon to 'fa-users'
-        //groupsIcon.text = "\u{f0c0}"
-        //Set the settings icon to 'fa-cog'
-        //settingsIcon.text = "\u{f013}"
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
