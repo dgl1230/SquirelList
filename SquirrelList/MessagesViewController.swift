@@ -155,9 +155,19 @@ class MessagesViewController: JSQMessagesViewController {
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
+        var previousDate = NSDate()
+        if indexPath.row != 0 {
+            let olderRow = indexPath.row - 1
+            let olderMessage = messages[olderRow]
+            previousDate = olderMessage.date
+        }
         if message.senderId != self.senderId {
             let NSMessage = message.senderId as NSString
-            if indexPath.item % 3 == 0 {
+            var calendar: NSCalendar = NSCalendar.currentCalendar()
+            let flags = NSCalendarUnit.HourCalendarUnit
+            let components = calendar.components(flags, fromDate: previousDate, toDate: message.date, options: nil)
+            //We only show the timestamp between messages if there's a difference of at least one hour between the messages
+            if components.hour >= 1 {
                 return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
             }
             return NSMutableAttributedString(string: message.senderDisplayName)

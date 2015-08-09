@@ -48,6 +48,10 @@ class NewFriendsViewController: UITableViewController {
             //Update the current user's UserFriendsData instance by removing username from "requestingUsers" field and adding it to "friends" field
             userFriendsData.removeObject(username, forKey: "pendingInviters")
             userFriendsData.addObject(username, forKey: "friends")
+            
+            //Updatee the "friendAdded" field to re-sort friends array when appropraite user goes to friends list
+            userFriendsData["friendAdded"] = true
+            otherUserFriendData!["friendAdded"] = true
         
             userFriendsData.save()
             otherUserFriendData!.save()
@@ -218,6 +222,14 @@ class NewFriendsViewController: UITableViewController {
         super.viewDidLoad()
 
         userFriendsData.fetch()
+        //If the logged in user has someone new added to their friends list, we need to re-alphabetize it and save it
+        if userFriendsData["friendAdded"] as! Bool == true {
+            let friends = userFriendsData["friends"] as! [String]
+            let sortedFriends = friends.sorted { $0 < $1 }
+            userFriendsData["friends"] = sortedFriends
+            userFriendsData["friendAdded"] = false
+            userFriendsData.save()
+        }
         if invitingToGroup == true {
             //If they are inviting friends to groups, we don't show pending friends
             users = userFriendsData["friends"] as! [String]

@@ -184,6 +184,22 @@ class UsersViewController: PFQueryTableViewController {
             }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        //Check to see if this is a lucky day for the user
+        if contains(alerts, "lucky") == true {
+            var message = "It's your lucky day! Here's 100 acorns!"
+            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+                //Update and save userGroupData
+                var acorns = userGroupData["acorns"] as! Int
+                acorns += 100
+                userGroupData["acorns"] = acorns
+                userGroupData.save()
+                self.alerts.removeAtIndex(0)
+                //We recursively call showAlerts() until the alerts array is empty
+                self.showAlerts()
+            }))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     
     }
     
@@ -268,6 +284,11 @@ class UsersViewController: PFQueryTableViewController {
         let daysApart = dayDifferences(lastCheckedDate, date2: today)
         if daysApart == 1 {
             alerts.append("cumulativeDay")
+            //Check to see if we're going to randomly award the user because they are lucky today
+            let randomLuckyNumber = Int(arc4random_uniform(100))
+            if randomLuckyNumber <= 5 {
+                alerts.append("lucky")
+        }
         } else if daysApart != 0 {
             //They haven't visited this group in more than a day, and so we need to update their last visit
             userGroupData["lastVisit"] = today
