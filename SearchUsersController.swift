@@ -14,7 +14,7 @@ Lets users search and find other users via their usernames
 
 import UIKit
 
-class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
+class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     @IBOutlet var searchController: UISearchDisplayController!
 
@@ -46,7 +46,8 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
     //Takes the tag of the button pressed in the tableViewCell and adds the user at the index of the objects array to the appropriate data model
     func addUser(sender:UIButton!) {
         let buttonRow = sender.tag
-        let user = objects![buttonRow] as! PFUser
+        let otherUserFriendData = objects![buttonRow] as! PFObject
+        let username = otherUserFriendData["lowerUsername"] as! String
         //We want to prevent the user from being able to quickly press the add friend button multiple times
         let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
         var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
@@ -57,7 +58,7 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
         if  (hasBeenAskedForPush == false) && (hasFriended == false) {
             //This is the first type that the user has friended someone and they haven't enabled push notification, so we can prompt them
             let title = "Let Squirrel List Access Notifications?"
-            let message = "You'll be alerted when \(user.username!) has accepted your request. "
+            let message = "You'll be alerted when \(username) has accepted your request. "
             var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction!) -> Void in
                 alert.dismissViewControllerAnimated(true, completion: nil)
@@ -79,23 +80,20 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
         self.presentViewController(alert, animated: true, completion: nil)
         }
 
-        //We need to query and get the other user's UserFriendsData
-        let query = PFQuery(className: "UserFriendsData")
-        query.whereKey("username", equalTo: user.username!)
-        //There is only one UserFriendsData instance per user
-        let otherUserFriendData = query.getFirstObject()
-        otherUserFriendData!.addObject(PFUser.currentUser()!.username!, forKey: "pendingInviters")
+        otherUserFriendData.addObject(PFUser.currentUser()!.username!, forKey: "pendingInviters")
         
         let currentUserFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
-        currentUserFriendsData.addObject(user.username!, forKey: "pendingInvitees")
+        currentUserFriendsData.addObject(username, forKey: "pendingInvitees")
         
         currentUserFriendsData.save()
-        otherUserFriendData!.save()
+        otherUserFriendData.save()
         
         
         //Alert the invited user that the logged in user has requested them as a friend
         let pushQuery = PFInstallation.query()
-        pushQuery!.whereKey("username", equalTo: user.username!)
+        //The installation field "username" is case sensitive
+        let nonLoweredUsername = otherUserFriendData["username"] as! String
+        pushQuery!.whereKey("username", equalTo: nonLoweredUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
         let message = "\(PFUser.currentUser()!.username!) wants to be friends!"
@@ -109,29 +107,31 @@ class NewSearchUsersViewController: PFQueryTableViewController, UISearchBarDeleg
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        var query = PFUser.query()
+        //We query via UserFriendsData instead of the User model because then it is one less query when a user requests
+        var query = PFQuery(className: "UserFriendsData")
         if searchedString == "" {
             //Then the user is searching users to add, but hasn't entered any text in the search field, so we don't query users yet
-            query!.limit = 0
+            query.limit = 0
         } else {
             //We query for users that have a prefix that matches the text in the searchField
             //We want to search users regardless of capitalization
-            query?.whereKey("lowerUsername", hasPrefix: searchedString)
+            query.whereKey("lowerUsername", hasPrefix: searchedString)
         }
         //Look into seeing if the else if and else are both executed
-        return query!
+        return query
     }
+
+
 
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var user: PFUser
         var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FindUserTableViewCell
-        user = objects![indexPath.row] as! PFUser
+        var friendsData = objects![indexPath.row] as! PFObject
         cell.addButton.addTarget(self, action: "addUser:", forControlEvents:  UIControlEvents.TouchUpInside)
-        cell.nameLabel.text = user["username"] as? String
+        cell.nameLabel.text = friendsData["lowerUsername"] as? String
         cell.addButton.tag = indexPath.row
-        if contains(users, user.username!) {
+        if contains(users, friendsData["lowerUsername"] as! String) {
             //The user is already friends with the logged in user or the logged in user has already requested them or the other user has already requested the logged in user
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)

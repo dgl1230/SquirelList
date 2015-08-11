@@ -82,9 +82,7 @@ class MessagesViewController: JSQMessagesViewController {
                     self.finishReceivingMessage()
                 }
                 self.finishReceivingMessage()
-            } else {
-                println("error")
-            }
+            } 
         }
     }
     
@@ -151,25 +149,27 @@ class MessagesViewController: JSQMessagesViewController {
     func close() {
         view.endEditing(true)
     }
-
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item]
+    /* This is the logic for showing timestamps once I figured out how to display them to not override senders' names
         var previousDate = NSDate()
         if indexPath.row != 0 {
             let olderRow = indexPath.row - 1
             let olderMessage = messages[olderRow]
             previousDate = olderMessage.date
         }
+         var calendar: NSCalendar = NSCalendar.currentCalendar()
+        let flags = NSCalendarUnit.HourCalendarUnit
+        let components = calendar.components(flags, fromDate: previousDate, toDate: message.date, options: nil)
+        //We only show the timestamp between messages if there's a difference of at least one hour between the messages
+        if components.hour >= 1 {
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+        }
+    */
+    
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+        let message = messages[indexPath.item]
         if message.senderId != self.senderId {
-            let NSMessage = message.senderId as NSString
-            var calendar: NSCalendar = NSCalendar.currentCalendar()
-            let flags = NSCalendarUnit.HourCalendarUnit
-            let components = calendar.components(flags, fromDate: previousDate, toDate: message.date, options: nil)
-            //We only show the timestamp between messages if there's a difference of at least one hour between the messages
-            if components.hour >= 1 {
-                return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
-            }
             return NSMutableAttributedString(string: message.senderDisplayName)
         }
         return nil

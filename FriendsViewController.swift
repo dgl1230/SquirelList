@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewFriendsViewController: UITableViewController {
+class FriendsViewController: UITableViewController {
     
     var friends: [String] = []
     //Variable for keeping track of the current group, if the user is inviting friends to a group
@@ -121,7 +121,7 @@ class NewFriendsViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "FindFriends" {
-            let controller = segue.destinationViewController as! NewSearchUsersViewController
+            let controller = segue.destinationViewController as! SearchUsersViewController
         }
     }
 

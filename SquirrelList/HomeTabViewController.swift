@@ -20,10 +20,6 @@ class HomeTabViewController: UITabBarController {
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState:.Normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.orangeColor()], forState: UIControlState.Selected)
         
-        
-
-
-        
         //Setting the tabs programmatically so that we can use multiple storyboards
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
@@ -32,9 +28,7 @@ class HomeTabViewController: UITabBarController {
         
         let squirrelsViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Squirrels")as! UINavigationController
         squirrelsViewController.tabBarItem = UITabBarItem(title: "Squirrels", image: UIImage(named: "squirrel"), tag: 4)
-        //squirrelsViewController.tabBarItem.imageInsets.top = 6
-        //squirrelsViewController.tabBarItem.imageInsets.bottom = -6
-        
+
         let chatViewController = mainStoryboard.instantiateViewControllerWithIdentifier("Chat") as! UINavigationController
 
         //Since the moreViewController isn't hooked up to the HomeTableViewController in the storyboard, we need to set attritbutes

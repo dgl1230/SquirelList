@@ -228,7 +228,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     */
     
     func reloadWithNewGroupTest() {
-        println("reloading with this phony")
         self.viewDidLoad()
     }
     
@@ -436,8 +435,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         individualGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
         individualGroupData?.fetch()
 
-        if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
-            //If new user, show them the tutorial screens
+        if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true && selectedUser == nil {
+            //If new user, show them the tutorial screens, but we only want to present these screens from the main squirrel tab
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
         
@@ -536,8 +535,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 self.dismissViewControllerAnimated(true, completion: nil)
                 self.viewDidLoad()
                 
-            } else {
-                println(error)
             }
         }
     }

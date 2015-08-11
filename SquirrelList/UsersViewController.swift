@@ -69,7 +69,7 @@ class UsersViewController: PFQueryTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddFriendToGroup" {
-            let controller = segue.destinationViewController as! NewFriendsViewController
+            let controller = segue.destinationViewController as! FriendsViewController
             controller.invitingToGroup = true
             controller.group = PFUser.currentUser()!["currentGroup"] as? PFObject
         }
@@ -229,14 +229,6 @@ class UsersViewController: PFQueryTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if PFUser.currentUser()!["friendData"] == nil {
-            let q = PFQuery(className: "UserFriendsData")
-            q.whereKey("username", equalTo: PFUser.currentUser()!.username!)
-            let friendData = q.getFirstObject()
-            PFUser.currentUser()!["friendData"] = friendData
-            PFUser.currentUser()!.save()
-            PFUser.currentUser()!.fetch()
-        }
         currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
         currentGroup!.fetch()
         //Set the addFriendToGroupButton to 'fa-user-plus
@@ -258,13 +250,6 @@ class UsersViewController: PFQueryTableViewController {
         navigationItem.backBarButtonItem = backItem
         //Register the UsersCellTableViewCell for use in the UserViewController tableView
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
-        //Check to see if we need to show a new user tutorial screens first
-        if PFUser.currentUser()!["newUserTab"] as! Bool == true {
-            performSegueWithIdentifier("NewUserScreens", sender: self)
-            //If this is a new user, we want them to be shown the tutorial screens first
-            return
-        }
         
         //We check to see if the user has been recently given a strike for offensive content
         if PFUser.currentUser()!["recentStrike"] as! Bool == true {
@@ -299,7 +284,15 @@ class UsersViewController: PFQueryTableViewController {
             showAlerts()
         }
         
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //If we don't show Tutorial Screens from here we get a "Presenting view controllers on detached view controllers is discouraged" warning
+        //Check to see if we need to show a new user tutorial screens first
+        if PFUser.currentUser()!["newUserTab"] as! Bool == true {
+            performSegueWithIdentifier("NewUserScreens", sender: self)
+        }
     }
     
     

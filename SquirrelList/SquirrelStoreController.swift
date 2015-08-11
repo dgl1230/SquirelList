@@ -100,7 +100,6 @@ class SquirrelStoreController: UITableViewController {
         } else {
             purchaseReratingLabel.text = "Purchase Rerating (0/1)"
         }
-        println("CAN REREATE is \(canRerate)")
         let groupName = individualGroupData["groupName"] as! String
         self.title = "\(groupName) Squirrel Store"
         

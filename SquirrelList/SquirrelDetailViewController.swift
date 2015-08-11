@@ -15,6 +15,7 @@ protocol SquirrelDetailViewControllerDelegate: class {
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+
     //Bool that determines if the logged in user has room to pick up another squirrel
     var canClaimSquirrel: Bool?
     weak var delegate: SquirrelViewController?
@@ -44,6 +45,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var squirrelPic: UIImageView?
     
+
 
     
     @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
@@ -76,6 +78,9 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         }
     }
 
+    @IBAction func flagContent(sender: AnyObject) {
+        performSegueWithIdentifier("flagContent", sender: self)
+    }
     
     
     @IBAction func rateSquirrel(sender: AnyObject) {
@@ -122,6 +127,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         
     }
     
+
     
 
     func calculateAverageRating(ratings:[String]) -> Double {
@@ -170,6 +176,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             let controller = segue.destinationViewController as! TradeViewController
             controller.desiredSquirrelOwner = squirrelOwner!
             controller.desiredSquirrel = ratedSquirrel!
+        }
+        if segue.identifier == "flagContent" {
+            let controller = segue.destinationViewController as! FlagContentController
+            if squirrelOwner != nil {
+                squirrelOwner!.fetch()
+                controller.owner = squirrelOwner!.username!
+            }
+            controller.squirrelID = ratedSquirrel!.objectId!
         }
 
     }
@@ -237,7 +251,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             var rating = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
             rateNumberTextField.placeholder = "Your rating: \(rating)"
             if canRerate == true {
-                println("canRerate is true")
                 rateButton.setTitle("Rerate", forState: UIControlState.Normal)
                 rateButton.enabled = true
             } else {
@@ -303,20 +316,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         if didRateSquirrel == false || canRerate == true {
             rateNumberTextField.delegate = self
         }
-        /*
-        //Make the font adjust depending on the size of the button for claimTradePictureButton
-        claimTradePictureButton.titleLabel!.numberOfLines = 1
-        claimTradePictureButton.titleLabel!.font = UIFont(name: "bosun-03", size: 100)
-        claimTradePictureButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        claimTradePictureButton.titleLabel!.baselineAdjustment = .AlignCenters
-        claimTradePictureButton.titleLabel!.sizeToFit()
-        //Make the font adjust depending on the size of the button for rateButton
-        rateButton.titleLabel!.numberOfLines = 1
-        rateButton.titleLabel!.font = UIFont(name: "bosun-03", size: 100)
-        rateButton.titleLabel!.adjustsFontSizeToFitWidth = true
-        rateButton.titleLabel!.baselineAdjustment = .AlignCenters
-        rateButton.titleLabel!.sizeToFit()
-        */
     }
     
     
@@ -325,7 +324,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
             var oldRating: NSString = ""
             var newRating: NSString = ""
-        
         
             oldRating = rateNumberTextField.text
             newRating = oldRating.stringByReplacingCharactersInRange(range, withString: string)

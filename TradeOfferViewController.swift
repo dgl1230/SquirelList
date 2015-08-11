@@ -165,7 +165,6 @@ class TradeOfferViewController: PopUpViewController {
         declineButton.layer.masksToBounds = true
 
         if tradeProposal!["offeredSquirrelID"] != nil {
-            println("pass1")
             //Then the offerer is offering a Squirrel
             var offeredSquirrelQuery = PFQuery(className: "Squirrel")
             offeredSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["offeredSquirrelID"]!)
@@ -176,14 +175,11 @@ class TradeOfferViewController: PopUpViewController {
         }
         
         if tradeProposal!["offeredAcorns"] != nil {
-            println("pass3")
             var acorns = tradeProposal!["offeredAcorns"] as! Int
             if tradeProposal!["offeredSquirrelID"] == nil {
-                println("pass4")
                 offeredlLabel.text = "\(acorns) acorns"
                 offeredAcornsLabel.hidden = true
             } else {
-                println("pass5")
                 offeredAcornsLabel.text = "\(acorns) acorns +"
             }
         } else {

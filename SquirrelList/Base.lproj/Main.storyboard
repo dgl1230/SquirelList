@@ -22,7 +22,6 @@
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
             <string>BebasNeueBook</string>
-            <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Thin.otf">
             <string>BebasNeue-Thin</string>
@@ -37,6 +36,7 @@
             <string>BebasNeue-Thin</string>
         </mutableArray>
         <mutableArray key="bosun03.otf">
+            <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
@@ -566,16 +566,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raQ-x4-CNh" userLabel="Pop-up View">
-                                <rect key="frame" x="185" y="72" width="230" height="293"/>
+                                <rect key="frame" x="185" y="72" width="230" height="236"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trade Offer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdn-zo-3Oj">
-                                        <rect key="frame" x="8" y="20" width="224" height="34"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBs-pL-Rc0">
-                                        <rect key="frame" x="35" y="129" width="171" height="30"/>
+                                        <rect key="frame" x="33" y="86" width="171" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="15"/>
                                         <state key="normal" title="Select a Squirrel to trade">
@@ -586,37 +580,37 @@
                                             <action selector="selectSquirrel:" destination="Igs-Gg-p6U" eventType="touchUpInside" id="j2o-45-5kD"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="desiredSquirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-WR-u1g">
-                                        <rect key="frame" x="8" y="69" width="224" height="33"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="24"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="offeredSquirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NkI-ny-uY5">
-                                        <rect key="frame" x="3" y="126" width="229" height="33"/>
+                                        <rect key="frame" x="0.0" y="84" width="229" height="33"/>
                                         <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="24"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEO-Zv-UGu">
-                                        <rect key="frame" x="8" y="104" width="214" height="21"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and/or " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc7-6n-4Nf">
-                                        <rect key="frame" x="8" y="175" width="214" height="21"/>
+                                        <rect key="frame" x="11" y="124" width="214" height="21"/>
                                         <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="desiredSquirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-WR-u1g">
+                                        <rect key="frame" x="3" y="8" width="224" height="51"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Offer acorns" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zuE-N7-Cgw">
-                                        <rect key="frame" x="11" y="199" width="209" height="30"/>
+                                        <rect key="frame" x="8" y="148" width="209" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-ij-eDq">
+                                        <rect key="frame" x="8" y="57" width="214" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1q-j4-gEX">
-                                        <rect key="frame" x="26" y="243" width="178" height="30"/>
+                                        <rect key="frame" x="26" y="186" width="178" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="24"/>
                                         <state key="normal" title="Propose Trade">
@@ -630,7 +624,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="293" id="dlt-Dx-jue"/>
+                                    <constraint firstAttribute="height" constant="236" id="dlt-Dx-jue"/>
                                     <constraint firstAttribute="width" constant="230" id="sYe-Kl-qjI"/>
                                 </constraints>
                             </view>
@@ -794,10 +788,10 @@
             </objects>
             <point key="canvasLocation" x="2752" y="-1829"/>
         </scene>
-        <!--New Friends View Controller-->
+        <!--Friends View Controller-->
         <scene sceneID="lmp-z0-56N">
             <objects>
-                <viewController id="XSm-0T-jTC" customClass="NewFriendsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XSm-0T-jTC" customClass="FriendsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3DJ-TJ-ecN" userLabel="User's Name">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -974,7 +968,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Squirrel Score Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="QUH-F8-pZB">
-                                        <rect key="frame" x="8" y="196" width="214" height="38"/>
+                                        <rect key="frame" x="8" y="202" width="214" height="38"/>
                                         <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="27"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1015,11 +1009,20 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Owner Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="McH-6c-U33">
-                                        <rect key="frame" x="8" y="226" width="214" height="29"/>
+                                        <rect key="frame" x="8" y="240" width="214" height="22"/>
                                         <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2K-bx-QIk">
+                                        <rect key="frame" x="201" y="179" width="15" height="15"/>
+                                        <state key="normal" title="Button" image="flag">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="flagContent:" destination="quq-DM-V0e" eventType="touchUpInside" id="QpG-Sk-bCm"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1045,6 +1048,7 @@
                         <outlet property="squirrelOwnerLabel" destination="McH-6c-U33" id="18T-N7-eur"/>
                         <outlet property="squirrelPic" destination="xI9-NR-V5B" id="59l-HM-s9r"/>
                         <segue destination="Igs-Gg-p6U" kind="presentation" identifier="tradeSquirrel" id="c3q-1e-3f7"/>
+                        <segue destination="xIO-fi-4M5" kind="presentation" identifier="flagContent" id="c2f-mX-hiM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzt-MK-zqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1089,21 +1093,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="qPZ-0X-YMv">
-                                <rect key="frame" x="16" y="233" width="568" height="98"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Squirrel Slots = # of squirrels you can get" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qPZ-0X-YMv">
+                                <rect key="frame" x="16" y="251" width="568" height="98"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="98" id="YYK-FV-aSJ"/>
+                                    <constraint firstAttribute="width" constant="568" id="Pfa-VA-5hR"/>
+                                    <constraint firstAttribute="height" constant="98" id="QIL-kX-AsX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="qPZ-0X-YMv" secondAttribute="width" constant="32" id="PI3-jr-4qx"/>
-                            <constraint firstItem="qPZ-0X-YMv" firstAttribute="top" secondItem="H3x-0n-fCP" secondAttribute="top" constant="233" id="Qsf-dl-tvX"/>
-                            <constraint firstAttribute="centerX" secondItem="qPZ-0X-YMv" secondAttribute="centerX" id="UWz-MM-zGM"/>
+                            <constraint firstAttribute="centerY" secondItem="qPZ-0X-YMv" secondAttribute="centerY" id="e85-0U-KII"/>
+                            <constraint firstAttribute="centerX" secondItem="qPZ-0X-YMv" secondAttribute="centerX" id="slM-7T-Qyf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1114,9 +1118,86 @@
             </objects>
             <point key="canvasLocation" x="1687" y="-1588"/>
         </scene>
+        <!--Report Controller-->
+        <scene sceneID="lh5-Rg-DgO">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="waE-Pi-IQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="xIO-fi-4M5" userLabel="Report Controller" customClass="FlagContentController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Akf-A4-G6b"/>
+                        <viewControllerLayoutGuide type="bottom" id="Cer-Nk-3DQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zx7-En-3fW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYB-ul-Fb2">
+                                <rect key="frame" x="229" y="230" width="142" height="47"/>
+                                <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="142" id="3TF-2n-bZc"/>
+                                    <constraint firstAttribute="height" constant="47" id="a59-1L-gN5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Report">
+                                    <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="report:" destination="xIO-fi-4M5" eventType="touchUpInside" id="Nbc-6b-H7U"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why are you flagging this Squirrel? " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="mka-lr-WZe">
+                                <rect key="frame" x="219" y="38" width="163" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="EFS-2Z-rVI"/>
+                                    <constraint firstAttribute="width" constant="163" id="HAM-mt-KM8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xjh-0e-aip" userLabel="Close Button">
+                                <rect key="frame" x="0.0" y="13" width="30" height="42"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="xIO-fi-4M5" eventType="touchUpInside" id="pDQ-LH-1ut"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0CV-Vm-Wzx">
+                                <rect key="frame" x="0.0" y="92" width="600" height="124"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="aYB-ul-Fb2" firstAttribute="top" secondItem="zx7-En-3fW" secondAttribute="top" constant="230" id="0tN-if-Z8E"/>
+                            <constraint firstAttribute="centerX" secondItem="aYB-ul-Fb2" secondAttribute="centerX" id="2MS-5L-AB5"/>
+                            <constraint firstItem="mka-lr-WZe" firstAttribute="top" secondItem="zx7-En-3fW" secondAttribute="top" constant="38" id="8o5-u1-ScY"/>
+                            <constraint firstAttribute="centerX" secondItem="mka-lr-WZe" secondAttribute="centerX" constant="-0.5" id="QNX-bD-I1V"/>
+                            <constraint firstItem="Xjh-0e-aip" firstAttribute="leading" secondItem="zx7-En-3fW" secondAttribute="leadingMargin" constant="-16" id="vdF-XC-LDF"/>
+                            <constraint firstItem="Xjh-0e-aip" firstAttribute="top" secondItem="zx7-En-3fW" secondAttribute="topMargin" constant="13" id="zW3-NV-8O1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="Xjh-0e-aip" id="i02-te-0XR"/>
+                        <outlet property="reportButton" destination="aYB-ul-Fb2" id="Vhv-as-HUv"/>
+                        <outlet property="reportTextView" destination="0CV-Vm-Wzx" id="ELM-e1-GIx"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="4354" y="1128"/>
+        </scene>
     </scenes>
     <resources>
         <image name="acorn_orange" width="128" height="128"/>
+        <image name="flag" width="64" height="64"/>
         <image name="group" width="76" height="76"/>
         <image name="squirrel" width="48" height="48"/>
         <image name="tabbar_chat" width="23" height="36"/>

@@ -13,10 +13,6 @@
 import UIKit
 
 class MoreTableViewController: UITableViewController {
-
-    //@IBOutlet weak var friendsIcon: UILabel!
-    //@IBOutlet weak var groupsIcon: UILabel!
-    //@IBOutlet weak var settingsIcon: UILabel!
     
     //Optional for keeping track if the user has no currentGroup
     var isNewUser: Bool?
@@ -37,7 +33,7 @@ class MoreTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Friends" {
-            let controller = segue.destinationViewController as! NewFriendsViewController
+            let controller = segue.destinationViewController as! FriendsViewController
         }
         if segue.identifier == "GroupInvites" {
             let controller = segue.destinationViewController as! NotificationsViewController

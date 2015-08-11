@@ -97,6 +97,7 @@ class RegisterViewController: UIViewController {
             userFriendsData["friends"] = []
             userFriendsData["pendingInviters"] = []
             userFriendsData["pendingInvitees"] = []
+            userFriendsData["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friendData"] = userFriendsData
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
@@ -186,7 +187,6 @@ class RegisterViewController: UIViewController {
     func resumeInteractionEvents() {
         self.activityIndicator.stopAnimating()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
-    
     }
     
     override func viewDidLoad() {
