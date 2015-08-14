@@ -52,7 +52,14 @@ class FlagContentController: UIViewController, UITextViewDelegate {
         reportTextView.delegate = self
     }
     
+    
+    
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+            //Make it so that pressing "done" dismisses the kayboard
+            if text == "\n" {
+                reportTextView.resignFirstResponder()
+                return false
+            }
             var oldInfo: NSString = reportTextView.text
             var newInfo: NSString = ""
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: text)

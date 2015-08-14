@@ -19,9 +19,7 @@ import UIKit
 }
 
 class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
-
-
-
+    
     //Optional value for determing if we're viewing someone else's squirrels, who's squirrels they are
     var selectedUser: PFUser?
     //Optional for determing if the user has room to add a Squirrel. Also passed along to SquirrelDetailViewController to allow them to pick up a Squirrel
@@ -286,6 +284,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
+               
+                    //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+                    let viewsArray = displayLoadingAnimator(self.view)
+                    let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+                    let container = viewsArray[1] as! UIView
+                    let loadingView = viewsArray[2] as! UIView
                     let squirrel = self.objects![indexPath.row] as! PFObject
                     squirrel.removeObjectForKey("owner")
                     squirrel.removeObjectForKey("ownerUsername")
@@ -302,6 +306,27 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                     ///Alert SquirrelViewController to reload data
                     NSNotificationCenter.defaultCenter().postNotificationName(droppedSquirrel, object: self)
                     self.loadObjects()
+                    //Need to delete all TradeProposals where the dropped squirrel is offered or desired
+                    let query1 = PFQuery(className: "TradeProposal")
+                    query1.whereKey("proposedSquirrelID", equalTo: squirrel.objectId!)
+                    let query2 = PFQuery(className: "TradeProposal")
+                    query2.whereKey("offeredSquirrelID", equalTo: squirrel.objectId!)
+                    let query = PFQuery.orQueryWithSubqueries([query1, query2])
+                    query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
+                        if error == nil {
+                            var tradeOffers = trades as? [PFObject]
+                            if tradeOffers?.count >= 1 {
+                                for trade in tradeOffers! {
+                                    trade.delete()
+                                }
+                            }
+                            
+                        }
+                    //Global function that stops the loading animation and dismisses the views it is attached to
+                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                    }
+                    
+                    
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -493,7 +518,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
    
    
-   //should be made into its own extension 
+    //should be made into its own extension
     func addSquirrelViewControllerDidCancel(controller: AddSquirrelViewController) {
         dismissViewControllerAnimated(true, completion: nil)
     }

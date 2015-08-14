@@ -86,7 +86,7 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         usernameLabel.text = PFUser.currentUser()!.username
-        //Customize navigation controller back button to my only the back symbol
+        //Customize navigation controller back button to only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         

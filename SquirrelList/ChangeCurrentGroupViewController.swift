@@ -11,8 +11,6 @@ import UIKit
 
 class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
-    //Optional for holding which cell should have a checkmark
-    var checkMarkedCellIndex: NSIndexPath?
     
     //this variable is for checking to see when the user presses done, if they have stayed on the same current group. If they have, then we don't want to send notifications to reload everything
     var currentGroup = PFUser.currentUser()!["currentGroup"]! as! PFObject
@@ -49,10 +47,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         //var name = cell.viewWithTag(1) as! UILabel
         cell.usernameLabel.text = objects![indexPath.row]["name"] as? String
         cell.usernameLabel.font = UIFont(name: "BebasNeue-Thin", size: 30)
-        if objects![indexPath.row].objectId == PFUser.currentUser()!["currentGroup"]!.objectId {
-            cell.accessoryType = .Checkmark
-            checkMarkedCellIndex = indexPath
-        }
         return cell
     }
     
@@ -156,11 +150,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
-        //Update checkMarkedCellIndex
-        checkMarkedCellIndex = indexPath
-        //Remove checkmark from old cell
-        let oldCheckMarkedCell = tableView.cellForRowAtIndexPath(checkMarkedCellIndex!)
-        oldCheckMarkedCell?.accessoryType = .None
         //Update the current group variable
         currentGroup = objects![indexPath.row] as! PFObject
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
@@ -176,6 +165,8 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             PFUser.currentUser()!.save()
             //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
+
+
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }

@@ -101,7 +101,6 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
         push.setData(pushDict)
         push.sendPushInBackgroundWithBlock(nil)
-        
     }
     
     
@@ -142,6 +141,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             //Setting the addFriendButton with the 'fa-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
             cell.addButton.setTitle("\u{f096}", forState: .Normal)
+            cell.addButton.enabled = true
         }
         return cell
     }

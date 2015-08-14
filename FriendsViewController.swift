@@ -33,6 +33,10 @@ class FriendsViewController: UITableViewController {
     func addUser(sender:UIButton!) {
         let buttonRow = sender.tag
         let username = users[buttonRow]
+        //We want to prevent the user from being able to quickly press the add friend button multiple times
+        let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
+        var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
+        cell.addButton.enabled = false
         if invitingToGroup == true {
             createGroupInvite(username)
         } else {
@@ -146,6 +150,8 @@ class FriendsViewController: UITableViewController {
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
             cell.addButton.setTitle("\u{f096}", forState: .Normal)
             cell.addButton.addTarget(self, action: "addUser:", forControlEvents:  UIControlEvents.TouchUpInside)
+            cell.addButton.enabled = true
+            cell.addButton.hidden = false
         } else {
             //The user variable has been already invited or added to the currentGroup or to the user's friends
             //Ghetto method for now, need to make it so that the button isn't default

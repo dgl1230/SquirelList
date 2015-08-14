@@ -17,7 +17,7 @@ protocol ChangeInfoViewControllerDelegate: class {
 }
 
 
-class ChangeInfoController: UIViewController, UITextFieldDelegate {
+class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
     //Optional for determing what kind of info the user is changing. Will either be "name" or "email" or "report"
     var infoBeingChanged: String?
@@ -104,6 +104,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
         } else if infoBeingChanged == "report" {
             self.title = "Support"
             saveButton.setTitle("Report", forState: UIControlState.Normal)
+            reportExplanationField!.delegate = self
         }
 
         infoField.delegate = self
@@ -111,6 +112,12 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
         //Give save button rounded edges
         saveButton.layer.cornerRadius = 5
         saveButton.layer.masksToBounds = true
+    }
+    
+    //For dismissing the keyboard after pressing "done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
     
@@ -124,6 +131,16 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate {
                 saveButton.enabled = false
             }
             return true 
+    }
+    
+    //For getting "done" button to dismiss keyboard on the report explanation textView
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+            //Make it so that pressing "done" dismisses the kayboard
+            if text == "\n" {
+                reportExplanationField!.resignFirstResponder()
+                return false
+            }
+            return true
     }
     
 

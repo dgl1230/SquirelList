@@ -15,7 +15,6 @@ protocol SquirrelDetailViewControllerDelegate: class {
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
     //Bool that determines if the logged in user has room to pick up another squirrel
     var canClaimSquirrel: Bool?
     weak var delegate: SquirrelViewController?
@@ -50,6 +49,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
         if claimOrTradeOrPicture == "claim" {
+            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+            let viewsArray = displayLoadingAnimator(self.view)
+            let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+            let container = viewsArray[1] as! UIView
+            let loadingView = viewsArray[2] as! UIView
+            
+            
             ratedSquirrel!["owner"] = PFUser.currentUser()!
             ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
             if didRateSquirrel == true {
@@ -66,7 +72,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!.save()
             //Alert SquirrelViewController to reload data
             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+            //Global function that stops the loading animation and dismisses the views it is attached to
+            resumeInteractionEvents(activityIndicatorView, container, loadingView)
             self.dismissViewControllerAnimated(true, completion: nil)
+            
         } else if claimOrTradeOrPicture == "trade" {
             self.performSegueWithIdentifier("tradeSquirrel", sender: self)
         } else if claimOrTradeOrPicture == "uploadPicture" {

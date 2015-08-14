@@ -20,6 +20,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+
         var group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
@@ -31,8 +32,8 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         let userGroupData = PFObject(className: "UserGroupData")
         userGroupData["user"] = PFUser.currentUser()!
         userGroupData["group"] = group
-        userGroupData["acorns"] = 1000
-        userGroupData["squirrelSlots"] = 4
+        userGroupData["acorns"] = 750
+        userGroupData["squirrelSlots"] = 3
         userGroupData["canRerate"] = false
         userGroupData["lastVisit"] = NSDate()
         userGroupData["numOfGroupUsers"] = 1
@@ -56,6 +57,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
  
         //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all need to be reloaded when their views appear 
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+
         self.navigationController?.popViewControllerAnimated(true)    
     }
     override func viewDidLoad() {

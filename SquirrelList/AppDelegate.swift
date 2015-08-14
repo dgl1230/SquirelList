@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
 
+
+        
+        //For now we rest their badge numbers anytime the app launches 
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
             let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)

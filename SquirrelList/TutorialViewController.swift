@@ -90,24 +90,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         let itemController = pendingViewControllers[0] as? TutorialPageItemViewController
         //Then the casting failed, and the user has swiped through all of the tutorialPageItemControllers
         if itemController == nil {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            if PFUser.currentUser()!["currentGroup"] == nil {
-                //Present just the MoreViewController to the user because they are still new
-                let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
-                let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
-                moreController.isNewUser = true
-                let navigationController = UINavigationController(rootViewController: moreController)
-                let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
-                navigationController.navigationBar.barTintColor = blue
-                appDelegate.window!.rootViewController = navigationController
-                appDelegate.window!.makeKeyAndVisible()
-            } else {
-                //Present the tab bar with all the tabs
-                //appDelegate.window!.rootViewController = HomeTabViewController()
-                //appDelegate.window!.makeKeyAndVisible()
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            self.dismissViewControllerAnimated(true, completion: nil)
             //Make keyboard disappear
             self.view.endEditing(true)
 

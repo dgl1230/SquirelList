@@ -28,25 +28,43 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     
     @IBAction func accept(sender: AnyObject) {
+        println(0)
         group!.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
         PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
+        println(1)
         let numOfUsers = (group!["users"] as! [String]).count
-        let squirrelSlots = numOfUsers + 5
+        println(2)
+        let squirrelSlots = (numOfUsers - 1) + 3
+        println(3)
         let userGroupData = PFObject(className: "UserGroupData")
+        println(4)
         userGroupData["user"] = PFUser.currentUser()!
+        println(5)
         userGroupData["group"] = group!
+        println(6)
         userGroupData["acorns"] = 1000
+        println(7)
         userGroupData["squirrelSlots"] = squirrelSlots
+        println(8)
         userGroupData["lastVisit"] = NSDate()
+        println(9)
         userGroupData["numOfGroupUsers"] = numOfUsers + 1
+        println(10)
         userGroupData["canRerate"] = false
+        println(11)
         userGroupData["cumulativeDaysVisited"] = 0
+        println(12)
         userGroupData["groupName"] = group!["name"] as! String
+        println(13)
         userGroupData.save()
+        println(14)
         group!.save()
+        println(15)
         PFUser.currentUser()!.save()
+        println(16)
         groupInvite!.delete()
+        println(17)
         if PFUser.currentUser()!["currentGroup"] == nil {
             //Then the user is new, and they need a current group
             PFUser.currentUser()!["currentGroup"] = group!

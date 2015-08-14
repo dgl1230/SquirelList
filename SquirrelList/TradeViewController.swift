@@ -12,6 +12,9 @@ import UIKit
 
 
 class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewControllerDelegate, UITextFieldDelegate {
+    
+    //Optional for displaying a custom activityIndicatorView during load times
+    var activityIndicatorView: NVActivityIndicatorView?
 
     var desiredSquirrel: PFObject?
     var desiredSquirrelOwner: PFUser?
@@ -66,8 +69,10 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             //Next we check to make sure the user hasn't offered zero acorns 
             if offeredAcorns == 0 {
                 let title = ""
-                let message = "Offer at least one acorn you swindler!"
+                let message = "Don't insult them with 0 acorns!"
                 displayErrorAlert(title, message: message)
+                return
+
             }
             if offeredAcorns > acorns {
                 let title = "You don't have that many acorns!"
@@ -79,7 +84,8 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             }
         }
         
-       
+       //Function found in GlobalFunctions file - displays loading animation
+        //activityIndicatorView = displayLoadingAnimator(self.view)
         tradeProposal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
             if (success) {
@@ -133,9 +139,12 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
                 
-                
             }
+            //Whether the save if successful or not, we need to suspend loading animation
+            //Function found in GlobalFunctions file - suspends loading animation
+            //resumeInteractionEvents(self.activityIndicatorView!)
         }
+        
     }
     
     

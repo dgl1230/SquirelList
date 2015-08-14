@@ -586,29 +586,6 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and/or " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc7-6n-4Nf">
-                                        <rect key="frame" x="11" y="124" width="214" height="21"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="desiredSquirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-WR-u1g">
-                                        <rect key="frame" x="3" y="8" width="224" height="51"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="24"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Offer acorns" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zuE-N7-Cgw">
-                                        <rect key="frame" x="8" y="148" width="209" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
-                                    </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-ij-eDq">
-                                        <rect key="frame" x="8" y="57" width="214" height="21"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1q-j4-gEX">
                                         <rect key="frame" x="26" y="186" width="178" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -621,6 +598,23 @@
                                             <action selector="proposeTrade:" destination="Igs-Gg-p6U" eventType="touchUpInside" id="40C-Lh-osb"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="desiredSquirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-WR-u1g">
+                                        <rect key="frame" x="3" y="8" width="224" height="41"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="24"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Offer acorns" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zuE-N7-Cgw">
+                                        <rect key="frame" x="8" y="148" width="209" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and/or " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zc7-6n-4Nf">
+                                        <rect key="frame" x="8" y="124" width="214" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -628,10 +622,22 @@
                                     <constraint firstAttribute="width" constant="230" id="sYe-Kl-qjI"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-ij-eDq">
+                                <rect key="frame" x="193" y="127" width="214" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="LDU-vy-RkE"/>
+                                    <constraint firstAttribute="width" constant="214" id="SXQ-fc-fgb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="raQ-x4-CNh" firstAttribute="leading" secondItem="6jj-ij-eDq" secondAttribute="trailing" constant="-222" id="07e-UZ-UbA"/>
                             <constraint firstAttribute="centerX" secondItem="raQ-x4-CNh" secondAttribute="centerX" id="36K-NE-XUO"/>
+                            <constraint firstItem="raQ-x4-CNh" firstAttribute="top" secondItem="6jj-ij-eDq" secondAttribute="bottom" constant="-76" id="9wW-VN-w9s"/>
                             <constraint firstItem="raQ-x4-CNh" firstAttribute="top" secondItem="WIs-qO-W6M" secondAttribute="top" constant="72" id="FJb-IL-gXz"/>
                         </constraints>
                     </view>
@@ -1121,7 +1127,6 @@
         <!--Report Controller-->
         <scene sceneID="lh5-Rg-DgO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="waE-Pi-IQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="xIO-fi-4M5" userLabel="Report Controller" customClass="FlagContentController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Akf-A4-G6b"/>
@@ -1172,7 +1177,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="124"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -1191,6 +1196,7 @@
                         <outlet property="reportTextView" destination="0CV-Vm-Wzx" id="ELM-e1-GIx"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="waE-Pi-IQi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4354" y="1128"/>
         </scene>
@@ -1203,8 +1209,8 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N0u-lI-g44"/>
-        <segue reference="DWb-jW-mwr"/>
+        <segue reference="dAj-Ue-6qY"/>
+        <segue reference="HIh-gZ-7Pb"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

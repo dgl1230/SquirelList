@@ -8,10 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -33,11 +30,16 @@ class LoginViewController: UIViewController {
         if error != "" {
             displayErrorAlert("Whoops! We had a problem", message: error)
         } else {
-            displayLoadingAnimator()
+            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+            let viewsArray = displayLoadingAnimator(self.view)
+            let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+            let container = viewsArray[1] as! UIView
+            let loadingView = viewsArray[2] as! UIView
             PFUser.logInWithUsernameInBackground(username, password:passwordTextField.text) {
                 (user: PFUser?, signupError: NSError?) -> Void in
-                    self.resumeInteractionEvents()
                     if signupError ==  nil {
+                        //Global function that stops the loading animation and dismisses the views it is attached to
+                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
                         if PFUser.currentUser()!["currentGroup"] == nil {
                             //Then they need to be directed just to the more tab
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -49,8 +51,6 @@ class LoginViewController: UIViewController {
                             navigationController.navigationBar.barTintColor = blue
                             appDelegate.window!.rootViewController = navigationController
                             appDelegate.window!.makeKeyAndVisible()
-                            //Make keyboard disappear
-                            self.view.endEditing(true)
                         } else {
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                             //Present the tab bar with all the tabs
@@ -80,36 +80,12 @@ class LoginViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
-    /*
-    What this does: Creates a loading spinner in the center of the view that disables all Interaction events. To enable
-    interaction events, the function resumeInteractionEvents() musts be called
-    */
-    
-    func displayLoadingAnimator() {
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if sender?.identifier == "register" {
             let controller = segue.destinationViewController as! RegisterViewController
         }
-    }
-    
-    
-    /*
-    What this does: Stops animating the activity indicator of self and calls endsIgnoringInteractionEvents()
-    */
-    
-    func resumeInteractionEvents() {
-        self.activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
     }
     
     override func viewDidLoad() {
@@ -120,6 +96,15 @@ class LoginViewController: UIViewController {
         //Set the login button to have rounded edges
         loginButton.layer.cornerRadius = 5
         loginButton.layer.masksToBounds = true
+        //So we can dismiss the kayboards after pressing "done"
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    //For dismissing the keyboard after pressing "done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
    
 

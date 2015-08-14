@@ -8,10 +8,8 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UITextFieldDelegate {
 
-    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-    
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -54,9 +52,9 @@ class RegisterViewController: UIViewController {
         } else if count(username) <= 2 {
             title = "That username is too short!"
             error = "Please have it be at least three characters"
-        } else if count(username) >= 10 {
+        } else if count(username) >= 15 {
             title = "That username is too long"
-            error = "Please have it be no greater than 10 characters"
+            error = "Please have it be no greater than 15 characters"
         } else if count(passwordTextField.text) <= 6 {
             title = "Whoa there cowboy!"
             error = "Your password needs to be at least 6 characters"
@@ -97,47 +95,52 @@ class RegisterViewController: UIViewController {
             userFriendsData["friends"] = []
             userFriendsData["pendingInviters"] = []
             userFriendsData["pendingInvitees"] = []
+            userFriendsData["friendAdded"] = false
             userFriendsData["lowerUsername"] = usernameTextField.text.lowercaseString
             user["friendData"] = userFriendsData
             //Give user a fake, unique email address to fill space until they change it in their settings
             let randomNumer = Int(arc4random_uniform(1000))
             let emailName = "\(username)\(randomNumer)"
             user.email = "\(emailName)@squirrellist.com"
-    
-            displayLoadingAnimator()
+            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+            let viewsArray = displayLoadingAnimator(self.view)
+            let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+            let container = viewsArray[1] as! UIView
+            let loadingView = viewsArray[2] as! UIView
     
             user.signUpInBackgroundWithBlock {
                 (succeeded: Bool, signupError: NSError?) -> Void in
-                    self.resumeInteractionEvents()
+                    //Function found in GlobalFunctions file - suspends loading animation
+                    //resumeInteractionEvents(self.activityIndicatorView!)
             
-                if signupError == nil {
-                    //For push notifications/chat real time might cause an error right now. Not sure if user is already logged in at this point
-                    let installation = PFInstallation.currentInstallation()
-                    installation["username"] = PFUser.currentUser()!.username
-                    installation.saveInBackgroundWithBlock(nil)
-                    //We only want to save the UserFriendsData instance if the user successfully registered
-                    userFriendsData.save()
+                    if signupError == nil {
+                        //For push notifications/chat real time might cause an error right now. Not sure if user is already logged in at this point
+                        let installation = PFInstallation.currentInstallation()
+                        installation["username"] = PFUser.currentUser()!.username
+                        installation.saveInBackgroundWithBlock(nil)
+                        //We only want to save the UserFriendsData instance if the user successfully registered
+                        userFriendsData.save()
                     
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
-                    let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
-                    moreController.isNewUser = true
-                    let navigationController = UINavigationController(rootViewController: moreController)
-                    let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
-                    navigationController.navigationBar.barTintColor = blue
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
+                        let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
+                        moreController.isNewUser = true
+                        let navigationController = UINavigationController(rootViewController: moreController)
+                        let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
+                        navigationController.navigationBar.barTintColor = blue
                     
-                    appDelegate.window!.rootViewController = navigationController
-                    appDelegate.window!.makeKeyAndVisible()
-                    //Make keyboard disappear
-                    self.view.endEditing(true)
-                } else {
-                    if let errorString = signupError!.userInfo?["error"] as? String {
-                        error = errorString
+                        appDelegate.window!.rootViewController = navigationController
+                        appDelegate.window!.makeKeyAndVisible()
                     } else {
-                        error = "There was a random bug :( Please try again"
+                        if let errorString = signupError!.userInfo?["error"] as? String {
+                            error = errorString
+                        } else {
+                            error = "There was a random bug :( Please try again"
+                        }
+                        self.displayErrorAlert("Whoops! We had an error", message: error)
                     }
-                    self.displayErrorAlert("Whoops! We had an error", message: error)
-                }
+                //Global function that stops the loading animation and dismisses the views it is attached to
+                resumeInteractionEvents(activityIndicatorView, container, loadingView)
             }
         }
     }
@@ -154,20 +157,6 @@ class RegisterViewController: UIViewController {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    /*
-    What this does: Creates a loading spinner in the center of the view that disables all Interaction events. To enable
-    interaction events, the function resumeInteractionEvents() musts be called
-    */
-    
-    func displayLoadingAnimator() {
-        activityIndicator = UIActivityIndicatorView(frame: CGRectMake(0, 0, 50, 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "privacyPolicy" {
@@ -179,16 +168,6 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    
-    /*
-    What this does: Stops animating the activity indicator of self and calls endsIgnoringInteractionEvents()
-    */
-    
-    func resumeInteractionEvents() {
-        self.activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set the close button icon to 'fa-times'
@@ -197,8 +176,21 @@ class RegisterViewController: UIViewController {
         //Set the register button to have rounded edges
         registerButton.layer.cornerRadius = 5
         registerButton.layer.masksToBounds = true
-
+        //So we can dismiss the keyboards by pressing "done"
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        verifyPasswordTextField.delegate = self
     }
+    
+    
+    //For dismissing the keyboard after pressing "done"
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    
+    
 
 
 
