@@ -82,7 +82,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
         let push = PFPush()
         push.setQuery(pushQuery)
         let groupName = group!["name"] as? String
-        let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)!"
+        let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)"
         let inviteMessage = message as NSString
         let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
         push.setData(pushDict)

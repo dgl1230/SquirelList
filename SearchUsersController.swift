@@ -96,7 +96,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         pushQuery!.whereKey("username", equalTo: nonLoweredUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
-        let message = "\(PFUser.currentUser()!.username!) wants to be friends!"
+        let message = "\(PFUser.currentUser()!.username!) wants to be friends"
         let inviteMessage = message as NSString
         let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
         push.setData(pushDict)

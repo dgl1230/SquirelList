@@ -166,7 +166,7 @@ class TradeOfferViewController: PopUpViewController {
         pushQuery!.whereKey("username", equalTo: offeringUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
-        let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)!"
+        let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
         let inviteMessage = message as NSString
         let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
         push.setData(pushDict)

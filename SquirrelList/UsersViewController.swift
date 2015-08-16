@@ -79,7 +79,7 @@ class UsersViewController: PFQueryTableViewController {
         }
         if segue.identifier == "SingleUserSquirrels" {
             let controller = segue.destinationViewController as! SquirrelViewController
-            controller.selectedUser = sender as? PFUser
+            controller.selectedUser = sender as! PFUser
         }
         if segue.identifier == "NewUserScreens" {
             let controller = segue.destinationViewController as! TutorialViewController
@@ -185,6 +185,7 @@ class UsersViewController: PFQueryTableViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
         //Check to see if this is a lucky day for the user
+        //"lucky" is only appended to this array if the user is visiting groups daily
         if contains(alerts, "lucky") == true {
             var message = "It's your lucky day! Here's 100 acorns!"
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)

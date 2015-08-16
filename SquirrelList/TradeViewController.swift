@@ -133,7 +133,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 pushQuery!.whereKey("username", equalTo: self.desiredSquirrelOwner!.username!)
                 let push = PFPush()
                 push.setQuery(pushQuery)
-                let proposal = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)!"
+                let proposal = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)"
                 let inviteMessage = proposal as NSString
                 let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
                 push.setData(pushDict)

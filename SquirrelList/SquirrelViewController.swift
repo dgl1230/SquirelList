@@ -183,9 +183,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         if (self.selectedUser != nil) {
             //We need to calculate the team rating
             var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
-            if teamRating == 999 && selectedUser != PFUser.currentUser()! {
-                teamRatingLabel.text = ""
-            } else {
+            //If rating is 999.0, then no one has rated their team
+            if teamRating == 999.0 && selectedUser!.objectId == PFUser.currentUser()!.objectId {
+                teamRatingLabel.text = "No one has rated your team"
+            } else if teamRating == 999.0 {
+                teamRatingLabel.text = "No one has rated their team"
+            }else {
                 teamRatingLabel.text = "Team Rating: \(teamRating)"
             }
         }
@@ -226,7 +229,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     */
     
     func reloadWithNewGroupTest() {
-        self.viewDidLoad()
+        println("RELOADING WITH NEW GROUP TEST")
+        shouldReLoad == true
     }
     
     
@@ -440,17 +444,41 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         return [deleteButton]
     }
     
+    //Updates the user's squirrel slots for when a new user (or users) have joined the group
+    func updateSquirrelSlots() {
+        let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+        let numOfUsers = (currentGroup["users"] as! [String]).count
+        let oldNumOfUsers = individualGroupData!["numOfGroupUsers"] as! Int
+        //Then new users have joined the group
+        let numOFNewUsers = numOfUsers - oldNumOfUsers
+        var squirrelSlots = individualGroupData!["squirrelSlots"] as! Int
+        squirrelSlots += numOFNewUsers
+        //Show popup
+        var message = ""
+        if numOFNewUsers == 1 {
+            message = "One new user has joined, so enjoy one more Squirrel Slot!"
+        } else {
+            message = "\(numOFNewUsers) have joined, so enjoy \(numOFNewUsers) squirrel slots!"
+        }
+        var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+            self.individualGroupData!["numOfGroupUsers"] = numOfUsers
+            self.individualGroupData!["squirrelSlots"] = squirrelSlots
+            self.individualGroupData!.save()
+        }))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if selectedUser == nil {
-            viewDidLoad()
-        }
+        self.viewDidLoad()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("LOADING A SQUIRREL VIEW")
         //Check to see if we need to show a new user tutorial screens first
         if currentlyTrading == true {
             //We don't need to load or calculate anything else if we're just displaying the user's squirrels to offer for a trade
@@ -466,7 +494,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         }
         
         let name = selectedUser?["name"] as? String
-        if selectedUser == nil && currentlyTrading == nil{
+        if selectedUser == nil && currentlyTrading == nil {
+            println("LOADING MAIN SQUIRREL TAB")
             //We are in the main Squirrels tab
             //Set the addSquirrelButton to 'fa-plus-circle'
             addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
@@ -482,10 +511,17 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             //Set the number of rerates 
             let userAcorns = individualGroupData!["acorns"] as! Int
             acornsLabel?.text = "\(userAcorns)"
-            //Set the number of squirrel slots to display
-            squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
+            
             var groupUsers = PFUser.currentUser()!["currentGroup"]!["users"] as? [String]
             var numOfUsers = groupUsers!.count
+            
+            let oldNumOfUsers = individualGroupData!["numOfGroupUsers"] as! Int
+            if numOfUsers > oldNumOfUsers {
+                updateSquirrelSlots()
+            }
+            
+            //Set the number of squirrel slots to display
+            squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
             
             if squirrelSlots == 0 {
                 squirrelSlotsLabel!.text = "Squirrel Slots: 0"
@@ -499,12 +535,16 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 addSquirrelButton!.enabled = true
             }
             
-        } else if selectedUser!.username == PFUser.currentUser()!.username {
+        }
+        else if selectedUser!.username == PFUser.currentUser()!.username {
+            println("The SELECTED USER IS THE LOGGED IN USER")
             self.title = "My Squirrels"
         } else if name != nil {
+            println("SELECTED USER IS NOT LOGGED IN USER")
             self.title = "\(name!)'s Squirrels"
         } else {
-            self.title = "\(selectedUser!.username!)'s Squirrels"
+            println("SELECTED USER IS NOT LOGGED IN USER")
+            self.teamRatingLabel.text = "\(selectedUser!.username!)'s Squirrels"
         }
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
 

@@ -17,8 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
 
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
-
-
         
         //For now we rest their badge numbers anytime the app launches 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
@@ -59,8 +57,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        //Alert the user when a new message has been sent 
-        NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
+        let aps = userInfo["aps"] as? NSDictionary
+        let alert = aps!["alert"] as? NSString
+        let message = alert as! String
+        
+        if message == "" {
+            //Its a group message and it should be silent, but we should reload do send a NSNotification to update messages for live chat
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
+        } else {
+            // We display an alert in Banner format
+            var title = ""
+            //Need to figure out the appropriate title to display
+            if message.rangeOfString("wants to be friends!", options: nil, range: nil, locale: nil) != nil {
+                title = "Friend Request"
+            } else if message.rangeOfString("has invited you to join", options: nil, range: nil, locale: nil) != nil {
+                title = "Group Invitation"
+            } else if message.rangeOfString("has accepted your invitation", options: nil, range: nil, locale: nil) != nil {
+                //We don't need to display a title for this
+            } else if message.rangeOfString("has accepted your friend request", options: nil, range: nil, locale: nil) != nil {
+                //We don't need to display a title for this
+            } else if message.rangeOfString("has accepted your offer", options: nil, range: nil, locale: nil) != nil {
+                title = "Trade Completed"
+            } else if message.rangeOfString("has proposed a trade", options: nil, range: nil, locale: nil) != nil {
+                title = "Trade Offer"
+            }
+            let banner = Banner(title: title, subtitle: message , backgroundColor: UIColor.orangeColor())
+            banner.dismissesOnTap = true
+            banner.show(duration: 5.0)
+        }
+        
+
         
     }
     

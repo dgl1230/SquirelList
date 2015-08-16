@@ -92,6 +92,7 @@
 		18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D81B1D47B40019B2C3 /* HomeViewController.swift */; };
 		18A568E01B2133C20019B2C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */; };
 		18A6577C1B7C1DBD000EFD7B /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */; };
+		18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6577D1B7E8103000EFD7B /* Banner.swift */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
@@ -283,6 +284,7 @@
 		18A568DC1B20E9140019B2C3 /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
+		18A6577D1B7E8103000EFD7B /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Banner.swift; path = ../Banner.swift; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeCurrentGroupViewController.swift; path = SquirrelList/ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = SquirrelList/CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -537,6 +539,7 @@
 			children = (
 				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
+				18A6577D1B7E8103000EFD7B /* Banner.swift */,
 				18C57B511B237B460068B726 /* ChangeInfoController.swift */,
 				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
@@ -837,6 +840,7 @@
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
 				18DE63A81B7954DC005EB7C0 /* FlagContentController.swift in Sources */,
+				18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */,
 				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,
 				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				184841961AE976C100F23551 /* JSQMessagesLabel.m in Sources */,

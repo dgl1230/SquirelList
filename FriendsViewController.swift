@@ -65,7 +65,7 @@ class FriendsViewController: UITableViewController {
             pushQuery!.whereKey("username", equalTo: username)
             let push = PFPush()
             push.setQuery(pushQuery)
-            let message = "\(PFUser.currentUser()!.username!) has accepted your friend request!"
+            let message = "\(PFUser.currentUser()!.username!) has accepted your friend request"
             let inviteMessage = message as NSString
             let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
             push.setData(pushDict)
@@ -83,6 +83,7 @@ class FriendsViewController: UITableViewController {
             users = groupUsers + pendingUsers
             
         } else {
+            //User is trying to invite them be to friends
             users = friends
         }
         if contains(users, username) {

@@ -16,6 +16,7 @@ import Foundation
     interaction events, the function resumeInteractionEvents() musts be called. We return the NVActivityIndicator so that we can pass it into resumeInteractionEvents() to stop it
     */
     func displayLoadingAnimator(uiView: UIView) -> [AnyObject] {
+        println("STARTING ANIMATION")
         //Make keyboard disappear
         uiView.endEditing(true)
         //We create a container the same size as self.view so that we can make the background whiter and more transparent
@@ -44,6 +45,7 @@ import Foundation
         activityIndicatorView.startAnimation()
         //uiView.bringSubviewToFront(activityIndicatorView)
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        println("ENDING START ANIMATION")
         return [activityIndicatorView, container, loadingView]
         
     }
@@ -52,9 +54,11 @@ import Foundation
     What this does: Stops animating the activity indicator of self and calls endsIgnoringInteractionEvents()
     */
     func resumeInteractionEvents(activityIndicatorView: NVActivityIndicatorView, container: UIView, loadingView: UIView) {
+        println("STARTING REUME EVENT")
         activityIndicatorView.stopAnimation()
         loadingView.removeFromSuperview()
         container.removeFromSuperview()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        println("ENDING RESUME EVENTS")
     }
 

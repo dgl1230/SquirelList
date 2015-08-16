@@ -14,6 +14,11 @@ protocol SquirrelDetailViewControllerDelegate: class {
 }
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    var activityIndicatorView: NVActivityIndicatorView?
+    var container: UIView?
+    var loadingView: UIView?
+    var thread: NSThread?
 
     //Bool that determines if the logged in user has room to pick up another squirrel
     var canClaimSquirrel: Bool?
@@ -44,19 +49,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var squirrelPic: UIImageView?
     
+    func test() {
+        println("starting test")
 
-
-    
-    @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
-        if claimOrTradeOrPicture == "claim" {
-            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-            let viewsArray = displayLoadingAnimator(self.view)
-            let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
-            let container = viewsArray[1] as! UIView
-            let loadingView = viewsArray[2] as! UIView
-            
-            
-            ratedSquirrel!["owner"] = PFUser.currentUser()!
+        ratedSquirrel!["owner"] = PFUser.currentUser()!
             ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
             if didRateSquirrel == true {
                 var ratings = removeRating(ratedSquirrel!)
@@ -72,9 +68,39 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!.save()
             //Alert SquirrelViewController to reload data
             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+            //Reload main squirrel view
+            delegate?.squirrelDetailViewController(self, usedRerate: false)
             //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView, container, loadingView)
+            resumeInteractionEvents(activityIndicatorView!, container!, loadingView!)
+
+
             self.dismissViewControllerAnimated(true, completion: nil)
+            println("ending test")
+
+
+    }
+    
+
+
+    
+    @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
+        if claimOrTradeOrPicture == "claim" {
+            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+            let viewsArray = displayLoadingAnimator(self.view)
+            activityIndicatorView = viewsArray[0] as? NVActivityIndicatorView
+            container = viewsArray[1] as? UIView
+            loadingView = viewsArray[2] as? UIView
+            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+            dispatch_async(queue) {
+                println("starting dispatch")
+                self.test()
+                println("ending dispatch")
+            }
+           
+
+            
+            
+            
             
         } else if claimOrTradeOrPicture == "trade" {
             self.performSegueWithIdentifier("tradeSquirrel", sender: self)
