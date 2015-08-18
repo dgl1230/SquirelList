@@ -15,10 +15,6 @@ protocol SquirrelDetailViewControllerDelegate: class {
 
 class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var activityIndicatorView: NVActivityIndicatorView?
-    var container: UIView?
-    var loadingView: UIView?
-    var thread: NSThread?
 
     //Bool that determines if the logged in user has room to pick up another squirrel
     var canClaimSquirrel: Bool?
@@ -49,59 +45,14 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     @IBOutlet weak var squirrelPic: UIImageView?
     
-    func test() {
-        println("starting test")
-
-        ratedSquirrel!["owner"] = PFUser.currentUser()!
-            ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
-            if didRateSquirrel == true {
-                var ratings = removeRating(ratedSquirrel!)
-                ratedSquirrel!["avg_rating"] = calculateAverageRating(ratings)
-                ratedSquirrel!["ratings"] = ratings
-                ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
-            }
-            let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-            var squirrelSlots = userGroupData["squirrelSlots"] as! Int
-            squirrelSlots -= 1
-            userGroupData["squirrelSlots"] = squirrelSlots
-            userGroupData.save()
-            ratedSquirrel!.save()
-            //Alert SquirrelViewController to reload data
-            NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-            //Reload main squirrel view
-            delegate?.squirrelDetailViewController(self, usedRerate: false)
-            //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView!, container!, loadingView!)
-
-
-            self.dismissViewControllerAnimated(true, completion: nil)
-            println("ending test")
-
-
-    }
     
-
 
     
     @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
         if claimOrTradeOrPicture == "claim" {
-            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-            let viewsArray = displayLoadingAnimator(self.view)
-            activityIndicatorView = viewsArray[0] as? NVActivityIndicatorView
-            container = viewsArray[1] as? UIView
-            loadingView = viewsArray[2] as? UIView
             let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-            dispatch_async(queue) {
-                println("starting dispatch")
-                self.test()
-                println("ending dispatch")
-            }
-           
-
-            
-            
-            
-            
+            self.claimSquirrel()
+            self.dismissViewControllerAnimated(true, completion: nil)
         } else if claimOrTradeOrPicture == "trade" {
             self.performSegueWithIdentifier("tradeSquirrel", sender: self)
         } else if claimOrTradeOrPicture == "uploadPicture" {
@@ -194,6 +145,29 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             return false
         }
         return true
+    }
+    
+    
+    //Assumes that user has already been given permission to claim it  - updates the Squirrel and the logged in user's info to reflect claiming of said squirrel. Assumes that there is a loading animation occuring and that we should stop it after everything has been saved.
+    func claimSquirrel() {
+        ratedSquirrel!["owner"] = PFUser.currentUser()!
+        ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
+        if didRateSquirrel == true {
+            var ratings = removeRating(ratedSquirrel!)
+            ratedSquirrel!["avg_rating"] = calculateAverageRating(ratings)
+            ratedSquirrel!["ratings"] = ratings
+            ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
+        }
+        let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+        var squirrelSlots = userGroupData["squirrelSlots"] as! Int
+        squirrelSlots -= 1
+        userGroupData["squirrelSlots"] = squirrelSlots
+        userGroupData.save()
+        ratedSquirrel!.save()
+        //Alert SquirrelViewController to reload data
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        //Reload main squirrel view
+        delegate?.squirrelDetailViewController(self, usedRerate: false)
     }
     
     

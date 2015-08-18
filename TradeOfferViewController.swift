@@ -16,6 +16,11 @@ protocol TradeOfferViewControllerDelegate: class {
 
 class TradeOfferViewController: PopUpViewController {
 
+    //Optional for holding the user's currentGroupData
+    var currentGroupData: PFObject?
+    //Optional for holding the offering users currentGroupData - only used if they offered acorns
+    var  offeringUserGroupData: PFObject?
+
     var delegate: TradeOfferViewControllerDelegate?
     var offeredSquirrel: PFObject?
     var tradeProposal: PFObject?
@@ -34,37 +39,17 @@ class TradeOfferViewController: PopUpViewController {
         let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
         
         if tradeProposal!["offeredAcorns"] != nil {
-            /*
-            let currentGroupdata  = PFUser.currentUser()!["currentGroupData"] as! PFObject
-            currentGroupdata.fetch()
-            var acorns = currentGroupdata["acorns"] as! Int
-            let offeredAcorns = tradeProposal!["offeredAcorns"] as! Int
-            acorns += offeredAcorns
-            currentGroupdata["acorns"] = acorns
-            currentGroupdata.save()
-            //We need to subtract the offered amount of acorns from the proposer of the trade
-            let offeringUserGroupDataQuery = PFQuery(className: "UserGroupData")
-            offeringUserGroupDataQuery.whereKey("user", equalTo: tradeProposal!["offeringUser"] as! PFObject)
-            offeringUserGroupDataQuery.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"] as! PFObject)
-            let offeringUserGroupData = offeringUserGroupDataQuery.getFirstObject()
-            var proposerAcorns = offeringUserGroupData!["acorns"] as! Int
-            proposerAcorns -= offeredAcorns
-            offeringUserGroupData!["acorns"] = proposerAcorns
-            offeringUserGroupData!.save()
-            */
-            let currentGroupdata  = PFUser.currentUser()!["currentGroupData"] as! PFObject
-            currentGroupdata.fetch()
+            currentGroupData  = PFUser.currentUser()!["currentGroupData"] as? PFObject
+            currentGroupData!.fetch()
             
             //We need to subtract the offered amount of acorns from the proposer of the trade
             let offeringUserGroupDataQuery = PFQuery(className: "UserGroupData")
             offeringUserGroupDataQuery.whereKey("user", equalTo: tradeProposal!["offeringUser"] as! PFObject)
             offeringUserGroupDataQuery.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"] as! PFObject)
-            let offeringUserGroupData = offeringUserGroupDataQuery.getFirstObject()
+            offeringUserGroupData = offeringUserGroupDataQuery.getFirstObject()
             var proposerAcorns = offeringUserGroupData!["acorns"] as! Int
             let offeredAcorns = tradeProposal!["offeredAcorns"] as! Int
-            println("proposerAcorns is \(proposerAcorns)")
             let offeredSquirrelID = tradeProposal!["offeredSquirrelID"] as? String
-            println("offeredSquirrelID is \(offeredSquirrelID)")
             //We need to run a lot of checks to see if the user still has enough acorns that they offered for the trade
             if proposerAcorns == 0 && offeredSquirrelID == nil {
                 //Then the offerer has no acorns and didn't propose a squirrel, so we have to tel the user that the trade is off
@@ -95,11 +80,7 @@ class TradeOfferViewController: PopUpViewController {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
-                    self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
-                    self.swapSquirrelOwners()
-                    self.deleteOtherSquirrelOffers()
+                    self.finishTrade()
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }))
@@ -126,18 +107,21 @@ class TradeOfferViewController: PopUpViewController {
                     self.tradeProposal!.delete()
                     //Reloading
                     self.delegate?.tradeOfferViewController(self)
-                    var userAcorns = currentGroupdata["acorns"] as! Int
+                    var userAcorns = self.currentGroupData!["acorns"] as! Int
                     userAcorns += proposerAcorns
-                    currentGroupdata["acorns"] = userAcorns
-                    currentGroupdata.save()
-                    offeringUserGroupData!["acorns"] = 0
-                    offeringUserGroupData!.save()
-                    if offeredSquirrelID != nil {
-                        self.swapSquirrelOwners()
-                    }
-                    self.deleteOtherSquirrelOffers()
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.currentGroupData!["acorns"] = userAcorns
+                    self.currentGroupData!.saveInBackgroundWithBlock({ (didSave: Bool, error: NSError?) -> Void in
+                        if error == nil {
+                            self.offeringUserGroupData!["acorns"] = 0
+                            self.finishTrade()
+                            alert.dismissViewControllerAnimated(true, completion: nil)
+                            self.dismissViewControllerAnimated(true, completion: nil)
+                        } else {
+                            //There was an error and we should alert them using the global function
+                            displayAlert(self, "Oops", "There's been a problem. Would you mind trying again?")
+                        }
+                    })
+                    
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -145,48 +129,24 @@ class TradeOfferViewController: PopUpViewController {
             } else {
                 //The user has enough acorns for the trade
                 proposerAcorns -= offeredAcorns
-                var userAcorns = currentGroupdata["acorns"] as! Int
+                var userAcorns = currentGroupData!["acorns"] as! Int
            
                 userAcorns += offeredAcorns
-                currentGroupdata["acorns"] = userAcorns
-                currentGroupdata.save()
+                currentGroupData!["acorns"] = userAcorns
                 offeringUserGroupData!["acorns"] = proposerAcorns
-                offeringUserGroupData!.save()
             }
         
         }
         ///End of acorn checks
         
-        if tradeProposal!["offeredSquirrelID"] != nil {
-            swapSquirrelOwners()
-        }
-        
-        //Alert the offering user that their proposal has been accepted
-        let pushQuery = PFInstallation.query()
-        pushQuery!.whereKey("username", equalTo: offeringUsername)
-        let push = PFPush()
-        push.setQuery(pushQuery)
-        let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
-        let inviteMessage = message as NSString
-        let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-        push.setData(pushDict)
-        push.sendPushInBackgroundWithBlock(nil)
-        
-        
-        tradeProposal!.delete()
-        
-        deleteOtherSquirrelOffers()
-    
-        dismissViewControllerAnimated(true, completion: nil)
-        //Reloading
-        delegate?.tradeOfferViewController(self)
+        finishTrade()
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     @IBAction func declineTrade(sender: AnyObject) {
         tradeProposal!.deleteInBackground()
         dismissViewControllerAnimated(true, completion: nil)
-        delegate?.tradeOfferViewController(self)
     }
     
     func calculateAverageRating(ratings:[String]) -> Double {
@@ -203,6 +163,7 @@ class TradeOfferViewController: PopUpViewController {
         var unroundedRating = Double(sum)/Double(numOfRatings)
         return round((10 * unroundedRating)) / 10
     }
+    
     
     //Deletes all other proposals where the desired squirrel is your squirrel (since owners have changed) and potentially deleted trades where offered squirrel (if there is one) is offered (since that squirrels owners have also changed)
     func deleteOtherSquirrelOffers() {
@@ -231,8 +192,43 @@ class TradeOfferViewController: PopUpViewController {
         }
     }
     
+    //Finishes the trade
+    func finishTrade() {
+        let offeringUsername = tradeProposal!["offeringUsername"] as! String
+        let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
+        currentGroupData!.saveInBackgroundWithBlock { (didSave: Bool, error: NSError?) -> Void in
+            if error == nil {
+                if self.tradeProposal!["offeredSquirrelID"] != nil {
+                    self.swapSquirrelOwners()
+                }
+                self.offeringUserGroupData?.save()
+                //Reload the updated trades
+                self.delegate?.tradeOfferViewController(self)
+                self.yourSquirrel?.save()
+                self.offeredSquirrel?.save()
+                //Alert the offering user that their proposal has been accepted
+                let pushQuery = PFInstallation.query()
+                pushQuery!.whereKey("username", equalTo: offeringUsername)
+                let push = PFPush()
+                push.setQuery(pushQuery)
+                let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
+                let inviteMessage = message as NSString
+                let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
+                push.setData(pushDict)
+                push.sendPushInBackgroundWithBlock(nil)
+                
+                self.tradeProposal!.delete()
+                self.deleteOtherSquirrelOffers()
+                
+            } else {
+                ///There was an error and we should alert the user using the global alert function
+                displayAlert(self, "Oops", "There's been an error. Would you mind trying again?")
+            }
+        }
+    }
     
-     //Removes the user's rating from the squirrel's "ratings" field and returns the new array 
+    
+     //Removes the user's rating from the squirrel's "ratings" field and returns the new array
     func removeRating(squirrel: PFObject, user: String) -> [String] {
         var index = find(squirrel["raters"] as! [String], user)
         var ratings = squirrel["ratings"] as! [String]

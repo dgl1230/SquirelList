@@ -19,6 +19,12 @@ import UIKit
 }
 
 class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControllerDelegate, SquirrelDetailViewControllerDelegate {
+
+    deinit {
+        //We remove the observer for reloading the controller
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadSquirrels, object: nil)
+
+    }
     
     //Optional value for determing if we're viewing someone else's squirrels, who's squirrels they are
     var selectedUser: PFUser?
@@ -30,6 +36,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     var squirrelSlots: Int?
     //Variable for storing an individualGroupData instance - holds acorn info, last group visit, and other gamification factors
     var individualGroupData: PFObject?
+    //Variable for storing the logged in user's current group
+    var currentGroup: PFObject?
     
     weak var delegate: SquirrelViewControllerDelegate?
     
@@ -207,10 +215,10 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        let group = PFUser.currentUser()!["currentGroup"] as! PFObject
-        group.fetch()
+        currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        currentGroup!.fetch()
         var query = PFQuery(className: "Squirrel")
-        query.whereKey("objectId", containedIn: group["squirrels"] as! [String])
+        query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!)
         } else if selectedUser != nil {
@@ -288,12 +296,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
-               
-                    //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-                    let viewsArray = displayLoadingAnimator(self.view)
-                    let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
-                    let container = viewsArray[1] as! UIView
-                    let loadingView = viewsArray[2] as! UIView
+            
                     let squirrel = self.objects![indexPath.row] as! PFObject
                     squirrel.removeObjectForKey("owner")
                     squirrel.removeObjectForKey("ownerUsername")
@@ -326,8 +329,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                             }
                             
                         }
-                    //Global function that stops the loading animation and dismisses the views it is attached to
-                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
                     }
                     
                     
@@ -451,8 +452,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         let oldNumOfUsers = individualGroupData!["numOfGroupUsers"] as! Int
         //Then new users have joined the group
         let numOFNewUsers = numOfUsers - oldNumOfUsers
-        var squirrelSlots = individualGroupData!["squirrelSlots"] as! Int
-        squirrelSlots += numOFNewUsers
+        squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
+        squirrelSlots! += numOFNewUsers
         //Show popup
         var message = ""
         if numOFNewUsers == 1 {
@@ -463,7 +464,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
             self.individualGroupData!["numOfGroupUsers"] = numOfUsers
-            self.individualGroupData!["squirrelSlots"] = squirrelSlots
+            self.individualGroupData!["squirrelSlots"] = self.squirrelSlots!
+            self.squirrelSlotsLabel!.text = "Squirrel Slots: \(self.squirrelSlots!)"
             self.individualGroupData!.save()
         }))
         self.presentViewController(alert, animated: true, completion: nil)
@@ -478,7 +480,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("LOADING A SQUIRREL VIEW")
         //Check to see if we need to show a new user tutorial screens first
         if currentlyTrading == true {
             //We don't need to load or calculate anything else if we're just displaying the user's squirrels to offer for a trade
@@ -495,7 +496,6 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
         
         let name = selectedUser?["name"] as? String
         if selectedUser == nil && currentlyTrading == nil {
-            println("LOADING MAIN SQUIRREL TAB")
             //We are in the main Squirrels tab
             //Set the addSquirrelButton to 'fa-plus-circle'
             addSquirrelButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
@@ -512,14 +512,12 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let userAcorns = individualGroupData!["acorns"] as! Int
             acornsLabel?.text = "\(userAcorns)"
             
-            var groupUsers = PFUser.currentUser()!["currentGroup"]!["users"] as? [String]
+            var groupUsers = currentGroup!["users"] as? [String]
             var numOfUsers = groupUsers!.count
             
-            let oldNumOfUsers = individualGroupData!["numOfGroupUsers"] as! Int
-            if numOfUsers > oldNumOfUsers {
-                updateSquirrelSlots()
-            }
             
+            let oldNumOfUsers = individualGroupData!["numOfGroupUsers"] as! Int
+
             //Set the number of squirrel slots to display
             squirrelSlots = individualGroupData!["squirrelSlots"] as? Int
             
@@ -535,23 +533,23 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 addSquirrelButton!.enabled = true
             }
             
+            //See if new users have been added to the group, and if they have been, update their squirrel slots and alert them
+            if numOfUsers > oldNumOfUsers {
+                updateSquirrelSlots()
+            }
+            
         }
         else if selectedUser!.username == PFUser.currentUser()!.username {
-            println("The SELECTED USER IS THE LOGGED IN USER")
             self.title = "My Squirrels"
         } else if name != nil {
-            println("SELECTED USER IS NOT LOGGED IN USER")
             self.title = "\(name!)'s Squirrels"
         } else {
-            println("SELECTED USER IS NOT LOGGED IN USER")
             self.teamRatingLabel.text = "\(selectedUser!.username!)'s Squirrels"
         }
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
 
         //Set notification to "listen" for when the the user has picked up a squirrel or dropped one of theirs
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroupTest", name: reloadSquirrels, object: nil)
-        //Set notification to "listen" for when the the user has dropped a squirrel
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: droppedSquirrel, object: nil)
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem

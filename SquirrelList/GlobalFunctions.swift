@@ -11,12 +11,21 @@ import Foundation
 //For using various functions across different classes. Perhaps a bit insecure and should be made into extensions, but still better than lots of redundant code
 
 
+    /* Parameters: error, which is the error that the user should see in the UIAlertController
+    What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
+    */
+    func displayAlert(controller: UIViewController, title: String, message: String) {
+        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        controller.presentViewController(alert, animated: true, completion: nil)
+    }
+
+
     /*
     What this does: Creates a loading spinner in the center of the view that disables all Interaction events. To enable
     interaction events, the function resumeInteractionEvents() musts be called. We return the NVActivityIndicator so that we can pass it into resumeInteractionEvents() to stop it
     */
     func displayLoadingAnimator(uiView: UIView) -> [AnyObject] {
-        println("STARTING ANIMATION")
         //Make keyboard disappear
         uiView.endEditing(true)
         //We create a container the same size as self.view so that we can make the background whiter and more transparent
@@ -45,20 +54,35 @@ import Foundation
         activityIndicatorView.startAnimation()
         //uiView.bringSubviewToFront(activityIndicatorView)
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
-        println("ENDING START ANIMATION")
         return [activityIndicatorView, container, loadingView]
-        
     }
 
     /*
     What this does: Stops animating the activity indicator of self and calls endsIgnoringInteractionEvents()
     */
     func resumeInteractionEvents(activityIndicatorView: NVActivityIndicatorView, container: UIView, loadingView: UIView) {
-        println("STARTING REUME EVENT")
         activityIndicatorView.stopAnimation()
         loadingView.removeFromSuperview()
         container.removeFromSuperview()
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
-        println("ENDING RESUME EVENTS")
+    }
+
+    //PARSE FUNCTIONS
+
+    /*
+    func getAcons(group: PFObject) -> String {
+        let acorns = group["acorns"] as! String
+        let index = contains(acorns, PFUser.currentUser()!.username!)
+        let userString = acorns[index!]
+        let colonIndex = contains(userString, ":")
+        let
+        
+        
+        return "hi"
+    }
+    */
+
+    func updateAcorns(acornsToAdd: Int) {
+        
     }
 

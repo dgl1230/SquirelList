@@ -20,7 +20,6 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-
         var group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
@@ -40,26 +39,32 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         userGroupData["cumulativeDaysVisited"] = 1
         userGroupData["groupName"] = groupNameTextField.text as NSString
         userGroupData.save()
-
-
-        if PFUser.currentUser()!["currentGroup"] == nil {
-            //The user can now access all tabs, since they now have a current group
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window!.rootViewController = HomeTabViewController()
-            appDelegate.window!.makeKeyAndVisible()
-        }
-        
+        let currentUserGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
         PFUser.currentUser()!["currentGroupData"] = userGroupData
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
-        
- 
-        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all need to be reloaded when their views appear 
-            NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
 
-        self.navigationController?.popViewControllerAnimated(true)    
+        //UsersViewController, SquirrelViewController, ChatDetailViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all need to be reloaded when their views appear 
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: self)
+
+
+        if currentUserGroup == nil {
+            //The user can now access all tabs, since they now have a current group
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window!.rootViewController = HomeTabViewController()
+            appDelegate.window!.makeKeyAndVisible()
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+
     }
+    
+    //Finishes the process of creating the group for the user. We assumes the user has already been given permission to create a group (they provided an appropriate name)
+    func finishCreatingGroup() {
+    
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Set the createGroupButton to 'fa-check-circle'

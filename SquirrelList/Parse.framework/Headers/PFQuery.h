@@ -1,8 +1,11 @@
-//
-//  PFQuery.h
-//
-//  Copyright 2011-present Parse Inc. All rights reserved.
-//
+/**
+ * Copyright (c) 2015-present, Parse, LLC.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -30,6 +33,13 @@ PF_ASSUME_NONNULL_BEGIN
 ///--------------------------------------
 /// @name Creating a Query for a Class
 ///--------------------------------------
+
+/*!
+ @abstract Initializes the query with a class name.
+
+ @param className The class name.
+ */
+- (instancetype)initWithClassName:(NSString *)className;
 
 /*!
  @abstract Returns a `PFQuery` for a given class.
@@ -65,13 +75,7 @@ PF_ASSUME_NONNULL_BEGIN
 + (instancetype)queryWithClassName:(NSString *)className predicate:(PF_NULLABLE NSPredicate *)predicate;
 
 /*!
- Initializes the query with a class name.
- @param newClassName The class name.
- */
-- (instancetype)initWithClassName:(NSString *)newClassName;
-
-/*!
- The class name to query for
+ The class name to query for.
  */
 @property (nonatomic, strong) NSString *parseClassName;
 
@@ -473,6 +477,8 @@ PF_ASSUME_NONNULL_BEGIN
 /*!
  @abstract Sort the results using a given sort descriptor.
 
+ @warning If a `sortDescriptor` has custom `selector` or `comparator` - they aren't going to be used.
+
  @param sortDescriptor The `NSSortDescriptor` to use to sort the results of the query.
 
  @returns The same instance of `PFQuery` as the receiver. This allows method chaining.
@@ -481,6 +487,8 @@ PF_ASSUME_NONNULL_BEGIN
 
 /*!
  @abstract Sort the results using a given array of sort descriptors.
+
+ @warning If a `sortDescriptor` has custom `selector` or `comparator` - they aren't going to be used.
 
  @param sortDescriptors An array of `NSSortDescriptor` objects to use to sort the results of the query.
 
@@ -795,7 +803,7 @@ PF_ASSUME_NONNULL_BEGIN
  */
 @property (assign, readwrite) PFCachePolicy cachePolicy;
 
-/* !
+/*!
  @abstract The age after which a cached value will be ignored
  */
 @property (assign, readwrite) NSTimeInterval maxCacheAge;

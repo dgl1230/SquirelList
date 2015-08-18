@@ -12,9 +12,7 @@ import UIKit
 
 
 class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewControllerDelegate, UITextFieldDelegate {
-    
-    //Optional for displaying a custom activityIndicatorView during load times
-    var activityIndicatorView: NVActivityIndicatorView?
+
 
     var desiredSquirrel: PFObject?
     var desiredSquirrelOwner: PFUser?
@@ -83,7 +81,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 tradeProposal["offeredAcorns"] = offeredAcorns
             }
         }
-        
+        //There's been no problems, so the trade offer can now go through
        //Function found in GlobalFunctions file - displays loading animation
         //activityIndicatorView = displayLoadingAnimator(self.view)
         tradeProposal.saveInBackgroundWithBlock {
@@ -101,6 +99,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                         alert.dismissViewControllerAnimated(true, completion: nil)
                         PFUser.currentUser()!["hasProposedTrade"] = true
                         PFUser.currentUser()!.save()
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     }))
                     alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction!) -> Void in
                         //We ask the user for push notification permission in chat because it's easier to explain why they might need it
@@ -139,10 +138,11 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 push.setData(pushDict)
                 push.sendPushInBackgroundWithBlock(nil)
                 
+            } else {
+                //Global function for displaying alert
+                displayAlert(self, "Ooops", "There's been an error. Could you please try again?")
             }
-            //Whether the save if successful or not, we need to suspend loading animation
-            //Function found in GlobalFunctions file - suspends loading animation
-            //resumeInteractionEvents(self.activityIndicatorView!)
+            
         }
         
     }

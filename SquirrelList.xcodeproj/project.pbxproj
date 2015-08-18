@@ -95,9 +95,6 @@
 		18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6577D1B7E8103000EFD7B /* Banner.swift */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
-		18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794E91ADA3124000C9E5F /* Bolts.framework */; };
-		18B794EC1ADA3124000C9E5F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794EA1ADA3124000C9E5F /* Parse.framework */; };
-		18B794EE1ADA312D000C9E5F /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B794ED1ADA312D000C9E5F /* ParseUI.framework */; };
 		18C279B91B4E227A001D932A /* Terms_Of_Service.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */; };
 		18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C57B511B237B460068B726 /* ChangeInfoController.swift */; };
 		18C57B571B24F8EF0068B726 /* PoliciesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */; };
@@ -149,6 +146,9 @@
 		18F769001ACB2AA000314DB2 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */; };
 		18F769031ACB995C00314DB2 /* FindUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */; };
 		18F769041ACB995C00314DB2 /* FindUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */; };
+		18FDAC4D1B825D4600300282 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FDAC4C1B825D4600300282 /* Bolts.framework */; };
+		18FDAC4F1B825D5400300282 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FDAC4E1B825D5400300282 /* Parse.framework */; };
+		18FDAC511B825D5B00300282 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18FDAC501B825D5B00300282 /* ParseUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -287,9 +287,6 @@
 		18A6577D1B7E8103000EFD7B /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Banner.swift; path = ../Banner.swift; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeCurrentGroupViewController.swift; path = SquirrelList/ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = SquirrelList/CreateGroupViewController.swift; sourceTree = "<group>"; };
-		18B794E91ADA3124000C9E5F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		18B794EA1ADA3124000C9E5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		18B794ED1ADA312D000C9E5F /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Terms_Of_Service.rtf; sourceTree = "<group>"; };
 		18C57B511B237B460068B726 /* ChangeInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeInfoController.swift; sourceTree = "<group>"; };
 		18C57B561B24F8EF0068B726 /* PoliciesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoliciesViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +338,9 @@
 		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserTableViewCell.swift; sourceTree = "<group>"; };
 		18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindUserTableViewCell.xib; sourceTree = "<group>"; };
+		18FDAC4C1B825D4600300282 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		18FDAC4E1B825D5400300282 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		18FDAC501B825D5B00300282 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,17 +350,17 @@
 			files = (
 				186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */,
 				186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */,
-				18B794EE1ADA312D000C9E5F /* ParseUI.framework in Frameworks */,
 				186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */,
-				18B794EB1ADA3124000C9E5F /* Bolts.framework in Frameworks */,
 				186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */,
-				18B794EC1ADA3124000C9E5F /* Parse.framework in Frameworks */,
 				186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */,
 				186B33101A758FA800A8D4CB /* MobileCoreServices.framework in Frameworks */,
 				186B330E1A758F9E00A8D4CB /* CoreLocation.framework in Frameworks */,
 				186B330C1A758F9300A8D4CB /* CoreGraphics.framework in Frameworks */,
+				18FDAC4D1B825D4600300282 /* Bolts.framework in Frameworks */,
 				186B330A1A758F8800A8D4CB /* CFNetwork.framework in Frameworks */,
+				18FDAC4F1B825D5400300282 /* Parse.framework in Frameworks */,
 				186B33081A758F7E00A8D4CB /* AudioToolbox.framework in Frameworks */,
+				18FDAC511B825D5B00300282 /* ParseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,9 +581,9 @@
 				18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */,
 				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
 				186B33191A758FDA00A8D4CB /* libz.dylib */,
-				18B794ED1ADA312D000C9E5F /* ParseUI.framework */,
-				18B794E91ADA3124000C9E5F /* Bolts.framework */,
-				18B794EA1ADA3124000C9E5F /* Parse.framework */,
+				18FDAC501B825D5B00300282 /* ParseUI.framework */,
+				18FDAC4E1B825D5400300282 /* Parse.framework */,
+				18FDAC4C1B825D4600300282 /* Bolts.framework */,
 				186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */,
 				186B33131A758FBC00A8D4CB /* Security.framework */,
 				186B33111A758FB100A8D4CB /* QuartzCore.framework */,

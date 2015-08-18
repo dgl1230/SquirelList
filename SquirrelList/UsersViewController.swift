@@ -18,6 +18,8 @@ let reloadIndividualGroupData = "com.denis.reloadIndividualGroupData"
 
 class UsersViewController: PFQueryTableViewController {
 
+    //Optional for storing the user's UserGroupData instance
+    var userGroupData: PFObject?
     var currentGroup: PFObject?
     //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
     var shouldReLoad: Bool?
@@ -79,7 +81,7 @@ class UsersViewController: PFQueryTableViewController {
         }
         if segue.identifier == "SingleUserSquirrels" {
             let controller = segue.destinationViewController as! SquirrelViewController
-            controller.selectedUser = sender as! PFUser
+            controller.selectedUser = sender as? PFUser
         }
         if segue.identifier == "NewUserScreens" {
             let controller = segue.destinationViewController as! TutorialViewController
@@ -125,45 +127,17 @@ class UsersViewController: PFQueryTableViewController {
                 }))
             self.presentViewController(alert, animated: true, completion: nil)
         }
-        //It's already been fetched by this point in viewDidLoad, so we don't need to again
-        let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-        //Check to see if we should alert them that their are new members in their group (and thus they have more Squirrel Slots)
-        if contains(alerts, "newUSers") {
-            let numOfUsers = (currentGroup!["users"] as! [String]).count
-            let oldNumOfUsers = userGroupData["numOfGroupUsers"] as! Int
-            //Then new users have joined the group
-            let numOFNewUsers = numOfUsers - oldNumOfUsers
-            var squirrelSlots = userGroupData["squirrelSlots"] as! Int
-            squirrelSlots += numOFNewUsers
-            //Show popup
-            var message = ""
-            if numOFNewUsers == 1 {
-                message = "One new user has joined, so enjoy one more Squirrel Slot!"
-            } else {
-                message = "\(numOFNewUsers) have joined, so enjoy \(numOFNewUsers) squirrel slots!"
-            }
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
-                userGroupData["numOfGroupUsers"] = numOfUsers
-                userGroupData["squirrelSlots"] = squirrelSlots
-                userGroupData.save()
-                self.alerts.removeAtIndex(0)
-                //We recursively call showAlerts() until the alerts array is empty
-                self.showAlerts()
-                }))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
         //Check to see if this is another day that they've consecutively checked this group
         if contains(alerts, "cumulativeDay") == true {
-            let lastCheckedDate = userGroupData["lastVisit"] as! NSDate
+            let lastCheckedDate = userGroupData!["lastVisit"] as! NSDate
             let today = NSDate()
             let daysApart = dayDifferences(lastCheckedDate, date2: today)
             //Then this is a cumulative day for the user
-            var cumulativeDays = userGroupData["cumulativeDaysVisited"] as! Int
+            var cumulativeDays = userGroupData!["cumulativeDaysVisited"] as! Int
             cumulativeDays += 1
-            var acorns = userGroupData["acorns"] as! Int
+            var acorns = userGroupData!["acorns"] as! Int
             acorns += 25
-            let squirrelScore = userGroupData["squirrelSlots"] as! Int
+            let squirrelScore = userGroupData!["squirrelSlots"] as! Int
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
             var message = "Here's 25 acorns for visiting \(groupName) everyday!"
             //Reward them for having a full squirrel team
@@ -174,10 +148,10 @@ class UsersViewController: PFQueryTableViewController {
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
                 //Update and save userGroupData
-                userGroupData["lastVisit"] = today
-                userGroupData["cumulitveDaysVisited"] = cumulativeDays
-                userGroupData["acorns"] = acorns
-                userGroupData.save()
+                self.userGroupData!["lastVisit"] = today
+                self.userGroupData!["cumulitveDaysVisited"] = cumulativeDays
+                self.userGroupData!["acorns"] = acorns
+                self.userGroupData!.save()
                 self.alerts.removeAtIndex(0)
                 //We recursively call showAlerts() until the alerts array is empty
                 self.showAlerts()
@@ -191,10 +165,10 @@ class UsersViewController: PFQueryTableViewController {
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
                 //Update and save userGroupData
-                var acorns = userGroupData["acorns"] as! Int
+                var acorns = self.userGroupData!["acorns"] as! Int
                 acorns += 100
-                userGroupData["acorns"] = acorns
-                userGroupData.save()
+                self.userGroupData!["acorns"] = acorns
+                self.userGroupData!.save()
                 self.alerts.removeAtIndex(0)
                 //We recursively call showAlerts() until the alerts array is empty
                 self.showAlerts()
@@ -256,16 +230,12 @@ class UsersViewController: PFQueryTableViewController {
         if PFUser.currentUser()!["recentStrike"] as! Bool == true {
             alerts.append("recentStrike")
         }
-        //Check to see if we should alert them that their are new members in their group (and thus they have more Squirrel Slots)
-        let numOfUsers = (currentGroup!["users"] as! [String]).count
-        let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-        userGroupData.fetch()
-        let oldNumOfUsers = userGroupData["numOfGroupUsers"] as! Int
-        if numOfUsers > oldNumOfUsers {
-           alerts.append("newUSers")
-        }
+
+        userGroupData = PFUser.currentUser()!["currentGroupData"] as? PFObject
+        userGroupData!.fetch()
+
         //Check to see if this is another day that they've consecutively checked this group
-        let lastCheckedDate = userGroupData["lastVisit"] as! NSDate
+        let lastCheckedDate = userGroupData!["lastVisit"] as! NSDate
         let today = NSDate()
         let daysApart = dayDifferences(lastCheckedDate, date2: today)
         if daysApart == 1 {
@@ -277,9 +247,9 @@ class UsersViewController: PFQueryTableViewController {
         }
         } else if daysApart != 0 {
             //They haven't visited this group in more than a day, and so we need to update their last visit
-            userGroupData["lastVisit"] = today
-            userGroupData["cumulitveDaysVisited"] = 0
-            userGroupData.save()
+            userGroupData!["lastVisit"] = today
+            userGroupData!["cumulitveDaysVisited"] = 0
+            userGroupData!.save()
         }
         if alerts.count > 0 {
             showAlerts()

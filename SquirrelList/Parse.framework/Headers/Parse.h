@@ -1,8 +1,11 @@
-//
-//  Parse.h
-//
-//  Copyright 2011-present Parse Inc. All rights reserved.
-//
+/**
+ * Copyright (c) 2015-present, Parse, LLC.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
 
 #import <Foundation/Foundation.h>
 
@@ -30,7 +33,6 @@
 #import <Parse/PFProduct.h>
 #import <Parse/PFPurchase.h>
 #import <Parse/PFPush.h>
-#import <Parse/PFTwitterUtils.h>
 
 #else
 
@@ -42,9 +44,11 @@
 #import <ParseOSX/PFConstants.h>
 #import <ParseOSX/PFFile.h>
 #import <ParseOSX/PFGeoPoint.h>
+#import <ParseOSX/PFInstallation.h>
 #import <ParseOSX/PFNullability.h>
 #import <ParseOSX/PFObject+Subclass.h>
 #import <ParseOSX/PFObject.h>
+#import <ParseOSX/PFPush.h>
 #import <ParseOSX/PFQuery.h>
 #import <ParseOSX/PFRelation.h>
 #import <ParseOSX/PFRole.h>
@@ -99,6 +103,51 @@ PF_ASSUME_NONNULL_BEGIN
  @returns `YES` if Local Datastore is enabled, otherwise `NO`.
  */
 + (BOOL)isLocalDatastoreEnabled;
+
+///--------------------------------------
+/// @name Enabling Extensions Data Sharing
+///--------------------------------------
+
+/*!
+ @abstract Enables data sharing with an application group identifier.
+
+ @discussion After enabling - Local Datastore, `currentUser`, `currentInstallation` and all eventually commands
+ are going to be available to every application/extension in a group that have the same Parse applicationId.
+
+ @warning This method is required to be called before <setApplicationId:clientKey:>.
+
+ @param groupIdentifier Application Group Identifier to share data with.
+ */
++ (void)enableDataSharingWithApplicationGroupIdentifier:(NSString *)groupIdentifier PF_EXTENSION_UNAVAILABLE("Use `enableDataSharingWithApplicationGroupIdentifier:containingApplication:`.");
+
+/*!
+ @abstract Enables data sharing with an application group identifier.
+
+ @discussion After enabling - Local Datastore, `currentUser`, `currentInstallation` and all eventually commands
+ are going to be available to every application/extension in a group that have the same Parse applicationId.
+
+ @warning This method is required to be called before <setApplicationId:clientKey:>.
+ This method can only be used by application extensions.
+
+ @param groupIdentifier Application Group Identifier to share data with.
+ @param bundleIdentifier Bundle identifier of the containing application.
+ */
++ (void)enableDataSharingWithApplicationGroupIdentifier:(NSString *)groupIdentifier
+                                  containingApplication:(NSString *)bundleIdentifier;
+
+/*!
+ @abstract Application Group Identifier for Data Sharing
+
+ @returns `NSString` value if data sharing is enabled, otherwise `nil`.
+ */
++ (NSString *)applicationGroupIdentifierForDataSharing;
+
+/*!
+ @abstract Containing application bundle identifier.
+
+ @returns `NSString` value if data sharing is enabled, otherwise `nil`.
+ */
++ (NSString *)containingApplicationBundleIdentifierForDataSharing;
 
 #if PARSE_IOS_ONLY
 
