@@ -62,7 +62,8 @@ class MessagesViewController: JSQMessagesViewController {
         }
         let messageQuery = PFQuery(className: "Messages")
         messageQuery.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
-        messageQuery.orderByAscending("createdAt")
+        messageQuery.orderByDescending("createdAt")
+        messageQuery.limit = 30
     
         if lastMessage != nil {
             messageQuery.whereKey("createdAt", greaterThan: lastMessage!.date)
@@ -71,24 +72,14 @@ class MessagesViewController: JSQMessagesViewController {
         messageQuery.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
                 let messageResults = results as? [PFObject]
-                println("RESULTS COUNT IS \(messageResults!.count)")
                 let newMessages = messageResults?.reverse()
                 var counter = 0
                 for message in newMessages! {
-                    println("GOING THROUGH MESSAGES")
-                    counter += 1
-                    if counter <= 10 {
-                        println("IF")
-                        self.messageObjects.append(message)
+                    self.messageObjects.append(message)
                         let user = message["sender"] as! String
                         self.users.append(user)
                         let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
                         self.messages.append(chatMessage)
-                    } else {
-                        println("ELSE")
-                        message.deleteEventually() //Not sure whether to use this or delete()
-                    }
-                    
                 }
                 /*
                 if results!.count > 0 {

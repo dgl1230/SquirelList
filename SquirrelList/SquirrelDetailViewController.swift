@@ -29,6 +29,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     var claimOrTradeOrPicture = ""
     //Optional for keeping track of if the user can rerate the squirrel - accessed from the UserGroupData model
     var canRerate = false
+
     
 
     
@@ -50,7 +51,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
         if claimOrTradeOrPicture == "claim" {
-            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
             self.claimSquirrel()
             self.dismissViewControllerAnimated(true, completion: nil)
         } else if claimOrTradeOrPicture == "trade" {
@@ -150,6 +150,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     //Assumes that user has already been given permission to claim it  - updates the Squirrel and the logged in user's info to reflect claiming of said squirrel. Assumes that there is a loading animation occuring and that we should stop it after everything has been saved.
     func claimSquirrel() {
+        let currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        currentGroup!.fetch()
         ratedSquirrel!["owner"] = PFUser.currentUser()!
         ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
         if didRateSquirrel == true {
@@ -158,11 +160,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!["ratings"] = ratings
             ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
         }
-        let userGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-        var squirrelSlots = userGroupData["squirrelSlots"] as! Int
-        squirrelSlots -= 1
-        userGroupData["squirrelSlots"] = squirrelSlots
-        userGroupData.save()
+        var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+        squirrelSlots! -= 1
+        let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(squirrelSlots!))
+        currentGroup!["squirrelSlots"] = newSquirrelSlots
+        currentGroup!.save()
         ratedSquirrel!.save()
         //Alert SquirrelViewController to reload data
         NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
@@ -261,12 +263,11 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             rateNumberTextField.placeholder = "Your rating: \(rating)"
             if canRerate == true {
                 rateButton.setTitle("Rerate", forState: UIControlState.Normal)
-                rateButton.enabled = true
-            } else {
-                rateButton.enabled = false
-                //We want it to be obvious that they can't use the rate button
-                rateButton.alpha = 0.5
             }
+            rateButton.enabled = false
+            //We want it to be obvious that they can't use the rate button
+            rateButton.alpha = 0.5
+
         } else {
             rateButton.enabled = false
             //We want it to be obvious that they can't use the rate button

@@ -75,6 +75,7 @@
 		186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */; };
 		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
 		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
+		1871A7A61B856110000FB0DE /* IJReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871A7A51B856110000FB0DE /* IJReachability.swift */; };
 		187547B31B0E6C77009A6EFE /* Login-Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187547B21B0E6C77009A6EFE /* Login-Register.storyboard */; };
 		187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */; };
 		187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */; };
@@ -266,6 +267,7 @@
 		186B33191A758FDA00A8D4CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
+		1871A7A51B856110000FB0DE /* IJReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IJReachability.swift; path = ../IJReachability.swift; sourceTree = "<group>"; };
 		187547B21B0E6C77009A6EFE /* Login-Register.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Login-Register.storyboard"; sourceTree = "<group>"; };
 		187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Bold.otf"; sourceTree = "<group>"; };
 		187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Book.otf"; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
 				18A568D81B1D47B40019B2C3 /* HomeViewController.swift */,
+				1871A7A51B856110000FB0DE /* IJReachability.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
 				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
 				184841141AE9767600F23551 /* Messages */,
@@ -840,6 +843,7 @@
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
 				18DE63A81B7954DC005EB7C0 /* FlagContentController.swift in Sources */,
+				1871A7A61B856110000FB0DE /* IJReachability.swift in Sources */,
 				18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */,
 				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,
 				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,

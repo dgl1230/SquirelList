@@ -65,6 +65,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         } else {
                             error = "There was a random bug :( Please try again"
                         }
+                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
                         self.displayErrorAlert("Whoops! We had a problem", message: error)
                     }
             }

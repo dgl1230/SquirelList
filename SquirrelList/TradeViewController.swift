@@ -17,6 +17,9 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     var desiredSquirrel: PFObject?
     var desiredSquirrelOwner: PFUser?
     var offeredSquirrel: PFObject?
+    
+    //Optional for storing the logged in user's currentGroup
+    var currentGroup: PFObject?
 
 
     @IBOutlet weak var desiredSquirrelLabel: UILabel!
@@ -59,12 +62,9 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                     return
                 }
             }
-            
-            let currentGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-            currentGroupData.fetch()
-            let acorns  = currentGroupData["acorns"] as! Int
+            let acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
             let offeredAcorns = acornTextField.text.toInt()
-            //Next we check to make sure the user hasn't offered zero acorns 
+            //Next we check to make sure the user hasn't offered zero acorns
             if offeredAcorns == 0 {
                 let title = ""
                 let message = "Don't insult them with 0 acorns!"
@@ -174,6 +174,8 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        currentGroup!.fetch()
         var firstName = desiredSquirrel!["first_name"] as? String
         var lastName = desiredSquirrel!["last_name"] as? String
         desiredSquirrelLabel.text = "\(firstName!) \(lastName!)"

@@ -88,14 +88,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                             }
                         }
                     })
-                    //Need to delete the UserGroupData instance too
-                    //We need to query and get the right UserGroupData instance
-                    let userGroupDataQ = PFQuery(className: "UserGroupData")
-                    userGroupDataQ.whereKey("group", equalTo: group)
-                    userGroupDataQ.whereKey("user", equalTo: PFUser.currentUser()!)
-                    //There should only ever be one result for this query
-                    let groupDataInstance = userGroupDataQ.getFirstObject()
-                    groupDataInstance!.delete()
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
                     group.delete()
@@ -124,21 +116,25 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                             }
                         }
                     })
-                    //Need to delete the UserGroupData instance too
-                    //We need to query and get the right UserGroupData instance
-                    let userGroupDataQ = PFQuery(className: "UserGroupData")
-                    userGroupDataQ.whereKey("group", equalTo: group)
-                    userGroupDataQ.whereKey("user", equalTo: PFUser.currentUser()!)
-                    //There should only ever be one result for this query
-                    let groupDataInstance = userGroupDataQ.getFirstObject()
-                    groupDataInstance!.delete()
-                    //Remove user from the group's users
+                    let acorns = getFullUserInfo(group["acorns"] as! [String], PFUser.currentUser()!.username!)
+                    let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!)
+                    let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], PFUser.currentUser()!.username!)
+                    let usersOnLastVist = getFullUserInfo(group["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!)
+                    let lastVisit = getFullUserInfo(group["lastVisits"] as! [String], PFUser.currentUser()!.username!)
+                    let rerate = getFullUserInfo(group["rerates"] as! [String], PFUser.currentUser()!.username!)
+                    //Remove user from the group's users and remove all of the user's other fields
                     group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
+                    group.removeObject(acorns, forKey: "acorns")
+                    group.removeObject(squirrelSlots, forKey: "squirrelSlots")
+                    group.removeObject(cumulativeDays, forKey: "cumulativeDays")
+                    group.removeObject(usersOnLastVist, forKey: "usersOnLastVist")
+                    group.removeObject(lastVisit, forKey: "lastVisits")
+                    group.removeObject(rerate, forKey: "rerates")
                     //Remve the group from the user's group
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     group.save()
                     PFUser.currentUser()!.save()
-                    self.loadObjects()
+                    self.viewDidLoad()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
@@ -157,11 +153,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         if currentGroup.objectId != userCurrentGroup.objectId {
             //We only want to reload everything if the user hasn't selected their same currentGroup
             PFUser.currentUser()!["currentGroup"] = currentGroup
-            let query = PFQuery(className: "UserGroupData")
-            query.whereKey("user", equalTo: PFUser.currentUser()!)
-            query.whereKey("group", equalTo: currentGroup)
-            let individualGroupData = query.getFirstObject()
-            PFUser.currentUser()!["currentGroupData"] = individualGroupData
             PFUser.currentUser()!.save()
             //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)

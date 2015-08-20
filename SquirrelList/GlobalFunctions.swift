@@ -67,22 +67,48 @@ import Foundation
         UIApplication.sharedApplication().endIgnoringInteractionEvents()
     }
 
-    //PARSE FUNCTIONS
 
-    /*
-    func getAcons(group: PFObject) -> String {
-        let acorns = group["acorns"] as! String
-        let index = contains(acorns, PFUser.currentUser()!.username!)
-        let userString = acorns[index!]
-        let colonIndex = contains(userString, ":")
-        let
-        
-        
-        return "hi"
+    //PARSE FUNCTIONS - Used for getting and setting user info
+
+    func getUserInfo(infoArray: [String], username: String) -> String {
+        var index = 0
+        for stringChunk in infoArray {
+            if  (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+                break
+            }
+            index += 1
+        }
+        let userString = infoArray[index]
+        let colonIndex = find(userString, ":")
+        let correctIndex = colonIndex!.successor()
+        let userInfo = userString.substringFromIndex(correctIndex)
+        return userInfo
     }
-    */
 
-    func updateAcorns(acornsToAdd: Int) {
-        
+    //Returns a new array to be saved to the group's relevant field, with updated user information
+    func getNewArrayToSave(oldArray: [String], username: String, newInfo: String) -> [String] {
+        var index = 0
+        var newArray = oldArray
+        for stringChunk in oldArray {
+            if (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+                break
+            }
+            index += 1
+        }
+        let newUserInfo = "\(username):\(newInfo)"
+        newArray[index] = newUserInfo
+        return newArray
+    }
+
+    //Used for deleting via parse, so that we can user the removeObject function
+    func getFullUserInfo(oldArray: [String], username: String) -> String {
+        var index = 0
+        for stringChunk in oldArray {
+            if (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+                break
+            }
+            index += 1
+        }
+        return oldArray[index]
     }
 

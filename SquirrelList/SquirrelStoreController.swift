@@ -11,7 +11,9 @@ import UIKit
 class SquirrelStoreController: UITableViewController {
 
     //Variable for storing the individualGroupData instance
-    var individualGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+    //var individualGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
+    //Variable for holding the user's currentGroup
+    var currentGroup: PFObject?
     
     //Optional for storing whether the SquirrelStoreController should reload (when a user changes their current group)
     var shouldReload: Bool?
@@ -22,14 +24,17 @@ class SquirrelStoreController: UITableViewController {
     @IBOutlet weak var purchaseReratingLabel: UILabel!
 
     @IBAction func buySquirrelSlots(sender: AnyObject) {
-        var acorns = individualGroupData["acorns"] as! Int
-        acorns -= 500
-        var squirrelSlots = individualGroupData["squirrelSlots"] as! Int
-        squirrelSlots += 1
-        individualGroupData["acorns"] = acorns
-        individualGroupData["squirrelSlots"] = squirrelSlots
-        individualGroupData.save()
-        acornsLabel.text = "\(acorns)"
+        var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+        acorns! -= 500
+        var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+        squirrelSlots! += 1
+        let newAcornsArray = getNewArrayToSave(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!, String(acorns!))
+        let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(squirrelSlots!))
+        currentGroup!["acorns"] = newAcornsArray
+        currentGroup!["squirrelSlots"] = newSquirrelSlots
+        currentGroup!.save()
+        //individualGroupData.save()
+        acornsLabel.text = "\(acorns!)"
         if acorns < 500 {
             buySquirrelSlotsButton.enabled = false
         }
@@ -40,12 +45,16 @@ class SquirrelStoreController: UITableViewController {
     }
 
     @IBAction func buyRerating(sender: AnyObject) {
-        var acorns = individualGroupData["acorns"] as! Int
-        acorns -= 50
-        individualGroupData["acorns"] = acorns
-        individualGroupData["canRerate"] = true
-        individualGroupData.save()
-        acornsLabel.text = "\(acorns)"
+        //var acorns = individualGroupData["acorns"] as! Int
+        var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+        acorns! -= 50
+        var rerate = "1"
+        let newAcornsArray = getNewArrayToSave(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!, String(acorns!))
+        let newRerates = getNewArrayToSave(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!, rerate)
+        currentGroup!["acorns"] = newAcornsArray
+        currentGroup!["rerates"] = newRerates
+        currentGroup!.save()
+        acornsLabel.text = "\(acorns!)"
         //Users can only buy one rerate at a time
         buyReratingButton.enabled = false
         if acorns < 500 {
@@ -79,28 +88,28 @@ class SquirrelStoreController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        currentGroup!.fetch()
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
         //Set notification to "listen" for when the the user has used their Rerate
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "didUseRerate", object: nil)
-        //Update the UserGroupData instance, the individualGroupData variable refers to an old instance if the user changes their currentGroup
-        individualGroupData = PFUser.currentUser()!["currentGroupData"] as! PFObject
-        individualGroupData.fetch()
-        let acorns = individualGroupData["acorns"] as! Int
-        acornsLabel.text = "\(acorns)"
-        let canRerate = individualGroupData["canRerate"] as! Bool
+        var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+        acornsLabel.text = "\(acorns!)"
+        var rerate = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
+        if rerate == 0 {
+            purchaseReratingLabel.text = "Purchase Rerating (0/1)"
+        } else {
+            purchaseReratingLabel.text = "Purchase Rerating (1/1)"
+        }
+        
         if acorns < 500 {
             buySquirrelSlotsButton.enabled = false
         }
-        if (acorns < 50) || (canRerate == true) {
+        if (acorns < 50) || (rerate == 1) {
             buyReratingButton.enabled = false
         }
-        if canRerate == true {
-            purchaseReratingLabel.text = "Purchase Rerating (1/1)"
-        } else {
-            purchaseReratingLabel.text = "Purchase Rerating (0/1)"
-        }
-        let groupName = individualGroupData["groupName"] as! String
+        let groupName = currentGroup!["name"] as! String
         self.title = "\(groupName) Squirrel Store"
         
     }

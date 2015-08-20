@@ -106,7 +106,8 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
             saveButton.setTitle("Report", forState: UIControlState.Normal)
             reportExplanationField!.delegate = self
         }
-
+        //We want it to be obvious that the button is not enabled at first
+        saveButton.alpha = 0.5
         infoField.delegate = self
         //So we can detect what the user is typing and whether or not to enable the save button
         //Give save button rounded edges
@@ -127,8 +128,10 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: string)
             if newInfo.length > 0 && newInfo != placeholder {
                 saveButton.enabled = true
+                saveButton.alpha = 1
             } else {
                 saveButton.enabled = false
+                saveButton.alpha = 0.5
             }
             return true 
     }

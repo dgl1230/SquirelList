@@ -25,9 +25,19 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group["pendingUsers"] = []
         group["squirrels"] = []
-        //Need to add the current user's squirrel list ID eventually as well
+        group["acorns"] = ["\(PFUser.currentUser()!.username!):750"]
+        group["squirrelSlots"] = ["\(PFUser.currentUser()!.username!):3"]
+        group["cumulativeDays"] = ["\(PFUser.currentUser()!.username!):1"]
+        group["usersOnLastVisit"] = ["\(PFUser.currentUser()!.username!):1"]
+        group["rerates"] = ["\(PFUser.currentUser()!.username!):0"]
+        let today = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let todayString = formatter.stringFromDate(today)
+        group["lastVisits"] = ["\(PFUser.currentUser()!.username!):\(todayString)"]
         group.save()
         
+        /*
         let userGroupData = PFObject(className: "UserGroupData")
         userGroupData["user"] = PFUser.currentUser()!
         userGroupData["group"] = group
@@ -39,9 +49,10 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         userGroupData["cumulativeDaysVisited"] = 1
         userGroupData["groupName"] = groupNameTextField.text as NSString
         userGroupData.save()
+        */
         let currentUserGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
-        PFUser.currentUser()!["currentGroupData"] = userGroupData
+        //PFUser.currentUser()!["currentGroupData"] = userGroupData
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
 
