@@ -435,7 +435,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="group_more" translatesAutoresizingMaskIntoConstraints="NO" id="8R8-Ys-RYK" userLabel="Squirrel Store Image">
-                                                    <rect key="frame" x="17" y="11" width="23" height="23"/>
+                                                    <rect key="frame" x="17" y="11" width="25" height="25"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -504,7 +504,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="682A9E6C-5919-4D59-A07C-D623BD08F416" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="CC393058-BD09-4F7E-9C7E-9C36F66476C7" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -972,7 +972,7 @@
                                     <constraint firstAttribute="width" constant="305" id="shH-hc-onh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1080,7 +1080,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="pcz-ml-qAn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1132,7 +1132,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="gop-rg-onn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1231,7 +1231,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="682A9E6C-5919-4D59-A07C-D623BD08F416" width="24" height="37">
+        <image name="CC393058-BD09-4F7E-9C7E-9C36F66476C7" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1361,7 +1361,7 @@ HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
 </mutableData>
         </image>
         <image name="acorn_orange" width="128" height="128"/>
-        <image name="group_more" width="128" height="128"/>
+        <image name="group_more" width="144" height="144"/>
         <image name="happy" width="128" height="128"/>
         <image name="money-bag-blue" width="128" height="128"/>
         <image name="settings" width="128" height="128"/>

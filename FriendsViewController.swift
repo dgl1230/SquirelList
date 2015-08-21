@@ -235,7 +235,7 @@ class FriendsViewController: UITableViewController {
             let sortedFriends = friends.sorted { $0 < $1 }
             userFriendsData["friends"] = sortedFriends
             userFriendsData["friendAdded"] = false
-            userFriendsData.save()
+            //userFriendsData.save()
         }
         if invitingToGroup == true {
             //If they are inviting friends to groups, we don't show pending friends
@@ -243,10 +243,10 @@ class FriendsViewController: UITableViewController {
             let groupName = group!["name"] as! String
             self.title = "Invite to \(groupName)"
         } else {
-            friends = userFriendsData["friends"] as! [String]
+            friends = (userFriendsData["friends"] as! [String]).sorted { $0 < $1 }
             //We only want pending inviters because we don't want to show users that the logged in user has requested
-            pendingInviters = userFriendsData["pendingInviters"] as! [String]
-            users = friends + pendingInviters
+            pendingInviters = (userFriendsData["pendingInviters"] as! [String]).sorted { $0 < $1 }
+            users = pendingInviters + friends
             self.title = "Friends"
         }
        

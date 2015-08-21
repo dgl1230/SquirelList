@@ -279,11 +279,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         if owner == nil {
             squirrelOwnerLabel.text = "Squirreler:  No one :("
             var canClaim = canClaimSquirrel!
+            claimOrTradeOrPicture = "claim"
+            claimTradePictureButton.setTitle("Claim Squirrel", forState: UIControlState.Normal)
             if canClaim == true {
-                claimTradePictureButton.setTitle("Claim Squirrel", forState: UIControlState.Normal)
-                claimOrTradeOrPicture = "claim"
+                claimTradePictureButton.enabled = true
             } else {
-                claimTradePictureButton.hidden = true
+                claimTradePictureButton.enabled = false
+                claimTradePictureButton.alpha = 0.5
             }
         } else if owner == PFUser.currentUser()!.username {
             squirrelOwnerLabel.text = "Squirreler:  me"

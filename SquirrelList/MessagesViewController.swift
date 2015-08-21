@@ -30,7 +30,6 @@ class MessagesViewController: JSQMessagesViewController {
         let message = PFObject(className: "Messages")
         message["message"] = text
         message["group"] = PFUser.currentUser()!["currentGroup"] as? PFObject
-        message["senderNew"] = PFUser.currentUser()
         message["sender"] = PFUser.currentUser()!.username
         message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if error == nil {

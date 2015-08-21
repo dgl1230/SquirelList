@@ -157,7 +157,6 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
 
     //This is merely for reloading the data everytime the user accepts or declines a trade
     func tradeOfferViewController(controller: TradeOfferViewController) {
-        println("DOING WHAT IT's SUPPOSED TO BE")
         self.viewDidLoad()
     }
     

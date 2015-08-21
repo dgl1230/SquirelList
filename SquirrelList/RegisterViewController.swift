@@ -45,7 +45,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         let whitespace = NSCharacterSet.whitespaceCharacterSet()
         if usernameCheck != nil {
             title = "That username is taken!"
-            error = "Sorry but someone already has that username"
+            error = "Please try a different username"
         } else if usernameTextField.text == "" || passwordTextField == "" || verifyPasswordTextField == "" {
             title = "Whoa there cowboy!"
             error = "Please make sure you fill in all fields"

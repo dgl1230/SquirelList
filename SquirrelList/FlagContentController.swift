@@ -32,7 +32,6 @@ class FlagContentController: UIViewController, UITextViewDelegate {
         report["offendedUser"] = PFUser.currentUser()!.username!
         let alertController = UIAlertController(title: "Reported!", message: "We will review this and remove the offending content if it violates our Terms of Service.", preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
-            println(5)
             report.save()
             self.dismissViewControllerAnimated(true, completion: nil)
         }))
@@ -63,7 +62,7 @@ class FlagContentController: UIViewController, UITextViewDelegate {
             var oldInfo: NSString = reportTextView.text
             var newInfo: NSString = ""
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: text)
-            if count(text) > 0  {
+            if count(String(newInfo)) > 0  {
                 reportButton.enabled = true
                 reportButton.alpha = 1
             } else {

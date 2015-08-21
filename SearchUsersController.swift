@@ -96,7 +96,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         pushQuery!.whereKey("username", equalTo: nonLoweredUsername)
         let push = PFPush()
         push.setQuery(pushQuery)
-        let message = "\(PFUser.currentUser()!.username!) wants to be friends"
+        let message = "\(PFUser.currentUser()!.username!) wants to be friends!"
         let inviteMessage = message as NSString
         let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
         push.setData(pushDict)
@@ -130,6 +130,12 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         cell.addButton.addTarget(self, action: "addUser:", forControlEvents:  UIControlEvents.TouchUpInside)
         cell.nameLabel.text = friendsData["lowerUsername"] as? String
         cell.addButton.tag = indexPath.row
+        //Users can't add themselves
+        if friendsData["lowerUsername"] as! String == PFUser.currentUser()!["lowerUsername"] as! String {
+            cell.addButton.enabled = false
+            cell.addButton.hidden = true
+            cell.nameLabel.text = "Me"
+        }
         if contains(users, friendsData["lowerUsername"] as! String) {
             //The user is already friends with the logged in user or the logged in user has already requested them or the other user has already requested the logged in user
             //Setting the addFriendButton with the 'fa-plus-square-o' button
@@ -151,6 +157,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         //To prevent recently added users in FriendsViewController from still showing as pending and other similar problems
         let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
         userFriendsData.fetch()
+        self.tableView.allowsSelection = false
         
         let friends = userFriendsData["friends"] as! [String]
         let pendingFriends = userFriendsData["pendingInviters"] as! [String]

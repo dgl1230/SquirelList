@@ -90,7 +90,6 @@ class UsersViewController: PFQueryTableViewController {
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        println("QUERYING")
         //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()

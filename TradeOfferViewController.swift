@@ -164,8 +164,9 @@ class TradeOfferViewController: PopUpViewController {
     }
     
     
-    //Deletes all other proposals where the desired squirrel is your squirrel (since owners have changed) and potentially deleted trades where offered squirrel (if there is one) is offered (since that squirrels owners have also changed)
-    func deleteOtherSquirrelOffers() {
+    //Deletes all other proposals where the desired squirrel is your squirrel (since owners have changed) and potentially deleted trades where offered squirrel (if there is one) is offered (since that squirrels owners have also changed). 
+    // Parameters: the offerer's username, because at this point the tradeProposal optional will have already been deleted
+    func deleteOtherSquirrelOffers(offeringUsername: String) {
         //Need to delete all other proposals where the desired squirrel is yourSquirrel (since the owners have changed)
         let query1 = PFQuery(className: "TradeProposal")
         query1.whereKey("proposedSquirrelID", equalTo: yourSquirrel!.objectId!)
@@ -178,6 +179,7 @@ class TradeOfferViewController: PopUpViewController {
             query2.whereKey("offeredSquirrelID", equalTo: tradeProposal!["offeredSquirrelID"] as! String)
             queries.append(query2)
         }
+        let offerer = tradeProposal
         let query = PFQuery.orQueryWithSubqueries(queries)
         query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
@@ -187,7 +189,10 @@ class TradeOfferViewController: PopUpViewController {
                     for trade in tradeOffers! {
                         let object = trade as PFObject
                         let username = object["offeringUsername"] as! String
-                        usernames.append(username)
+                        if username != offeringUsername {
+                            //If the offerer who had their trade approved also had multiple offers, we just want to send an approval alert, not a rejection alert too
+                            usernames.append(username)
+                        }
                         trade.delete()
                     }
                 }
@@ -234,7 +239,7 @@ class TradeOfferViewController: PopUpViewController {
                 push.sendPushInBackgroundWithBlock(nil)
                 
                 self.tradeProposal!.delete()
-                self.deleteOtherSquirrelOffers()
+                self.deleteOtherSquirrelOffers(offeringUsername)
                 //Reload the updated trades
                 self.delegate?.tradeOfferViewController(self)
             } else {

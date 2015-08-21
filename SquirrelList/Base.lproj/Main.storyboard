@@ -288,6 +288,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Squirrel " id="PWj-Qa-X0S">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Item" id="x2E-Ks-MC6" userLabel="Done Button">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="done" destination="YAQ-u8-yw6" id="Cyg-pJ-l4T"/>
                             </connections>
@@ -507,7 +508,7 @@
             <objects>
                 <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="19G-oi-EXZ">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="293"/>
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="270"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -672,7 +673,7 @@
                                 <rect key="frame" x="185" y="72" width="240" height="293"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZNs-RS-jxa">
-                                        <rect key="frame" x="0.0" y="23" width="240" height="293"/>
+                                        <rect key="frame" x="0.0" y="23" width="240" height="270"/>
                                         <connections>
                                             <segue destination="bck-TG-7KF" kind="embed" identifier="userSquirrelsEmbed" id="0L0-7G-FFb"/>
                                         </connections>

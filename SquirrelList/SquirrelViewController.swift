@@ -160,25 +160,26 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             let controller = segue.destinationViewController as! SquirrelDetailViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            if squirrelSlots > 0 {
-                controller.canClaimSquirrel = true
-            } else {
-                controller.canClaimSquirrel = false
-            }
+            squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+        
             let userRerates = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
             if userRerates == 1 {
                 controller.canRerate = true
             } else {
                 controller.canRerate = false
             }
-            //controller.canRerate = canRerate
             let owner = sender!["owner"] as? PFObject
             if owner != nil {
                 var user = sender!["owner"] as? PFUser
-                controller.squirrelOwner = user 
+                controller.squirrelOwner = user
+                controller.canClaimSquirrel = false
             } else {
                 //The Squirrel doesn't have an owner
-                controller.canClaimSquirrel = canPickUpSquirrel!
+                if squirrelSlots! > 0 {
+                        controller.canClaimSquirrel = true
+                } else {
+                        controller.canClaimSquirrel = false
+                }
             }
         }
         if segue.identifier == "TradeOffers" {
@@ -269,6 +270,8 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
             //For some reason 2 is already being used as another tag
             var last = cell.viewWithTag(5) as! UILabel
             last.text = object!["last_name"]!.capitalizedString
+            let firstName = object!["first_name"]!.capitalizedString
+            let lastName = object!["last_name"]!.capitalizedString
             var ratingLabel = cell.viewWithTag(3) as! UILabel
             var avgRating = object!["avg_rating"] as! Double
             var squirrel = objects![indexPath.row] as! PFObject
@@ -393,9 +396,18 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
                 alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Delete Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
-                        squirrel.delete()
-                        self.loadObjects()
+                alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler:  { (action: UIAlertAction!) in
+                    group.removeObject(squirrel.objectId!, forKey: "squirrels")
+                    squirrel.deleteInBackgroundWithBlock({ (didWork: Bool, error: NSError?) -> Void in
+                            if error == nil {
+                                group.save()
+                                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                                self.viewDidLoad()
+                            } else {
+                                println(error)
+                            }
+                        
+                        })
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -491,12 +503,7 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Check to see if the internet is shitty, and if it is we give them an alert about it
-        let statusType = IJReachability.isConnectedToNetworkOfType()
-        if statusType == IJReachabilityType.NotConnected {
-            displayAlert(self, "", "Your device isn't connected to a network right now, so Squirrel List may act moody.")
-        }
+
         //Check to see if we need to show a new user tutorial screens first
         if currentlyTrading == true {
             //We don't need to load or calculate anything else if we're just displaying the user's squirrels to offer for a trade
