@@ -61,15 +61,7 @@ class FriendsViewController: UITableViewController {
             otherUserFriendData!.save()
             
             //Alert the requester that their friend request has been accepted
-            let pushQuery = PFInstallation.query()
-            pushQuery!.whereKey("username", equalTo: username)
-            let push = PFPush()
-            push.setQuery(pushQuery)
-            let message = "\(PFUser.currentUser()!.username!) has accepted your friend request"
-            let inviteMessage = message as NSString
-            let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-            push.setData(pushDict)
-            push.sendPushInBackgroundWithBlock(nil)
+            sendPushNotifications(1, "\(PFUser.currentUser()!.username!) has accepted your friend request", "friendRequest", [username])
         }
     }
     
@@ -108,18 +100,10 @@ class FriendsViewController: UITableViewController {
         currentGroup.addObject(inviteeUsername, forKey: "pendingUsers")
         currentGroup.save()
         
+        
         //Alert the invited user that they have been invited to a group
-        let pushQuery = PFInstallation.query()
-        //We want to get all installations that have the same users that are in the user's currentGroup
-        pushQuery!.whereKey("username", equalTo: inviteeUsername)
-        let push = PFPush()
-        push.setQuery(pushQuery)
         let groupName = group!["name"] as! String
-        let message = "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)"
-        let inviteMessage = message as NSString
-        let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-        push.setData(pushDict)
-        push.sendPushInBackgroundWithBlock(nil)
+        sendPushNotifications(1, "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)", "groupInvite", [inviteeUsername])
         
     }
     
@@ -130,6 +114,25 @@ class FriendsViewController: UITableViewController {
         }
     }
 
+    
+    //For rare times that a user's name occurs more than once throughout user's friends list, this returns a corrected friends array to be saved. The first element of the return set is a Bool indicating if there are duplicates, and the second element is the array containing no duplicates. 
+    func removeDuplicates(array: [String]) -> (Bool, [String]) {
+        var encountered = Set<String>()
+        var result: [String] = []
+        var containsDuplicates = false
+        for value in array {
+            if encountered.contains(value) {
+            // Do not add a duplicate element.
+            containsDuplicates = true
+            } else {
+                // Add value to the set.
+                encountered.insert(value)
+                // ... Append the value.
+                result.append(value)
+            }
+        }
+        return (containsDuplicates, result)
+    }
     
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -215,13 +218,7 @@ class FriendsViewController: UITableViewController {
         }
     }
     
-    /*
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        // We need to reload everytime to prevent users from requesting each other after a request has already been sent
-        self.viewDidLoad()
-    }
-    */
+    
     
     
     
@@ -235,7 +232,7 @@ class FriendsViewController: UITableViewController {
             let sortedFriends = friends.sorted { $0 < $1 }
             userFriendsData["friends"] = sortedFriends
             userFriendsData["friendAdded"] = false
-            //userFriendsData.save()
+            userFriendsData.save()
         }
         if invitingToGroup == true {
             //If they are inviting friends to groups, we don't show pending friends
@@ -243,11 +240,19 @@ class FriendsViewController: UITableViewController {
             let groupName = group!["name"] as! String
             self.title = "Invite to \(groupName)"
         } else {
-            friends = (userFriendsData["friends"] as! [String]).sorted { $0 < $1 }
+            //friends = (userFriendsData["friends"] as! [String]).sorted { $0 < $1 }
+            friends = userFriendsData["friends"] as! [String]
             //We only want pending inviters because we don't want to show users that the logged in user has requested
-            pendingInviters = (userFriendsData["pendingInviters"] as! [String]).sorted { $0 < $1 }
+            //pendingInviters = (userFriendsData["pendingInviters"] as! [String]).sorted { $0 < $1 }
+            pendingInviters = userFriendsData["pendingInviters"] as! [String]
             users = pendingInviters + friends
             self.title = "Friends"
+        }
+        let (thereAreDuplicates, friendsArray) = removeDuplicates(friends)
+        if thereAreDuplicates == true {
+            //We want to save the array that contains no duplicates of friends as the logged in user's friends list
+            userFriendsData["friends"] = friendsArray
+            userFriendsData.save()
         }
        
 

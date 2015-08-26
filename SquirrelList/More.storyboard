@@ -504,7 +504,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="CC393058-BD09-4F7E-9C7E-9C36F66476C7" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="CA855133-992E-47CA-9C28-513F2B328DB5" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1231,7 +1231,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CC393058-BD09-4F7E-9C7E-9C36F66476C7" width="24" height="37">
+        <image name="CA855133-992E-47CA-9C28-513F2B328DB5" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

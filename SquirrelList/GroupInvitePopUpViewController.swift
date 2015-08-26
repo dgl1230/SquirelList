@@ -45,18 +45,11 @@ class GroupInvitePopUpViewController: PopUpViewController {
         group!.addObject("\(PFUser.currentUser()!.username!):\(todayString)", forKey: "lastVisits")
         group!.saveInBackgroundWithBlock { (didSave: Bool, error: NSError?) -> Void in
             if error == nil {
-                //userGroupData.save()
                 //Alert the inviter that the logged in user has accepted their group invite
-                let pushQuery = PFInstallation.query()
-                pushQuery!.whereKey("username", equalTo: self.inviterName!)
-                let push = PFPush()
-                push.setQuery(pushQuery)
+                let inviterName = self.groupInvite!["inviter"] as! String
                 let groupName = self.group!["name"] as? String
                 let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)"
-                let inviteMessage = message as NSString
-                let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-                push.setData(pushDict)
-                push.sendPushInBackgroundWithBlock(nil)
+                sendPushNotifications(0, message, "acceptedGroupInvite", [inviterName])
                 PFUser.currentUser()!.save()
                 self.groupInvite!.delete()
                 if PFUser.currentUser()!["currentGroup"] == nil {

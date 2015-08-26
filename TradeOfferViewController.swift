@@ -29,122 +29,21 @@ class TradeOfferViewController: PopUpViewController {
     
     
     @IBAction func acceptTrade(sender: AnyObject) {
-        //Finish implementing remove ratings later
-        let offeringUsername = tradeProposal!["offeringUsername"] as! String
-        let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
-        
-        if tradeProposal!["offeredAcorns"] != nil {
-            var offeredAcorns = tradeProposal!["offeredAcorns"] as! Int
-            var currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
-
-            var proposerAcorns = getUserInfo(currentGroup["acorns"] as! [String], tradeProposal!["offeringUsername"] as! String).toInt()
-            let offeredSquirrelID = tradeProposal!["offeredSquirrelID"] as? String
-            //We need to run a lot of checks to see if the user still has enough acorns that they offered for the trade
-            if proposerAcorns == 0 && offeredSquirrelID == nil {
-                //Then the offerer has no acorns and didn't propose a squirrel, so we have to tel the user that the trade is off
-                let title = "There's a problem with the trade"
-                let offeringUsername = tradeProposal!["offeringUsername"] as! String
-                let message = "Unfortunately \(offeringUsername) didn't offer a Squirrel and spent all of his/her acorns, so this trade is off the table :("
-                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
-                    self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
-                return
-            } else if proposerAcorns == 0 && offeredSquirrelID != nil {
-                //Then the offerer has no acorns, but we give the user the option to just trade for the offered squirrel
-                let title = "There's a problem with the trade"
-                let offeringUsername = tradeProposal!["offeringUsername"] as! String
-                let message = "Unfortunately \(offeringUsername) spent all of their acorns, but would you like to trade just squirrels?"
-                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
-                    self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }))
-                alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
-                    self.changeOwners()
-                    self.finishTrade()
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
-                return
-            } else if proposerAcorns < offeredAcorns && proposerAcorns > 0 {
-                //Then the offerer doesn't have as many acorns as they offered, but we can give the user the option to accept less acorns and get the offered squirrel
-                let title = "There's a problem with the trade"
-                let offeringUsername = tradeProposal!["offeringUsername"] as! String
-                var message = "Unforuntately \(offeringUsername) doesn't have \(offeredAcorns) acorns but can offer \(proposerAcorns!) acorns instead. Would you still like to trade?"
-                if offeredSquirrelID != nil {
-                    message = "Unfortunately \(offeringUsername) doesn't have \(offeredAcorns) acorns but can offer \(proposerAcorns!) acorns and their squirrel. Would you still like to trade?"
-                }
-                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
-                    self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
-                    alert.dismissViewControllerAnimated(true, completion: nil)
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    return
-                }))
-                alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
-                    var newProposerAcorns = "0"
-                    var newUserAcorns = getNewArrayToSave(currentGroup["acorns"] as! [String], offeringUsername, newProposerAcorns)
-                    var userAcorns2 = getUserInfo(newUserAcorns, PFUser.currentUser()!.username!).toInt()
-                    userAcorns2! += proposerAcorns!
-                    self.changeOwners()
-                    self.tradeProposal!.deleteInBackgroundWithBlock({ (didDelete: Bool, error: NSError?) -> Void in
-                        if error == nil {
-                            self.finishTrade()
-                            let newAcorns = getNewArrayToSave(newUserAcorns, PFUser.currentUser()!.username!, String(userAcorns2!))
-                            currentGroup["acorns"] = newAcorns
-                            currentGroup.save()
-                            //Reloading
-                            self.delegate?.tradeOfferViewController(self)
-                            alert.dismissViewControllerAnimated(true, completion: nil)
-                            self.dismissViewControllerAnimated(true, completion: nil)
-    
-                        } else {
-                            //There was an error and we should alert them using the global function
-                            displayAlert(self, "Oops", "There's been a problem. Would you mind trying again?")
-                        }
-                    })
-                }))
-                self.presentViewController(alert, animated: true, completion: nil)
-                return
-
-            } else {
-                //The user has enough acorns for the trade
-                //Need to subtract acorns from the offerer and add them to the logged in user
-                proposerAcorns! -= offeredAcorns
-                var newAcorns = getNewArrayToSave(currentGroup["acorns"] as! [String], offeringUsername, String(proposerAcorns!))
-                
-                var userAcorns = getUserInfo(newAcorns, PFUser.currentUser()!.username!).toInt()
-           
-                userAcorns! += offeredAcorns
-                let newAcorns2 = getNewArrayToSave(newAcorns, PFUser.currentUser()!.username!, String(userAcorns!))
-                currentGroup["acorns"] = newAcorns2
-                currentGroup.save()
-            }
-        
+        //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+        let viewsArray = displayLoadingAnimator(self.view)
+        let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+        let container = viewsArray[1] as! UIView
+        let loadingView = viewsArray[2] as! UIView
+        dispatch_async(dispatch_get_main_queue()) {
+            self.startAcceptingTrade(activityIndicatorView, container: container, loadingView: loadingView)
         }
-        
-        ///End of acorn checks
-        changeOwners()
-        finishTrade()
     }
     
     
     @IBAction func declineTrade(sender: AnyObject) {
         tradeProposal!.deleteInBackground()
+        //Reloading
+        self.delegate?.tradeOfferViewController(self)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -189,6 +88,8 @@ class TradeOfferViewController: PopUpViewController {
                     for trade in tradeOffers! {
                         let object = trade as PFObject
                         let username = object["offeringUsername"] as! String
+                        println("username is \(username)")
+                        println("offeringUsername is \(offeringUsername)")
                         if username != offeringUsername {
                             //If the offerer who had their trade approved also had multiple offers, we just want to send an approval alert, not a rejection alert too
                             usernames.append(username)
@@ -200,15 +101,8 @@ class TradeOfferViewController: PopUpViewController {
                 let yourSquirrelFirstName = self.yourSquirrel!["first_name"] as! String
                 let yourSquirrelLastName = self.yourSquirrel!["last_name"] as! String
                 let yourSquirrelName = "\(yourSquirrelFirstName) \(yourSquirrelLastName)"
-                let pushQuery = PFInstallation.query()
-                pushQuery!.whereKey("username", containedIn: usernames)
-                let push = PFPush()
-                push.setQuery(pushQuery)
                 let message = "\(PFUser.currentUser()!.username!) has rejected your offer for \(yourSquirrelName)"
-                let NSMessage = message as NSString
-                let pushDict = ["alert": NSMessage, "badge":0, "sounds":"", "content-available": 1]
-                push.setData(pushDict)
-                push.sendPushInBackgroundWithBlock(nil)
+                sendPushNotifications(0, message, "rejectedTrade", usernames)
                 self.dismissViewControllerAnimated(true, completion: nil)
                 //Reloading
                 self.delegate?.tradeOfferViewController(self)
@@ -228,16 +122,8 @@ class TradeOfferViewController: PopUpViewController {
                 self.yourSquirrel?.save()
                 self.offeredSquirrel?.save()
                 //Alert the offering user that their proposal has been accepted
-                let pushQuery = PFInstallation.query()
-                pushQuery!.whereKey("username", equalTo: offeringUsername)
-                let push = PFPush()
-                push.setQuery(pushQuery)
                 let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
-                let inviteMessage = message as NSString
-                let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-                push.setData(pushDict)
-                push.sendPushInBackgroundWithBlock(nil)
-                
+                sendPushNotifications(0, message, "acceptedTrade", [offeringUsername])
                 self.tradeProposal!.delete()
                 self.deleteOtherSquirrelOffers(offeringUsername)
                 //Reload the updated trades
@@ -287,6 +173,177 @@ class TradeOfferViewController: PopUpViewController {
         yourSquirrel!["owner"] = tradeProposal!["offeringUser"]
         yourSquirrel!["ownerUsername"] = tradeProposal!["offeringUsername"]
         yourSquirrel!.save()
+    }
+    
+    //If the proposer has offered only acorns, then we need to take away a squirrel slot from them and give the logged in user a squirrel slot
+    func newSquirrelSlots(group: PFObject) -> [String] {
+        var proposerSquirrelSlots = getUserInfo(group["squirrelSlots"] as! [String], tradeProposal!["offeringUsername"] as! String).toInt()
+        //var yourSquirrelSlots = getUserInfo(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+        proposerSquirrelSlots! -= 1
+        //yourSquirrelSlots! += 1
+        LOGGED_IN_USER_SQUIRREL_SLOTS += 1
+        let newSquirrelSlots1 = getNewArrayToSave(group["squirrelSlots"] as! [String], tradeProposal!["offeringUsername"] as! String, String(proposerSquirrelSlots!))
+        let newSquirrelSlots2 = getNewArrayToSave(newSquirrelSlots1, PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+        return newSquirrelSlots2
+    }
+    
+    
+    //All of this is in a function so that it's easier to put in as a block to be run asychonously (which lets us show a loading animation)
+    func startAcceptingTrade(activityIndicatorView: NVActivityIndicatorView, container: UIView, loadingView: UIView) {
+        //Finish implementing remove ratings later
+        let offeringUsername = tradeProposal!["offeringUsername"] as! String
+        let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
+        
+        if tradeProposal!["offeredAcorns"] != nil {
+            var offeredAcorns = tradeProposal!["offeredAcorns"] as! Int
+            var currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+            currentGroup.fetch()
+            
+            var proposerSquirrelSlots = getUserInfo(currentGroup["squirrelSlots"] as! [String], offeringUsername).toInt()
+            var proposerAcorns = getUserInfo(currentGroup["acorns"] as! [String], tradeProposal!["offeringUsername"] as! String).toInt()
+            let offeredSquirrelID = tradeProposal!["offeredSquirrelID"] as? String
+            //We need to run a lot of checks to see if the user still has enough acorns that they offered for the trade
+            if proposerAcorns == 0 && offeredSquirrelID == nil {
+                //Global function that stops the loading animation and dismisses the views it is attached to
+                resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                //Then the offerer has no acorns and didn't propose a squirrel, so we have to tel the user that the trade is off
+                let title = "There's a problem with the trade"
+                let offeringUsername = tradeProposal!["offeringUsername"] as! String
+                let message = "Unfortunately \(offeringUsername) didn't offer a Squirrel and spent all of his/her acorns, so this trade is off the table :("
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.tradeProposal!.delete()
+                    //Reloading
+                    self.delegate?.tradeOfferViewController(self)
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+            
+            else if (proposerAcorns! > 0) && (proposerSquirrelSlots == 0) && (offeredSquirrelID == nil) {
+                //The user cant accept this trade because the offerer has no squirrel slots to give up (to balance the trade)
+                //Global function that stops the loading animation and dismisses the views it is attached to
+                resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                let title = "There's a problem with the trade"
+                let offeringUsername = tradeProposal!["offeringUsername"] as! String
+                let message = "Unfortunately \(offeringUsername) doesn't have any Squirrel Slots to give up (since he's the only one getting a Squirrel), so this trade is off the table :("
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.tradeProposal!.delete()
+                    //Reloading
+                    self.delegate?.tradeOfferViewController(self)
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            }
+
+            else if proposerAcorns == 0 && offeredSquirrelID != nil {
+                //Then the offerer has no acorns, but we give the user the option to just trade for the offered squirrel
+                let title = "There's a problem with the trade"
+                let offeringUsername = tradeProposal!["offeringUsername"] as! String
+                let message = "Unfortunately \(offeringUsername) spent all of their acorns, but would you like to trade just squirrels?"
+                //Global function that stops the loading animation and dismisses the views it is attached to
+                resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.tradeProposal!.delete()
+                    //Reloading
+                    self.delegate?.tradeOfferViewController(self)
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+                    self.changeOwners()
+                    self.finishTrade()
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+            } else if proposerAcorns < offeredAcorns && proposerAcorns > 0 {
+                //Then the offerer doesn't have as many acorns as they offered, but we can give the user the option to accept less acorns and get the offered squirrel
+                //Global function that stops the loading animation and dismisses the views it is attached to
+                resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                let title = "There's a problem with the trade"
+                let offeringUsername = tradeProposal!["offeringUsername"] as! String
+                var message = "Unforuntately \(offeringUsername) doesn't have \(offeredAcorns) acorns but can offer \(proposerAcorns!) acorns instead. Would you still like to trade?"
+                if offeredSquirrelID != nil {
+                    message = "Unfortunately \(offeringUsername) doesn't have \(offeredAcorns) acorns but can offer \(proposerAcorns!) acorns and their squirrel. Would you still like to trade?"
+                }
+                var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
+                    self.tradeProposal!.delete()
+                    //Reloading
+                    self.delegate?.tradeOfferViewController(self)
+                    alert.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    return
+                }))
+                alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction!) in
+                    //Reloading
+                    self.delegate?.tradeOfferViewController(self)
+                    var newProposerAcorns = "0"
+                    var newUserAcorns = getNewArrayToSave(currentGroup["acorns"] as! [String], offeringUsername, newProposerAcorns)
+                    var userAcorns2 = getUserInfo(newUserAcorns, PFUser.currentUser()!.username!).toInt()
+                    userAcorns2! += proposerAcorns!
+                    //For immediately displaying the user's new acorns
+                    LOGGED_IN_USER_ACORNS = userAcorns2!
+                    self.changeOwners()
+                    self.tradeProposal!.deleteInBackgroundWithBlock({ (didDelete: Bool, error: NSError?) -> Void in
+                        if error == nil {
+                            self.finishTrade()
+                            let newAcorns = getNewArrayToSave(newUserAcorns, PFUser.currentUser()!.username!, String(userAcorns2!))
+                            currentGroup["acorns"] = newAcorns
+                            if self.tradeProposal!["offeredSquirrelID"] == nil {
+                                var squirrelSlots = self.newSquirrelSlots(currentGroup)
+                                currentGroup["squirrelSlots"] = squirrelSlots
+                            }
+                            currentGroup.save()
+                            //Reloading
+                            self.delegate?.tradeOfferViewController(self)
+                            alert.dismissViewControllerAnimated(true, completion: nil)
+                            self.dismissViewControllerAnimated(true, completion: nil)
+    
+                        } else {
+                            //There was an error and we should alert them using the global function
+                            displayAlert(self, "Oops", "There's been a problem. Would you mind trying again?")
+                        }
+                    })
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+
+            } else {
+                //The user has enough acorns for the trade
+                //Need to subtract acorns from the offerer and add them to the logged in user
+                proposerAcorns! -= offeredAcorns
+                var newAcorns = getNewArrayToSave(currentGroup["acorns"] as! [String], offeringUsername, String(proposerAcorns!))
+                
+                var userAcorns = getUserInfo(newAcorns, PFUser.currentUser()!.username!).toInt()
+           
+                userAcorns! += offeredAcorns
+                //For immediately displaying the user's new acorns
+                LOGGED_IN_USER_ACORNS = userAcorns!
+                let newAcorns2 = getNewArrayToSave(newAcorns, PFUser.currentUser()!.username!, String(userAcorns!))
+                currentGroup["acorns"] = newAcorns2
+                if self.tradeProposal!["offeredSquirrelID"] == nil {
+                    var squirrelSlots = self.newSquirrelSlots(currentGroup)
+                    currentGroup["squirrelSlots"] = squirrelSlots
+                }
+                currentGroup.save()
+            }
+        
+        }
+        
+        ///End of acorn checks
+        changeOwners()
+        finishTrade()
+        //Global function that stops the loading animation and dismisses the views it is attached to
+        resumeInteractionEvents(activityIndicatorView, container, loadingView)
     }
     
 

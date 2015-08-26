@@ -75,15 +75,21 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
-                    self.loadObjects()
-                    //Need to delete all of the squirrels in the group
-                    let squirrelQuery = PFQuery(className: "Squirrel")
-                    squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
-                    squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
-                    if error == nil {
-                        for object in squirrels! {
-                                //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
-                                let squirrel:PFObject = object as! PFObject
+                     //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+                    let viewsArray = displayLoadingAnimator(self.view)
+                    let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+                    let container = viewsArray[1] as! UIView
+                    let loadingView = viewsArray[2] as! UIView
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.loadObjects()
+                        //Need to delete all of the squirrels in the group
+                        let squirrelQuery = PFQuery(className: "Squirrel")
+                        squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
+                        squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
+                        if error == nil {
+                            for object in squirrels! {
+                                let squirrel = object as! PFObject
                                 squirrel.delete()
                             }
                         }
@@ -92,6 +98,9 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     PFUser.currentUser()!.save()
                     group.delete()
                     self.loadObjects()
+                    //Global function that stops the loading animation and dismisses the views it is attached to
+                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                    }
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
@@ -102,39 +111,50 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
-                let squirrelQuery = PFQuery(className: "Squirrel")
-                squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
-                squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
-                squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
-                    if error == nil {
-                        for object in squirrels! {
-                                //Bug - have to declare the type and convert it for Xcode to recognize it as a PFObject
-                                let squirrel:PFObject = object as! PFObject
-                                squirrel.removeObjectForKey("ownerUsername")
-                                squirrel.removeObjectForKey("owner")
+                //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+                let viewsArray = displayLoadingAnimator(self.view)
+                let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+                let container = viewsArray[1] as! UIView
+                let loadingView = viewsArray[2] as! UIView
+                dispatch_async(dispatch_get_main_queue()) {
+                    let squirrelQuery = PFQuery(className: "Squirrel")
+                    squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
+                    squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
+                    squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
+                        if error == nil {
+                            for object in squirrels! {
+                                    let squirrel = object as! PFObject
+                                    squirrel.removeObjectForKey("ownerUsername")
+                                    squirrel.removeObjectForKey("owner")
                                     squirrel.save()
+                                }
                             }
-                        }
-                    })
-                    let acorns = getFullUserInfo(group["acorns"] as! [String], PFUser.currentUser()!.username!)
-                    let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!)
-                    let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], PFUser.currentUser()!.username!)
-                    let usersOnLastVist = getFullUserInfo(group["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!)
-                    let lastVisit = getFullUserInfo(group["lastVisits"] as! [String], PFUser.currentUser()!.username!)
-                    let rerate = getFullUserInfo(group["rerates"] as! [String], PFUser.currentUser()!.username!)
-                    //Remove user from the group's users and remove all of the user's other fields
-                    group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
-                    group.removeObject(acorns, forKey: "acorns")
-                    group.removeObject(squirrelSlots, forKey: "squirrelSlots")
-                    group.removeObject(cumulativeDays, forKey: "cumulativeDays")
-                    group.removeObject(usersOnLastVist, forKey: "usersOnLastVist")
-                    group.removeObject(lastVisit, forKey: "lastVisits")
-                    group.removeObject(rerate, forKey: "rerates")
-                    //Remve the group from the user's group
-                    PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
-                    group.save()
-                    PFUser.currentUser()!.save()
-                    self.viewDidLoad()
+                            let acorns = getFullUserInfo(group["acorns"] as! [String], PFUser.currentUser()!.username!)
+                        let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!)
+                        let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], PFUser.currentUser()!.username!)
+                        let usersOnLastVist = getFullUserInfo(group["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!)
+                        let lastVisit = getFullUserInfo(group["lastVisits"] as! [String], PFUser.currentUser()!.username!)
+                        let rerate = getFullUserInfo(group["rerates"] as! [String], PFUser.currentUser()!.username!)
+                        //Remove user from the group's users and remove all of the user's other fields
+                        group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
+                        group.removeObject(acorns, forKey: "acorns")
+                        group.removeObject(squirrelSlots, forKey: "squirrelSlots")
+                        group.removeObject(cumulativeDays, forKey: "cumulativeDays")
+                        group.removeObject(usersOnLastVist, forKey: "usersOnLastVist")
+                        group.removeObject(lastVisit, forKey: "lastVisits")
+                        group.removeObject(rerate, forKey: "rerates")
+                        //Remve the group from the user's group
+                        PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
+                        group.save()
+                        PFUser.currentUser()!.save()
+                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        //self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.viewDidLoad()
+                        //Global function that stops the loading animation and dismisses the views it is attached to
+                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                        })
+                    
+                    }
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             }

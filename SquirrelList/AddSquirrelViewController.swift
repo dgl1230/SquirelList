@@ -21,9 +21,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var firstName: UITextField!
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
-    //Have one array with their full names in it
-    var squirrelNames: [String]?
-
     
     
     @IBAction func done() {
@@ -47,20 +44,32 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         if first.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil || last.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil {
                 displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal.")
         } else {
-            let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
-            let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
-            let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
+                let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
+                let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
-            let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
-            if (find(squirrelNames!, squirrelName) != nil) {
-                displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
-                
-            } else {
-                //Reloads the parent squirrelViewController
-                delegate?.addSquirrelViewController(self, didFinishAddingFirstName: trimmedFirst2.capitalizedString, didFinishAddingLastName: trimmedLast2.capitalizedString)
-                self.navigationController?.popViewControllerAnimated(true)
-        }
+                let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+                currentGroup.fetch()
+                //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
+                let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
+                let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
+            
+                let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
+                if (find(squirrelNames, squirrelName) != nil) {
+                    self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
+                    
+                } else {
+                    //Add the new Squirrel's full name to the groups squirrelFullNames field
+                    currentGroup.addObject(squirrelName, forKey: "squirrelFullNames")
+                    currentGroup.save()
+                    LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+                    //Send silent push notifications for other users to have their Squirrel tab refresh
+                    sendPushNotifications(0, "", "reloadSquirrels", users)
+                    //Reloads the parent squirrelViewController
+                    self.delegate!.addSquirrelViewController(self, didFinishAddingFirstName: trimmedFirst2.capitalizedString, didFinishAddingLastName: trimmedLast2.capitalizedString)
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
         }
     }
     
@@ -92,7 +101,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         //Set the doneBarButton to 'fa-check-circle'
         doneBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         doneBarButton.title = "\u{f058}"
-        doneBarButton.tintColor = UIColor.whiteColor()
+        doneBarButton.tintColor = UIColor.orangeColor()
     }
     
     //Should be its own extension 

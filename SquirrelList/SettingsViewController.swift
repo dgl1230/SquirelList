@@ -66,6 +66,10 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
                 alert.dismissViewControllerAnimated(true, completion: nil)
             }))
             alert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler:  { (action: UIAlertAction!) in
+                //Let SquirrelViewController and SquirrelStoreController know that global variables should be reloaded
+                LOGGED_IN_USER_ACORNS = 123456789
+                LOGGED_IN_USER_SQUIRREL_SLOTS = 123456789
+                LOGGED_IN_USER_RERATES = 123456789
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
                 let homeController = loginRegisterStoryBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController

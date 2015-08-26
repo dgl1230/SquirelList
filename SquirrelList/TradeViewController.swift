@@ -83,6 +83,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         }
         //There's been no problems, so the trade offer can now go through
        //Function found in GlobalFunctions file - displays loading animation
+       
         //activityIndicatorView = displayLoadingAnimator(self.view)
         tradeProposal.saveInBackgroundWithBlock {
             (success: Bool, error: NSError?) -> Void in
@@ -125,18 +126,10 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                     }))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-            
-                let pushQuery = PFInstallation.query()
-                let offeringUsername = PFUser.currentUser()!.username
+                
                 let desiredSquirrelName = "\(firstName) \(lastName)"
-                pushQuery!.whereKey("username", equalTo: self.desiredSquirrelOwner!.username!)
-                let push = PFPush()
-                push.setQuery(pushQuery)
-                let proposal = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)"
-                let inviteMessage = proposal as NSString
-                let pushDict = ["alert": inviteMessage, "badge":"increment", "sounds":"", "content-available": 1]
-                push.setData(pushDict)
-                push.sendPushInBackgroundWithBlock(nil)
+                let message = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)"
+                sendPushNotifications(0, message, "proposedTrade", [self.desiredSquirrelOwner!.username!])
                 
             } else {
                 //Global function for displaying alert

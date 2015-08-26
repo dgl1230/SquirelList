@@ -18,6 +18,10 @@ let reloadIndividualGroupData = "com.denis.reloadIndividualGroupData"
 
 class UsersViewController: PFQueryTableViewController {
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadWithNewGroup", object: nil)
+    }
+
     var currentGroup: PFObject?
     //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
     var shouldReLoad: Bool?
@@ -138,15 +142,15 @@ class UsersViewController: PFQueryTableViewController {
             cumulativeDays! += 1
             //var acorns = userGroupData!["acorns"] as! Int
             var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
-            acorns! += 25
+            acorns! += 20
             //let squirrelScore = userGroupData!["squirrelSlots"] as! Int
             let squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
-            var message = "Here's 25 acorns for visiting \(groupName) everyday!"
+            var message = "Here's 20 acorns for visiting \(groupName) everyday!"
             //Reward them for having a full squirrel team
             if squirrelSlots == 0 {
-                acorns! += 25
-                message = "Here's 50 acorns for visiting \(groupName) daily and having a full squirrel team!"
+                acorns! += 20
+                message = "Here's 40 acorns for visiting \(groupName) daily and having a full squirrel team!"
             }
             var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in

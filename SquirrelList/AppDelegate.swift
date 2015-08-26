@@ -61,7 +61,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let aps = userInfo["aps"] as? NSDictionary
         let alert = aps!["alert"] as? NSString
         let message = alert as! String
+        //The type can be "friendRequest", "groupInvite", "acceptedGroupInvite", "acceptedFriendRequest", "acceptedTrade", "proposedTrade", "reloadMessages", "reloadSquirrels", "rejectedTrade"
+        let type = userInfo["type"] as! NSString
         
+        if type == "acceptedFriendReuqest" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Friendship Accepted")
+        } else if type == "acceptedGroupInvite" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Invitation Accepted")
+             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        } else if type == "acceptedTrade" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Trade Completed")
+            //We should reload the user's squirrels if they have changed owners
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        } else if type == "friendRequest" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Friend Request")
+        } else if type == "groupInvite" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Group Invitation")
+        } else if type == "proposedTrade" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Trade Offer")
+        } else if type == "rejectedTrade" {
+            showBanner(UIColor.orangeColor(), message: message, title: "Trade Rejected")
+        }else if type == "reloadMessages" {
+            NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
+        } else if type == "reloadSquirrels" {
+            NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+        }
+        
+
+        
+        
+        /*
         if message == "" {
             //Its a group message and it should be silent, but we should reload do send a NSNotification to update messages for live chat
             NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
@@ -86,6 +115,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             banner.dismissesOnTap = true
             banner.show(duration: 5.0)
         }
+        */
         
 
         
@@ -117,6 +147,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    
+    //NON APPDELEGATE FUNCTIONS
+    
+    //Shows a notification banner
+    func showBanner(color: UIColor, message: String, title: String) {
+        let banner = Banner(title: title, subtitle: message , backgroundColor: color)
+        banner.dismissesOnTap = true
+        banner.show(duration: 5.0)
     }
 
 

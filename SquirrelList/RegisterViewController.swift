@@ -33,6 +33,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
 
     @IBAction func register(sender: AnyObject) {
+    println("PASSWORD TEXT FIELD IS \(count(passwordTextField.text))")
         var error = ""
         var title = ""
         var username = usernameTextField.text

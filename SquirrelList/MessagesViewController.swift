@@ -35,18 +35,8 @@ class MessagesViewController: JSQMessagesViewController {
             if error == nil {
                 self.loadMessages()
                 
-                let pushQuery = PFInstallation.query()
-                
-                //We want to get all installations that have the same users that are in the user's currentGroup
-                pushQuery?.whereKey("username", containedIn: PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
-                
-                let push = PFPush()
-                push.setQuery(pushQuery)
-                //We want silent push notifications
-                let pushDict = ["alert": "", "badge":0, "sounds":"", "content-available": 1]
-                push.setData(pushDict)
-                push.sendPushInBackgroundWithBlock(nil)
-                
+                //Send silent push notifications for other users to have their Messages tab refresh
+                sendPushNotifications(0, "", "reloadMessages", PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
             }
         }
         self.finishSendingMessage()
@@ -90,7 +80,7 @@ class MessagesViewController: JSQMessagesViewController {
         }
     }
     
-    func reloadMessages() {
+    func reload() {
         loadMessages()
     }
     
@@ -108,7 +98,7 @@ class MessagesViewController: JSQMessagesViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //Listen for when a user has pushed a new notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadMessages", name: "reloadMessages", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "reloadMessages", object: nil)
         loadMessages()
         
     }
@@ -117,7 +107,7 @@ class MessagesViewController: JSQMessagesViewController {
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         //We only want the chat to get updated in real time if the user is on the chat screen
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadMessages", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadmessages", object: nil)
     }
     
 

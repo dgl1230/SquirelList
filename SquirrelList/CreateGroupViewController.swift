@@ -25,6 +25,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group["pendingUsers"] = []
         group["squirrels"] = []
+        group["squirrelFullNames"] = []
         group["acorns"] = ["\(PFUser.currentUser()!.username!):750"]
         group["squirrelSlots"] = ["\(PFUser.currentUser()!.username!):3"]
         group["cumulativeDays"] = ["\(PFUser.currentUser()!.username!):1"]
@@ -36,23 +37,8 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         let todayString = formatter.stringFromDate(today)
         group["lastVisits"] = ["\(PFUser.currentUser()!.username!):\(todayString)"]
         group.save()
-        
-        /*
-        let userGroupData = PFObject(className: "UserGroupData")
-        userGroupData["user"] = PFUser.currentUser()!
-        userGroupData["group"] = group
-        userGroupData["acorns"] = 750
-        userGroupData["squirrelSlots"] = 3
-        userGroupData["canRerate"] = false
-        userGroupData["lastVisit"] = NSDate()
-        userGroupData["numOfGroupUsers"] = 1
-        userGroupData["cumulativeDaysVisited"] = 1
-        userGroupData["groupName"] = groupNameTextField.text as NSString
-        userGroupData.save()
-        */
         let currentUserGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
-        //PFUser.currentUser()!["currentGroupData"] = userGroupData
         PFUser.currentUser()!["currentGroup"] = group
         PFUser.currentUser()!.save()
 
@@ -69,11 +55,6 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
             self.navigationController?.popViewControllerAnimated(true)
         }
 
-    }
-    
-    //Finishes the process of creating the group for the user. We assumes the user has already been given permission to create a group (they provided an appropriate name)
-    func finishCreatingGroup() {
-    
     }
     
     override func viewDidLoad() {
