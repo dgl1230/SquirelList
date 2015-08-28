@@ -20,8 +20,8 @@ class MessagesViewController: JSQMessagesViewController {
     var outgoingBubbleImage: JSQMessagesBubbleImage!
     var incomingBubbleImage : JSQMessagesBubbleImage!
     
-    //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
-    var shouldReLoad: Bool?
+    //Variable for storing whether the viewcontroller should reload (if the user changed their currentGroup)
+    var shouldReLoad = false
     //Optional for
     var firstViewDidLoad: Bool?
     
@@ -81,7 +81,13 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     func reload() {
-        loadMessages()
+        if self.view.window == nil {
+            //The user is not currently on the screen, so we just make a note to refresh later
+            shouldReLoad = true
+        } else {
+            //Else the user is on the screen right now, and we should reload
+            loadMessages()
+        }
     }
     
     

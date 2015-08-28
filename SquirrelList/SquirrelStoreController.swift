@@ -98,12 +98,12 @@ class SquirrelStoreController: UITableViewController {
         }
     }
 
-    
+    /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //In order to be up to date and not be tricked by the user, we need to always fetch when we're in the squirrel store
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
-        currentGroup.fetch()
+        //currentGroup.fetch()
         LOGGED_IN_USER_ACORNS = getUserInfo(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()!
         LOGGED_IN_USER_SQUIRREL_SLOTS = getUserInfo(currentGroup["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
         LOGGED_IN_USER_RERATES = getUserInfo(currentGroup["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()!
@@ -112,10 +112,10 @@ class SquirrelStoreController: UITableViewController {
         }
         LOGGED_IN_USER_GROUP_NAME = currentGroup["name"] as! String
     }
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("LOADING THE SQUIRREL STORE")
         //So that we don't reload twice
         //shouldReload = false
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject

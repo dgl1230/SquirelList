@@ -82,7 +82,7 @@ class UsersViewController: PFQueryTableViewController {
             //controller.delegate = self
         }
         if segue.identifier == "SingleUserSquirrels" {
-            let controller = segue.destinationViewController as! SquirrelViewController
+            let controller = segue.destinationViewController as! UsersSquirrelsViewController
             controller.selectedUser = sender as? PFUser
         }
         if segue.identifier == "NewUserScreens" {
@@ -215,9 +215,6 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        currentGroup = PFUser.currentUser()!["currentGroup"]! as? PFObject
-        currentGroup!.fetch()
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"

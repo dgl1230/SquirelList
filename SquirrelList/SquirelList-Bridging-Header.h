@@ -7,3 +7,4 @@
 #import <Bolts/Bolts.h> 
 #import <ParseUI/ParseUI.h>
 #import "JSQMessages.h"
+#import "Reachability.h"

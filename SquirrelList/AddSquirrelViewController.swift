@@ -63,7 +63,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                     //Add the new Squirrel's full name to the groups squirrelFullNames field
                     currentGroup.addObject(squirrelName, forKey: "squirrelFullNames")
                     currentGroup.save()
-                    LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+                    //LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
                     //Send silent push notifications for other users to have their Squirrel tab refresh
                     sendPushNotifications(0, "", "reloadSquirrels", users)
                     //Reloads the parent squirrelViewController

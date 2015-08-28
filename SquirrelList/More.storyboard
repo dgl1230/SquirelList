@@ -242,24 +242,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jlg-8F-B7V" userLabel="Pop-up View">
-                                <rect key="frame" x="180" y="68" width="240" height="240"/>
+                                <rect key="frame" x="181" y="92" width="238" height="150"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inviter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
-                                        <rect key="frame" x="8" y="41" width="224" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="group name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
+                                        <rect key="frame" x="11" y="67" width="216" height="35"/>
                                         <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="group name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylf-mO-KUR">
-                                        <rect key="frame" x="8" y="131" width="224" height="42"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="invites you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
+                                        <rect key="frame" x="65" y="44" width="108" height="21"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9z-em-gaB">
-                                        <rect key="frame" x="8" y="202" width="62" height="30"/>
+                                        <rect key="frame" x="8" y="110" width="68" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="  Decline  ">
+                                        <state key="normal" title="  Decline   ">
                                             <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -267,14 +267,8 @@
                                             <action selector="decline:" destination="wIG-oy-ucg" eventType="touchUpInside" id="7Bi-lX-Tbf"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="invites you to join" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oro-R6-g6j">
-                                        <rect key="frame" x="66" y="96" width="108" height="21"/>
-                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="19"/>
-                                        <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-gY-Ye9">
-                                        <rect key="frame" x="170" y="202" width="62" height="30"/>
+                                        <rect key="frame" x="162" y="110" width="68" height="30"/>
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="  Accept  ">
                                             <color key="titleColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
@@ -284,18 +278,24 @@
                                             <action selector="accept:" destination="wIG-oy-ucg" eventType="touchUpInside" id="OC9-ov-fjm"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="inviter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1v4-GX-kdx">
+                                        <rect key="frame" x="14" y="13" width="210" height="31"/>
+                                        <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="0.94999999999999996" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="odB-yg-g9v"/>
-                                    <constraint firstAttribute="height" constant="240" id="wjG-1l-p1I"/>
+                                    <constraint firstAttribute="width" constant="238" id="odB-yg-g9v"/>
+                                    <constraint firstAttribute="height" constant="150" id="wjG-1l-p1I"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="jlg-8F-B7V" secondAttribute="centerX" id="9jf-Jv-Z32"/>
-                            <constraint firstItem="jlg-8F-B7V" firstAttribute="top" secondItem="ARW-aH-czT" secondAttribute="top" constant="68" id="jb2-nl-adw"/>
+                            <constraint firstItem="jlg-8F-B7V" firstAttribute="top" secondItem="ARW-aH-czT" secondAttribute="top" constant="92" id="jb2-nl-adw"/>
                         </constraints>
                     </view>
                     <connections>
@@ -435,7 +435,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="group_more" translatesAutoresizingMaskIntoConstraints="NO" id="8R8-Ys-RYK" userLabel="Squirrel Store Image">
-                                                    <rect key="frame" x="17" y="11" width="25" height="25"/>
+                                                    <rect key="frame" x="17" y="8" width="25" height="30"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -504,7 +504,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="CA855133-992E-47CA-9C28-513F2B328DB5" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="BAAF4C43-E152-4F37-A340-48B7A6AEF8D0" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1231,7 +1231,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CA855133-992E-47CA-9C28-513F2B328DB5" width="24" height="37">
+        <image name="BAAF4C43-E152-4F37-A340-48B7A6AEF8D0" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA

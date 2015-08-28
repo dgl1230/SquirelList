@@ -17,7 +17,7 @@ import UIKit
     optional func userSquirrelsPopUpViewControllerDelegate(controller: UserSquirrelsPopUpViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject)
 }
 
-class UserSquirrelsPopUpViewController: PopUpViewController, SquirrelViewControllerDelegate {
+class UserSquirrelsPopUpViewController: PopUpViewController, UsersSquirrelsViewControllerDelegate {
 
     //These optionals need to be passed to the tableviewcontroller container and then passed back to the TradeViewController
     var desiredSquirrel: PFObject?
@@ -29,7 +29,7 @@ class UserSquirrelsPopUpViewController: PopUpViewController, SquirrelViewControl
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "userSquirrelsEmbed" {
-            let controller = segue.destinationViewController as! SquirrelViewController
+            let controller = segue.destinationViewController as! UsersSquirrelsViewController
             controller.currentlyTrading = true
             controller.desiredSquirrel = desiredSquirrel
             controller.desiredSquirrelOwner = desiredSquirrelOwner
@@ -37,12 +37,19 @@ class UserSquirrelsPopUpViewController: PopUpViewController, SquirrelViewControl
         }
     }
     
-    
+    /*
     //Delegate function for passing selected squrirel and other trade info back to the TradeViewController
     func SquirrelTradeDelegate(controller: SquirrelViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
             delegate?.userSquirrelsPopUpViewControllerDelegate!(self, selectedSquirrel: selectedSquirrel, wantedSquirrelOwner: wantedSquirrelOwner, wantedSquirrel: wantedSquirrel)
             dismissViewControllerAnimated(true, completion: nil)
     }
+    */
+    
+    func selectedSquirrelForTrade(controller: UsersSquirrelsViewController, selectedSquirrel: PFObject, wantedSquirrelOwner: PFUser, wantedSquirrel: PFObject) {
+            delegate!.userSquirrelsPopUpViewControllerDelegate!(self, selectedSquirrel: selectedSquirrel, wantedSquirrelOwner: wantedSquirrelOwner, wantedSquirrel: wantedSquirrel)
+            dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
     
 

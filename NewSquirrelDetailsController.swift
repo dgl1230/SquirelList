@@ -9,26 +9,24 @@
 import UIKit
 
 //For telling SquirrelViewController to reload after updating Squirrel information
-protocol SquirrelDetailViewControllerDelegate: class {
-    func reload(controller: SquirrelDetailViewController, usedRerate: Bool)
+protocol NewSquirrelDetailslViewControllerDelegate: class {
+    func reloadParent(controller: NewSquirrelDetailsViewController, usedRerate: Bool)
 }
 
-class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
 
-    //Bool that determines if the logged in user has room to pick up another squirrel
-    var canClaimSquirrel: Bool?
-    weak var delegate: SquirrelDetailViewControllerDelegate?
+    weak var delegate: NewSquirrelDetailslViewControllerDelegate?
     var ratedSquirrel: PFObject?
     var squirrelOwner: PFUser?
     var didRateSquirrel: Bool?
-    //Optional for keeping track up how many squirrel slots the user has
-    var squirrelSlots: Int?
     //Variable for checking if the user is pressing the claimTradeButton for claiming a squirrel or proposing a trade or uploading a picture
     //Value can be either "claim", "trade", or "uploadPicture"
     var claimOrTradeOrPicture = ""
     //Optional for keeping track of if the user can rerate the squirrel - accessed from the UserGroupData model
     var canRerate = false
+    //Optional for keeping track up how many squirrel slots the user has
+    var squirrelSlots: Int?
 
     
 
@@ -38,12 +36,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     @IBOutlet weak var claimTradePictureButton: UIButton!
     @IBOutlet weak var squirrelNameLabel: UILabel!
     @IBOutlet weak var avgRatingLabel: UILabel!
-    
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var rateNumberTextField: UITextField!
     //Label that displays the owners name
     @IBOutlet weak var squirrelOwnerLabel: UILabel!
-    
     @IBOutlet weak var squirrelPic: UIImageView?
     
     
@@ -87,7 +83,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
             ratedSquirrel!.save()
             //Since the user already rated the squirrel, they had to have purchased a rerate in order to do this, so we need to set userGroupDate["canRerate"] to false
-            delegate!.reload(self, usedRerate: true)
+            delegate!.reloadParent(self, usedRerate: true)
             //Alert SquirrelStoreController that Rerate was used, so that it can reload
             NSNotificationCenter.defaultCenter().postNotificationName("didUseRerate", object: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -108,14 +104,10 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
 
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
         ratedSquirrel!.save()
-        //Alert SquirrelViewController to reload data
-        //NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-        delegate!.reload(self, usedRerate: false)
+        delegate!.reloadParent(self, usedRerate: false)
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
-    
-
     
 
     func calculateAverageRating(ratings:[String]) -> Double {
@@ -135,7 +127,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     
     //Returns true if the user can claim the squirrel, else it returns false
     func canGetSquirrel() -> Bool {
-        if (ratedSquirrel!["owner"] == nil) || (squirrelSlots > 0) {
+        if (ratedSquirrel!["owner"] == nil) && (LOGGED_IN_USER_SQUIRREL_SLOTS > 0) {
             return true
         }
         return false
@@ -171,7 +163,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             var alert = UIAlertController(title: "Whoops", message: "That Squirrel was just deleted! You can re-add it though :)", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
                 //Need to reload squirrel view
-                self.delegate!.reload(self, usedRerate: false)
+                self.delegate!.reloadParent(self, usedRerate: false)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -183,7 +175,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             var alert = UIAlertController(title: "Oops", message: "That Squirrel was just claimed :(", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
                 //Need to reload squirrel view
-                self.delegate!.reload(self, usedRerate: false)
+                self.delegate!.reloadParent(self, usedRerate: false)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -210,7 +202,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             //Send silent push notifications for other users to have their Squirrel tab refresh
             sendPushNotifications(0, "", "reloadSquirrels", users)
             //Reload main squirrel view
-            self.delegate!.reload(self, usedRerate: false)
+            self.delegate!.reloadParent(self, usedRerate: false)
             //Global function that stops the loading animation and dismisses the views it is attached to
             resumeInteractionEvents(activityIndicatorView, container, loadingView)
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -249,7 +241,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
     }
     
     
-     //Removes the user's rating from the squirrel's "ratings" field
+    //Removes the user's rating from the squirrel's "ratings" field
     func removeRating(squirrel: PFObject) -> [String] {
         var ownerIndex = find(squirrel["raters"] as! [String], PFUser.currentUser()!.username!)
         var ratings = squirrel["ratings"] as? [String]
@@ -294,7 +286,6 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         //Check if the squirrel has an average rating 
         if squirrelRating != 0 && squirrelRating >= 8 {
             //We have to cast the rating as an Int first, because casting it directly as a String produces nil
-            //var averageRating = ratedSquirrel!["avg_rating"] as! Double
             avgRatingLabel.text = "Squirrel Score:  \(squirrelRating!)"
         } else  {
             //The squirrel has a rating, but it is too low to show or the squirrel has no rating
@@ -319,14 +310,13 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             rateButton.alpha = 0.5
         }
         //Check if the squirrel has an owner to propose a trade with and if they have a unique picture
-        var owner = ratedSquirrel!["ownerUsername"] as? String
         let pic = ratedSquirrel!["picture"] as! PFFile
+        var owner = ratedSquirrel!["ownerUsername"] as? String
         if owner == nil {
             squirrelOwnerLabel.text = "Squirreler:  No one :("
-            var canClaim = canClaimSquirrel!
             claimOrTradeOrPicture = "claim"
             claimTradePictureButton.setTitle("Claim Squirrel", forState: UIControlState.Normal)
-            if canClaim == true {
+            if canGetSquirrel() == true {
                 claimTradePictureButton.enabled = true
             } else {
                 claimTradePictureButton.enabled = false
@@ -353,7 +343,7 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
             claimTradePictureButton.setTitle("Propose Trade", forState: UIControlState.Normal)
             claimOrTradeOrPicture = "trade"
         }
-        
+
         //Fetch picture file
         pic.getDataInBackgroundWithBlock({ (imageData: NSData?, error: NSError?) -> Void in
                 if error == nil {
@@ -439,7 +429,8 @@ class SquirrelDetailViewController: PopUpViewController, UITextFieldDelegate, UI
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
-/*
+
+
 //Extending the UIImage class so we can save pictures in much lower quality (which is much faster)
 extension UIImage {
     var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
@@ -448,4 +439,5 @@ extension UIImage {
     var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
     var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
 }
-*/
+
+

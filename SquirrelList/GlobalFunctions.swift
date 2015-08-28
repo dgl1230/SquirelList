@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 //Global variables - yes it's bad practice, but it makes so that we do less NSNotifications
 var LOGGED_IN_USER_ACORNS = 123456789
 var LOGGED_IN_USER_SQUIRREL_SLOTS = 123456789

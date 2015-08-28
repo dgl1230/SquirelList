@@ -100,7 +100,7 @@
         <!--Squirrels-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController storyboardIdentifier="Squirrel_Tab" id="8rJ-Kc-sve" userLabel="Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Squirrel_Tab" id="8rJ-Kc-sve" userLabel="Squirrels" customClass="SquirrelTabViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="51" sectionHeaderHeight="22" sectionFooterHeight="22" id="bFD-op-ejU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -443,7 +443,7 @@
         <!--User Squirrels-->
         <scene sceneID="S3v-xI-UKD">
             <objects>
-                <viewController id="Qgd-8Q-Du2" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qgd-8Q-Du2" userLabel="User Squirrels" customClass="UsersSquirrelsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="52" sectionHeaderHeight="22" sectionFooterHeight="22" id="7CP-dD-uFx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -506,7 +506,7 @@
         <!--User Squirrels-->
         <scene sceneID="VaJ-Nv-JYk">
             <objects>
-                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="SquirrelViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bck-TG-7KF" userLabel="User Squirrels" customClass="UsersSquirrelsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="19G-oi-EXZ">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="270"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -953,10 +953,10 @@
             </objects>
             <point key="canvasLocation" x="1657" y="1850.5"/>
         </scene>
-        <!--Squirrel Detail View Controller-->
+        <!--New Squirrel Details View Controller-->
         <scene sceneID="QaX-M2-vhn">
             <objects>
-                <viewController id="quq-DM-V0e" customClass="SquirrelDetailViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="quq-DM-V0e" customClass="NewSquirrelDetailsViewController" customModule="Squirrel_List" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s2v-Id-4cG"/>
                         <viewControllerLayoutGuide type="bottom" id="Exj-JS-PIW"/>

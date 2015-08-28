@@ -6,14 +6,18 @@
     <customFonts key="customFonts">
         <mutableArray key="BebasNeue Bold.otf">
             <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
+        </mutableArray>
+        <mutableArray key="BebasNeue Book.otf">
+            <string>BebasNeueBook</string>
+        </mutableArray>
+        <mutableArray key="BebasNeue Thin.otf">
+            <string>BebasNeue-Thin</string>
+            <string>BebasNeue-Thin</string>
+            <string>BebasNeue-Thin</string>
+            <string>BebasNeue-Thin</string>
+            <string>BebasNeue-Thin</string>
         </mutableArray>
         <mutableArray key="bosun03.otf">
-            <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
             <string>bosun-03</string>
@@ -42,9 +46,9 @@
                                     <constraint firstAttribute="height" constant="56" id="4Fv-ey-B0J"/>
                                     <constraint firstAttribute="width" constant="204" id="eM9-7v-AUX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Register">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -53,15 +57,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHp-cP-qtg">
-                                <rect key="frame" x="198" y="308" width="204" height="56"/>
+                                <rect key="frame" x="198" y="304" width="204" height="60"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="LXd-PP-xZ9"/>
+                                    <constraint firstAttribute="height" constant="60" id="LXd-PP-xZ9"/>
                                     <constraint firstAttribute="width" constant="204" id="nli-h8-wyX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -85,12 +89,12 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Squirrel List" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ok-e4-ihh">
-                                <rect key="frame" x="174" y="41" width="253" height="100"/>
+                                <rect key="frame" x="182" y="40" width="236" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="253" id="1GR-tf-NYm"/>
+                                    <constraint firstAttribute="width" constant="236" id="1GR-tf-NYm"/>
                                     <constraint firstAttribute="height" constant="100" id="MnU-lS-9Nn"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="59"/>
+                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="59"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -102,8 +106,8 @@
                             <constraint firstAttribute="centerX" secondItem="sG4-sl-xE2" secondAttribute="centerX" id="Q3c-s5-k7T"/>
                             <constraint firstItem="EFr-7l-HDJ" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="372" id="Tlh-Da-Sx3"/>
                             <constraint firstItem="sG4-sl-xE2" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="218" id="fJn-fV-gSP"/>
-                            <constraint firstItem="3ok-e4-ihh" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="41" id="j8b-tx-OrC"/>
-                            <constraint firstItem="JHp-cP-qtg" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="308" id="n33-Pk-UBQ"/>
+                            <constraint firstItem="3ok-e4-ihh" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="40" id="j8b-tx-OrC"/>
+                            <constraint firstItem="JHp-cP-qtg" firstAttribute="top" secondItem="l54-8I-Faa" secondAttribute="top" constant="304" id="n33-Pk-UBQ"/>
                             <constraint firstAttribute="centerX" secondItem="3ok-e4-ihh" secondAttribute="centerX" constant="-0.5" id="uMA-0j-yYZ"/>
                         </constraints>
                     </view>
@@ -154,7 +158,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Txs-5M-icC" userLabel="Close Button">
                                 <rect key="frame" x="0.0" y="13" width="30" height="42"/>
-                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="30"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -171,9 +175,9 @@
                                     <constraint firstAttribute="height" constant="56" id="0rl-hn-a8b"/>
                                     <constraint firstAttribute="width" constant="204" id="85o-yH-fSM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Register">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -319,9 +323,9 @@
                                     <constraint firstAttribute="height" constant="56" id="7PK-fy-gG5"/>
                                     <constraint firstAttribute="width" constant="204" id="JK2-Xd-2fI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

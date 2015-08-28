@@ -8,15 +8,20 @@
 
 import UIKit
 
+let networkDown = "com.frenvu.squirrellist.GOD_NETWORK_WHY"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
+    var reachability: Reachability?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
-
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "checkForReachability:", name: kReachabilityChangedNotification, object: nil)
+        self.reachability = Reachability.reachabilityForInternetConnection()
+        self.reachability!.startNotifier()
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
+        
 
         
         //For now we rest their badge numbers anytime the app launches 
@@ -151,6 +156,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     
     //NON APPDELEGATE FUNCTIONS
+    
+    func checkForReachability(notification: NSNotification) {
+        println("GOING INTO REACHABILITY FUNCTION")
+        var remoteHostStatus = self.reachability!.currentReachabilityStatus()
+        if (remoteHostStatus.value == NotReachable.value) {
+            println("SHOULD BE GOING HERE GOD")
+            let mainStoryBoard = UIStoryboard(name: "ShittyConnection", bundle: nil)
+            let monkeyController = mainStoryBoard.instantiateViewControllerWithIdentifier("MonkeyController") as! UIViewController
+            self.window!.rootViewController = monkeyController
+            self.window!.makeKeyAndVisible()
+        } else if PFUser.currentUser() == nil {
+            //If the user isn't logged in, we need to present the login/register storyboard
+            let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
+            let loginController = loginRegisterStoryBoard.instantiateViewControllerWithIdentifier("Home") as! HomeViewController
+            self.window!.rootViewController = loginController
+            self.window!.makeKeyAndVisible()
+        } else if PFUser.currentUser()!["currentGroup"] == nil {
+            //Present just the MoreViewController to the user because they are still new
+            let mainStoryboard = UIStoryboard(name: "More", bundle: nil)
+            let moreController = mainStoryboard.instantiateViewControllerWithIdentifier("More") as! MoreTableViewController
+            moreController.isNewUser = true
+            let navigationController = UINavigationController(rootViewController: moreController)
+            let blue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
+            navigationController.navigationBar.barTintColor = blue
+            self.window!.rootViewController = navigationController
+            self.window!.makeKeyAndVisible()
+        } else {
+            //Present the tab bar with all the tabs
+            self.window!.rootViewController = HomeTabViewController()
+            self.window!.makeKeyAndVisible()
+        }
+    }
     
     //Shows a notification banner
     func showBanner(color: UIColor, message: String, title: String) {
