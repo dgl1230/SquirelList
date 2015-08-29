@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+/*
 //Unique string for reloading when user has dropped a squirrel or picked up one
 let reloadSquirrels = "com.denis.reloadSquirrelViewController"
 let droppedSquirrel = "com.denis.droppedSquirrel"
@@ -746,4 +747,5 @@ class SquirrelViewController: PFQueryTableViewController, AddSquirrelViewControl
     }
 
 }
+*/
 

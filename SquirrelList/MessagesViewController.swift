@@ -10,6 +10,12 @@ import UIKit
 
 class MessagesViewController: JSQMessagesViewController {
 
+    deinit {
+        //We remove the observers for reloading the controller
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadmessages", object: nil)
+    }
+
     var group: PFObject!
     var incomingUser: PFUser!
     var users = [String]()
@@ -20,10 +26,8 @@ class MessagesViewController: JSQMessagesViewController {
     var outgoingBubbleImage: JSQMessagesBubbleImage!
     var incomingBubbleImage : JSQMessagesBubbleImage!
     
-    //Variable for storing whether the viewcontroller should reload (if the user changed their currentGroup)
-    var shouldReLoad = false
-    //Optional for
-    var firstViewDidLoad: Bool?
+    //Variable for storing whether the viewcontroller should load new messages (if the user has received silent push notifications from other users)
+    var shouldLoadNewMessages = false
     
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
@@ -34,7 +38,6 @@ class MessagesViewController: JSQMessagesViewController {
         message.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
             if error == nil {
                 self.loadMessages()
-                
                 //Send silent push notifications for other users to have their Messages tab refresh
                 sendPushNotifications(0, "", "reloadMessages", PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
             }
@@ -45,7 +48,6 @@ class MessagesViewController: JSQMessagesViewController {
     
     func loadMessages() {
         var lastMessage: JSQMessage? = nil
-        
         if messages.last != nil {
             lastMessage = messages.last
         }
@@ -53,13 +55,12 @@ class MessagesViewController: JSQMessagesViewController {
         messageQuery.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         messageQuery.orderByDescending("createdAt")
         messageQuery.limit = 30
-    
         if lastMessage != nil {
             messageQuery.whereKey("createdAt", greaterThan: lastMessage!.date)
         }
-
         messageQuery.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
+                println("QUERYING MESSAGES")
                 let messageResults = results as? [PFObject]
                 let newMessages = messageResults?.reverse()
                 var counter = 0
@@ -81,18 +82,6 @@ class MessagesViewController: JSQMessagesViewController {
     }
     
     func reload() {
-        if self.view.window == nil {
-            //The user is not currently on the screen, so we just make a note to refresh later
-            shouldReLoad = true
-        } else {
-            //Else the user is on the screen right now, and we should reload
-            loadMessages()
-        }
-    }
-    
-    
-    //Responds to NSNotication when user has changed their current group
-    func reloadWithNewGroup() {
         self.messages = []
         self.messageObjects = []
         self.users = []
@@ -100,28 +89,34 @@ class MessagesViewController: JSQMessagesViewController {
         loadMessages()
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        //Listen for when a user has pushed a new notification
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "reloadMessages", object: nil)
-        loadMessages()
-        
+    //If the user is on the chat screen, we call loadMessages, else we change the shouldLoadNewMessages variable to true (so that loadMessages() is called when the view appears next)
+    func loadNewMessages() {
+        if self.view.window == nil {
+            //The user is not currently on the screen, so we just make a note to refresh later
+            shouldLoadNewMessages = true
+        } else {
+            //Else the user is on the screen right now, and we should reload
+            loadMessages()
+        }
     }
     
     
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        //We only want the chat to get updated in real time if the user is on the chat screen
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadmessages", object: nil)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldLoadNewMessages == true {
+            shouldLoadNewMessages = false
+            loadMessages()
+        }
+        
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstViewDidLoad = true
+        //Listen for when a user has pushed a new silent notification (meaning they have sent a message in the group chat)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadNewMessages", name: "reloadMessages", object: nil)
         //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
         //The sender ID doesn't have to be an actual ID, just something unique, so the user's username works too 
         self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username
@@ -142,10 +137,12 @@ class MessagesViewController: JSQMessagesViewController {
         
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+        //Load any messages 
+        loadMessages()
 
     }
     
-    //For when the user touches an obscure area of the view
+    //For when the user touches an obscure area of the view we want to dismiss the keyboard
     func close() {
         view.endEditing(true)
     }

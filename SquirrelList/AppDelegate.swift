@@ -87,43 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         } else if type == "rejectedTrade" {
             showBanner(UIColor.orangeColor(), message: message, title: "Trade Rejected")
         }else if type == "reloadMessages" {
+            println("TYPE IS RELOADMESSAGES")
             NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
         } else if type == "reloadSquirrels" {
             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
         }
-        
-
-        
-        
-        /*
-        if message == "" {
-            //Its a group message and it should be silent, but we should reload do send a NSNotification to update messages for live chat
-            NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
-        } else {
-            // We display an alert in Banner format
-            var title = ""
-            //Need to figure out the appropriate title to display
-            if message.rangeOfString("wants to be friends!", options: nil, range: nil, locale: nil) != nil {
-                title = "Friend Request"
-            } else if message.rangeOfString("has invited you to join", options: nil, range: nil, locale: nil) != nil {
-                title = "Group Invitation"
-            } else if message.rangeOfString("has accepted your invitation", options: nil, range: nil, locale: nil) != nil {
-                //We don't need to display a title for this
-            } else if message.rangeOfString("has accepted your friend request", options: nil, range: nil, locale: nil) != nil {
-                //We don't need to display a title for this
-            } else if message.rangeOfString("has accepted your offer", options: nil, range: nil, locale: nil) != nil {
-                title = "Trade Completed"
-            } else if message.rangeOfString("has proposed a trade", options: nil, range: nil, locale: nil) != nil {
-                title = "Trade Offer"
-            }
-            let banner = Banner(title: title, subtitle: message , backgroundColor: UIColor.orangeColor())
-            banner.dismissesOnTap = true
-            banner.show(duration: 5.0)
-        }
-        */
-        
-
-        
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

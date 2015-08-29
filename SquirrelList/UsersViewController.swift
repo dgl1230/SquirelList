@@ -19,7 +19,7 @@ let reloadIndividualGroupData = "com.denis.reloadIndividualGroupData"
 class UsersViewController: PFQueryTableViewController {
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "reloadWithNewGroup", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadNotificationKey, object: nil)
     }
 
     var currentGroup: PFObject?
@@ -103,9 +103,22 @@ class UsersViewController: PFQueryTableViewController {
         return query!
     }
     
-     //Responds to NSNotication when user has changed their current group
-    func reloadWithNewGroup() {
-        shouldReLoad = true
+    //Reload the objects and checks if there are new users and updates all labels
+    func reload() {
+        self.loadObjects()
+        self.title = currentGroup!["name"] as? String
+        updateAlerts()
+    }
+    
+    
+    func prepareForReload() {
+        if self.view.window == nil {
+            //The user is not currently on the screen, so we just make a note to refresh later
+            shouldReLoad = true
+        } else {
+            //Else the user is on the Squirrels tab right now, and we should reload
+            reload()
+        }
     }
     
     //Recursively shows the prompts to the user, depending upon the data in the alerts array
@@ -213,28 +226,8 @@ class UsersViewController: PFQueryTableViewController {
         self.performSegueWithIdentifier("SingleUserSquirrels", sender: objects![indexPath.row])
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //Set the addFriendToGroupButton to 'fa-user-plus
-        addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        addFriendToGroupButton?.title = "\u{f234}"
-        addFriendToGroupButton?.tintColor = UIColor.orangeColor()
-        //Set the changeCurrentGroupButton to 'fa-bars'
-        changeCurrentGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        changeCurrentGroupButton?.title = "\u{f0c9}"
-        changeCurrentGroupButton?.tintColor = UIColor.orangeColor()
-        
-        self.title = currentGroup!["name"] as? String
-        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
-        //Customize navigation controller back button to my only the back symbol
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backItem
-        //Register the UsersCellTableViewCell for use in the UserViewController tableView
-        tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        
+    //Checks to see if the logged in user should be shown any strikes, updates their last visit if today if the first time
+    func updateAlerts() {
         //We check to see if the user has been recently given a strike for offensive content
         if PFUser.currentUser()!["recentStrike"] as! Bool == true {
             alerts.append("recentStrike")
@@ -265,8 +258,8 @@ class UsersViewController: PFQueryTableViewController {
         if alerts.count > 0 {
             showAlerts()
         }
-        
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -282,10 +275,35 @@ class UsersViewController: PFQueryTableViewController {
     override func viewWillAppear(animated: Bool) {
         if shouldReLoad == true {
             shouldReLoad = false
-            self.viewDidLoad()
+            reload()
         }
     }
     
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = currentGroup!["name"] as? String
+        //Set the addFriendToGroupButton to 'fa-user-plus
+        addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        addFriendToGroupButton?.title = "\u{f234}"
+        addFriendToGroupButton?.tintColor = UIColor.orangeColor()
+        //Set the changeCurrentGroupButton to 'fa-bars'
+        changeCurrentGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        changeCurrentGroupButton?.title = "\u{f0c9}"
+        changeCurrentGroupButton?.tintColor = UIColor.orangeColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        //Set notification to "listen" for when the the user has changed their currentGroup
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadNotificationKey, object: nil)
+        //Customize navigation controller back button to my only the back symbol
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
+        //Register the UsersCellTableViewCell for use in the UserViewController tableView
+        tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        //Check for any alerts to show
+        updateAlerts()
+        
+        
+        
+    }
 }
 

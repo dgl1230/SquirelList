@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+//Unique string for reloading when user has dropped a squirrel or picked up one
+let reloadSquirrels = "com.denis.reloadSquirrelViewController"
+let droppedSquirrel = "com.denis.droppedSquirrel"
+
 import UIKit
 
 
@@ -98,7 +102,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
         var query = PFQuery(className: "Squirrel")
-        //query.cachePolicy = .CacheElseNetwork
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         query.orderByDescending("avg_rating")
         return query
@@ -107,6 +110,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     //Reload the objects and checks if there are new users and updates all labels
     func reload() {
         self.loadObjects()
+         //Since it appears there is a chance that a user can not have a data field, for now we do a double check and create any relevant fields for them in the group instance if they don't have them
+        verifyNoNullFields()
         updateLables()
         updateSquirrelSlots()
     }
@@ -280,6 +285,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         LOGGED_IN_USER_RERATES = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()!
         var groupUsers = currentGroup!["users"] as! [String]
         var numOfUsers = groupUsers.count
+        
+        //var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
 
         acornsLabel!.text = "\(LOGGED_IN_USER_ACORNS)"
         squirrelSlotsLabel!.text = "Squirrel Slots: \(LOGGED_IN_USER_SQUIRREL_SLOTS)"
@@ -300,11 +307,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     //Checks if new users have joined the currentGroup and pdates the user's squirrel slots if there are new users
     func updateSquirrelSlots() {
-        println("UPDATING SQUIRREL SLOTS")
         let numOfUsers = (currentGroup!["users"] as! [String]).count
-        println("\(numOfUsers)")
         let oldNumOfUsers = getUserInfo(currentGroup!["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!).toInt()
-        println("\(oldNumOfUsers)")
         if numOfUsers == oldNumOfUsers {
             //No new users have joined the group, so we return
             return
@@ -373,7 +377,15 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         } else {
             updateLables()
         }
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //Check to see if we need to show a new user tutorial screens
+        if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
+            //If new user, show them the tutorial screens, but we only want to present these screens from the main squirrel tab
+            performSegueWithIdentifier("NewUserScreens", sender: self)
+        }
     }
     
     
@@ -387,26 +399,21 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadNotificationKey, object: nil)
         //Listen for when silent push notification alerts user that data has changed
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadSquirrels, object: nil)
-        //Set the addSquirrelButton to 'fa-plus-circle'
+        //Set the addSquirrelButton to 'fa-plus'
         addSquirrelButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        addSquirrelButton!.title = "\u{f055}"
-        addSquirrelButton!.tintColor = UIColor.orangeColor()
+        addSquirrelButton!.title = "\u{f067}"
+        //addSquirrelButton!.tintColor = UIColor.orangeColor()
         //Set the tradeOfferButton to 'fa-user-secret'
         tradeOfferButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         tradeOfferButton!.title = "\u{f21b}"
-        tradeOfferButton!.tintColor = UIColor.orangeColor()
+        //tradeOfferButton!.tintColor = UIColor.orangeColor()
         tradeOfferButton!.enabled = true
         
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
-        
-        //Check to see if we need to show a new user tutorial screens
-        if PFUser.currentUser()!["newSquirrelTab"] as! Bool == true {
-            //If new user, show them the tutorial screens, but we only want to present these screens from the main squirrel tab
-            performSegueWithIdentifier("NewUserScreens", sender: self)
-        }
+        //self.navigationItem.leftBarButtonItem = tradeOfferButton
     }
     
     //Delegate function is called for squirrelDetailViewController so that we can reload after a user has rated a squirrel

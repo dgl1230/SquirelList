@@ -12,37 +12,24 @@ import UIKit
 
 class ChatHolderViewController: UIViewController {
     
-    //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
-    var shouldReLoad: Bool?
-
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "messages" {
             let controller = segue.destinationViewController as! MessagesViewController
         }
     }
     
-    func reloadWithNewGroup() {
-        shouldReLoad = true
-    }
-    
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if shouldReLoad == true {
-            self.viewDidLoad()
-        }
+        //If the user has changed their group, we want to make sure the title is always up to date
+        var groupName = PFUser.currentUser()!["currentGroup"]!["name"] as? String
+        self.navigationItem.title = "\(groupName!) Chat"
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var groupName = PFUser.currentUser()!["currentGroup"]!["name"] as? String
-        self.navigationItem.title = "\(groupName!) Chat"
-    
         
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
-        //Set notification to "listen" for when the the user has changed their currentGroup. This is just for changing the title to the new currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
 
         //Check to see whether we should prompt the user to enable push notifications
         let hasSeenChat = PFUser.currentUser()!["hasSeenChat"] as! Bool

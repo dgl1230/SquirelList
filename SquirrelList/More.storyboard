@@ -415,7 +415,7 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="happy" translatesAutoresizingMaskIntoConstraints="NO" id="0qA-Ew-De9" userLabel="Squirrel Store Image">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="poop-happy" translatesAutoresizingMaskIntoConstraints="NO" id="0qA-Ew-De9" userLabel="Squirrel Store Image">
                                                     <rect key="frame" x="17" y="11" width="23" height="23"/>
                                                 </imageView>
                                             </subviews>
@@ -504,7 +504,7 @@
         <scene sceneID="nn8-nG-K4y">
             <objects>
                 <navigationController storyboardIdentifier="MoreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="mTZ-PY-uQR" userLabel="Navigation Bar" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="BAAF4C43-E152-4F37-A340-48B7A6AEF8D0" id="jV0-qV-oSf"/>
+                    <tabBarItem key="tabBarItem" title="Item" selectedImage="F0C99AE0-96EB-4AE4-92F9-6C4551C93B3B" id="jV0-qV-oSf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k49-Lg-Zh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1231,7 +1231,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BAAF4C43-E152-4F37-A340-48B7A6AEF8D0" width="24" height="37">
+        <image name="F0C99AE0-96EB-4AE4-92F9-6C4551C93B3B" width="24" height="37">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBEW
 GxwgISksLzU4VSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05TQ29sb3KA
@@ -1362,8 +1362,8 @@ HH4ckByTHJgAAAAAAAACAQAAAAAAAAA/AAAAAAAAAAAAAAAAAAAcmg
         </image>
         <image name="acorn_orange" width="128" height="128"/>
         <image name="group_more" width="144" height="144"/>
-        <image name="happy" width="128" height="128"/>
         <image name="money-bag-blue" width="128" height="128"/>
+        <image name="poop-happy" width="128" height="123"/>
         <image name="settings" width="128" height="128"/>
         <image name="store" width="128" height="128"/>
     </resources>

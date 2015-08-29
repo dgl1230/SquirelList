@@ -153,6 +153,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         updateLabels()
     }
     
+    
     func updateLabels() {
         let name = selectedUser!["name"] as? String
         if selectedUser!.username == PFUser.currentUser()!.username {
@@ -163,8 +164,6 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             self.teamRatingLabel.text = "\(selectedUser!.username!)'s Squirrels"
         }
     }
-    
-    
     
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

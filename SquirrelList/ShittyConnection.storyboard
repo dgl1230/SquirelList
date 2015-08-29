@@ -4,6 +4,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="bosun03.otf">
+            <string>bosun-03</string>
+            <string>bosun-03</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--MonkeyController-->
         <scene sceneID="GXK-vM-0tX">
@@ -17,35 +23,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monkey" translatesAutoresizingMaskIntoConstraints="NO" id="6do-dz-mUH">
-                                <rect key="frame" x="181" y="65" width="239" height="219"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You have no connection. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="p5Q-PX-iEt">
+                                <rect key="frame" x="16" y="324" width="568" height="33"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="27"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Once you do, we'll reconnect you. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-6G-Hip">
+                                <rect key="frame" x="16" y="347" width="568" height="33"/>
+                                <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="27"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="neutral_face_black" translatesAutoresizingMaskIntoConstraints="NO" id="6do-dz-mUH">
+                                <rect key="frame" x="172" y="49" width="256" height="256"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="239" id="5tK-Cf-ofT"/>
-                                    <constraint firstAttribute="height" constant="219" id="JdZ-0g-AhB"/>
+                                    <constraint firstAttribute="width" constant="256" id="5tK-Cf-ofT"/>
+                                    <constraint firstAttribute="height" constant="256" id="JdZ-0g-AhB"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no connection. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="p5Q-PX-iEt">
-                                <rect key="frame" x="16" y="324" width="568" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Our CEO recommends trying again." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ygE-6G-Hip">
-                                <rect key="frame" x="16" y="347" width="568" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ygE-6G-Hip" firstAttribute="top" secondItem="p5Q-PX-iEt" secondAttribute="bottom" constant="-10" id="1yV-Sg-Ad0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ygE-6G-Hip" secondAttribute="trailing" id="6Ak-vx-j0A"/>
                             <constraint firstItem="p5Q-PX-iEt" firstAttribute="leading" secondItem="JMO-yc-Ous" secondAttribute="leadingMargin" id="Huv-Wp-Y13"/>
-                            <constraint firstItem="6do-dz-mUH" firstAttribute="top" secondItem="JMO-yc-Ous" secondAttribute="top" constant="65" id="ObH-Uq-68P"/>
+                            <constraint firstItem="6do-dz-mUH" firstAttribute="top" secondItem="JMO-yc-Ous" secondAttribute="top" constant="49" id="ObH-Uq-68P"/>
                             <constraint firstItem="ygE-6G-Hip" firstAttribute="leading" secondItem="JMO-yc-Ous" secondAttribute="leadingMargin" id="XI0-OE-nKZ"/>
                             <constraint firstAttribute="centerX" secondItem="6do-dz-mUH" secondAttribute="centerX" constant="-0.5" id="nDX-vZ-8eb"/>
-                            <constraint firstItem="p5Q-PX-iEt" firstAttribute="top" secondItem="6do-dz-mUH" secondAttribute="bottom" constant="40" id="o60-AK-nU6"/>
+                            <constraint firstItem="p5Q-PX-iEt" firstAttribute="top" secondItem="6do-dz-mUH" secondAttribute="bottom" constant="19" id="o60-AK-nU6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="p5Q-PX-iEt" secondAttribute="trailing" id="rPn-ce-x9Z"/>
                             <constraint firstAttribute="centerX" secondItem="ygE-6G-Hip" secondAttribute="centerX" constant="-0.5" id="uWZ-Np-kqM"/>
                             <constraint firstAttribute="centerX" secondItem="p5Q-PX-iEt" secondAttribute="centerX" constant="-0.5" id="zNf-84-KlE"/>
@@ -58,6 +64,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="monkey" width="256" height="256"/>
+        <image name="neutral_face_black" width="256" height="256"/>
     </resources>
 </document>

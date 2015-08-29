@@ -79,19 +79,20 @@ class MoreTableViewController: UITableViewController {
             //The user is selecting "Squirrel Store"
             performSegueWithIdentifier("Squirrel Store", sender: self)
         }
-
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //Check to see if we need to show a new user tutorial screens first
+        if PFUser.currentUser()!["newMoreTab"] as! Bool == true {
+            //If new user, show them the tutorial screens
+            performSegueWithIdentifier("NewUserScreens", sender: self)
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Check to see if we need to show a new user tutorial screens first
-        if PFUser.currentUser()!["newMoreTab"] as! Bool == true {
-            //If new user, show them the tutorial screens
-            performSegueWithIdentifier("NewUserScreens", sender: self)
-        
-        }
-        
         if isNewUser == true {
             self.title = "Home"
         }

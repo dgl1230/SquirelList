@@ -196,11 +196,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Squirrels" id="chp-pU-Rsd">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="Teh-DG-8JU" userLabel="Trade Offers Button">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="viewTradeOffers:" destination="8rJ-Kc-sve" id="VEN-De-Kfl"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="QCF-gE-72V" userLabel="Add Squirrel Button">
+                            <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="addSquirrel:" destination="8rJ-Kc-sve" id="Yl6-hG-YGd"/>
                             </connections>
