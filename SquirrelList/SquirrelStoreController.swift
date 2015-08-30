@@ -90,26 +90,12 @@ class SquirrelStoreController: UITableViewController {
     }
     
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if shouldReload == true {
-            self.viewDidLoad()
-            shouldReload = false
-        }
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func update() {
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         LOGGED_IN_USER_ACORNS = getUserInfo(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()!
         LOGGED_IN_USER_SQUIRREL_SLOTS = getUserInfo(currentGroup["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
         LOGGED_IN_USER_RERATES = getUserInfo(currentGroup["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()!
         LOGGED_IN_USER_GROUP_NAME = currentGroup["name"] as! String
-        //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
-        //Set notification to "listen" for when the the user has used their Rerate
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "didUseRerate", object: nil)
         //var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
         acornsLabel.text = "\(LOGGED_IN_USER_ACORNS)"
         //var rerate = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
@@ -127,7 +113,25 @@ class SquirrelStoreController: UITableViewController {
         }
         //let groupName = currentGroup!["name"] as! String
         self.title = "\(LOGGED_IN_USER_GROUP_NAME) Squirrel Store"
-        
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if shouldReload == true {
+            update()
+            shouldReload = false
+        }
+    }
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        update()
+        //Set notification to "listen" for when the the user has changed their currentGroup
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: reloadNotificationKey, object: nil)
+        //Set notification to "listen" for when the the user has used their Rerate
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reload", name: "didUseRerate", object: nil)
     }
     
 

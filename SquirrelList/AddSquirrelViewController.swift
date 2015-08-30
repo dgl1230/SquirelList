@@ -9,8 +9,7 @@
 import UIKit
 
 protocol AddSquirrelViewControllerDelegate: class {
-    func addSquirrelViewControllerDidCancel(controller: AddSquirrelViewController)
-    func addSquirrelViewController(controller: AddSquirrelViewController, didFinishAddingFirstName firstName: NSString, didFinishAddingLastName lastName: NSString)
+    func createdSquirrel(controller: AddSquirrelViewController)
 }
 
 
@@ -50,6 +49,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                 let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
             
                 let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+                //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
                 currentGroup.fetch()
                 //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
                 let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
@@ -60,15 +60,44 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                     self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
                     
                 } else {
-                    //Add the new Squirrel's full name to the groups squirrelFullNames field
-                    currentGroup.addObject(squirrelName, forKey: "squirrelFullNames")
-                    currentGroup.save()
-                    //LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
-                    //Send silent push notifications for other users to have their Squirrel tab refresh
-                    sendPushNotifications(0, "", "reloadSquirrels", users)
-                    //Reloads the parent squirrelViewController
-                    self.delegate!.addSquirrelViewController(self, didFinishAddingFirstName: trimmedFirst2.capitalizedString, didFinishAddingLastName: trimmedLast2.capitalizedString)
-                    self.navigationController?.popViewControllerAnimated(true)
+                    //We create the Squirrel 
+                    var newSquirrel = PFObject(className:"Squirrel")
+                    newSquirrel["first_name"] = firstName.text
+                    newSquirrel["last_name"] = lastName.text
+                    newSquirrel["owner"] = PFUser.currentUser()!
+                    newSquirrel["raters"] = []
+                    newSquirrel["ratings"] = []
+                    newSquirrel["avg_rating"] = 0
+                    newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
+                    newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
+                    newSquirrel["dropVotes"] = 0
+                    newSquirrel["droppers"] = []
+                    let picture = UIImage(named: "Squirrel_Profile_Pic")
+                    let imageData = UIImagePNGRepresentation(picture)
+                    let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData)
+                    newSquirrel["picture"] = imageFile
+        
+                    newSquirrel.saveInBackgroundWithBlock {
+                        (success: Bool, error: NSError?) -> Void in
+                            if (success) {
+                                var group = PFUser.currentUser()!["currentGroup"] as! PFObject
+                                group.addObject(newSquirrel.objectId!, forKey: "squirrels")
+                
+                                LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+                                let newSquirrelSlots = getNewArrayToSave(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+                                group["squirrelSlots"] = newSquirrelSlots
+                                group.addObject(squirrelName, forKey: "squirrelFullNames")
+                                group.save()
+                                //Send silent push notifications for other users to have their Squirrel tab refresh
+                                sendPushNotifications(0, "", "reloadSquirrels", users)
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                                //Reloads the parent squirrelViewController
+                            self.delegate!.createdSquirrel(self)
+                            self.navigationController!.popViewControllerAnimated(true)
+                        }
+    
+                    }
+
                 }
         }
     }

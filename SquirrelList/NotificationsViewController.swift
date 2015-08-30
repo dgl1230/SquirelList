@@ -130,9 +130,9 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        //Set the createGroupButton to 'fa-plus-circle'
+        //Set the createGroupButton to 'fa-plus'
         createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        createGroupButton?.title = "\u{f055}"
+        createGroupButton?.title = "\u{f067}"
         createGroupButton?.tintColor = UIColor.orangeColor()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         //Set notification to "listen" for when the the user has changed their currentGroup

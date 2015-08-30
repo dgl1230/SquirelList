@@ -164,8 +164,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
         //Update the current group variable
         currentGroup = objects![indexPath.row] as! PFObject
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything

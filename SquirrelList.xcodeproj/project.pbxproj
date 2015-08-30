@@ -63,7 +63,6 @@
 		1848419D1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184841721AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		184841A01AE9770400F23551 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848419F1AE9770400F23551 /* JSQSystemSoundPlayer.m */; };
 		184841A21AE978D100F23551 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184841A11AE978D100F23551 /* MessagesViewController.swift */; };
-		184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */; };
 		1854AACE1B900BBA002F25C9 /* ShittyConnection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1854AACD1B900BBA002F25C9 /* ShittyConnection.storyboard */; };
 		18625C571AC33DA100093A1B /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C561AC33DA100093A1B /* MoreViewController.swift */; };
 		18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C581AC3610E00093A1B /* TradeOfferViewController.swift */; };
@@ -258,7 +257,6 @@
 		1848419E1AE9770400F23551 /* JSQSystemSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQSystemSoundPlayer.h; sourceTree = "<group>"; };
 		1848419F1AE9770400F23551 /* JSQSystemSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQSystemSoundPlayer.m; sourceTree = "<group>"; };
 		184841A11AE978D100F23551 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelViewController.swift; path = SquirrelList/SquirrelViewController.swift; sourceTree = "<group>"; };
 		1854AACD1B900BBA002F25C9 /* ShittyConnection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShittyConnection.storyboard; sourceTree = "<group>"; };
 		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = SquirrelList/MoreViewController.swift; sourceTree = "<group>"; };
 		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeOfferViewController.swift; sourceTree = "<group>"; };
@@ -661,7 +659,6 @@
 				18F43A851B69808800CCE2C3 /* SearchUsersController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
 				18DC68271B59A82200364A4E /* SquirrelStoreController.swift */,
-				184ED40B1AC0A29A00F82D50 /* SquirrelViewController.swift */,
 				181E459D1B8E37B700CD9F07 /* SquirrelTabViewController.swift */,
 				181E459F1B8E471B00CD9F07 /* UsersSquirrelsViewController.swift */,
 				18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */,
@@ -844,7 +841,6 @@
 				184841901AE976C100F23551 /* JSQMessagesCollectionViewCellIncoming.m in Sources */,
 				1828B76E1B3F4ED30081AAD4 /* TutorialViewController.swift in Sources */,
 				18DE63971B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
-				184ED40C1AC0A29A00F82D50 /* SquirrelViewController.swift in Sources */,
 				18DE63A01B772CA1005EB7C0 /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				18DE63A11B772CA1005EB7C0 /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */,
 				184841841AE976C100F23551 /* JSQMessagesCollectionViewFlowLayoutInvalidationContext.m in Sources */,

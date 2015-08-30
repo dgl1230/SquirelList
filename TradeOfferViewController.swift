@@ -213,8 +213,11 @@ class TradeOfferViewController: PopUpViewController {
                 var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
                     self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
+                    //Send alert that proposer's trade was deleted
+                    let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
+                    sendPushNotifications(0, rejection, "rejectedTrade", [offeringUsername])
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }))
@@ -232,8 +235,11 @@ class TradeOfferViewController: PopUpViewController {
                 var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction!) in
                     self.tradeProposal!.delete()
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
+                    //Send alert that proposer's trade was deleted
+                    let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
+                    sendPushNotifications(0, rejection, "rejectedTrade", [offeringUsername])
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }))
@@ -251,7 +257,10 @@ class TradeOfferViewController: PopUpViewController {
                 var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
                     self.tradeProposal!.delete()
-                    //Reloading
+                    //Send alert that proposer's trade was deleted
+                    let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
+                    sendPushNotifications(0, rejection, "rejectedTrade", [offeringUsername])
+                    //Reload
                     self.delegate?.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
@@ -277,6 +286,9 @@ class TradeOfferViewController: PopUpViewController {
                 var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "No", style: .Cancel, handler: { (action: UIAlertAction!) in
                     self.tradeProposal!.delete()
+                    //Send alert that proposer's trade was deleted
+                    let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
+                    sendPushNotifications(0, rejection, "rejectedTrade", [offeringUsername])
                     //Reloading
                     self.delegate?.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)

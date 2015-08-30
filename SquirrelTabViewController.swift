@@ -309,7 +309,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     func updateSquirrelSlots() {
         let numOfUsers = (currentGroup!["users"] as! [String]).count
         let oldNumOfUsers = getUserInfo(currentGroup!["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!).toInt()
-        if numOfUsers == oldNumOfUsers {
+        //I think this line can lead to small errors
+        if numOfUsers <= oldNumOfUsers {
             //No new users have joined the group, so we return
             return
         }
@@ -369,6 +370,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         }
     }
     
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if shouldReload == true {
@@ -402,19 +404,16 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         //Set the addSquirrelButton to 'fa-plus'
         addSquirrelButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addSquirrelButton!.title = "\u{f067}"
-        //addSquirrelButton!.tintColor = UIColor.orangeColor()
-        //Set the tradeOfferButton to 'fa-user-secret'
+        //Set the tradeOfferButton to 'fa-exchange
         tradeOfferButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        tradeOfferButton!.title = "\u{f21b}"
-        //tradeOfferButton!.tintColor = UIColor.orangeColor()
+        tradeOfferButton!.title = "\u{f0ec}"
         tradeOfferButton!.enabled = true
-        
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
-        //self.navigationItem.leftBarButtonItem = tradeOfferButton
     }
+    
     
     //Delegate function is called for squirrelDetailViewController so that we can reload after a user has rated a squirrel
     func reloadParent(controller: NewSquirrelDetailsViewController, usedRerate: Bool) {
@@ -427,48 +426,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         reload()
     }
     
-    //Should also be made into its own extension
-    func addSquirrelViewController(controller: AddSquirrelViewController, didFinishAddingFirstName firstName: NSString, didFinishAddingLastName lastName: NSString) {
-        
-        var newSquirrel = PFObject(className:"Squirrel")
-        newSquirrel["first_name"] = firstName
-        newSquirrel["last_name"] = lastName
-        newSquirrel["owner"] = PFUser.currentUser()!
-        newSquirrel["raters"] = []
-        newSquirrel["ratings"] = []
-        newSquirrel["avg_rating"] = 0
-        newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
-        newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
-        newSquirrel["dropVotes"] = 0
-        newSquirrel["droppers"] = []
-        let picture = UIImage(named: "Squirrel_Profile_Pic")
-        let imageData = UIImagePNGRepresentation(picture)
-        let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData)
-        newSquirrel["picture"] = imageFile
-        
-        newSquirrel.saveInBackgroundWithBlock {
-            (success: Bool, error: NSError?) -> Void in
-            if (success) {
-                var group = PFUser.currentUser()!["currentGroup"] as! PFObject
-                group.addObject(newSquirrel.objectId!, forKey: "squirrels")
-                
-                
-                //LOGGED_IN_USER_SQUIRREL_SLOTS already has one squirrel slot subtracted from in AddSquirrelViewController
-                LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
-                let newSquirrelSlots = getNewArrayToSave(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
-                group["squirrelSlots"] = newSquirrelSlots
-                group.save()
-                self.reload()
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-    
-        }
+    //Called after adding a Squirrel so that we can reload the SquirrelTabViewController
+    func createdSquirrel(controller: AddSquirrelViewController) {
+        self.reload()
     }
-    
-    //should be made into its own extension
-    func addSquirrelViewControllerDidCancel(controller: AddSquirrelViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+
 
 }
 
