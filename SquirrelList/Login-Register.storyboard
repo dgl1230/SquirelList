@@ -57,10 +57,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHp-cP-qtg">
-                                <rect key="frame" x="198" y="304" width="204" height="60"/>
+                                <rect key="frame" x="198" y="304" width="204" height="56"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="LXd-PP-xZ9"/>
+                                    <constraint firstAttribute="height" constant="56" id="LXd-PP-xZ9"/>
                                     <constraint firstAttribute="width" constant="204" id="nli-h8-wyX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
@@ -196,18 +196,6 @@
                                     <action selector="privacyPolicy:" destination="Fn5-sk-FgC" eventType="touchUpInside" id="uiN-Hd-E8y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvj-9O-Pow">
-                                <rect key="frame" x="172" y="98" width="185" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="185" id="9wC-S9-qfF"/>
-                                    <constraint firstAttribute="height" constant="30" id="faa-Ok-Hlz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="By hitting register, you agree to our ">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZML-gG-oM1">
                                 <rect key="frame" x="289" y="119" width="91" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -244,11 +232,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvj-9O-Pow">
+                                <rect key="frame" x="161" y="98" width="206" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="206" id="9wC-S9-qfF"/>
+                                    <constraint firstAttribute="height" constant="30" id="faa-Ok-Hlz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <state key="normal" title="By hitting register, you agree to our ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Xvj-9O-Pow" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="98" id="1qh-ng-jSx"/>
-                            <constraint firstItem="3DV-mX-YQJ" firstAttribute="leading" secondItem="Xvj-9O-Pow" secondAttribute="trailing" constant="-7" id="AX5-9E-Ks7"/>
+                            <constraint firstItem="3DV-mX-YQJ" firstAttribute="leading" secondItem="Xvj-9O-Pow" secondAttribute="trailing" constant="-17" id="AX5-9E-Ks7"/>
                             <constraint firstItem="3DV-mX-YQJ" firstAttribute="height" secondItem="Xvj-9O-Pow" secondAttribute="height" constant="-4" id="CHL-og-SYq"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="top" secondItem="Ea6-d5-zi5" secondAttribute="top" constant="119" id="DMr-Sn-UBQ"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="leading" secondItem="qOy-Oa-G5f" secondAttribute="trailing" constant="3" id="MK6-iZ-CYp"/>
@@ -266,7 +266,7 @@
                             <constraint firstAttribute="centerX" secondItem="qOy-Oa-G5f" secondAttribute="centerX" constant="35.5" id="uQ2-DQ-cAr"/>
                             <constraint firstItem="ZML-gG-oM1" firstAttribute="height" secondItem="qOy-Oa-G5f" secondAttribute="height" constant="-4" id="upx-bb-oQS"/>
                             <constraint firstAttribute="centerX" secondItem="m31-1Z-viE" secondAttribute="centerX" id="wjY-SK-Cbp"/>
-                            <constraint firstItem="3DV-mX-YQJ" firstAttribute="width" secondItem="Xvj-9O-Pow" secondAttribute="width" constant="-94" id="yBf-wz-wdg"/>
+                            <constraint firstItem="3DV-mX-YQJ" firstAttribute="width" secondItem="Xvj-9O-Pow" secondAttribute="width" constant="-115" id="yBf-wz-wdg"/>
                         </constraints>
                     </view>
                     <connections>

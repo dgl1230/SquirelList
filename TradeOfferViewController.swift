@@ -128,6 +128,8 @@ class TradeOfferViewController: PopUpViewController {
                 self.deleteOtherSquirrelOffers(offeringUsername)
                 //Reload the updated trades
                 self.delegate?.tradeOfferViewController(self)
+                //Alert the Squirrel Tab to reload
+                NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
             } else {
             
             }
