@@ -740,6 +740,7 @@
 		186B32D41A758E5000A8D4CB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Frenvu Inc.";
 				TargetAttributes = {

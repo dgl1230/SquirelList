@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Frenvu Inc. All rights reserved.
 //
 
+/*
+
 import UIKit
 
 //For telling SquirrelViewController to reload after updating Squirrel information
@@ -448,4 +450,6 @@ extension UIImage {
     var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
     var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
 }
+*/
+
 */

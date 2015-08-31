@@ -87,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         } else if type == "rejectedTrade" {
             showBanner(UIColor.orangeColor(), message: message, title: "Trade Rejected")
         }else if type == "reloadMessages" {
-            println("TYPE IS RELOADMESSAGES")
             NSNotificationCenter.defaultCenter().postNotificationName("reloadMessages", object: self)
         } else if type == "reloadSquirrels" {
             NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
@@ -126,10 +125,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     //NON APPDELEGATE FUNCTIONS
     
     func checkForReachability(notification: NSNotification) {
-        println("GOING INTO REACHABILITY FUNCTION")
         var remoteHostStatus = self.reachability!.currentReachabilityStatus()
         if (remoteHostStatus.value == NotReachable.value) {
-            println("SHOULD BE GOING HERE GOD")
             let mainStoryBoard = UIStoryboard(name: "ShittyConnection", bundle: nil)
             let monkeyController = mainStoryBoard.instantiateViewControllerWithIdentifier("MonkeyController") as! UIViewController
             self.window!.rootViewController = monkeyController

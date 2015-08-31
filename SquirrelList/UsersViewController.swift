@@ -280,6 +280,7 @@ class UsersViewController: PFQueryTableViewController {
     }
     
     override func viewDidLoad() {
+        println(1)
         super.viewDidLoad()
         self.title = currentGroup!["name"] as? String
         //Set the addFriendToGroupButton to 'fa-user-plus
@@ -301,6 +302,7 @@ class UsersViewController: PFQueryTableViewController {
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         //Check for any alerts to show
         updateAlerts()
+        println(2)
         
         
         

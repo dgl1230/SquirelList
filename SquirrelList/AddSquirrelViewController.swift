@@ -47,23 +47,33 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                 let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
                 let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            
-                let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+                //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+                let viewsArray = displayLoadingAnimator(self.view)
+                let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
+                let container = viewsArray[1] as! UIView
+                let loadingView = viewsArray[2] as! UIView
+                createSquirrel(trimmedFirst2, last_name: trimmedLast2, activityIndicatorView: activityIndicatorView, container: container, loadingView: loadingView)
+            }
+    }
+    
+    
+    //Creates the Squirrel, after first checking to make sure that the same Squirrel name doesn't exist already. Assumes that the Squirrel has already passed checks to make sure there are no white spaces, numbers, punctuations, etc. and that the first and last name have a correct length 
+    func createSquirrel(first_name: String, last_name: String, activityIndicatorView: NVActivityIndicatorView, container: UIView, loadingView: UIView) {
+        let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
                 //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
                 currentGroup.fetch()
                 //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
                 let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
                 let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
             
-                let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
+                let squirrelName = "\(first_name.lowercaseString) \(last_name.lowercaseString)"
                 if (find(squirrelNames, squirrelName) != nil) {
                     self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
-                    
                 } else {
                     //We create the Squirrel 
                     var newSquirrel = PFObject(className:"Squirrel")
-                    newSquirrel["first_name"] = firstName.text
-                    newSquirrel["last_name"] = lastName.text
+                    newSquirrel["first_name"] = first_name
+                    newSquirrel["last_name"] = last_name
                     newSquirrel["owner"] = PFUser.currentUser()!
                     newSquirrel["raters"] = []
                     newSquirrel["ratings"] = []
@@ -92,14 +102,18 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                                 sendPushNotifications(0, "", "reloadSquirrels", users)
                                 self.dismissViewControllerAnimated(true, completion: nil)
                                 //Reloads the parent squirrelViewController
-                            self.delegate!.createdSquirrel(self)
-                            self.navigationController!.popViewControllerAnimated(true)
+                                self.delegate!.createdSquirrel(self)
+                                self.navigationController!.popViewControllerAnimated(true)
                         }
+                        //Regardless of whether an error occurs, we need to resume interaction 
+                        //Global function that stops the loading animation and dismisses the views it is attached to
+                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
     
                     }
 
                 }
-        }
+
+    
     }
     
     /* Parameters: Title, which is the title of the alert, and error, which is the error that the user should see in the UIAlertController
@@ -112,6 +126,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         }))
         self.presentViewController(alert, animated: true, completion: nil)
     }
+
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
