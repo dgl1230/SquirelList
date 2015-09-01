@@ -229,6 +229,17 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             
                     dispatch_async(dispatch_get_main_queue()) {
                         let squirrel = self.objects![indexPath.row] as! PFObject
+                        squirrel.fetch()
+                        let potentialOwner = squirrel["ownerUsername"] as? String
+                        if potentialOwner != nil && potentialOwner != PFUser.currentUser()!.username! {
+                            //Then a trade was just accepted recently and the logged in user is trying to drop a squirrel that's not there's anymore
+                            //Global function that stops the loading animation and dismisses the views it is attached to
+                            resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                            displayAlert(self, "You sneaky Squirreler", "That squirrel isn't yours anymore! But nice try ;)")
+                            //Reload the view
+                            self.loadObjects()
+                            return
+                        }
                         squirrel.removeObjectForKey("owner")
                         squirrel.removeObjectForKey("ownerUsername")
                         squirrel.save()

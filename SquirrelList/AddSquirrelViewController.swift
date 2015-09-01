@@ -146,6 +146,9 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
         doneBarButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         doneBarButton.title = "\u{f058}"
         doneBarButton.tintColor = UIColor.orangeColor()
+        firstName.autocorrectionType = UITextAutocorrectionType.No
+        lastName.autocorrectionType = UITextAutocorrectionType.No
+        
     }
     
     //Should be its own extension 

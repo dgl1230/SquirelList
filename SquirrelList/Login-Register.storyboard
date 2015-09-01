@@ -6,15 +6,15 @@
     <customFonts key="customFonts">
         <mutableArray key="BebasNeue Bold.otf">
             <string>BebasNeueBold</string>
+            <string>BebasNeueBold</string>
+            <string>BebasNeueBold</string>
+            <string>BebasNeueBold</string>
+            <string>BebasNeueBold</string>
         </mutableArray>
         <mutableArray key="BebasNeue Book.otf">
             <string>BebasNeueBook</string>
         </mutableArray>
         <mutableArray key="BebasNeue Thin.otf">
-            <string>BebasNeue-Thin</string>
-            <string>BebasNeue-Thin</string>
-            <string>BebasNeue-Thin</string>
-            <string>BebasNeue-Thin</string>
             <string>BebasNeue-Thin</string>
         </mutableArray>
         <mutableArray key="bosun03.otf">
@@ -46,7 +46,7 @@
                                     <constraint firstAttribute="height" constant="56" id="4Fv-ey-B0J"/>
                                     <constraint firstAttribute="width" constant="204" id="eM9-7v-AUX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="43"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,7 +63,7 @@
                                     <constraint firstAttribute="height" constant="56" id="LXd-PP-xZ9"/>
                                     <constraint firstAttribute="width" constant="204" id="nli-h8-wyX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,7 +175,7 @@
                                     <constraint firstAttribute="height" constant="56" id="0rl-hn-a8b"/>
                                     <constraint firstAttribute="width" constant="204" id="85o-yH-fSM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Register">
                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -323,7 +323,7 @@
                                     <constraint firstAttribute="height" constant="56" id="7PK-fy-gG5"/>
                                     <constraint firstAttribute="width" constant="204" id="JK2-Xd-2fI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="42"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="42"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

@@ -156,14 +156,6 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         let lastName = (ratedSquirrel!["last_name"] as! String).lowercaseString
         let squirrelName = "\(firstName) \(lastName)"
         let squirrelNames = currentGroup!["squirrelFullNames"] as! [String]
-        println("SQUIRREL NAME IS \(squirrelName)")
-        println(squirrelNames)
-        for name in squirrelNames {
-            println(name)
-            if name == squirrelName {
-                println("IT SHOULD BE WORKING")
-            }
-        }
         //Make sure the squirrel hasn't been deleted  - if it has been, we can still fetch it, but it's fields won't have any values 
         if contains(squirrelNames, squirrelName) == false {
             //Global function that stops the loading animation and dismisses the views it is attached to

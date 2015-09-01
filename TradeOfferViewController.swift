@@ -313,6 +313,7 @@ class TradeOfferViewController: PopUpViewController {
                             let newAcorns = getNewArrayToSave(newUserAcorns, PFUser.currentUser()!.username!, String(userAcorns2!))
                             currentGroup["acorns"] = newAcorns
                             if self.tradeProposal!["offeredSquirrelID"] == nil {
+                                //Update squirrel slots
                                 var squirrelSlots = self.newSquirrelSlots(currentGroup)
                                 currentGroup["squirrelSlots"] = squirrelSlots
                             }

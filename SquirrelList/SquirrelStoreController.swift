@@ -101,8 +101,10 @@ class SquirrelStoreController: UITableViewController {
         //var rerate = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
         if LOGGED_IN_USER_RERATES == 0 {
             purchaseReratingLabel.text = "Purchase Rerating (0/1)"
+            buyReratingButton.enabled = true
         } else {
             purchaseReratingLabel.text = "Purchase Rerating (1/1)"
+            buyReratingButton.enabled = false
         }
         
         if LOGGED_IN_USER_ACORNS < 500 {

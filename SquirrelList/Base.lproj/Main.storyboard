@@ -242,7 +242,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SW2-bK-7Qf">
                                                     <rect key="frame" x="8" y="8" width="584" height="30"/>
                                                     <fontDescription key="fontDescription" name="bosun-03" family="bosun" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="no"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="YAQ-u8-yw6" id="hxK-Tl-Xgz"/>
                                                     </connections>
@@ -626,12 +626,12 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="for" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-ij-eDq">
-                                <rect key="frame" x="193" y="127" width="214" height="21"/>
+                                <rect key="frame" x="193" y="129" width="214" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="LDU-vy-RkE"/>
                                     <constraint firstAttribute="width" constant="214" id="SXQ-fc-fgb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="BebasNeueBook" family="Bebas Neue" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -640,7 +640,7 @@
                         <constraints>
                             <constraint firstItem="raQ-x4-CNh" firstAttribute="leading" secondItem="6jj-ij-eDq" secondAttribute="trailing" constant="-222" id="07e-UZ-UbA"/>
                             <constraint firstAttribute="centerX" secondItem="raQ-x4-CNh" secondAttribute="centerX" id="36K-NE-XUO"/>
-                            <constraint firstItem="raQ-x4-CNh" firstAttribute="top" secondItem="6jj-ij-eDq" secondAttribute="bottom" constant="-61" id="9wW-VN-w9s"/>
+                            <constraint firstItem="raQ-x4-CNh" firstAttribute="top" secondItem="6jj-ij-eDq" secondAttribute="bottom" constant="-63" id="9wW-VN-w9s"/>
                             <constraint firstItem="raQ-x4-CNh" firstAttribute="top" secondItem="WIs-qO-W6M" secondAttribute="top" constant="87" id="FJb-IL-gXz"/>
                         </constraints>
                     </view>
