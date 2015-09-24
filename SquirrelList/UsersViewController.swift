@@ -51,17 +51,17 @@ class UsersViewController: PFQueryTableViewController {
     func dayDifferences(date1: NSDate, date2: NSDate) -> Int {
         let calendar = NSCalendar.currentCalendar()
         //let flags = NSCalendarUnit.DayCalendarUnit
-        let unit: NSCalendarUnit = NSCalendarUnit.CalendarUnitDay
+        let unit: NSCalendarUnit = NSCalendarUnit.Day
         //We want to only be comparing days, not hours
         let d1 = calendar.startOfDayForDate(date1)
         let d2 = calendar.startOfDayForDate(date2)
-        let components = calendar.components(unit, fromDate: d1, toDate: d2, options: nil)
+        let components = calendar.components(unit, fromDate: d1, toDate: d2, options: [])
         return components.day
     }
 	
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
   
         // Configure the PFQueryTableView
         self.parseClassName = "User"
@@ -76,10 +76,6 @@ class UsersViewController: PFQueryTableViewController {
             let controller = segue.destinationViewController as! FriendsViewController
             controller.invitingToGroup = true
             controller.group = PFUser.currentUser()!["currentGroup"] as? PFObject
-        }
-        if segue.identifier == "ChangeCurrentGroup" {
-            let controller = segue.destinationViewController as! ChangeCurrentGroupViewController
-            //controller.delegate = self
         }
         if segue.identifier == "SingleUserSquirrels" {
             let controller = segue.destinationViewController as! UsersSquirrelsViewController
@@ -97,7 +93,7 @@ class UsersViewController: PFQueryTableViewController {
         //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
-        var query = PFUser.query()
+        let query = PFUser.query()
         query!.whereKey("username", containedIn: currentGroup!["users"] as! [String])
         query!.orderByAscending("username")
         return query!
@@ -127,13 +123,13 @@ class UsersViewController: PFQueryTableViewController {
             return
         }
          //We check to see if the user has been recently given a strike for offensive content
-        if contains(alerts, "recentStrike") == true {
+        if alerts.contains("recentStrike") == true {
             let query  = PFQuery(className: "Report")
             query.whereKey("offendingUsername", equalTo: PFUser.currentUser()!.username!)
             let report = query.getFirstObject()
             let warning = report!["warningToOffender"] as! String
-            var alert = UIAlertController(title: "This is a warning for posting offensive material", message: warning, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+            let alert = UIAlertController(title: "This is a warning for posting offensive material", message: warning, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction) in
                 PFUser.currentUser()!["recentStrike"] = false
                 PFUser.currentUser()!.save()
                 self.alerts.removeAtIndex(0)
@@ -143,21 +139,21 @@ class UsersViewController: PFQueryTableViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
         //Check to see if this is another day that they've consecutively checked this group
-        if contains(alerts, "cumulativeDay") == true {
-            let lastCheckedDateString = getUserInfo(currentGroup!["lastVisits"] as! [String], PFUser.currentUser()!.username!)
+        if alerts.contains("cumulativeDay") == true {
+            //let lastCheckedDateString = getUserInfo(currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!)
             let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            let lastCheckedDate = formatter.dateFromString(lastCheckedDateString)
+            //let lastCheckedDate = formatter.dateFromString(lastCheckedDateString)
             let today = NSDate()
-            let daysApart = dayDifferences(lastCheckedDate!, date2: today)
+            //let daysApart = dayDifferences(lastCheckedDate!, date2: today)
             //Then this is a cumulative day for the user
-            var cumulativeDays = getUserInfo(currentGroup!["cumulativeDays"] as! [String], PFUser.currentUser()!.username!).toInt()
+            var cumulativeDays = Int(getUserInfo(currentGroup!["cumulativeDays"] as! [String], username: PFUser.currentUser()!.username!))
             cumulativeDays! += 1
             //var acorns = userGroupData!["acorns"] as! Int
-            var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+            var acorns = Int(getUserInfo(currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!))
             acorns! += 20
             //let squirrelScore = userGroupData!["squirrelSlots"] as! Int
-            let squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+            let squirrelSlots = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
             let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as! String
             var message = "Here's 20 acorns for visiting \(groupName) everyday!"
             //Reward them for having a full squirrel team
@@ -165,14 +161,14 @@ class UsersViewController: PFQueryTableViewController {
                 acorns! += 20
                 message = "Here's 40 acorns for visiting \(groupName) daily and having a full squirrel team!"
             }
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction) in
                 //Update and save userGroupData
-                var newLastVisits = getNewArrayToSave(self.currentGroup!["lastVisits"] as! [String], PFUser.currentUser()!.username!, formatter.stringFromDate(today))
+                let newLastVisits = getNewArrayToSave(self.currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!, newInfo: formatter.stringFromDate(today))
                 self.currentGroup!["lastVisits"] = newLastVisits
-                var newCumulativeVisits = getNewArrayToSave(self.currentGroup!["cumulativeDays"] as! [String], PFUser.currentUser()!.username!, String(cumulativeDays!))
+                let newCumulativeVisits = getNewArrayToSave(self.currentGroup!["cumulativeDays"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(cumulativeDays!))
                 self.currentGroup!["cumulativeDays"] = newCumulativeVisits
-                var newAcorns = getNewArrayToSave(self.currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!, String(acorns!))
+                let newAcorns = getNewArrayToSave(self.currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(acorns!))
                 self.currentGroup!["acorns"] = newAcorns
                 self.currentGroup!.save()
                 self.alerts.removeAtIndex(0)
@@ -183,15 +179,15 @@ class UsersViewController: PFQueryTableViewController {
         }
         //Check to see if this is a lucky day for the user
         //"lucky" is only appended to this array if the user is visiting groups daily
-        if contains(alerts, "lucky") == true {
-            var message = "It's your lucky day! Here's 100 acorns!"
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+        if alerts.contains("lucky") == true {
+            let message = "It's your lucky day! Here's 100 acorns!"
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction) in
                 //Update and save userGroupData
-                var acorns = getUserInfo(self.currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+                var acorns = Int(getUserInfo(self.currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!))
                 //var acorns = self.userGroupData!["acorns"] as! Int
                 acorns! += 100
-                var newAcorns = getNewArrayToSave(self.currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!, String(acorns!))
+                let newAcorns = getNewArrayToSave(self.currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(acorns!))
                 self.currentGroup!["acorns"] = newAcorns
                 self.currentGroup!.save()
                 self.alerts.removeAtIndex(0)
@@ -205,7 +201,7 @@ class UsersViewController: PFQueryTableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UsersCellTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! UsersCellTableViewCell
         let name = objects![indexPath.row]["name"] as? String
         //It looks strange to have the row highlighted in gray
         cell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -234,7 +230,7 @@ class UsersViewController: PFQueryTableViewController {
         }
 
         //Check to see if this is another day that they've consecutively checked this group
-        let lastCheckedDateString = getUserInfo(currentGroup!["lastVisits"] as! [String], PFUser.currentUser()!.username!)
+        let lastCheckedDateString = getUserInfo(currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!)
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let lastCheckedDate = formatter.dateFromString(lastCheckedDateString)
@@ -251,7 +247,7 @@ class UsersViewController: PFQueryTableViewController {
         } else if daysApart != 0 {
             //They haven't visited this group in more than a day, and so we need to update their last visit
             let todayString = formatter.stringFromDate(today)
-            let newLastVisits = getNewArrayToSave(currentGroup!["lastVisits"] as! [String], PFUser.currentUser()!.username!, todayString)
+            let newLastVisits = getNewArrayToSave(currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!, newInfo: todayString)
             currentGroup!["lastVisits"] = newLastVisits
             currentGroup!.save()
         }

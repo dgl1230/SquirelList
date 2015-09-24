@@ -49,10 +49,16 @@ class GroupInvitePopUpViewController: PopUpViewController {
                 let inviterName = self.groupInvite!["inviter"] as! String
                 let groupName = self.group!["name"] as? String
                 let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)"
-                sendPushNotifications(0, message, "acceptedGroupInvite", [inviterName])
+                sendPushNotifications(0, message: message, type: "acceptedGroupInvite", users: [inviterName])
                 PFUser.currentUser()!.save()
                 self.groupInvite!.delete()
                 if PFUser.currentUser()!["currentGroup"] == nil {
+                    let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
+                    userFriendsData.fetch()
+                    var groupInvites = userFriendsData["groupInvites"] as! Int
+                    groupInvites -= 1
+                    userFriendsData["groupInvites"] = groupInvites
+                    userFriendsData.save()
                     //Then the user is new, and they need a current group
                     PFUser.currentUser()!["currentGroup"] = self.group!
                     //The user can now access all tabs, since they have a current group
@@ -62,11 +68,11 @@ class GroupInvitePopUpViewController: PopUpViewController {
                 } else {
                     self.dismissViewControllerAnimated(true, completion: nil)
                     //Reload the notificationsViewController
-                    self.delegate?.reloadAfterGroupInviteDecision!(self)
+                    self.delegate!.reloadAfterGroupInviteDecision!(self)
                 }
             } else {
                 //There was an error, and we display an alert via the global function to the user
-                displayAlert(self, "Ooops", "There's been an error. Would you mind trying again?")
+                displayAlert(self, title: "Ooops", message: "There's been an error. Would you mind trying again?")
             }
         }
         
@@ -78,14 +84,13 @@ class GroupInvitePopUpViewController: PopUpViewController {
         //Reload the notificationsViewController
         dismissViewControllerAnimated(true, completion: nil)
         delegate?.reloadAfterGroupInviteDecision!(self)
-    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         group = groupInvite!["group"] as? PFObject
         //Need to fetch to update values of group object
-        group?.fetch()
+        group!.fetch()
 
         inviterLabel.text = inviterName
         groupLabel.text = group!["name"] as? String

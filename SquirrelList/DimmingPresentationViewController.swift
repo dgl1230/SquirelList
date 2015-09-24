@@ -10,7 +10,7 @@ import UIKit
 
 class DimmingPresentationViewController: UIPresentationController {
 
-    lazy var dimmingView = GradientView(frame: CGRect.zeroRect)
+    lazy var dimmingView = GradientView(frame: CGRect.zero)
     
     override func dismissalTransitionWillBegin() {
         if let transitionCoordinator = presentedViewController.transitionCoordinator() {
@@ -19,8 +19,8 @@ class DimmingPresentationViewController: UIPresentationController {
     }
     
     override func presentationTransitionWillBegin() {
-        dimmingView.frame = containerView.bounds
-        containerView.insertSubview(dimmingView, atIndex: 0)
+        dimmingView.frame = containerView!.bounds
+        containerView!.insertSubview(dimmingView, atIndex: 0)
         
         //For the gradient to start to fade while the popupView is being animated
         dimmingView.alpha = 0

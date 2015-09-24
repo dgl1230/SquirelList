@@ -22,11 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         self.reachability!.startNotifier()
         Parse.setApplicationId("6BTcw6XSmVmHfXh7BOFBsxD1yafzwkGNqeiqaldq", clientKey: "p8a21bPoRIKkWmhneL262toyrjpCRH9CZUjVTVTm")
         
-
-        
         //For now we rest their badge numbers anytime the app launches 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
-    
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
             let loginRegisterStoryBoard = UIStoryboard(name: "Login-Register", bundle: nil)
@@ -125,10 +122,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     //NON APPDELEGATE FUNCTIONS
     
     func checkForReachability(notification: NSNotification) {
-        var remoteHostStatus = self.reachability!.currentReachabilityStatus()
-        if (remoteHostStatus.value == NotReachable.value) {
+        let remoteHostStatus = self.reachability!.currentReachabilityStatus()
+        if (remoteHostStatus.rawValue == NotReachable.rawValue) {
             let mainStoryBoard = UIStoryboard(name: "ShittyConnection", bundle: nil)
-            let monkeyController = mainStoryBoard.instantiateViewControllerWithIdentifier("MonkeyController") as! UIViewController
+            let monkeyController = mainStoryBoard.instantiateViewControllerWithIdentifier("MonkeyController") 
             self.window!.rootViewController = monkeyController
             self.window!.makeKeyAndVisible()
         } else if PFUser.currentUser() == nil {
@@ -158,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func showBanner(color: UIColor, message: String, title: String) {
         let banner = Banner(title: title, subtitle: message , backgroundColor: color)
         banner.dismissesOnTap = true
-        banner.show(duration: 5.0)
+        banner.show(5.0)
     }
 
 

@@ -16,7 +16,7 @@ class TutorialPageItemViewController: UIViewController {
     var text = "" {
         
         didSet {
-            if let label = textLabel {
+            if let _ = textLabel {
                 textLabel!.text = text
             }
             

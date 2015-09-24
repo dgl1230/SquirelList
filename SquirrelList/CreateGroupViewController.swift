@@ -14,14 +14,14 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var groupNameTextField: UITextField!
     
     @IBAction func createGroup(sender: AnyObject) {
-        if count(groupNameTextField.text) > 15 {
+        if groupNameTextField.text!.characters.count > 15 {
             let alertController = UIAlertController(title: "", message: "Please limit the name of the group to no more than 15 characters", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
-        var group = PFObject(className: "Group")
-        group["name"] = groupNameTextField.text as NSString
+        let group = PFObject(className: "Group")
+        group["name"] = groupNameTextField.text //as NSString
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group["pendingUsers"] = []
         group["squirrels"] = []
@@ -31,6 +31,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group["cumulativeDays"] = ["\(PFUser.currentUser()!.username!):1"]
         group["usersOnLastVisit"] = ["\(PFUser.currentUser()!.username!):1"]
         group["rerates"] = ["\(PFUser.currentUser()!.username!):0"]
+        
         let today = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -72,7 +73,7 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
             var oldText: NSString = ""
             var newText: NSString = ""
 
-            oldText = groupNameTextField.text
+            oldText = groupNameTextField.text!
             newText = oldText.stringByReplacingCharactersInRange(range, withString: string)
         
             if newText.length > 0 {

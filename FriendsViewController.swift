@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FriendsViewControllerDelegate: class {
+    func updateFriendBadges(controller: FriendsViewController, numOfBadges: Int)
+}
+
 class FriendsViewController: UITableViewController {
     
     var friends: [String] = []
@@ -20,8 +24,13 @@ class FriendsViewController: UITableViewController {
     var shouldReload: Bool?
     var users: [String] = []
     let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
+    //Variable for keeping track of whether we should update the friends badges when the user goes back to the More Tab
+    var shouldUpdateFriendBadges = false
+    //Variable for keeping track of how mnay friend badges the logged in user has
+    var friendBadges = 0
     
-  
+    var delegate: FriendsViewControllerDelegate?
+    
     //Button only occurs when user is in their 'Friends' main page under the 'More' tab
     @IBOutlet weak var findFriendsButton: UIBarButtonItem?
     
@@ -35,7 +44,7 @@ class FriendsViewController: UITableViewController {
         let username = users[buttonRow]
         //We want to prevent the user from being able to quickly press the add friend button multiple times
         let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
-        var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
+        let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
         cell.addButton.enabled = false
         if invitingToGroup == true {
             createGroupInvite(username)
@@ -53,7 +62,7 @@ class FriendsViewController: UITableViewController {
             userFriendsData.removeObject(username, forKey: "pendingInviters")
             userFriendsData.addObject(username, forKey: "friends")
             
-            //Updatee the "friendAdded" field to re-sort friends array when appropraite user goes to friends list
+            //Update the "friendAdded" field to re-sort friends array when appropraite user goes to friends list
             userFriendsData["friendAdded"] = true
             otherUserFriendData!["friendAdded"] = true
         
@@ -61,7 +70,10 @@ class FriendsViewController: UITableViewController {
             otherUserFriendData!.save()
             
             //Alert the requester that their friend request has been accepted
-            sendPushNotifications(1, "\(PFUser.currentUser()!.username!) has accepted your friend request", "friendRequest", [username])
+            sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) has accepted your friend request", type: "friendRequest", users: [username])
+            //When the user presses the back button, we should update the friends badges in viewWillDissappear 
+            shouldUpdateFriendBadges = true
+            friendBadges -= 1
         }
     }
     
@@ -78,7 +90,7 @@ class FriendsViewController: UITableViewController {
             //User is trying to invite them be to friends
             users = friends
         }
-        if contains(users, username) {
+        if users.contains(username) {
             //Check to see if the user is already among the user's friends and pending friends or if the user is in the group or has already been invited to it
             return false
         }
@@ -88,7 +100,7 @@ class FriendsViewController: UITableViewController {
     
     //Creates a group invite notification for the invitee
     func createGroupInvite(inviteeUsername: String) {
-        var invite = PFObject(className: "GroupInvite")
+        let invite = PFObject(className: "GroupInvite")
         invite["inviter"] = PFUser.currentUser()!.username
         invite["invitee"] = inviteeUsername
         invite["group"] = group!
@@ -100,20 +112,26 @@ class FriendsViewController: UITableViewController {
         currentGroup.addObject(inviteeUsername, forKey: "pendingUsers")
         currentGroup.save()
         
+        //We need to query and get the other user's UserFriendsData
+        let query = PFQuery(className: "UserFriendsData")
+        query.whereKey("username", equalTo: inviteeUsername)
+        //There is only one UserFriendsData instance per user
+        let otherUserFriendData = query.getFirstObject()
+        let oldNumOfGroupInvites = otherUserFriendData!["groupInvites"] as! Int
+        let newNumOfInvites = oldNumOfGroupInvites + 1
+        otherUserFriendData!["groupInvites"] = newNumOfInvites
+        otherUserFriendData!.save()
+        
+        
+        
+        
         
         //Alert the invited user that they have been invited to a group
         let groupName = group!["name"] as! String
-        sendPushNotifications(1, "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)", "groupInvite", [inviteeUsername])
+        sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)", type: "groupInvite", users: [inviteeUsername])
         
     }
     
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "FindFriends" {
-            let controller = segue.destinationViewController as! SearchUsersViewController
-        }
-    }
-
     
     //For rare times that a user's name occurs more than once throughout user's friends list, this returns a corrected friends array to be saved. The first element of the return set is a Bool indicating if there are duplicates, and the second element is the array containing no duplicates. 
     func removeDuplicates(array: [String]) -> (Bool, [String]) {
@@ -144,8 +162,8 @@ class FriendsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FindUserTableViewCell
-        var username = users[indexPath.row]
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell") as! FindUserTableViewCell
+        let username = users[indexPath.row]
         cell.nameLabel.text = username
         cell.addButton.tag = indexPath.row
         if canInvite(username){
@@ -166,15 +184,15 @@ class FriendsViewController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let username = users[indexPath.row]
         var title = ""
-        if contains(friends, username) {
+        if friends.contains(username) {
             title = "Unfriend"
         } else {
             title = "Reject"
         }
-        var deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
+        let deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
             self.tableView.dataSource?.tableView?(
                 self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
             )
@@ -196,7 +214,7 @@ class FriendsViewController: UITableViewController {
             query.whereKey("username", equalTo: username)
             //There is only one UserFriendsData instance per user
             let otherUserFriendData = query.getFirstObject()
-            if contains(friends, username) {
+            if friends.contains(username) {
                 //Then the logged in user is removing this user from their friends list
                 userFriendsData.removeObject(username, forKey: "friends")
                 //Need to remove the logged in user from the other user's friends list as well
@@ -229,7 +247,7 @@ class FriendsViewController: UITableViewController {
         //If the logged in user has someone new added to their friends list, we need to re-alphabetize it and save it
         if userFriendsData["friendAdded"] as! Bool == true {
             let friends = userFriendsData["friends"] as! [String]
-            let sortedFriends = friends.sorted { $0 < $1 }
+            let sortedFriends = friends.sort { $0 < $1 }
             userFriendsData["friends"] = sortedFriends
             userFriendsData["friendAdded"] = false
             userFriendsData.save()
@@ -245,6 +263,8 @@ class FriendsViewController: UITableViewController {
             //We only want pending inviters because we don't want to show users that the logged in user has requested
             //pendingInviters = (userFriendsData["pendingInviters"] as! [String]).sorted { $0 < $1 }
             pendingInviters = userFriendsData["pendingInviters"] as! [String]
+            //Need to keep track of how many friend badges the user has right now (if they have any)
+            friendBadges = pendingInviters.count
             users = pendingInviters + friends
             self.title = "Friends"
         }
@@ -254,9 +274,6 @@ class FriendsViewController: UITableViewController {
             userFriendsData["friends"] = friendsArray
             userFriendsData.save()
         }
-       
-
-        
         //Setting the find friend image, which is 'fa-user-plus'
         findFriendsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         findFriendsButton?.title = "\u{f234}"
@@ -267,9 +284,12 @@ class FriendsViewController: UITableViewController {
         navigationItem.backBarButtonItem = backItem
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
     }
-
-
-
-
-
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if shouldUpdateFriendBadges == true {
+            delegate!.updateFriendBadges(self, numOfBadges: friendBadges)
+        }
+    }
 }

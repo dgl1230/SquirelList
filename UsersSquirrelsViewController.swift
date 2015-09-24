@@ -40,7 +40,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     }
 	
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
 
         // Configure the PFQueryTableView
         self.parseClassName = "Squirrel"
@@ -62,7 +62,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             sum += rating
             numOfRatings += 1
         }
-        var unroundedRating = Double(sum)/Double(numOfRatings)
+        let unroundedRating = Double(sum)/Double(numOfRatings)
         return round((10 * unroundedRating)) / 10
     }
     
@@ -71,21 +71,21 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     func calculateTeamRating(username:String) -> Double {
         var teamRatings: [Double] = []
         for squirrel in self.objects! {
-            var owner = squirrel["ownerUsername"] as? String
+            let owner = squirrel["ownerUsername"] as? String
             if squirrel["avg_rating"] === 0 {
                 //Weird parse bug, can only check if nil by using ===
             } else if (owner == username){
                 teamRatings.append(squirrel["avg_rating"] as! Double)
             }
         }
-        var teamRating = calculateAverageRating(teamRatings as [Double])
+        let teamRating = calculateAverageRating(teamRatings as [Double])
         return teamRating
     }
     
     
     //Goes through the list of raters a Squirrel has and if the username of said user is found, returns false. Else it returns true
     func didUserRatedSquirrel(username:String, raters: [String]) -> Bool {
-        if (find(raters, username) == nil) {
+        if (raters.indexOf(username) == nil) {
             return false
         }
         return true
@@ -97,9 +97,9 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             let controller = segue.destinationViewController as! NewSquirrelDetailsViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+            //var squirrelSlots = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
         
-            let userRerates = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
+            let userRerates = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))
             if userRerates == 1 {
                 controller.canRerate = true
             } else {
@@ -107,7 +107,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             }
             let owner = sender!["owner"] as? PFObject
             if owner != nil {
-                var user = sender!["owner"] as? PFUser
+                let user = sender!["owner"] as? PFUser
                 controller.squirrelOwner = user
             } 
         }
@@ -120,7 +120,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         //Team ratings need to be calculated here because the query hasn't been calculated yet in viewDidLoad
         if (self.selectedUser != nil) {
             //We need to calculate the team rating
-            var teamRating = calculateTeamRating(selectedUser!["username"] as! String)
+            let teamRating = calculateTeamRating(selectedUser!["username"] as! String)
             //If rating is 999.0, then no one has rated their team
             if teamRating == 999.0 && selectedUser!.objectId == PFUser.currentUser()!.objectId {
                 teamRatingLabel.text = "No one has rated your team"
@@ -136,7 +136,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     override func queryForTable() -> PFQuery {
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
-        var query = PFQuery(className: "Squirrel")
+        let query = PFQuery(className: "Squirrel")
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         if currentlyTrading == true {
             query.whereKey("owner", equalTo: PFUser.currentUser()!)
@@ -175,19 +175,19 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
-            var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
             //It looks strange to have the row highlighted in gray 
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            var openLabel = cell.viewWithTag(6) as? UILabel
-            var first = cell.viewWithTag(1) as! UILabel
+            let openLabel = cell.viewWithTag(6) as? UILabel
+            let first = cell.viewWithTag(1) as! UILabel
             first.text = object!["first_name"]!.capitalizedString
             //For some reason 2 is already being used as another tag
-            var last = cell.viewWithTag(5) as! UILabel
+            let last = cell.viewWithTag(5) as! UILabel
             last.text = object!["last_name"]!.capitalizedString
-            var ratingLabel = cell.viewWithTag(3) as! UILabel
-            var avgRating = object!["avg_rating"] as! Double
-            var squirrel = objects![indexPath.row] as! PFObject
-            var owner = squirrel["owner"] as? PFUser
+            let ratingLabel = cell.viewWithTag(3) as! UILabel
+            let avgRating = object!["avg_rating"] as! Double
+            let squirrel = objects![indexPath.row] as! PFObject
+            let owner = squirrel["owner"] as? PFUser
             if owner == nil {
                 openLabel?.hidden = false
             } else {
@@ -196,10 +196,13 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             if avgRating != 0 && avgRating >= 9 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.redColor()
-            } else if avgRating != 0 && avgRating >= 8 {
+            } else if avgRating != 0 && avgRating >= 7 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.orangeColor()
-            }else {
+            } else if avgRating != 0 && avgRating >= 5 {
+                ratingLabel.text = "\(avgRating)"
+                cell.backgroundColor = UIColor.yellowColor()
+            } else {
                 //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
                 ratingLabel.text = ""
                 cell.backgroundColor = UIColor.yellowColor()
@@ -211,16 +214,16 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             // Else the user is trying to delete a squirrel from the group
-            let squirrel = objects![indexPath.row] as! PFObject
-            let firstName = (squirrel["first_name"] as! String).lowercaseString
-            let lastName = (squirrel["last_name"] as! String).lowercaseString
-            let fullName = "\(firstName) \(lastName)"
-                var message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
-                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            //let squirrel = objects![indexPath.row] as! PFObject
+            //let firstName = (squirrel["first_name"] as! String).lowercaseString
+            //let lastName = (squirrel["last_name"] as! String).lowercaseString
+            //let fullName = "\(firstName) \(lastName)"
+                let message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
+                let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "Drop Squirrel", style: .Default, handler:  { (action: UIAlertAction) in
                     //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
                     let viewsArray = displayLoadingAnimator(self.view)
                     let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
@@ -234,8 +237,8 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         if potentialOwner != nil && potentialOwner != PFUser.currentUser()!.username! {
                             //Then a trade was just accepted recently and the logged in user is trying to drop a squirrel that's not there's anymore
                             //Global function that stops the loading animation and dismisses the views it is attached to
-                            resumeInteractionEvents(activityIndicatorView, container, loadingView)
-                            displayAlert(self, "You sneaky Squirreler", "That squirrel isn't yours anymore! But nice try ;)")
+                            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+                            displayAlert(self, title: "You sneaky Squirreler", message: "That squirrel isn't yours anymore! But nice try ;)")
                             //Reload the view
                             self.loadObjects()
                             return
@@ -243,13 +246,13 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         squirrel.removeObjectForKey("owner")
                         squirrel.removeObjectForKey("ownerUsername")
                         squirrel.save()
-                        var teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
+                        let teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
                         self.teamRatingLabel.text = "Team Rating: \(teamRating)"
                         //Give the user a squirrel slot
-                        let squirrelSlots = getUserInfo(self.currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+                        let squirrelSlots = Int(getUserInfo(self.currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
                         LOGGED_IN_USER_SQUIRREL_SLOTS = squirrelSlots!
                         LOGGED_IN_USER_SQUIRREL_SLOTS += 1
-                        let newSquirrelSlots = getNewArrayToSave(self.currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+                        let newSquirrelSlots = getNewArrayToSave(self.currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
                         self.currentGroup!["squirrelSlots"] = newSquirrelSlots
                         self.currentGroup!.save()
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
@@ -261,7 +264,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         let query = PFQuery.orQueryWithSubqueries([query1, query2])
                         query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
                             if error == nil {
-                                var tradeOffers = trades as? [PFObject]
+                                let tradeOffers = trades as? [PFObject]
                                 if tradeOffers?.count >= 1 {
                                     for trade in tradeOffers! {
                                         trade.delete()
@@ -275,11 +278,11 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
                         let users = (self.currentGroup!["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
                         //Send silent push notifications for other users to have their Squirrel tab refresh
-                        sendPushNotifications(0, "", "reloadSquirrels", users)
+                        sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
                         //Reload the view
                         self.loadObjects()
                         //Global function that stops the loading animation and dismisses the views it is attached to
-                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                     }
                     
                 }))
@@ -288,7 +291,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let squirrel = objects![indexPath.row] as! PFObject
+        //let squirrel = objects![indexPath.row] as! PFObject
         if currentlyTrading == true {
             //Then the delegate will store the selected Squirrel and other trade information and pass it back to the UsersSquirrelsViewController
             delegate!.selectedSquirrelForTrade!(self, selectedSquirrel: objects![indexPath.row] as! PFObject, wantedSquirrelOwner:desiredSquirrelOwner!, wantedSquirrel: desiredSquirrel!)
@@ -301,9 +304,9 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     
     
     //Customize the delete button on swipe left
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var title = "Drop"
-        var deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let title = "Drop"
+        let deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
             self.tableView.dataSource?.tableView?(
                 self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
             )
@@ -336,7 +339,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     func reloadParent(controller: NewSquirrelDetailsViewController, usedRerate: Bool) {
         if usedRerate == true {
             //Then the user used their rerate and it needs to be set back to false
-            var newRerates = getNewArrayToSave(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!, "0")
+            let newRerates = getNewArrayToSave(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!, newInfo: "0")
             currentGroup!["rerates"] = newRerates
             currentGroup!.save()
         }

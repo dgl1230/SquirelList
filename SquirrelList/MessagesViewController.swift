@@ -39,7 +39,7 @@ class MessagesViewController: JSQMessagesViewController {
             if error == nil {
                 self.loadMessages()
                 //Send silent push notifications for other users to have their Messages tab refresh
-                sendPushNotifications(0, "", "reloadMessages", PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
+                sendPushNotifications(0, message: "", type: "reloadMessages", users: PFUser.currentUser()!["currentGroup"]!["users"] as! [String])
             }
         }
         self.finishSendingMessage()
@@ -60,11 +60,10 @@ class MessagesViewController: JSQMessagesViewController {
         }
         messageQuery.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
             if error == nil {
-                println("QUERYING MESSAGES")
                 let messageResults = results as? [PFObject]
-                let newMessages = messageResults?.reverse()
-                var counter = 0
-                for message in newMessages! {
+                let newMessages = Array(messageResults!.reverse())
+                //var counter = 0
+                for message in newMessages {
                     self.messageObjects.append(message)
                         let user = message["sender"] as! String
                         self.users.append(user)
@@ -121,22 +120,22 @@ class MessagesViewController: JSQMessagesViewController {
         self.senderId = PFUser.currentUser()!.username
         self.senderDisplayName = PFUser.currentUser()!.username
         //Disable the attachment button
-        self.inputToolbar.contentView.leftBarButtonItem = nil
+        self.inputToolbar!.contentView!.leftBarButtonItem = nil
         
         let lightBlue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
         
-        let selfUsername = PFUser.currentUser()!.username! as NSString
-        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        _ = PFUser.currentUser()!.username! as NSString
+        self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(lightBlue)
         incomingBubbleImage = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.orangeColor())
         
         //For when the user touches an obscure area of the view
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "close")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "close")
         view.addGestureRecognizer(tap)
         
-        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
-        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+        self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+        self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         //Load any messages 
         loadMessages()
 
@@ -163,7 +162,7 @@ class MessagesViewController: JSQMessagesViewController {
         }
     */
     
-    
+
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         if message.senderId != self.senderId {
@@ -172,17 +171,18 @@ class MessagesViewController: JSQMessagesViewController {
         return nil
     }
 
+
     
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as? JSQMessagesCollectionViewCell
-        cell!.textView.textColor = UIColor.blackColor()
+        cell!.textView!.textColor = UIColor.blackColor()
         //Check to see if we are displaying a sender's name. If we are, we want their name to be aligned witht the beggining of the message
         let message = messages[indexPath.row]
         if message.senderId != self.senderId {
-            cell!.messageBubbleTopLabel.textInsets.left = 15.0
+            cell!.messageBubbleTopLabel!.textInsets.left = 15.0
         }
-        cell!.textView.linkTextAttributes = [NSForegroundColorAttributeName:cell!.textView.textColor]
+        cell!.textView!.linkTextAttributes = [NSForegroundColorAttributeName:cell!.textView!.textColor!]
         return cell!
     }
     

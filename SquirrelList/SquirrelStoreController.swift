@@ -25,17 +25,17 @@ class SquirrelStoreController: UITableViewController {
     @IBAction func buySquirrelSlots(sender: AnyObject) {
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         currentGroup.fetch()
-        var acorns = getUserInfo(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+        let acorns = Int(getUserInfo(currentGroup["acorns"] as! [String], username: PFUser.currentUser()!.username!))
         if acorns! < 500 {
-            displayAlert(self, "Ooops", "You don't have that many acorns anymore! Perhaps a trade was just accepted?")
+            displayAlert(self, title: "Ooops", message: "You don't have that many acorns anymore! Perhaps a trade was just accepted?")
             return
         }
         LOGGED_IN_USER_ACORNS = acorns!
         LOGGED_IN_USER_ACORNS -= 500
-        var squirrelSlots = getUserInfo(currentGroup["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+        //var squirrelSlots = Int(getUserInfo(currentGroup["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
         LOGGED_IN_USER_SQUIRREL_SLOTS += 1
-        let newAcornsArray = getNewArrayToSave(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_ACORNS))
-        let newSquirrelSlots = getNewArrayToSave(currentGroup["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+        let newAcornsArray = getNewArrayToSave(currentGroup["acorns"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_ACORNS))
+        let newSquirrelSlots = getNewArrayToSave(currentGroup["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
         currentGroup["acorns"] = newAcornsArray
         currentGroup["squirrelSlots"] = newSquirrelSlots
         currentGroup.save()
@@ -52,16 +52,16 @@ class SquirrelStoreController: UITableViewController {
     @IBAction func buyRerating(sender: AnyObject) {
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         currentGroup.fetch()
-        var acorns = getUserInfo(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
+        let acorns = Int(getUserInfo(currentGroup["acorns"] as! [String], username: PFUser.currentUser()!.username!))
         if acorns! < 50 {
-            displayAlert(self, "Ooops", "You don't have that many acorns anymore! Perhaps a trade was just accepted?")
+            displayAlert(self, title: "Ooops", message: "You don't have that many acorns anymore! Perhaps a trade was just accepted?")
             return
         }
         LOGGED_IN_USER_ACORNS = acorns!
         LOGGED_IN_USER_ACORNS -= 50
         LOGGED_IN_USER_RERATES = 1
-        let newAcornsArray = getNewArrayToSave(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_ACORNS))
-        let newRerates = getNewArrayToSave(currentGroup["rerates"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_RERATES))
+        let newAcornsArray = getNewArrayToSave(currentGroup["acorns"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_ACORNS))
+        let newRerates = getNewArrayToSave(currentGroup["rerates"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_RERATES))
         currentGroup["acorns"] = newAcornsArray
         currentGroup["rerates"] = newRerates
         currentGroup.save()
@@ -92,9 +92,9 @@ class SquirrelStoreController: UITableViewController {
     
     func update() {
         let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
-        LOGGED_IN_USER_ACORNS = getUserInfo(currentGroup["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()!
-        LOGGED_IN_USER_SQUIRREL_SLOTS = getUserInfo(currentGroup["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
-        LOGGED_IN_USER_RERATES = getUserInfo(currentGroup["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()!
+        LOGGED_IN_USER_ACORNS = Int(getUserInfo(currentGroup["acorns"] as! [String], username: PFUser.currentUser()!.username!))!
+        LOGGED_IN_USER_SQUIRREL_SLOTS = Int(getUserInfo(currentGroup["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))!
+        LOGGED_IN_USER_RERATES = Int(getUserInfo(currentGroup["rerates"] as! [String], username: PFUser.currentUser()!.username!))!
         LOGGED_IN_USER_GROUP_NAME = currentGroup["name"] as! String
         //var acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
         acornsLabel.text = "\(LOGGED_IN_USER_ACORNS)"

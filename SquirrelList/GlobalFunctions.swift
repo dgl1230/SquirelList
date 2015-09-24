@@ -25,9 +25,9 @@ var COUNTER = 0
     What this does: displays a UIAlertController with a specified error, dismisses it when they press OK, and potentially executes whatever is in the closure if they provide it
     */
     func displayAlert(controller: UIViewController, title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         //alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
             alert.dismissViewControllerAnimated(true, completion: nil)
         }))
         controller.presentViewController(alert, animated: true, completion: nil)
@@ -42,24 +42,24 @@ var COUNTER = 0
         //Make keyboard disappear
         uiView.endEditing(true)
         //We create a container the same size as self.view so that we can make the background whiter and more transparent
-        var container = UIView()
+        let container = UIView()
         container.frame = uiView.frame
         container.center = uiView.center
         container.backgroundColor = UIColor(white: 0.7, alpha: 0.3)
         //Loading view is for holding activityIndicatorView
-        var loadingView = UIView()
+        let loadingView = UIView()
         loadingView.frame = CGRectMake(0, 0, 70, 70)
         loadingView.center = uiView.center
         loadingView.backgroundColor = UIColor(white: 0, alpha: 0.4)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
         
-        let x = CGFloat(uiView.frame.size.width)
-        let y = CGFloat(uiView.frame.height)
-        let cellWidth = Int(uiView.frame.width / 2)
-        let cellHeight = Int(uiView.frame.height / 2)
+        _ = CGFloat(uiView.frame.size.width)
+        _ = CGFloat(uiView.frame.height)
+        _ = Int(uiView.frame.width / 2)
+        _ = Int(uiView.frame.height / 2)
         let frame = CGRectMake(0, 0, 100, 100)
-        var activityIndicatorView = NVActivityIndicatorView(frame: frame, type: .BallClipRotatePulse, color: UIColor.orangeColor(), size: CGSize(width: 50, height: 50))
+        let activityIndicatorView = NVActivityIndicatorView(frame: frame, type: .BallClipRotatePulse, color: UIColor.orangeColor(), size: CGSize(width: 50, height: 50))
         activityIndicatorView.center = CGPointMake(loadingView.frame.size.width / 2, loadingView.frame.size.height / 2)
         loadingView.addSubview(activityIndicatorView)
         container.addSubview(loadingView)
@@ -98,13 +98,13 @@ var COUNTER = 0
     func getUserInfo(infoArray: [String], username: String) -> String {
         var index = 0
         for stringChunk in infoArray {
-            if  (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+            if  (stringChunk.rangeOfString(username, options: [], range: nil, locale: nil) != nil) {
                 break
             }
             index += 1
         }
         let userString = infoArray[index]
-        let colonIndex = find(userString, ":")
+        let colonIndex = userString.characters.indexOf(":")
         let correctIndex = colonIndex!.successor()
         let userInfo = userString.substringFromIndex(correctIndex)
         return userInfo
@@ -115,7 +115,7 @@ var COUNTER = 0
         var index = 0
         var newArray = oldArray
         for stringChunk in oldArray {
-            if (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+            if (stringChunk.rangeOfString(username, options: [], range: nil, locale: nil) != nil) {
                 break
             }
             index += 1
@@ -129,7 +129,7 @@ var COUNTER = 0
     func getFullUserInfo(oldArray: [String], username: String) -> String {
         var index = 0
         for stringChunk in oldArray {
-            if (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+            if (stringChunk.rangeOfString(username, options: [], range: nil, locale: nil) != nil) {
                 break
             }
             index += 1
@@ -140,7 +140,7 @@ var COUNTER = 0
     //Used for verifiying that a user's data exists in a group's array
     func userDataExists(dataArray: [String], username: String) -> Bool {
         for stringChunk in dataArray {
-            if (stringChunk.rangeOfString(username, options: nil, range: nil, locale: nil) != nil) {
+            if (stringChunk.rangeOfString(username, options: [], range: nil, locale: nil) != nil) {
                 return true
             }
         }

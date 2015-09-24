@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if usernameTextField.text == "" || passwordTextField.text == "" {
             error = "We need your username and password to login"
         }
-        let username = usernameTextField.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        let username = usernameTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         if error != "" {
             displayErrorAlert("Whoops! We had a problem", message: error)
         } else {
@@ -35,11 +35,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
             let container = viewsArray[1] as! UIView
             let loadingView = viewsArray[2] as! UIView
-            PFUser.logInWithUsernameInBackground(username, password:passwordTextField.text) {
+            PFUser.logInWithUsernameInBackground(username, password:passwordTextField.text!) {
                 (user: PFUser?, signupError: NSError?) -> Void in
                     if signupError ==  nil {
                         //Global function that stops the loading animation and dismisses the views it is attached to
-                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                         if PFUser.currentUser()!["currentGroup"] == nil {
                             //Then they need to be directed just to the more tab
                             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -60,12 +60,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             self.view.endEditing(true)
                         }
                     } else {
-                        if let errorString = signupError!.userInfo?["error"] as? String {
+                        if let errorString = signupError!.userInfo["error"] as? String {
                             error = errorString
                         } else {
                             error = "There was a random bug :( Please try again"
                         }
-                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                         self.displayErrorAlert("Whoops! We had a problem", message: error)
                     }
             }
@@ -77,17 +77,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
     func displayErrorAlert(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
 
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if sender?.identifier == "register" {
-            let controller = segue.destinationViewController as! RegisterViewController
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

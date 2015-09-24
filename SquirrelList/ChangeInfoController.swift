@@ -32,7 +32,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     @IBAction func save(sender: AnyObject) {
         if infoBeingChanged == "name" {
-            if count(infoField.text) > 15 {
+            if infoField.text!.characters.count > 15 {
                 displayErrorAlert("That name is too long!", message: "Please keep it to under 15 characters. Amateur.")
                 return
             }
@@ -42,7 +42,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
             //Reloads the SettingsViewContrller with the new name
             delegate!.finishedSaving(self)
         } else if infoBeingChanged == "email" {
-            if count(infoField.text) > 30 {
+            if infoField.text!.characters.count > 30 {
                 displayErrorAlert("That email is too long!", message: "Please keep it to under 30 characters. Amateur.")
                 return
             }
@@ -78,7 +78,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
     func displayErrorAlert(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -123,7 +123,7 @@ class ChangeInfoController: UIViewController, UITextFieldDelegate, UITextViewDel
     
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-            var oldInfo: NSString = infoField.text
+            let oldInfo: NSString = infoField.text!
             var newInfo: NSString = ""
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: string)
             if newInfo.length > 0 && newInfo != placeholder {

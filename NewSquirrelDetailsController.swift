@@ -66,18 +66,18 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
     @IBAction func rateSquirrel(sender: AnyObject) {
         ratedSquirrel!.fetch()
-        var rater = PFUser.currentUser()!.username
+        let rater = PFUser.currentUser()!.username
         //They are re-rating the squirrel
         //Not efficient, look into way to not duplicate code
         if didRateSquirrel == true {
             //Set the global variable back to zero
             LOGGED_IN_USER_RERATES = 0
             var raters = ratedSquirrel!["raters"] as! [String]
-            var raterIndex = find(raters, PFUser.currentUser()!.username!)
+            let raterIndex = raters.indexOf((PFUser.currentUser()!.username!))
             raters.removeAtIndex(raterIndex!)
             raters.append(PFUser.currentUser()!.username!)
             var ratings = removeRating(ratedSquirrel!)
-            ratings.append(rateNumberTextField.text)
+            ratings.append(rateNumberTextField.text!)
             ratedSquirrel!["ratings"] = ratings
             ratedSquirrel!["raters"] = raters
             ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
@@ -97,9 +97,9 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         }
         //check if ["ratings"] is nil. If it is, we create it
         if let check: AnyObject = ratedSquirrel!["ratings"] {
-            ratedSquirrel!["ratings"]!.addObject(rateNumberTextField.text)
+            ratedSquirrel!["ratings"]!.addObject(rateNumberTextField.text!)
         } else {
-            ratedSquirrel!["ratings"] = [rateNumberTextField.text]
+            ratedSquirrel!["ratings"] = [rateNumberTextField.text!]
         }
 
         ratedSquirrel!["avg_rating"] = calculateAverageRating(ratedSquirrel!["ratings"] as! [String])
@@ -111,17 +111,17 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
 
     func calculateAverageRating(ratings:[String]) -> Double {
-        var numOfRatings = ratings.count
+        let numOfRatings = ratings.count
         if numOfRatings == 0 {
             return 0
         }
         var sum = 0.0
 
         for rating in ratings {
-            var rating1 = rating as NSString
+            let rating1 = rating as NSString
             sum += rating1.doubleValue
         }
-        var unroundedRating = Double(sum)/Double(numOfRatings)
+        let unroundedRating = Double(sum)/Double(numOfRatings)
         return round((10 * unroundedRating)) / 10
     }
     
@@ -135,7 +135,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
     
     func checkIfUserRatedSquirrel(username:String, raters: [String]) -> Bool {
-        if (find(raters, username) == nil) {
+        if (raters.indexOf(username) == nil) {
             return false
         }
         return true
@@ -157,11 +157,11 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         let squirrelName = "\(firstName) \(lastName)"
         let squirrelNames = currentGroup!["squirrelFullNames"] as! [String]
         //Make sure the squirrel hasn't been deleted  - if it has been, we can still fetch it, but it's fields won't have any values 
-        if contains(squirrelNames, squirrelName) == false {
+        if squirrelNames.contains(squirrelName) == false {
             //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView, container, loadingView)
-            var alert = UIAlertController(title: "Whoops", message: "That Squirrel was just deleted! You can re-add it though :)", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+            let alert = UIAlertController(title: "Whoops", message: "That Squirrel was just deleted! You can re-add it though :)", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                 //Need to reload squirrel view
                 self.delegate!.reloadParent(self, usedRerate: false)
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -171,9 +171,9 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         }
         if ratedSquirrel!["ownerUsername"] != nil {
             //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView, container, loadingView)
-            var alert = UIAlertController(title: "Oops", message: "That Squirrel was just claimed :(", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+            let alert = UIAlertController(title: "Oops", message: "That Squirrel was just claimed :(", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                 //Need to reload squirrel view
                 self.delegate!.reloadParent(self, usedRerate: false)
                 self.dismissViewControllerAnimated(true, completion: nil)
@@ -186,35 +186,35 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             self.ratedSquirrel!["owner"] = PFUser.currentUser()!
             self.ratedSquirrel!["ownerUsername"] = PFUser.currentUser()!.username
             if self.didRateSquirrel == true {
-                var ratings = self.removeRating(self.ratedSquirrel!)
+                let ratings = self.removeRating(self.ratedSquirrel!)
                 self.ratedSquirrel!["avg_rating"] = self.calculateAverageRating(ratings)
                 self.ratedSquirrel!["ratings"] = ratings
                 self.ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
             }
             //var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
             LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
-            let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+            let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
             currentGroup!["squirrelSlots"] = newSquirrelSlots
             currentGroup!.save()
             self.ratedSquirrel!.save()
             //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
             let users = (currentGroup!["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
             //Send silent push notifications for other users to have their Squirrel tab refresh
-            sendPushNotifications(0, "", "reloadSquirrels", users)
+            sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
             //Reload main squirrel view
             self.delegate!.reloadParent(self, usedRerate: false)
             //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView, container, loadingView)
+            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     
     
     func getUserRating(username:String, raters:[String], ratings:[String]) -> String {
-        if (find(raters, username) == nil) {
+        if (raters.indexOf(username) == nil) {
             return "No rating"
         }
-        var index = find(raters, username)
+        let index = raters.indexOf(username)
         return ratings[index!]
     }
     
@@ -236,14 +236,14 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
 
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     
     //Removes the user's rating from the squirrel's "ratings" field
     func removeRating(squirrel: PFObject) -> [String] {
-        var ownerIndex = find(squirrel["raters"] as! [String], PFUser.currentUser()!.username!)
+        let ownerIndex = (squirrel["raters"] as! [String]).indexOf((PFUser.currentUser()!.username!))
         var ratings = squirrel["ratings"] as? [String]
         ratings!.removeAtIndex(ownerIndex!)
         return ratings!
@@ -251,8 +251,8 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
 
 
     func validRating(rating: String) -> Bool {
-        var validRatings = ["1", "1.0", "1.5", "2", "2.0", "2.5", "3", "3.0", "3.5", "4", "4.0", "4.5", "5", "5.0", "5.5", "6", "6.0", "6.5", "7", "7.0", "7.5", "8", "8.0", "8.5", "9", "9.0", "9.5", "10", "10.0"]
-        if contains(validRatings, rating) {
+        let validRatings = ["1", "1.0", "1.5", "2", "2.0", "2.5", "3", "3.0", "3.5", "4", "4.0", "4.5", "5", "5.0", "5.5", "6", "6.0", "6.5", "7", "7.0", "7.5", "8", "8.0", "8.5", "9", "9.0", "9.5", "10", "10.0"]
+        if validRatings.contains(rating) {
             return true
         }
         return false
@@ -264,8 +264,8 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         if ratingAlert == true {
             //The user is new and we need to give them an alert about what ratings they can use and then update their "newRatingAlert" field
             let message = "Rate Squirrels starting at 1 and in increments of 0.5, up to 10."
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) -> Void in
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) -> Void in
                     //We only want to show this alert to users once, so we update their "newRatingAlert" field afterwards
                     PFUser.currentUser()!["newRatingAlert"] = false
                     PFUser.currentUser()!.save()
@@ -278,16 +278,19 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        var firstName = ratedSquirrel!["first_name"] as! String
-        var lastName = ratedSquirrel!["last_name"] as! String
+        let firstName = ratedSquirrel!["first_name"] as! String
+        let lastName = ratedSquirrel!["last_name"] as! String
         squirrelNameLabel.text = "\(firstName) \(lastName)"
         let squirrelRating = ratedSquirrel!["avg_rating"] as? Double
         
         //Check if the squirrel has an average rating 
-        if squirrelRating != 0 && squirrelRating >= 8 {
+        if squirrelRating != 0 && squirrelRating >= 5 {
             //We have to cast the rating as an Int first, because casting it directly as a String produces nil
             avgRatingLabel.text = "Squirrel Score:  \(squirrelRating!)"
-        } else  {
+        } else if squirrelRating == 0 {
+            //The squirrel hasn't been rated
+            avgRatingLabel.text = "Not Rated"
+        } else {
             //The squirrel has a rating, but it is too low to show or the squirrel has no rating
             avgRatingLabel.text = "Squirrel Score: ???"
         }
@@ -295,7 +298,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         //Check if the user has rated the squirrel
         didRateSquirrel = checkIfUserRatedSquirrel(PFUser.currentUser()!["username"] as! String, raters: ratedSquirrel!["raters"] as! [String])
         if didRateSquirrel == true {
-            var rating = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
+            let rating = getUserRating(PFUser.currentUser()!["username"]! as! String, raters: ratedSquirrel!["raters"]! as! [String], ratings: ratedSquirrel!["ratings"]! as! [String])
             rateNumberTextField.placeholder = "Your rating: \(rating)"
             if canRerate == true {
                 rateButton.setTitle("Rerate", forState: UIControlState.Normal)
@@ -311,7 +314,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
         }
         //Check if the squirrel has an owner to propose a trade with and if they have a unique picture
         let pic = ratedSquirrel!["picture"] as! PFFile
-        var owner = ratedSquirrel!["ownerUsername"] as? String
+        let owner = ratedSquirrel!["ownerUsername"] as? String
         if owner == nil {
             squirrelOwnerLabel.text = "Squirreler:  No one :("
             claimOrTradeOrPicture = "claim"
@@ -338,7 +341,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             rateNumberTextField.hidden = true
         } else {
             //Squirrel does have an owner that's not the logged in user
-            var owner = ratedSquirrel!["ownerUsername"] as! String
+            let owner = ratedSquirrel!["ownerUsername"] as! String
             squirrelOwnerLabel.text = "Squirreler:  \(owner)"
             claimTradePictureButton.setTitle("Propose Trade", forState: UIControlState.Normal)
             claimOrTradeOrPicture = "trade"
@@ -373,7 +376,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             var oldRating: NSString = ""
             var newRating: NSString = ""
         
-            oldRating = rateNumberTextField.text
+            oldRating = rateNumberTextField.text!
             newRating = oldRating.stringByReplacingCharactersInRange(range, withString: string)
         
             if validRating(newRating as String) == true {
@@ -393,7 +396,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     }
     
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
         let viewsArray = displayLoadingAnimator(picker.view)
         let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
@@ -410,13 +413,13 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
                     //We need to reload the popup with the new picture
                     self.viewDidLoad()
                     //Global function that stops the loading animation and dismisses the views it is attached to
-                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                    resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 } else {
                     //There was an error and display it
                     //Global function that stops the loading animation and dismisses the views it is attached to
-                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
-                    displayAlert(self, "Ooops", "There was an error. Would you mind trying again?")
+                    resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+                    displayAlert(self, title: "Ooops", message: "There was an error. Would you mind trying again?")
                     
                 }
             }
@@ -433,11 +436,11 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
 
 //Extending the UIImage class so we can save pictures in much lower quality (which is much faster)
 extension UIImage {
-    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0) }
-    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)}
-    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5) }
-    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)}
-    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0) }
+    var highestQualityJPEGNSData:NSData { return UIImageJPEGRepresentation(self, 1.0)! }
+    var highQualityJPEGNSData:NSData    { return UIImageJPEGRepresentation(self, 0.75)! }
+    var mediumQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.5)! }
+    var lowQualityJPEGNSData:NSData     { return UIImageJPEGRepresentation(self, 0.25)! }
+    var lowestQualityJPEGNSData:NSData  { return UIImageJPEGRepresentation(self, 0.0)! }
 }
 
 

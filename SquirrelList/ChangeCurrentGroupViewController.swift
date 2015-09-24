@@ -23,7 +23,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     }
 	
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
   
         // Configure the PFQueryTableView
         self.parseClassName = "Group"
@@ -32,18 +32,36 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         self.paginationEnabled = false
     }
     
+    func deleteTrades(group: PFObject) {
+        let tradeQ1 = PFQuery(className: "TradeProposal")
+        tradeQ1.whereKey("offeringUsername", equalTo: PFUser.currentUser()!.username!)
+        tradeQ1.whereKey("group", equalTo: group)
+        let tradeQ2 = PFQuery(className: "TradeProposal")
+        tradeQ2.whereKey("receivingUsername", equalTo: PFUser.currentUser()!.username!)
+        tradeQ2.whereKey("group", equalTo: group)
+        let query = PFQuery.orQueryWithSubqueries([tradeQ1, tradeQ2])
+        query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
+            if error == nil {
+                for object in trades! {
+                    let trade = object as! PFObject
+                    trade.delete()
+                }
+            }
+        }
+    }
+    
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        var query = PFQuery(className: "Group")
+        let query = PFQuery(className: "Group")
         query.whereKey("objectId", containedIn: PFUser.currentUser()!["groups"]! as! [String])
-        query.orderByDescending("name")
+        query.orderByAscending("name")
         return query
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UsersCellTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UsersCellTableViewCell
         //var name = cell.viewWithTag(1) as! UILabel
         cell.usernameLabel.text = objects![indexPath.row]["name"] as? String
         cell.usernameLabel.font = UIFont(name: "BebasNeue-Thin", size: 30)
@@ -57,9 +75,9 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             let groups = PFUser.currentUser()!["groups"] as! [String]
             if groups.count == 1 {
                 //This is their only group, and they can't leave it then
-                var message = "This is your only group! You can only leave it if you have at least one other group to go to."
-                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:  { (action: UIAlertAction!) in
+                let message = "This is your only group! You can only leave it if you have at least one other group to go to."
+                let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler:  { (action: UIAlertAction) in
                     return
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
@@ -69,12 +87,12 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             let group = objects![indexPath.row] as! PFObject
             let users = group["users"] as! [String]
             if users.count == 1 {
-                var message = "Are you sure you want to leave this group? You're the only member right now, so leaving this group will delete it."
-                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                let message = "Are you sure you want to leave this group? You're the only member right now, so leaving this group will delete it."
+                let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction) in
                      //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
                     let viewsArray = displayLoadingAnimator(self.view)
                     let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
@@ -93,24 +111,25 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                                 squirrel.delete()
                             }
                         }
+                        self.deleteTrades(group)
                     })
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
                     group.delete()
                     self.loadObjects()
                     //Global function that stops the loading animation and dismisses the views it is attached to
-                    resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                    resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                     }
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
                 //The user will leave the group and we will update their squirrels
-                var message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
-                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                let message = "Are you sure you want to leave this group? You'll lose all of your Squirrels in this group and won't be able to re-join unless you're invited back."
+                let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "Leave Group", style: .Default, handler:  { (action: UIAlertAction) in
                 //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
                 let viewsArray = displayLoadingAnimator(self.view)
                 let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
@@ -129,12 +148,14 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                                     squirrel.save()
                                 }
                             }
-                            let acorns = getFullUserInfo(group["acorns"] as! [String], PFUser.currentUser()!.username!)
-                        let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!)
-                        let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], PFUser.currentUser()!.username!)
-                        let usersOnLastVist = getFullUserInfo(group["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!)
-                        let lastVisit = getFullUserInfo(group["lastVisits"] as! [String], PFUser.currentUser()!.username!)
-                        let rerate = getFullUserInfo(group["rerates"] as! [String], PFUser.currentUser()!.username!)
+                        })
+                        self.deleteTrades(group)
+                        let acorns = getFullUserInfo(group["acorns"] as! [String], username: PFUser.currentUser()!.username!)
+                        let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!)
+                        let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], username: PFUser.currentUser()!.username!)
+                        let usersOnLastVist = getFullUserInfo(group["usersOnLastVisit"] as! [String], username: PFUser.currentUser()!.username!)
+                        let lastVisit = getFullUserInfo(group["lastVisits"] as! [String], username: PFUser.currentUser()!.username!)
+                        let rerate = getFullUserInfo(group["rerates"] as! [String], username: PFUser.currentUser()!.username!)
                         //Remove user from the group's users and remove all of the user's other fields
                         group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
                         group.removeObject(acorns, forKey: "acorns")
@@ -151,10 +172,9 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         //self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                         self.viewDidLoad()
                         //Global function that stops the loading animation and dismisses the views it is attached to
-                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
-                        })
-                    
+                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                     }
+                        
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             }
@@ -183,8 +203,8 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     
     
     //Customize the delete button on swipe left
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var deleteButton = UITableViewRowAction(style: .Default, title: "Leave Group", handler: { (action, indexPath) in
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .Default, title: "Leave Group", handler: { (action, indexPath) in
         self.tableView.dataSource?.tableView?(
             self.tableView,
             commitEditingStyle: .Delete,

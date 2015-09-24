@@ -15,7 +15,7 @@ class GradientView: UIView {
         backgroundColor = UIColor.clearColor()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = UIColor.clearColor()
     }
@@ -33,7 +33,7 @@ class GradientView: UIView {
         let radius = max(x,y)
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextDrawRadialGradient(context, gradient, point, 0, point, radius, CGGradientDrawingOptions(kCGGradientDrawsAfterEndLocation))
+        CGContextDrawRadialGradient(context, gradient, point, 0, point, radius, CGGradientDrawingOptions.DrawsAfterEndLocation)
     }
 
 }

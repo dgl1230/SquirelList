@@ -28,12 +28,12 @@ class PoliciesViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         if policy == "Privacy Policy" {
         let path = NSBundle.mainBundle().URLForResource("Privacy_Policy", withExtension: "rtf", subdirectory: nil, localization: nil)
-        let content = NSAttributedString(fileURL: path, options: [NSDocumentTypeDocumentAttribute:NSRTFTextDocumentType], documentAttributes: nil, error: nil)
+        let content = try? NSAttributedString(fileURL: path!, options: [NSDocumentTypeDocumentAttribute:NSRTFTextDocumentType], documentAttributes: nil)
         textView.attributedText = content
         self.title = "Privacy Policy"
     } else if policy == "Terms of Service" {
         let path = NSBundle.mainBundle().URLForResource("Terms_Of_Service", withExtension: "rtf", subdirectory: nil, localization: nil)
-        let content = NSAttributedString(fileURL: path, options: [NSDocumentTypeDocumentAttribute:NSRTFTextDocumentType], documentAttributes: nil, error: nil)
+        let content = try? NSAttributedString(fileURL: path!, options: [NSDocumentTypeDocumentAttribute:NSRTFTextDocumentType], documentAttributes: nil)
         textView.attributedText = content
         self.title = "Terms of Service"
     }

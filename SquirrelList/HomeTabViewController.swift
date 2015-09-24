@@ -33,7 +33,7 @@ class HomeTabViewController: UITabBarController {
 
         //Since the moreViewController isn't hooked up to the HomeTableViewController in the storyboard, we need to set attritbutes
         let moreStoryboard = UIStoryboard(name: "More", bundle: nil)
-        var moreViewController = moreStoryboard.instantiateViewControllerWithIdentifier("MoreNavigationController") as! UINavigationController
+        let moreViewController = moreStoryboard.instantiateViewControllerWithIdentifier("MoreNavigationController") as! UINavigationController
         moreViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "tabbar_more"), tag: 4)
         moreViewController.tabBarItem.imageInsets.top = 8
         moreViewController.tabBarItem.imageInsets.bottom = -8
@@ -41,7 +41,7 @@ class HomeTabViewController: UITabBarController {
         self.viewControllers = [usersViewController, squirrelsViewController, chatViewController, moreViewController]
         
         //Set each tab image to white
-        for item in self.tabBar.items as! [UITabBarItem] {
+        for item in self.tabBar.items! {
             if let image = item.image {
                 item.image = image.imageWithColor(UIColor.whiteColor()).imageWithRenderingMode(.AlwaysOriginal)
             }
@@ -56,10 +56,10 @@ class HomeTabViewController: UITabBarController {
         func imageWithColor(tintColor: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
 
-        let context = UIGraphicsGetCurrentContext() as CGContextRef
+        let context = UIGraphicsGetCurrentContext() //as! CGContextRef
         CGContextTranslateCTM(context, 0, self.size.height)
         CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextSetBlendMode(context, kCGBlendModeNormal)
+        CGContextSetBlendMode(context, CGBlendMode.Normal)
 
         let rect = CGRectMake(0, 0, self.size.width, self.size.height) as CGRect
         CGContextClipToMask(context, rect, self.CGImage)

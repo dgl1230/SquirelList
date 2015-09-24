@@ -33,11 +33,12 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     }
 
     @IBAction func proposeTrade(sender: AnyObject) {
-        var tradeProposal = PFObject(className:"TradeProposal")
+        let tradeProposal = PFObject(className:"TradeProposal")
         tradeProposal["offeringUser"] = PFUser.currentUser()!
         tradeProposal["offeringUsername"] = PFUser.currentUser()!.username
         if offeredSquirrel != nil {
             tradeProposal["offeredSquirrelID"] = offeredSquirrel!.objectId
+            tradeProposal["offeredSquirrel"] = offeredSquirrel!
         }
         tradeProposal["receivingUser"] = desiredSquirrelOwner!
         //Would like to get rid of fetching
@@ -45,8 +46,8 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         tradeProposal["receivingUsername"] = desiredSquirrelOwner!.username
         tradeProposal["proposedSquirrelID"] = desiredSquirrel!.objectId
 
-        var firstName = desiredSquirrel!["first_name"] as! String
-        var lastName = desiredSquirrel!["last_name"] as! String
+        let firstName = desiredSquirrel!["first_name"] as! String
+        let lastName = desiredSquirrel!["last_name"] as! String
         tradeProposal["desiredSquirrelName"] = "\(firstName) \(lastName)"
         tradeProposal["group"] = PFUser.currentUser()!["currentGroup"] as! PFObject
         
@@ -54,16 +55,16 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             //Then the user is offering acorns and we need to run some checks
             //First we need to check and make sure they only entered in digits
             let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-            for char in acornTextField.text {
-                if find(digits, String(char)) == nil {
+            for char in acornTextField.text!.characters {
+                if digits.indexOf(String(char)) == nil {
                     let title = ""
                     let message = "Only enter in numbers! You weirdo."
                     displayErrorAlert(title, message: message)
                     return
                 }
             }
-            let acorns = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()
-            let offeredAcorns = acornTextField.text.toInt()
+            let acorns = Int(getUserInfo(currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!))
+            let offeredAcorns = Int(acornTextField.text!)
             //Next we check to make sure the user hasn't offered zero acorns
             if offeredAcorns == 0 {
                 let title = ""
@@ -95,17 +96,17 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                     //This is the first type that the user has proposed a trade and they haven't enabled push notification, so we can   prompt them
                     let title = "Let Squirrel List Access Notifications?"
                     let message = "You'll be alerted if \(self.desiredSquirrelOwner!.username!) accepts your trade."
-                    var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction) -> Void in
                         alert.dismissViewControllerAnimated(true, completion: nil)
                         PFUser.currentUser()!["hasProposedTrade"] = true
                         PFUser.currentUser()!.save()
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }))
-                    alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+                    alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction) -> Void in
                         //We ask the user for push notification permission in chat because it's easier to explain why they might need it
                         alert.dismissViewControllerAnimated(true, completion: nil)
-                        let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+                        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
                         let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
                         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
@@ -121,19 +122,25 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                     let owner = self.desiredSquirrelOwner!["username"] as! String
                     let message = "You will be notified if \(owner) accepts your trade."
                     let alert = UIAlertController(title: "Trade Offered!", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+                    alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction) in
                         self.dismissViewControllerAnimated(true, completion: nil)
                     }))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-                
                 let desiredSquirrelName = "\(firstName) \(lastName)"
-                let message = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName)"
-                sendPushNotifications(0, message, "proposedTrade", [self.desiredSquirrelOwner!.username!])
+                let groupName = self.currentGroup!["name"] as! String
+                let message = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName) in group \(groupName)"
+                sendPushNotifications(0, message: message, type: "proposedTrade", users: [self.desiredSquirrelOwner!.username!])
+                //Update the number of trades for the propsoed user 
+                let proposeeTradeOffers = getUserInfo(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!)
+                let newTradeOffers = Int(proposeeTradeOffers)! + 1
+                let newTradeOffersArray = getNewArrayToSave(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!, newInfo: String(newTradeOffers))
+                self.currentGroup!["tradeOffers"] = newTradeOffersArray
+                self.currentGroup!.save()
                 
             } else {
                 //Global function for displaying alert
-                displayAlert(self, "Ooops", "There's been an error. Could you please try again?")
+                displayAlert(self, title: "Ooops", message: "There's been an error. Could you please try again?")
             }
             
         }
@@ -150,7 +157,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
     func displayErrorAlert(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
@@ -169,19 +176,19 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
         super.viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
-        var firstName = desiredSquirrel!["first_name"] as? String
-        var lastName = desiredSquirrel!["last_name"] as? String
+        let firstName = desiredSquirrel!["first_name"] as? String
+        let lastName = desiredSquirrel!["last_name"] as? String
         desiredSquirrelLabel.text = "\(firstName!) \(lastName!)"
         
         //Check whether we should be displaying the "choose a squirrel to offer" button
         if offeredSquirrel != nil {
             //The user has already selected a squirrel for trading
-            var firstName = offeredSquirrel!["first_name"] as? String
-            var lastName = offeredSquirrel!["last_name"] as? String
+            let firstName = offeredSquirrel!["first_name"] as? String
+            let lastName = offeredSquirrel!["last_name"] as? String
             offeredSquirrelLabel.text = "\(firstName!) \(lastName!)"
             selectSquirrelButton.hidden = true
             proposeTradeButton.enabled = true
-        } else if count(acornTextField.text) != 0 {
+        } else if acornTextField.text!.characters.count != 0 {
             //We need to first display the select squirrel button and hide the trade button, since there is no offered squirrel and no proposed acorns
             offeredSquirrelLabel.hidden = true
             proposeTradeButton.enabled = true
@@ -208,8 +215,8 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
             desiredSquirrelOwner = wantedSquirrelOwner
             offeredSquirrel = selectedSquirrel
         
-            var firstName = selectedSquirrel["first_name"] as? String
-            var lastName = selectedSquirrel["last_name"] as? String
+            let firstName = selectedSquirrel["first_name"] as? String
+            let lastName = selectedSquirrel["last_name"] as? String
             offeredSquirrelLabel.text = "\(firstName!) \(lastName!)"
             offeredSquirrelLabel.hidden = false
             proposeTradeButton.hidden = false
@@ -228,7 +235,7 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
 
     //UITextFieldDelate used for seeing whether the user has proposed acorns, and if they have,to show the trade button
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-            if count(string) > 0 || count(acornTextField.text) >= 2 {
+            if string.characters.count > 0 || acornTextField.text!.characters.count >= 2 {
                 proposeTradeButton.alpha = 1
                 proposeTradeButton.enabled = true
             } else if offeredSquirrel == nil {

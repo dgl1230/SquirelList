@@ -22,7 +22,7 @@ class PopUpViewController: UIViewController {
     }
 
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         modalPresentationStyle = .Custom
         transitioningDelegate = self
@@ -52,7 +52,7 @@ extension PopUpViewController: UIViewControllerTransitioningDelegate {
         return BounceAnimationController()
     }
     
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController!, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
             return DimmingPresentationViewController(presentedViewController: presented, presentingViewController: presenting)
     }
 }

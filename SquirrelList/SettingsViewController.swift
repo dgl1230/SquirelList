@@ -41,7 +41,7 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
     
      
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
+        let cell: UITableViewCell = tableView.cellForRowAtIndexPath(indexPath)!
         if cell.tag == 2 {
             //The user is selecting the "name" row
             self.performSegueWithIdentifier("Name", sender: self)
@@ -60,12 +60,12 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
         }
         if cell.tag == 7 {
             //They clicked the "Log Out" row
-            var message = "Are you sure you want to log out?"
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            let message = "Are you sure you want to log out?"
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                 alert.dismissViewControllerAnimated(true, completion: nil)
             }))
-            alert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler:  { (action: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Log Out", style: .Default, handler:  { (action: UIAlertAction) in
                 //Let SquirrelViewController and SquirrelStoreController know that global variables should be reloaded
                 LOGGED_IN_USER_ACORNS = 123456789
                 LOGGED_IN_USER_SQUIRREL_SLOTS = 123456789
@@ -100,7 +100,6 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
         } else {
             nameLabel.text = ""
         }
-        
         //For some reason accessing email via currentUser()!.email results in an error
         let email = PFUser.currentUser()!["email"] as? String
         if email!.rangeOfString("squirrellist") != nil {
@@ -116,6 +115,7 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
     func finishedSaving(controller: ChangeInfoController) {
         self.viewDidLoad()
     }
+    
     
 
 }

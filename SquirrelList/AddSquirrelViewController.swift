@@ -23,28 +23,28 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     
     
     @IBAction func done() {
-        let first = firstName.text as String
-        let last = lastName.text as String
-        if count(first) > 10 {
+        let first = firstName.text //as! String
+        let last = lastName.text //as! String
+        if first!.characters.count > 10 {
             displayErrorAlert("Their first name is too long!", error: "Please keep first names to a max of 10 characters.")
             return
-        } else if count(last) > 15 {
+        } else if last!.characters.count > 15 {
             displayErrorAlert("Their last name is too long!", error: "Please keep last names to a max of 15 characters.")
             return
         }
         //Check to make user didn't just enter spaces for either name 
         let spaces = NSCharacterSet(charactersInString: " ")
-        if count(first.stringByTrimmingCharactersInSet(spaces)) == 0 || count(last.stringByTrimmingCharactersInSet(spaces)) == 0 {
+        if first!.stringByTrimmingCharactersInSet(spaces).characters.count == 0 || last!.stringByTrimmingCharactersInSet(spaces).characters.count == 0 {
             displayErrorAlert("That's not a name!", error: "Please provide letters (not whitespaces) for a Squirrel name. I expected better of you.")
             return
         }
         //We want to make sure users can't add a squirrel that starts or ends with a space or have numbers or weird punctuation
         let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:<>,.?/_+=")
-        if first.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil || last.rangeOfCharacterFromSet(badSet, options: nil, range: nil) != nil {
+        if first!.rangeOfCharacterFromSet(badSet, options: [], range: nil) != nil || last!.rangeOfCharacterFromSet(badSet, options: [], range: nil) != nil {
                 displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal.")
         } else {
-                let trimmedFirst = first.stringByTrimmingCharactersInSet(badSet)
-                let trimmedLast = last.stringByTrimmingCharactersInSet(badSet)
+                let trimmedFirst = first!.stringByTrimmingCharactersInSet(badSet)
+                let trimmedLast = last!.stringByTrimmingCharactersInSet(badSet)
                 let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
@@ -67,11 +67,13 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                 let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
             
                 let squirrelName = "\(first_name.lowercaseString) \(last_name.lowercaseString)"
-                if (find(squirrelNames, squirrelName) != nil) {
+                if (squirrelNames.indexOf(squirrelName) != nil) {
+                    //Global function that stops the loading animation and dismisses the views it is attached to
+                    resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                     self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
                 } else {
                     //We create the Squirrel 
-                    var newSquirrel = PFObject(className:"Squirrel")
+                    let newSquirrel = PFObject(className:"Squirrel")
                     newSquirrel["first_name"] = first_name
                     newSquirrel["last_name"] = last_name
                     newSquirrel["owner"] = PFUser.currentUser()!
@@ -83,23 +85,23 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                     newSquirrel["dropVotes"] = 0
                     newSquirrel["droppers"] = []
                     let picture = UIImage(named: "Squirrel_Profile_Pic")
-                    let imageData = UIImagePNGRepresentation(picture)
-                    let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData)
+                    let imageData = UIImagePNGRepresentation(picture!)
+                    let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData!)
                     newSquirrel["picture"] = imageFile
         
                     newSquirrel.saveInBackgroundWithBlock {
                         (success: Bool, error: NSError?) -> Void in
                             if (success) {
-                                var group = PFUser.currentUser()!["currentGroup"] as! PFObject
+                                let group = PFUser.currentUser()!["currentGroup"] as! PFObject
                                 group.addObject(newSquirrel.objectId!, forKey: "squirrels")
                 
                                 LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
-                                let newSquirrelSlots = getNewArrayToSave(group["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+                                let newSquirrelSlots = getNewArrayToSave(group["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
                                 group["squirrelSlots"] = newSquirrelSlots
                                 group.addObject(squirrelName, forKey: "squirrelFullNames")
                                 group.save()
                                 //Send silent push notifications for other users to have their Squirrel tab refresh
-                                sendPushNotifications(0, "", "reloadSquirrels", users)
+                                sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
                                 self.dismissViewControllerAnimated(true, completion: nil)
                                 //Reloads the parent squirrelViewController
                                 self.delegate!.createdSquirrel(self)
@@ -107,7 +109,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                         }
                         //Regardless of whether an error occurs, we need to resume interaction 
                         //Global function that stops the loading animation and dismisses the views it is attached to
-                        resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
     
                     }
 
@@ -120,7 +122,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     What this does: displays a UIAlertController with a specified error and dismisses it when they press OK
     */
     func displayErrorAlert(title: String, error: String) {
-        var alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: error, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
             self.dismissViewControllerAnimated(true, completion: nil)
         }))
@@ -158,13 +160,13 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
             var newName: NSString = ""
             if textField.tag == 1 {
                 //they are typing in the first name field
-                untouchedName = lastName.text
-                oldName = firstName.text
+                untouchedName = lastName.text!
+                oldName = firstName.text!
                 newName = oldName.stringByReplacingCharactersInRange(range, withString: string)
             } else {
                 //they are typing in the last name field 
-                untouchedName = firstName.text
-                oldName = lastName.text
+                untouchedName = firstName.text!
+                oldName = lastName.text!
                 newName = oldName.stringByReplacingCharactersInRange(range, withString: string)
             }
         

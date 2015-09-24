@@ -32,7 +32,7 @@ public enum BannerSpringiness {
 /// Banner is a dropdown notification view that presents above the main view controller, but below the status bar.
 public class Banner: UIView {
     private class func topWindow() -> UIWindow? {
-        for window in (UIApplication.sharedApplication().windows as! [UIWindow]).reverse() {
+        for window in Array((UIApplication.sharedApplication().windows ).reverse()) {
             if window.windowLevel == UIWindowLevelNormal && !window.hidden { return window }
         }
         return nil
@@ -97,7 +97,7 @@ public class Banner: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         label.numberOfLines = 0
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -106,7 +106,7 @@ public class Banner: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
         label.numberOfLines = 0
-        label.setTranslatesAutoresizingMaskIntoConstraints(false)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -116,7 +116,7 @@ public class Banner: UIView {
     /// The image view that displays the `image`.
     public let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .ScaleAspectFit
         return imageView
     }()
@@ -131,11 +131,11 @@ public class Banner: UIView {
     
     /// A Banner with the provided `title`, `subtitle`, and optional `image`, ready to be presented with `show()`.
     ///
-    /// :param: title The title of the banner. Optional. Defaults to nil.
-    /// :param: subtitle The subtitle of the banner. Optional. Defaults to nil.
-    /// :param: image The image on the left of the banner. Optional. Defaults to nil.
-    /// :param: backgroundColor The color of the banner's background view. Defaults to `UIColor.blackColor()`.
-    /// :param: didTapBlock An action to be called when the user taps on the banner. Optional. Defaults to `nil`.
+    /// - parameter title: The title of the banner. Optional. Defaults to nil.
+    /// - parameter subtitle: The subtitle of the banner. Optional. Defaults to nil.
+    /// - parameter image: The image on the left of the banner. Optional. Defaults to nil.
+    /// - parameter backgroundColor: The color of the banner's background view. Defaults to `UIColor.blackColor()`.
+    /// - parameter didTapBlock: An action to be called when the user taps on the banner. Optional. Defaults to `nil`.
     public required init(title: String? = nil, subtitle: String? = nil, image: UIImage? = nil, backgroundColor: UIColor = UIColor.blackColor(), didTapBlock: (() -> ())? = nil) {
         self.didTapBlock = didTapBlock
         self.image = image
@@ -214,15 +214,15 @@ public class Banner: UIView {
             "titleLabel": titleLabel,
             "detailLabel": detailLabel
         ]
-        setTranslatesAutoresizingMaskIntoConstraints(false)
+        translatesAutoresizingMaskIntoConstraints = false
         addSubview(backgroundView)
-        backgroundView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[backgroundView]|", options: .DirectionLeadingToTrailing, metrics: nil, views: views))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[backgroundView(>=80)]|", options: .DirectionLeadingToTrailing, metrics: nil, views: views))
         backgroundView.backgroundColor = backgroundColor
-        contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(contentView)
-        labelView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        labelView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(labelView)
         labelView.addSubview(titleLabel)
         labelView.addSubview(detailLabel)
@@ -254,7 +254,7 @@ public class Banner: UIView {
       labelView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(10)-[titleLabel][detailLabel]-(10)-|", options: .DirectionLeadingToTrailing, metrics: nil, views: views))
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -265,7 +265,7 @@ public class Banner: UIView {
     override public func didMoveToSuperview() {
         super.didMoveToSuperview()
         if let superview = superview where bannerState != .Gone {
-            commonConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[banner]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["banner": self]) as! [NSLayoutConstraint]
+            commonConstraints = NSLayoutConstraint.constraintsWithVisualFormat("H:|[banner]|", options: .DirectionLeadingToTrailing, metrics: nil, views: ["banner": self]) 
             superview.addConstraints(commonConstraints)
             let yOffset: CGFloat = -7.0 // Offset the bottom constraint to make room for the shadow to animate off screen.
             showingConstraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: window, attribute: .Top, multiplier: 1.0, constant: yOffset)
@@ -274,7 +274,7 @@ public class Banner: UIView {
     }
     
     /// Shows the banner. If a `duration` is specified, the banner dismisses itself automatically after that duration elapses.
-    /// :param: duration A time interval, after which the banner will dismiss itself. Optional. Defaults to `nil`.
+    /// - parameter duration: A time interval, after which the banner will dismiss itself. Optional. Defaults to `nil`.
     public func show(duration: NSTimeInterval? = nil) {
         if let window = Banner.topWindow() {
             window.addSubview(self)
@@ -288,7 +288,7 @@ public class Banner: UIView {
                     }
             })
         } else {
-            println("[Banner]: Could not find window. Aborting.")
+            print("[Banner]: Could not find window. Aborting.")
         }
     }
     

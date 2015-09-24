@@ -59,10 +59,10 @@ class FlagContentController: UIViewController, UITextViewDelegate {
                 reportTextView.resignFirstResponder()
                 return false
             }
-            var oldInfo: NSString = reportTextView.text
+            let oldInfo: NSString = reportTextView.text
             var newInfo: NSString = ""
             newInfo = oldInfo.stringByReplacingCharactersInRange(range, withString: text)
-            if count(String(newInfo)) > 0  {
+            if String(newInfo).characters.count > 0  {
                 reportButton.enabled = true
                 reportButton.alpha = 1
             } else {

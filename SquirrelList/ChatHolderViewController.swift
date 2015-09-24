@@ -12,16 +12,10 @@ import UIKit
 
 class ChatHolderViewController: UIViewController {
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "messages" {
-            let controller = segue.destinationViewController as! MessagesViewController
-        }
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         //If the user has changed their group, we want to make sure the title is always up to date
-        var groupName = PFUser.currentUser()!["currentGroup"]!["name"] as? String
+        let groupName = PFUser.currentUser()!["currentGroup"]!["name"] as? String
         self.navigationItem.title = "\(groupName!) Chat"
     }
     
@@ -35,19 +29,19 @@ class ChatHolderViewController: UIViewController {
         let hasSeenChat = PFUser.currentUser()!["hasSeenChat"] as! Bool
         let hasBeenAskedForPush = PFUser.currentUser()!["hasBeenAskedForPush"] as! Bool
         if  (hasBeenAskedForPush == false) && (hasSeenChat == false) {
-            //This is the first type that the user has seen the chat and they haven't enabled push notification, so we can prompt them
+            //This is the first time that the user has seen the chat and they haven't enabled push notification, so we can prompt them
             let title = "Let Squirrel List Access Notifications?"
             let message = "This lets you receive messages in real time."
-            var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+            let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Not Now", style: .Default, handler: { (action: UIAlertAction) -> Void in
                 alert.dismissViewControllerAnimated(true, completion: nil)
                 PFUser.currentUser()!["hasSeenChat"] = true
                 PFUser.currentUser()!.save()
             }))
-            alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction!) -> Void in
+            alert.addAction(UIAlertAction(title: "Give Access", style: .Default, handler: { (action: UIAlertAction) -> Void in
                 //We ask the user for push notification permission in chat because it's easier to explain why they might need it
                 alert.dismissViewControllerAnimated(true, completion: nil)
-                let notificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
+                let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
                 let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
         
                 UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)

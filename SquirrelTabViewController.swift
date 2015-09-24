@@ -30,6 +30,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     @IBOutlet weak var squirrelSlotsLabel: UILabel!
     @IBOutlet weak var addSquirrelButton: UIBarButtonItem!
     @IBOutlet weak var tradeOfferButton: UIBarButtonItem!
+    @IBOutlet weak var tradeOffersBadgeLabel: SwiftBadge!
     
     
     @IBAction func addSquirrel(sender: AnyObject) {
@@ -44,6 +45,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         // So that the user can't quickly press the trade button again and have multiple screens
         tradeOfferButton.enabled = false
     }
+
     
     
     // Initialise the PFQueryTable tableview
@@ -52,7 +54,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     }
 	
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
   
         // Configure the PFQueryTableView
         self.parseClassName = "Squirrel"
@@ -73,9 +75,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             let controller = segue.destinationViewController as! NewSquirrelDetailsViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()
+            let squirrelSlots = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
             controller.squirrelSlots = squirrelSlots
-            let userRerates = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()
+            let userRerates = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))
             if userRerates == 1 {
                 controller.canRerate = true
             } else {
@@ -83,12 +85,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             }
             let owner = sender!["owner"] as? PFObject
             if owner != nil {
-                var user = sender!["owner"] as? PFUser
+                let user = sender!["owner"] as? PFUser
                 controller.squirrelOwner = user
             }
-        }
-        if segue.identifier == "TradeOffers" {
-            let controller = segue.destinationViewController as! NotificationsViewController
         }
         if segue.identifier == "NewUserScreens" {
             let controller = segue.destinationViewController as! TutorialViewController
@@ -101,7 +100,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         //We set the currentGroup optional here, since this is the first place where it needs to be used
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         currentGroup!.fetch()
-        var query = PFQuery(className: "Squirrel")
+        let query = PFQuery(className: "Squirrel")
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         query.orderByDescending("avg_rating")
         return query
@@ -134,19 +133,19 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
-            var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! PFTableViewCell
             //It looks strange to have the row highlighted in gray 
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            var openLabel = cell.viewWithTag(6) as? UILabel
-            var first = cell.viewWithTag(1) as! UILabel
+            let openLabel = cell.viewWithTag(6) as? UILabel
+            let first = cell.viewWithTag(1) as! UILabel
             first.text = object!["first_name"]!.capitalizedString
             //For some reason 2 is already being used as another tag
-            var last = cell.viewWithTag(5) as! UILabel
+            let last = cell.viewWithTag(5) as! UILabel
             last.text = object!["last_name"]!.capitalizedString
-            var ratingLabel = cell.viewWithTag(3) as! UILabel
-            var avgRating = object!["avg_rating"] as! Double
-            var squirrel = objects![indexPath.row] as! PFObject
-            var owner = squirrel["owner"] as? PFUser
+            let ratingLabel = cell.viewWithTag(3) as! UILabel
+            let avgRating = object!["avg_rating"] as! Double
+            let squirrel = objects![indexPath.row] as! PFObject
+            let owner = squirrel["owner"] as? PFUser
             if owner == nil {
                 openLabel?.hidden = false
             } else {
@@ -156,10 +155,13 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             if avgRating != 0 && avgRating >= 9 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.redColor()
-            } else if avgRating != 0 && avgRating >= 8 {
+            } else if avgRating != 0 && avgRating >= 7 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.orangeColor()
-            }else {
+            } else if avgRating != 0 && avgRating >= 5 {
+                ratingLabel.text = "\(avgRating)"
+                cell.backgroundColor = UIColor.yellowColor()
+            } else {
                 //For some reason not setting unrated squirrels color to black, leads to them sometimes being other colors, despite 
                 ratingLabel.text = ""
                 cell.backgroundColor = UIColor.yellowColor()
@@ -173,24 +175,24 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let squirrel = objects![indexPath.row] as! PFObject
             var message = ""
-            var owner = squirrel["ownerUsername"] as? String
+            let owner = squirrel["ownerUsername"] as? String
             //Users need to drop their own squirrels before they delete them
             if owner == PFUser.currentUser()!.username! {
                 message = "Whoa there! If you want to delete your squirrel, drop them from your team first"
-                displayAlert(self, "", message)
+                displayAlert(self, title: "", message: message)
                 return
             }
             //Users can't delete squirrels with an owner
             if squirrel["ownerUsername"] != nil  {
                 message = "Only squirrels that are ownerless can be deleted! This is someone's beloved squirrel. What's wrong with you?"
-                displayAlert(self, "", message)
+                displayAlert(self, title: "", message: message)
                 return
             }
             //Check to see if the user already voted to drop the Squirrel
             let droppers = squirrel["droppers"] as! [String]
-            if find(droppers, PFUser.currentUser()!.username!) != nil {
+            if droppers.indexOf((PFUser.currentUser()!.username!)) != nil {
                 message = "You already voted to delete this squirrel! Just leave it alone."
-                displayAlert(self, "My Bad", message)
+                displayAlert(self, title: "My Bad", message: message)
                 return
             }
             let firstName = (squirrel["first_name"] as! String).lowercaseString
@@ -208,11 +210,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
                 } else {
                     message = "Are you sure you want to do this? With your vote, enough users will have voted to drop this squirrel. Your vote will delete it from the group."
                 }
-                var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+                let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler:  { (action: UIAlertAction!) in
+                alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler:  { (action: UIAlertAction) in
                      //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
                     let viewsArray = displayLoadingAnimator(self.view)
                     let activityIndicatorView = viewsArray[0] as! NVActivityIndicatorView
@@ -228,10 +230,10 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
                                 self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                                 self.loadObjects()
                             } else {
-                                println(error)
+                                print(error)
                             }
                             //Global function that stops the loading animation and dismisses the views it is attached to
-                            resumeInteractionEvents(activityIndicatorView, container, loadingView)
+                            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                         })
                     }
                 }))
@@ -240,11 +242,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             }
             //Else user is casting their vote to delete the squirrel, but a majority of the users haven't voted for this option yet
             message = "Are you sure you want to vote to delete this squirrel?"
-            var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
                     alert.dismissViewControllerAnimated(true, completion: nil)
             }))
-            alert.addAction(UIAlertAction(title: "Vote to Delete", style: .Default, handler:  { (action: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Vote to Delete", style: .Default, handler:  { (action: UIAlertAction) in
                     let oldVotes = squirrel["dropVotes"] as! Int
                     let newVotes = oldVotes + 1
                     squirrel["dropVotes"] = newVotes
@@ -264,9 +266,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     
     //Customize the delete button on swipe left
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        var title = "Delete"
-        var deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let title = "Delete"
+        let deleteButton = UITableViewRowAction(style: .Default, title: title, handler: { (action, indexPath) in
             self.tableView.dataSource?.tableView?(
                 self.tableView, commitEditingStyle: .Delete, forRowAtIndexPath: indexPath
             )
@@ -280,11 +282,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         //Setting self.title here for some reason change's the squirrel tab's title as well
         self.navigationItem.title = "\(groupName) Squirrels"
         //Set the number of rerates
-        LOGGED_IN_USER_ACORNS = getUserInfo(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!).toInt()!
-        LOGGED_IN_USER_SQUIRREL_SLOTS = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
-        LOGGED_IN_USER_RERATES = getUserInfo(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!).toInt()!
-        var groupUsers = currentGroup!["users"] as! [String]
-        var numOfUsers = groupUsers.count
+        LOGGED_IN_USER_ACORNS = Int(getUserInfo(currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!))!
+        LOGGED_IN_USER_SQUIRREL_SLOTS = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))!
+        LOGGED_IN_USER_RERATES = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))!
+        let groupUsers = currentGroup!["users"] as! [String]
+        let numOfUsers = groupUsers.count
         
         //var squirrelSlots = getUserInfo(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!).toInt()!
 
@@ -308,7 +310,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     //Checks if new users have joined the currentGroup and pdates the user's squirrel slots if there are new users
     func updateSquirrelSlots() {
         let numOfUsers = (currentGroup!["users"] as! [String]).count
-        let oldNumOfUsers = getUserInfo(currentGroup!["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!).toInt()
+        let oldNumOfUsers = Int(getUserInfo(currentGroup!["usersOnLastVisit"] as! [String], username: PFUser.currentUser()!.username!))
         //I think this line can lead to small errors
         if numOfUsers <= oldNumOfUsers {
             //No new users have joined the group, so we return
@@ -323,12 +325,12 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         } else {
             message = "\(numOFNewUsers) users have joined, so enjoy \(numOFNewUsers) squirrel slots!"
         }
-        var alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction!) in
+        let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler:  { (action: UIAlertAction) in
             LOGGED_IN_USER_SQUIRREL_SLOTS += numOFNewUsers
             self.squirrelSlotsLabel!.text = "Squirrel Slots: \(LOGGED_IN_USER_SQUIRREL_SLOTS)"
-            let newSquirrelSlots = getNewArrayToSave(self.currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!, String(LOGGED_IN_USER_SQUIRREL_SLOTS))
-            let newUsersOnLastVisit = getNewArrayToSave(self.currentGroup!["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!, String(numOfUsers))
+            let newSquirrelSlots = getNewArrayToSave(self.currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+            let newUsersOnLastVisit = getNewArrayToSave(self.currentGroup!["usersOnLastVisit"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(numOfUsers))
             self.currentGroup!["squirrelSlots"] = newSquirrelSlots
             self.currentGroup!["usersOnLastVisit"] = newUsersOnLastVisit
             self.currentGroup!.save()
@@ -339,29 +341,29 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     //Since there appears to be the possibility that somehow a user can be added to a group with a missing field (rarely), this function goes through all of the group's user fields, and if the user's data is missing from it, it updates the group's field to include it. If the user's data was missing on any of the fields, it saves the new information afterwords
     func verifyNoNullFields() {
         var needToChangeData = false
-        if userDataExists(currentGroup!["acorns"] as! [String], PFUser.currentUser()!.username!) == false {
+        if userDataExists(currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
-        } else if userDataExists(currentGroup!["squirrelSlots"] as! [String], PFUser.currentUser()!.username!) == false {
+        } else if userDataExists(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
-            var numOfUsers = (currentGroup!["users"] as! [String]).count
+            let numOfUsers = (currentGroup!["users"] as! [String]).count
             let squirrelSlots = (numOfUsers - 1) + 3
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
-        } else if userDataExists(currentGroup!["cumulativeDays"] as! [String], PFUser.currentUser()!.username!) == false {
+        } else if userDataExists(currentGroup!["cumulativeDays"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):\(1)", forKey: "lastVisits")
-        } else if userDataExists(currentGroup!["usersOnLastVisit"] as! [String], PFUser.currentUser()!.username!) == false {
+        } else if userDataExists(currentGroup!["usersOnLastVisit"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
-            var numOfUsers = (currentGroup!["users"] as! [String]).count
+            let numOfUsers = (currentGroup!["users"] as! [String]).count
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers)", forKey: "usersOnLastVisit")
-        } else if userDataExists(currentGroup!["lastVisits"] as! [String], PFUser.currentUser()!.username!) == false {
+        } else if userDataExists(currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
             let today = NSDate()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let todayString = formatter.stringFromDate(today)
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):\(todayString)", forKey: "lastVisits")
-        } else if userDataExists(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!) == false {
+        } else if userDataExists(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!) == false {
             needToChangeData = true
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
         }
@@ -388,11 +390,25 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             //If new user, show them the tutorial screens, but we only want to present these screens from the main squirrel tab
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
+        /*
+        //let badge = SwiftBadge(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
+        tradeOffersBadgeLabel.text = "2"
+        tradeOffersBadgeLabel.backgroundColor = UIColor.redColor()
+        tradeOffersBadgeLabel.layer.cornerRadius = 8
+        tradeOffersBadgeLabel.layer.masksToBounds = true
+        tradeOffersBadgeLabel.hidden = false
+        //badge.font = UIFont(name: "Didot", size: 30.0)
+        //let badgeButton = UIBarButtonItem(customView: badge)
+        //let buttons: [UIBarButtonItem] = [tradeOfferButton, badgeButton]
+        //self.navigationItem.leftBarButtonItems = buttons
+        */
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = backItem
         //Since it appears there is a chance that a user can not have a data field, for now we do a double check and create any relevant fields for them in the group instance if they don't have them
         verifyNoNullFields()
         //Check to see if there are new users
@@ -410,8 +426,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         tradeOfferButton!.enabled = true
         self.navigationController!.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         //Customize navigation controller back button to my only the back symbol
-        let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem = backItem
     }
     
     
@@ -419,7 +433,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     func reloadParent(controller: NewSquirrelDetailsViewController, usedRerate: Bool) {
         if usedRerate == true {
             //Then the user used their rerate and it needs to be set back to false
-            var newRerates = getNewArrayToSave(currentGroup!["rerates"] as! [String], PFUser.currentUser()!.username!, "0")
+            let newRerates = getNewArrayToSave(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!, newInfo: "0")
             currentGroup!["rerates"] = newRerates
             currentGroup!.save()
         }
@@ -428,7 +442,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     //Called after adding a Squirrel so that we can reload the SquirrelTabViewController
     func createdSquirrel(controller: AddSquirrelViewController) {
-        self.reload()
+        shouldReload = true
+        //So users can't game the system if they have no squirrel slots while it reloads
+        addSquirrelButton.enabled = false
     }
 
 

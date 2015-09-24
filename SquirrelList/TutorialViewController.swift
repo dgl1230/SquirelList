@@ -32,7 +32,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         if textContent.count > 0 {
             let firstController = getItemController(0)!
             let startingViewControllers: NSArray = [firstController]
-            pageController.setViewControllers(startingViewControllers as [AnyObject], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
+            pageController.setViewControllers(startingViewControllers as? [UIViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
         }
         
         pageViewController = pageController
@@ -86,7 +86,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         return UIViewController()
     }
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
         let itemController = pendingViewControllers[0] as? TutorialPageItemViewController
         //Then the casting failed, and the user has swiped through all of the tutorialPageItemControllers
         if itemController == nil {

@@ -23,8 +23,8 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBAction func sendEmail(sender: AnyObject) {
         let email = emailTextField.text
-        PFUser.requestPasswordResetForEmail(email)
-        PFUser.requestPasswordResetForEmailInBackground(email, block: { (succeeded: Bool, error: NSError?) -> Void in
+        PFUser.requestPasswordResetForEmail(email!)
+        PFUser.requestPasswordResetForEmailInBackground(email!, block: { (succeeded: Bool, error: NSError?) -> Void in
             if succeeded == true {
                 let alertController = UIAlertController(title: "Email Sent!", message: "Please check your email to reset your password", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in

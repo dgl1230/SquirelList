@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -62,9 +63,10 @@
                         <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="73" id="9xA-zR-mMw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="73"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9xA-zR-mMw" id="KV3-0c-nh2">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="cic-SL-uSJ">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Squirrel Slots" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrw-2n-vWZ">
@@ -144,9 +146,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell tag="2" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="51" id="20F-7w-9gC" customClass="PFTableViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="600" height="51"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="20F-7w-9gC" id="vrq-jl-kDa">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="51"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WPx-Y0-P5g">
@@ -195,10 +198,10 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Squirrels" id="chp-pU-Rsd">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Teh-DG-8JU" userLabel="Trade Offers Button">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="WCn-oa-7PZ">
                             <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="viewTradeOffers:" destination="8rJ-Kc-sve" id="VEN-De-Kfl"/>
+                                <action selector="viewTradeOffers:" destination="8rJ-Kc-sve" id="kFp-Ho-FOd"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" id="QCF-gE-72V" userLabel="Add Squirrel Button">
@@ -212,7 +215,7 @@
                         <outlet property="acornsLabel" destination="lDG-8A-ypo" id="gxh-LE-oHB"/>
                         <outlet property="addSquirrelButton" destination="QCF-gE-72V" id="KEe-PA-0Up"/>
                         <outlet property="squirrelSlotsLabel" destination="nrw-2n-vWZ" id="79H-uV-Lym"/>
-                        <outlet property="tradeOfferButton" destination="Teh-DG-8JU" id="vLD-lb-dAI"/>
+                        <outlet property="tradeOfferButton" destination="WCn-oa-7PZ" id="gbb-Nc-VTU"/>
                         <segue destination="YAQ-u8-yw6" kind="show" identifier="AddSquirrel" id="JST-aR-Mpe"/>
                         <segue destination="5U7-1n-vli" kind="show" identifier="TradeOffers" id="2Cm-GT-kAX"/>
                         <segue destination="quq-DM-V0e" kind="presentation" identifier="SquirrelDetails" id="N0u-lI-g44"/>
@@ -221,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1657" y="366"/>
+            <point key="canvasLocation" x="1657" y="368"/>
         </scene>
         <!--Add Squirrel -->
         <scene sceneID="6OE-gP-1Oe">
@@ -235,8 +238,10 @@
                             <tableViewSection id="aYH-ao-ZnZ">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="pJX-aP-9jy">
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pJX-aP-9jy" id="mq9-DI-WSo">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SW2-bK-7Qf">
@@ -258,8 +263,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="1lF-l5-Mp2">
+                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1lF-l5-Mp2" id="CI0-W4-HPi">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zIN-VJ-kfF">
@@ -367,7 +374,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3B0-yE-1WB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="nlM-35-rxB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-SD-0VK">
@@ -379,9 +386,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="KFH-SD-0VK" secondAttribute="trailing" constant="-16" id="ckU-yA-3BB"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KFH-SD-0VK" secondAttribute="trailing" constant="-20" id="ckU-yA-3BB"/>
                             <constraint firstItem="KFH-SD-0VK" firstAttribute="top" secondItem="bAx-Fz-fud" secondAttribute="bottom" id="fCU-Gb-Djy"/>
-                            <constraint firstItem="KFH-SD-0VK" firstAttribute="leading" secondItem="nlM-35-rxB" secondAttribute="leadingMargin" constant="-16" id="jqR-PP-qpV"/>
+                            <constraint firstItem="KFH-SD-0VK" firstAttribute="leading" secondItem="nlM-35-rxB" secondAttribute="leadingMargin" constant="-20" id="jqR-PP-qpV"/>
                             <constraint firstItem="3B0-yE-1WB" firstAttribute="top" secondItem="KFH-SD-0VK" secondAttribute="bottom" id="yU4-oX-r1F"/>
                         </constraints>
                     </view>
@@ -460,8 +467,10 @@
                         </label>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="52" id="fF1-Je-irg" customClass="PFTableViewCell">
+                                <rect key="frame" x="0.0" y="130" width="600" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fF1-Je-irg" id="UcP-D2-PN3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOy-iW-iIa">
@@ -515,8 +524,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="S0A-Ah-w5p" customClass="PFTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="240" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S0A-Ah-w5p" id="zja-Fq-B2Q">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozh-Bt-Amw">
@@ -719,9 +730,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="57" id="7ob-qM-btM">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ob-qM-btM" id="jMK-hl-pp9">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="trade proposal info " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="pB1-ye-SC2">
@@ -784,9 +796,10 @@
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="66" id="D9o-BF-cag" customClass="PFTableViewCell">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="600" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D9o-BF-cag" id="qSu-9I-4BG">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -807,9 +820,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="BYR-oe-LEV" customClass="FindFriendsTableViewCell" customModule="Squirrel_List" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BYR-oe-LEV" id="VW0-jW-lJy">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1062,7 +1076,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gzt-MK-zqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3557" y="357"/>
+            <point key="canvasLocation" x="3519" y="351"/>
         </scene>
         <!--Tutorial View Controller-->
         <scene sceneID="wzt-9k-D3e">
@@ -1189,7 +1203,7 @@
                             <constraint firstAttribute="centerX" secondItem="aYB-ul-Fb2" secondAttribute="centerX" id="2MS-5L-AB5"/>
                             <constraint firstItem="mka-lr-WZe" firstAttribute="top" secondItem="zx7-En-3fW" secondAttribute="top" constant="38" id="8o5-u1-ScY"/>
                             <constraint firstAttribute="centerX" secondItem="mka-lr-WZe" secondAttribute="centerX" constant="-0.5" id="QNX-bD-I1V"/>
-                            <constraint firstItem="Xjh-0e-aip" firstAttribute="leading" secondItem="zx7-En-3fW" secondAttribute="leadingMargin" constant="-16" id="vdF-XC-LDF"/>
+                            <constraint firstItem="Xjh-0e-aip" firstAttribute="leading" secondItem="zx7-En-3fW" secondAttribute="leadingMargin" constant="-20" id="vdF-XC-LDF"/>
                             <constraint firstItem="Xjh-0e-aip" firstAttribute="top" secondItem="zx7-En-3fW" secondAttribute="topMargin" constant="13" id="zW3-NV-8O1"/>
                         </constraints>
                     </view>
@@ -1212,8 +1226,8 @@
         <image name="tabbar_chat" width="23" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dAj-Ue-6qY"/>
         <segue reference="N0u-lI-g44"/>
+        <segue reference="DWb-jW-mwr"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.0" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

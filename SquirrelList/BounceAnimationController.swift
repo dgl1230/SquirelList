@@ -15,7 +15,7 @@ class BounceAnimationController: NSObject, UIViewControllerAnimatedTransitioning
             if let toView = transitionContext.viewForKey(UITransitionContextToViewKey) {
                 toView.frame = transitionContext.finalFrameForViewController(toViewController)
                 let containerView = transitionContext.containerView()
-                containerView.addSubview(toView)
+                containerView!.addSubview(toView)
                 
                 toView.transform = CGAffineTransformMakeScale(0.7, 0.7)
                 
@@ -34,7 +34,7 @@ class BounceAnimationController: NSObject, UIViewControllerAnimatedTransitioning
         }
     }
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
             return 0.4
     }
     
