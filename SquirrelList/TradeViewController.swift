@@ -132,11 +132,11 @@ class TradeViewController: PopUpViewController, UserSquirrelsPopUpViewController
                 let message = "\(PFUser.currentUser()!.username!) has proposed a trade for \(desiredSquirrelName) in group \(groupName)"
                 sendPushNotifications(0, message: message, type: "proposedTrade", users: [self.desiredSquirrelOwner!.username!])
                 //Update the number of trades for the propsoed user 
-                let proposeeTradeOffers = getUserInfo(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!)
-                let newTradeOffers = Int(proposeeTradeOffers)! + 1
-                let newTradeOffersArray = getNewArrayToSave(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!, newInfo: String(newTradeOffers))
-                self.currentGroup!["tradeOffers"] = newTradeOffersArray
-                self.currentGroup!.save()
+                //let proposeeTradeOffers = getUserInfo(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!)
+                //let newTradeOffers = Int(proposeeTradeOffers)! + 1
+                //let newTradeOffersArray = getNewArrayToSave(self.currentGroup!["tradeOffers"] as! [String], username: self.desiredSquirrelOwner!.username!, newInfo: String(newTradeOffers))
+                //self.currentGroup!["tradeOffers"] = newTradeOffersArray
+                //self.currentGroup!.save()
                 
             } else {
                 //Global function for displaying alert

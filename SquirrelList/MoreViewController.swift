@@ -85,11 +85,6 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if PFUser.currentUser()!["hasSeenMoreTab"] as? Bool == nil {
-            //Then the logged in user hasn't had their data fetched before this first update, so we need to fetch and update their new fields
-            PFUser.currentUser()!["hasSeenMoreTab"] = false
-            PFUser.currentUser()!.save()
-        }
         //Check to see if we need to show a new user tutorial screens first
         if PFUser.currentUser()!["newMoreTab"] as! Bool == true {
             //If new user, show them the tutorial screens
@@ -126,6 +121,11 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
         if isNewUser == true {
             self.title = "Home"
         }
+        if PFUser.currentUser()!["hasSeenMoreTab"] as? Bool == nil {
+            //Then the logged in user hasn't had their data fetched before this first update, so we need to fetch and update their new fields
+            PFUser.currentUser()!["hasSeenMoreTab"] = true
+            PFUser.currentUser()!.save()
+        }
         let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
         userFriendsData.fetch()
         //We only user the pendingInviters field, since we just want the friends basge to show the number of people that have requested the logged in user
@@ -145,6 +145,7 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
             //The user hasn't had their userFriendsData model updated yet
             userFriendsData["groupInvites"] = 0
             userFriendsData.save()
+            //No badges to show since we just updated their info from nil
             groupsBadgeLabel.hidden = true
         } else if groupInvites > 0 {
             groupsBadgeLabel.text = "\(groupInvites!)"

@@ -28,6 +28,8 @@ class MessagesViewController: JSQMessagesViewController {
     
     //Variable for storing whether the viewcontroller should load new messages (if the user has received silent push notifications from other users)
     var shouldLoadNewMessages = false
+    //Variable for determining whether the user changed new groups (and thus whether we should reload all messages)
+    var shouldReload = false
     
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
@@ -47,7 +49,7 @@ class MessagesViewController: JSQMessagesViewController {
     
     
     func loadMessages() {
-        var lastMessage: JSQMessage? = nil
+        var lastMessage: JSQMessage?
         if messages.last != nil {
             lastMessage = messages.last
         }
@@ -62,23 +64,24 @@ class MessagesViewController: JSQMessagesViewController {
             if error == nil {
                 let messageResults = results as? [PFObject]
                 let newMessages = Array(messageResults!.reverse())
-                //var counter = 0
                 for message in newMessages {
                     self.messageObjects.append(message)
-                        let user = message["sender"] as! String
-                        self.users.append(user)
-                        let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
-                        self.messages.append(chatMessage)
+                    let user = message["sender"] as! String
+                    self.users.append(user)
+                    let chatMessage = JSQMessage(senderId: user, senderDisplayName: user, date: message.createdAt!, text: message["message"]! as! String)
+                    self.messages.append(chatMessage)
                 }
-                /*
+                
                 if results!.count > 0 {
                     self.finishReceivingMessage()
                 }
-                */
+
                 self.finishReceivingMessage()
             } 
         }
     }
+    
+    
     
     func reload() {
         self.messages = []
@@ -88,25 +91,17 @@ class MessagesViewController: JSQMessagesViewController {
         loadMessages()
     }
     
-    //If the user is on the chat screen, we call loadMessages, else we change the shouldLoadNewMessages variable to true (so that loadMessages() is called when the view appears next)
+    //If the user is on the chat screen, we call loadMessages, since this function is only for live chat
     func loadNewMessages() {
-        if self.view.window == nil {
-            //The user is not currently on the screen, so we just make a note to refresh later
-            shouldLoadNewMessages = true
-        } else {
-            //Else the user is on the screen right now, and we should reload
+        if self.view.window != nil {
+            //We only want to load the newest messages via push notifications if the user is on the chat tab
             loadMessages()
         }
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if shouldLoadNewMessages == true {
-            shouldLoadNewMessages = false
-            loadMessages()
-        }
-        
+    //For when I can figure out how not to get an array out of index error
+    override func viewWillAppear(animated: Bool) {
+        loadMessages()
     }
     
 
@@ -123,8 +118,6 @@ class MessagesViewController: JSQMessagesViewController {
         self.inputToolbar!.contentView!.leftBarButtonItem = nil
         
         let lightBlue = UIColor(red: 0, green: 191/255, blue: 1, alpha: 1)
-        
-        _ = PFUser.currentUser()!.username! as NSString
         self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         outgoingBubbleImage = bubbleFactory.outgoingMessagesBubbleImageWithColor(lightBlue)
@@ -136,9 +129,7 @@ class MessagesViewController: JSQMessagesViewController {
         
         self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
         self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
-        //Load any messages 
-        loadMessages()
-
+        self.collectionView!.collectionViewLayout.springinessEnabled = false
     }
     
     //For when the user touches an obscure area of the view we want to dismiss the keyboard
@@ -146,27 +137,17 @@ class MessagesViewController: JSQMessagesViewController {
         view.endEditing(true)
     }
     
-    /* This is the logic for showing timestamps once I figured out how to display them to not override senders' names
-        var previousDate = NSDate()
-        if indexPath.row != 0 {
-            let olderRow = indexPath.row - 1
-            let olderMessage = messages[olderRow]
-            previousDate = olderMessage.date
-        }
-         var calendar: NSCalendar = NSCalendar.currentCalendar()
-        let flags = NSCalendarUnit.HourCalendarUnit
-        let components = calendar.components(flags, fromDate: previousDate, toDate: message.date, options: nil)
-        //We only show the timestamp between messages if there's a difference of at least one hour between the messages
-        if components.hour >= 1 {
-            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
-        }
-    */
-    
 
     override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
         let message = messages[indexPath.item]
         if message.senderId != self.senderId {
-            return NSMutableAttributedString(string: message.senderDisplayName)
+            //Add the date sent to part of the attributedText
+            let formatter = NSDateFormatter()
+            formatter.dateStyle = NSDateFormatterStyle.LongStyle
+            formatter.timeStyle = .ShortStyle
+            let date = formatter.stringFromDate(message.date)
+            let displayInfo = "\(message.senderDisplayName) - \(date)"
+            return NSMutableAttributedString(string: displayInfo)
         }
         return nil
     }

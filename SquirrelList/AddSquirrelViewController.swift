@@ -63,7 +63,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                 //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
                 currentGroup.fetch()
                 //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
-                let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
+                //let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
                 let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
             
                 let squirrelName = "\(first_name.lowercaseString) \(last_name.lowercaseString)"
@@ -100,16 +100,14 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                                 group["squirrelSlots"] = newSquirrelSlots
                                 group.addObject(squirrelName, forKey: "squirrelFullNames")
                                 group.save()
-                                //Send silent push notifications for other users to have their Squirrel tab refresh
-                                sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
-                                self.dismissViewControllerAnimated(true, completion: nil)
+                                self.navigationController!.popViewControllerAnimated(true)
                                 //Reloads the parent squirrelViewController
                                 self.delegate!.createdSquirrel(self)
-                                self.navigationController!.popViewControllerAnimated(true)
                         }
                         //Regardless of whether an error occurs, we need to resume interaction 
                         //Global function that stops the loading animation and dismisses the views it is attached to
-                        resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+                        //resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+                        UIApplication.sharedApplication().endIgnoringInteractionEvents()
     
                     }
 

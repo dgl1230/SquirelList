@@ -20,6 +20,8 @@ class TradeOfferViewController: PopUpViewController {
     var offeredSquirrel: PFObject?
     var tradeProposal: PFObject?
     var yourSquirrel: PFObject?
+    //For keeping track of which trades to delete that involve the same squirrel - if user accepts a trade
+    var trades: [PFObject] = []
     
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -47,9 +49,9 @@ class TradeOfferViewController: PopUpViewController {
         let yourSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
         let message = "\(PFUser.currentUser()!.username!) has rejected your offer for \(yourSquirrelName)"
         sendPushNotifications(0, message: message, type: "rejectedTrade", users: [offeringUsername])
+        dismissViewControllerAnimated(true, completion: nil)
         //Reloading
         self.delegate?.tradeOfferViewController(self)
-        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func calculateAverageRating(ratings:[String]) -> Double {
@@ -67,7 +69,7 @@ class TradeOfferViewController: PopUpViewController {
         return round((10 * unroundedRating)) / 10
     }
     
-    
+    /*
     //Deletes all other proposals where the desired squirrel is your squirrel (since owners have changed) and potentially deleted trades where offered squirrel (if there is one) is offered (since that squirrels owners have also changed). 
     // Parameters: the offerer's username, because at this point the tradeProposal optional will have already been deleted
     func deleteOtherSquirrelOffers(offeringUsername: String) {
@@ -112,9 +114,41 @@ class TradeOfferViewController: PopUpViewController {
             }
         }
     }
+    */
+    
+    func deleteTradeOffers() {
+        let yourSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
+        for trade in trades {
+            let desiredSquirrelName = trade["desiredSquirrelName"] as! String
+            if yourSquirrelName == desiredSquirrelName {
+                trade.deleteInBackground()
+            }
+        }
+
+    
+    }
     
     //Finishes the trade
     func finishTrade() {
+        let offeringUsername = tradeProposal!["offeringUsername"] as! String
+        let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
+        if self.tradeProposal!["offeredSquirrelID"] != nil {
+            self.changeOwners()
+        }
+        self.yourSquirrel?.save()
+        self.offeredSquirrel?.save()
+        //Alert the offering user that their proposal has been accepted
+        let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
+        sendPushNotifications(0, message: message, type: "acceptedTrade", users: [offeringUsername])
+        self.tradeProposal!.delete()
+        //self.deleteOtherSquirrelOffers(offeringUsername)
+        self.deleteTradeOffers()
+        
+        //Reload the updated trades
+        self.delegate?.tradeOfferViewController(self)
+        //Alert the Squirrel Tab to reload
+        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
+    /*
         let offeringUsername = tradeProposal!["offeringUsername"] as! String
         let desiredSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
         tradeProposal!.deleteInBackgroundWithBlock { (didDelete: Bool, error: NSError?) -> Void in
@@ -128,7 +162,8 @@ class TradeOfferViewController: PopUpViewController {
                 let message = "\(PFUser.currentUser()!.username!) has accepted your offer for \(desiredSquirrelName)"
                 sendPushNotifications(0, message: message, type: "acceptedTrade", users: [offeringUsername])
                 self.tradeProposal!.delete()
-                self.deleteOtherSquirrelOffers(offeringUsername)
+                //self.deleteOtherSquirrelOffers(offeringUsername)
+                self.deleteTradeOffers()
                 //Reload the updated trades
                 self.delegate?.tradeOfferViewController(self)
                 //Alert the Squirrel Tab to reload
@@ -137,6 +172,7 @@ class TradeOfferViewController: PopUpViewController {
             
             }
         }
+        */
     }
     
      //Removes the user's rating from the squirrel's "ratings" field and returns the new array
@@ -214,10 +250,10 @@ class TradeOfferViewController: PopUpViewController {
                 let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action: UIAlertAction) in
                     self.tradeProposal!.delete()
-                    //Reload
-                    self.delegate!.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -247,10 +283,10 @@ class TradeOfferViewController: PopUpViewController {
                     //Send alert that proposer's trade was deleted
                     let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
                     sendPushNotifications(0, message: rejection, type: "rejectedTrade", users: [offeringUsername])
-                    //Reload
-                    self.delegate!.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -269,10 +305,10 @@ class TradeOfferViewController: PopUpViewController {
                     //Send alert that proposer's trade was deleted
                     let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
                     sendPushNotifications(0, message: rejection, type: "rejectedTrade", users: [offeringUsername])
-                    //Reload
-                    self.delegate!.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
                 return
@@ -291,10 +327,10 @@ class TradeOfferViewController: PopUpViewController {
                     //Send alert that proposer's trade was deleted
                     let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
                     sendPushNotifications(0, message: rejection, type: "rejectedTrade", users: [offeringUsername])
-                    //Reload
-                    self.delegate?.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                 }))
                 alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
                     self.changeOwners()
@@ -320,10 +356,10 @@ class TradeOfferViewController: PopUpViewController {
                     //Send alert that proposer's trade was deleted
                     let rejection = "\(PFUser.currentUser()!.username!) has rejected your offer for \(desiredSquirrelName)"
                     sendPushNotifications(0, message: rejection, type: "rejectedTrade", users: [offeringUsername])
-                    //Reloading
-                    self.delegate?.tradeOfferViewController(self)
                     alert.dismissViewControllerAnimated(true, completion: nil)
                     self.dismissViewControllerAnimated(true, completion: nil)
+                    //Reload
+                    self.delegate!.tradeOfferViewController(self)
                     return
                 }))
                 alert.addAction(UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
@@ -347,10 +383,10 @@ class TradeOfferViewController: PopUpViewController {
                                 currentGroup["squirrelSlots"] = squirrelSlots
                             }
                             currentGroup.save()
-                            //Reloading
-                            self.delegate?.tradeOfferViewController(self)
                             alert.dismissViewControllerAnimated(true, completion: nil)
                             self.dismissViewControllerAnimated(true, completion: nil)
+                            //Reload
+                            self.delegate!.tradeOfferViewController(self)
     
                         } else {
                             //There was an error and we should alert them using the global function
@@ -388,12 +424,12 @@ class TradeOfferViewController: PopUpViewController {
         finishTrade()
         //Global function that stops the loading animation and dismisses the views it is attached to
         resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let yourSquirrelQuery = PFQuery(className: "Squirrel")
         yourSquirrelQuery.whereKey("objectId", equalTo: tradeProposal!["proposedSquirrelID"]!)
         yourSquirrel = yourSquirrelQuery.getFirstObject()

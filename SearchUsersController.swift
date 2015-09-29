@@ -93,19 +93,19 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         currentUserFriendsData.save()
         otherUserFriendData.save()
         
-        
         //Alert the invited user that the logged in user has requested them as a friend
         let nonLoweredUsername = otherUserFriendData["username"] as! String
         sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) wants to be friends!", type: "friendRequest", users: [nonLoweredUsername])
     }
     
     
+    
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
         //We query via UserFriendsData instead of the User model because then it is one less query when a user requests
         let query = PFQuery(className: "UserFriendsData")
-        if searchedString == "" {
-            //Then the user is searching users to add, but hasn't entered any text in the search field, so we don't query users yet
+        if searchedString == "" || searchedString.characters.count < 3 {
+            //Then the user is searching users to add, but hasn't entered any text (or not enough characters) in the search field, so we don't query users yet
             query.limit = 0
         } else {
             //We query for users that have a prefix that matches the text in the searchField
@@ -114,6 +114,11 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         }
         //Look into seeing if the else if and else are both executed
         return query
+    }
+    
+    func reload () {
+        self.queryForTable()
+        self.loadObjects()
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -128,7 +133,12 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             cell.addButton.hidden = true
             cell.nameLabel.text = "Me"
         }
-        if users.contains((friendsData["lowerUsername"] as! String)) {
+        //We use the searched users friends data instead of the logged in friends data for checking their current friend status because this has the highest chance of being up to date, since we just queried this data
+        let friends = friendsData["friends"] as! [String]
+        let pendingFriends = friendsData["pendingInviters"] as! [String]
+        let requestedFriends = friendsData["pendingInvitees"] as! [String]
+        let users = friends + pendingFriends + requestedFriends
+        if users.contains(PFUser.currentUser()!.username!) {
             //The user is already friends with the logged in user or the logged in user has already requested them or the other user has already requested the logged in user
             //Setting the addFriendButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
@@ -146,16 +156,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
      override func viewDidLoad() {
         super.viewDidLoad()
-        //To prevent recently added users in FriendsViewController from still showing as pending and other similar problems
-        let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
-        userFriendsData.fetch()
         self.tableView.allowsSelection = false
-        
-        let friends = userFriendsData["friends"] as! [String]
-        let pendingFriends = userFriendsData["pendingInviters"] as! [String]
-        let requestedFriends = userFriendsData["pendingInvitees"] as! [String]
-        users = friends + pendingFriends + requestedFriends
-
         tableView.registerNib(UINib(nibName: "FindUserTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         //Set notification to "listen" for when the the user has changed their currentGroup
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
@@ -166,7 +167,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         //We want to search users regardless of capitalization
         searchedString = searchBar.text!.lowercaseString
-        viewDidLoad()
+        reload()
         searchController.setActive(false, animated: true)
     }
     

@@ -116,13 +116,15 @@ class FriendsViewController: UITableViewController {
         let query = PFQuery(className: "UserFriendsData")
         query.whereKey("username", equalTo: inviteeUsername)
         //There is only one UserFriendsData instance per user
+        //We need a way of handiling errors for users that haven't updated yet and thus have groupInvites be null for them
         let otherUserFriendData = query.getFirstObject()
-        let oldNumOfGroupInvites = otherUserFriendData!["groupInvites"] as! Int
-        let newNumOfInvites = oldNumOfGroupInvites + 1
-        otherUserFriendData!["groupInvites"] = newNumOfInvites
-        otherUserFriendData!.save()
-        
-        
+        let oldNumOfGroupInvites = otherUserFriendData!["groupInvites"] as? Int
+        if oldNumOfGroupInvites != nil {
+            //Then the user has updated to the newest version of Squirrel List, and this field is not null, and altering it will not trigger an error
+            let newNumOfInvites = oldNumOfGroupInvites! + 1
+            otherUserFriendData!["groupInvites"] = newNumOfInvites
+            otherUserFriendData!.saveEventually()
+        }
         
         
         
@@ -242,42 +244,40 @@ class FriendsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         userFriendsData.fetch()
-        //If the logged in user has someone new added to their friends list, we need to re-alphabetize it and save it
-        if userFriendsData["friendAdded"] as! Bool == true {
-            let friends = userFriendsData["friends"] as! [String]
-            let sortedFriends = friends.sort { $0 < $1 }
-            userFriendsData["friends"] = sortedFriends
-            userFriendsData["friendAdded"] = false
-            userFriendsData.save()
-        }
         if invitingToGroup == true {
             //If they are inviting friends to groups, we don't show pending friends
             users = userFriendsData["friends"] as! [String]
             let groupName = group!["name"] as! String
             self.title = "Invite to \(groupName)"
         } else {
-            //friends = (userFriendsData["friends"] as! [String]).sorted { $0 < $1 }
+            //If the logged in user has someone new added to their friends list, we need to re-alphabetize it and save it
+            if userFriendsData["friendAdded"] as! Bool == true {
+                let friends = userFriendsData["friends"] as! [String]
+                let sortedFriends = friends.sort { $0 < $1 }
+                let (thereAreDuplicates, friendsArray) = removeDuplicates(sortedFriends)
+                if thereAreDuplicates == true {
+                    //We want to save the array that contains no duplicates of friends as the logged in user's friends list
+                    userFriendsData["friends"] = friendsArray
+                    userFriendsData.save()
+                }
+                userFriendsData["friends"] = sortedFriends
+                userFriendsData["friendAdded"] = false
+                userFriendsData.save()
+            }
             friends = userFriendsData["friends"] as! [String]
             //We only want pending inviters because we don't want to show users that the logged in user has requested
-            //pendingInviters = (userFriendsData["pendingInviters"] as! [String]).sorted { $0 < $1 }
             pendingInviters = userFriendsData["pendingInviters"] as! [String]
             //Need to keep track of how many friend badges the user has right now (if they have any)
             friendBadges = pendingInviters.count
             users = pendingInviters + friends
             self.title = "Friends"
+            //Setting the find friend image, which is 'fa-user-plus' 
+            findFriendsButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+            findFriendsButton!.title = "\u{f234}"
+            findFriendsButton!.tintColor = UIColor.orangeColor()
         }
-        let (thereAreDuplicates, friendsArray) = removeDuplicates(friends)
-        if thereAreDuplicates == true {
-            //We want to save the array that contains no duplicates of friends as the logged in user's friends list
-            userFriendsData["friends"] = friendsArray
-            userFriendsData.save()
-        }
-        //Setting the find friend image, which is 'fa-user-plus'
-        findFriendsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        findFriendsButton?.title = "\u{f234}"
-        findFriendsButton?.tintColor = UIColor.orangeColor()
+        
         self.tableView.allowsSelection = false
         //Customize navigation controller back button to only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)

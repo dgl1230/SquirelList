@@ -232,7 +232,7 @@ public class Banner: UIView {
             backgroundView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: .DirectionLeadingToTrailing, metrics: nil, views: views))
         }
         let leftConstraintText: String
-        if let image = image {
+        if let _ = image {
             contentView.addSubview(imageView)
             contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(15)-[imageView]", options: .DirectionLeadingToTrailing, metrics: nil, views: views))
             contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1.0, constant: 0.0))

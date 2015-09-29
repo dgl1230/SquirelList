@@ -15,16 +15,8 @@ import UIKit
 
 class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailslViewControllerDelegate, AddSquirrelViewControllerDelegate {
 
-    deinit {
-        //We remove the observers for reloading the controller
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadSquirrels, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadNotificationKey, object: nil)
-    }
-
     //Optional for storing the logged in user's current group
     var currentGroup: PFObject?
-    //Variable for keeping track of whether the SquirrelTabViewController should reload
-    var shouldReload = false
 
     @IBOutlet weak var acornsLabel: UILabel!
     @IBOutlet weak var squirrelSlotsLabel: UILabel!
@@ -99,7 +91,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     override func queryForTable() -> PFQuery {
         //We set the currentGroup optional here, since this is the first place where it needs to be used
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
-        currentGroup!.fetch()
         let query = PFQuery(className: "Squirrel")
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         query.orderByDescending("avg_rating")
@@ -110,22 +101,10 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     func reload() {
         self.loadObjects()
          //Since it appears there is a chance that a user can not have a data field, for now we do a double check and create any relevant fields for them in the group instance if they don't have them
-        verifyNoNullFields()
+        //verifyNoNullFields()
         updateLables()
         updateSquirrelSlots()
     }
-    
-    
-    func prepareForReload() {
-        if self.view.window == nil {
-            //The user is not currently on the screen, so we just make a note to refresh later
-            shouldReload = true
-        } else {
-            //Else the user is on the Squirrels tab right now, and we should reload
-            reload()
-        }
-    }
-    
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -338,6 +317,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    /*
     //Since there appears to be the possibility that somehow a user can be added to a group with a missing field (rarely), this function goes through all of the group's user fields, and if the user's data is missing from it, it updates the group's field to include it. If the user's data was missing on any of the fields, it saves the new information afterwords
     func verifyNoNullFields() {
         var needToChangeData = false
@@ -371,16 +351,12 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             currentGroup!.save()
         }
     }
+    */
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if shouldReload == true {
-            shouldReload = false
-            reload()
-        } else {
-            updateLables()
-        }
+        reload()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -391,17 +367,20 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
         /*
-        //let badge = SwiftBadge(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
-        tradeOffersBadgeLabel.text = "2"
-        tradeOffersBadgeLabel.backgroundColor = UIColor.redColor()
-        tradeOffersBadgeLabel.layer.cornerRadius = 8
-        tradeOffersBadgeLabel.layer.masksToBounds = true
-        tradeOffersBadgeLabel.hidden = false
-        //badge.font = UIFont(name: "Didot", size: 30.0)
-        //let badgeButton = UIBarButtonItem(customView: badge)
-        //let buttons: [UIBarButtonItem] = [tradeOfferButton, badgeButton]
-        //self.navigationItem.leftBarButtonItems = buttons
+        let badge = SwiftBadge(frame: CGRect(x: 17, y: 0, width: 15, height: 15))
+        badge.text = "99"
+        badge.textAlignment = .Center
+        badge.backgroundColor = UIColor.redColor()
+        badge.layer.cornerRadius = 8
+        badge.layer.masksToBounds = true
+        badge.hidden = false
+        badge.font = UIFont(name: "Didot", size: 9.0)
+        let badgeButton = UIBarButtonItem(customView: badge)
+        badgeButton.setTitlePositionAdjustment(UIOffsetMake(-10, -10), forBarMetrics: UIBarMetrics.Default)
+        let buttons: [UIBarButtonItem] = [tradeOfferButton, badgeButton]
+        self.navigationItem.leftBarButtonItems = buttons
         */
+
     }
     
     
@@ -410,13 +389,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
         //Since it appears there is a chance that a user can not have a data field, for now we do a double check and create any relevant fields for them in the group instance if they don't have them
-        verifyNoNullFields()
+        //verifyNoNullFields()
         //Check to see if there are new users
-        updateSquirrelSlots()
-        //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadNotificationKey, object: nil)
-        //Listen for when silent push notification alerts user that data has changed
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadSquirrels, object: nil)
+        //updateSquirrelSlots()
         //Set the addSquirrelButton to 'fa-plus'
         addSquirrelButton!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addSquirrelButton!.title = "\u{f067}"
@@ -442,7 +417,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     //Called after adding a Squirrel so that we can reload the SquirrelTabViewController
     func createdSquirrel(controller: AddSquirrelViewController) {
-        shouldReload = true
         //So users can't game the system if they have no squirrel slots while it reloads
         addSquirrelButton.enabled = false
     }

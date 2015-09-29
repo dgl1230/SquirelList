@@ -135,7 +135,6 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
-        currentGroup!.fetch()
         let query = PFQuery(className: "Squirrel")
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
         if currentlyTrading == true {
@@ -213,11 +212,6 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            // Else the user is trying to delete a squirrel from the group
-            //let squirrel = objects![indexPath.row] as! PFObject
-            //let firstName = (squirrel["first_name"] as! String).lowercaseString
-            //let lastName = (squirrel["last_name"] as! String).lowercaseString
-            //let fullName = "\(firstName) \(lastName)"
                 let message = "Are you sure you want to drop your squirrel? Your friends may claim it!"
                 let alert = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction) in
@@ -256,29 +250,6 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         self.currentGroup!["squirrelSlots"] = newSquirrelSlots
                         self.currentGroup!.save()
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                        //Need to delete all TradeProposals where the dropped squirrel is offered or desired
-                        let query1 = PFQuery(className: "TradeProposal")
-                        query1.whereKey("proposedSquirrelID", equalTo: squirrel.objectId!)
-                        let query2 = PFQuery(className: "TradeProposal")
-                        query2.whereKey("offeredSquirrelID", equalTo: squirrel.objectId!)
-                        let query = PFQuery.orQueryWithSubqueries([query1, query2])
-                        query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
-                            if error == nil {
-                                let tradeOffers = trades as? [PFObject]
-                                if tradeOffers?.count >= 1 {
-                                    for trade in tradeOffers! {
-                                        trade.delete()
-                                    }
-                                }
-                            
-                            }
-                        }
-                        //Alert Squirrel Tab to reload
-                        NSNotificationCenter.defaultCenter().postNotificationName(reloadSquirrels, object: self)
-                        //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
-                        let users = (self.currentGroup!["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
-                        //Send silent push notifications for other users to have their Squirrel tab refresh
-                        sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
                         //Reload the view
                         self.loadObjects()
                         //Global function that stops the loading animation and dismisses the views it is attached to

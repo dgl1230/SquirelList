@@ -32,24 +32,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         self.paginationEnabled = false
     }
     
-    func deleteTrades(group: PFObject) {
-        let tradeQ1 = PFQuery(className: "TradeProposal")
-        tradeQ1.whereKey("offeringUsername", equalTo: PFUser.currentUser()!.username!)
-        tradeQ1.whereKey("group", equalTo: group)
-        let tradeQ2 = PFQuery(className: "TradeProposal")
-        tradeQ2.whereKey("receivingUsername", equalTo: PFUser.currentUser()!.username!)
-        tradeQ2.whereKey("group", equalTo: group)
-        let query = PFQuery.orQueryWithSubqueries([tradeQ1, tradeQ2])
-        query.findObjectsInBackgroundWithBlock { (trades: [AnyObject]?, error: NSError?) -> Void in
-            if error == nil {
-                for object in trades! {
-                    let trade = object as! PFObject
-                    trade.delete()
-                }
-            }
-        }
-    }
-    
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
@@ -99,27 +81,15 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                     let container = viewsArray[1] as! UIView
                     let loadingView = viewsArray[2] as! UIView
                     
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.loadObjects()
-                        //Need to delete all of the squirrels in the group
-                        let squirrelQuery = PFQuery(className: "Squirrel")
-                        squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
-                        squirrelQuery.findObjectsInBackgroundWithBlock({ (squirrels: [AnyObject]?, error: NSError?) -> Void in
-                        if error == nil {
-                            for object in squirrels! {
-                                let squirrel = object as! PFObject
-                                squirrel.delete()
-                            }
-                        }
-                        self.deleteTrades(group)
-                    })
+                    
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
-                    group.delete()
-                    self.loadObjects()
+                    group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
+                    group.save()
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    self.viewDidLoad()
                     //Global function that stops the loading animation and dismisses the views it is attached to
                     resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
-                    }
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             } else {
@@ -136,6 +106,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                 let container = viewsArray[1] as! UIView
                 let loadingView = viewsArray[2] as! UIView
                 dispatch_async(dispatch_get_main_queue()) {
+                    
                     let squirrelQuery = PFQuery(className: "Squirrel")
                     squirrelQuery.whereKey("objectId", containedIn: group["squirrels"] as! [String])
                     squirrelQuery.whereKey("owner", equalTo: PFUser.currentUser()!)
@@ -149,7 +120,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                                 }
                             }
                         })
-                        self.deleteTrades(group)
+
                         let acorns = getFullUserInfo(group["acorns"] as! [String], username: PFUser.currentUser()!.username!)
                         let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!)
                         let cumulativeDays = getFullUserInfo(group["cumulativeDays"] as! [String], username: PFUser.currentUser()!.username!)
@@ -168,7 +139,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                         group.save()
                         PFUser.currentUser()!.save()
-                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                         //self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                         self.viewDidLoad()
                         //Global function that stops the loading animation and dismisses the views it is attached to
@@ -189,12 +159,19 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
         let userCurrentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         if currentGroup.objectId != userCurrentGroup.objectId {
+            //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
+                let viewsArray = displayLoadingAnimator(self.view)
+                _ = viewsArray[0] as! NVActivityIndicatorView
+                _ = viewsArray[1] as! UIView
+                _ = viewsArray[2] as! UIView
+                dispatch_async(dispatch_get_main_queue()) {
             //We only want to reload everything if the user hasn't selected their same currentGroup
-            PFUser.currentUser()!["currentGroup"] = currentGroup
+            PFUser.currentUser()!["currentGroup"] = self.currentGroup
             PFUser.currentUser()!.save()
             //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            }
 
 
         }

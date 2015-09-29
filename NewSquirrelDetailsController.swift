@@ -65,7 +65,6 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
     
     @IBAction func rateSquirrel(sender: AnyObject) {
-        ratedSquirrel!.fetch()
         let rater = PFUser.currentUser()!.username
         //They are re-rating the squirrel
         //Not efficient, look into way to not duplicate code
@@ -90,13 +89,13 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             return
         }
         //check if ["raters"] is nil. If it is, we create it
-        if let check: AnyObject = ratedSquirrel!["raters"] {
+        if let _ : AnyObject = ratedSquirrel!["raters"] {
            ratedSquirrel!["raters"]!.addObject(rater!)
         } else {
             ratedSquirrel!["raters"] = [rater!]
         }
         //check if ["ratings"] is nil. If it is, we create it
-        if let check: AnyObject = ratedSquirrel!["ratings"] {
+        if let _ : AnyObject = ratedSquirrel!["ratings"] {
             ratedSquirrel!["ratings"]!.addObject(rateNumberTextField.text!)
         } else {
             ratedSquirrel!["ratings"] = [rateNumberTextField.text!]
@@ -196,16 +195,10 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
             currentGroup!["squirrelSlots"] = newSquirrelSlots
             currentGroup!.save()
-            self.ratedSquirrel!.save()
-            //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
-            let users = (currentGroup!["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
-            //Send silent push notifications for other users to have their Squirrel tab refresh
-            sendPushNotifications(0, message: "", type: "reloadSquirrels", users: users)
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            self.dismissViewControllerAnimated(true, completion: nil)
             //Reload main squirrel view
             self.delegate!.reloadParent(self, usedRerate: false)
-            //Global function that stops the loading animation and dismisses the views it is attached to
-            resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
-            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

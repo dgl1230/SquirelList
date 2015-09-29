@@ -81,6 +81,9 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     @IBAction func decline(sender: AnyObject) {
         groupInvite!.delete()
+        //So that the user can be invited again if they decline
+        group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
+        group!.save()
         //Reload the notificationsViewController
         dismissViewControllerAnimated(true, completion: nil)
         delegate?.reloadAfterGroupInviteDecision!(self)

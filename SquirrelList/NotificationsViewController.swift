@@ -31,6 +31,9 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     //Variable for updating new number of trade offers, if user has accepted or rejected offers
     var numOfTradeOffers = 0
     
+    //Array for storing all the trades as PFObjects - for potentially deleting multiple trades without querying after user has accepted a trade. This variable if passed on to TradeOfferViewController
+    var trades: [PFObject] = []
+    
     var delegate: NotificationsViewControllerDelegate?
     
     
@@ -76,6 +79,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             let controller = segue.destinationViewController as! TradeOfferViewController
             controller.delegate = self
             controller.tradeProposal = sender as? PFObject
+            controller.trades = trades
         }
     }
     
@@ -94,12 +98,6 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             query.whereKey("group", equalTo: PFUser.currentUser()!["currentGroup"]!)
         }
         return query
-    }
-    
-    
-    //Responds to NSNotication when user has changed their current group
-    func reloadWithNewGroup() {
-        shouldReLoad = true
     }
 
     
@@ -120,6 +118,8 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             let user = objects![indexPath.row]["offeringUsername"] as! String
             let desiredSquirrel = objects![indexPath.row]["desiredSquirrelName"] as! String
             tradeOfferLabel.text = "\(user) wants \(desiredSquirrel)"
+            //Update trade array
+            trades.append(objects![indexPath.row] as! PFObject)
             return cell
         }
     }
@@ -144,14 +144,12 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         createGroupButton?.title = "\u{f067}"
         createGroupButton?.tintColor = UIColor.orangeColor()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
-        //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadWithNewGroup", name: reloadNotificationKey, object: nil)
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
     }
     
-    
+    /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if shouldReLoad == true {
@@ -159,6 +157,7 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
             self.viewDidLoad()
         }
     }
+    */
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillAppear(animated)
