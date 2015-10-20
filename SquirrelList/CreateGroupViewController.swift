@@ -12,6 +12,13 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var createGroupButton: UIBarButtonItem!
     @IBOutlet weak var groupNameTextField: UITextField!
+    @IBOutlet weak var anonymousChatEnabledButton: UIButton!
+    @IBOutlet weak var publicGroupEnabledButton: UIButton!
+    
+    //Variable for keeping track of whether the group's chat should be anonymous
+    var anonymousChat = false
+    //Variable for keeping track of whether the group is public 
+    var isPublic = false
     
     @IBAction func createGroup(sender: AnyObject) {
         if groupNameTextField.text!.characters.count > 15 {
@@ -20,8 +27,24 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
             self.presentViewController(alertController, animated: true, completion: nil)
             return
         }
+        //If they are making a public group, we make sure a group with that name doesn't exist already
+        if isPublic == true {
+            let existanceQueryCheck = PFQuery(className: "Group")
+            existanceQueryCheck.whereKey("lowercaseName", equalTo: groupNameTextField.text!.lowercaseString)
+            let results = existanceQueryCheck.getFirstObject()
+            if results != nil {
+                //That name exists already
+                displayAlert(self, title: "", message: "There's already a public group with that name :/")
+                return
+            } else if groupNameTextField.text!.characters.count < 3 {
+                //To avoid awkwardly showing all groups that start with one or two letters, we only want users to be able to create groups with at least 3 characters. We also don't show results in the search bar for searches with one or two characters. 
+                displayAlert(self, title: "", message: "If you're making a public group, please have it be at least three characters")
+                return
+            }
+        }
         let group = PFObject(className: "Group")
         group["name"] = groupNameTextField.text //as NSString
+        group["lowercaseName"] = groupNameTextField.text!.lowercaseString
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group["pendingUsers"] = []
         group["squirrels"] = []
@@ -31,6 +54,8 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         group["cumulativeDays"] = ["\(PFUser.currentUser()!.username!):1"]
         group["usersOnLastVisit"] = ["\(PFUser.currentUser()!.username!):1"]
         group["rerates"] = ["\(PFUser.currentUser()!.username!):0"]
+        group["anonymousChatEnabled"] = anonymousChat
+        group["isPublic"] = isPublic
         
         let today = NSDate()
         let formatter = NSDateFormatter()
@@ -57,6 +82,38 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         }
 
     }
+
+    @IBAction func anonymousChatEnabled(sender: AnyObject) {
+        if anonymousChat == false {
+            //Set it equal to true
+            anonymousChat = true
+            //Set the anonymousChatEnabledd button to 'fa-square-check-o'
+            anonymousChatEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+            anonymousChatEnabledButton.setTitle("\u{f046}", forState: .Normal)
+        } else {
+            //The box was checked, and now they are unchecking it
+            anonymousChat = false
+            //Set the anonymousChatEnabledd button to 'fa-square-o'
+            anonymousChatEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+            anonymousChatEnabledButton.setTitle("\u{f096}", forState: .Normal)
+        }
+    }
+    
+    @IBAction func publicOptionEnabled(sender: AnyObject) {
+        if isPublic == false {
+            //Set it equal to true
+            isPublic = true
+            //Set the publicGroupEnabledButton to 'fa-square-check-o'
+            publicGroupEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+            publicGroupEnabledButton.setTitle("\u{f046}", forState: .Normal)
+        } else {
+            //The box was checked, and now they are unchecking it
+            isPublic = false
+            //Set the publicGroupEnabledButton to 'fa-square-o'
+            publicGroupEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+            publicGroupEnabledButton.setTitle("\u{f096}", forState: .Normal)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +122,14 @@ class CreateGroupViewController: UITableViewController, UITextFieldDelegate {
         createGroupButton.title = "\u{f058}"
         createGroupButton.tintColor = UIColor.orangeColor()
         groupNameTextField.delegate = self
+        //Set the anonymousChatEnabledd button to 'fa-square-o'
+        anonymousChatEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+        anonymousChatEnabledButton.setTitle("\u{f096}", forState: .Normal)
+        //Set the publicGroupEnabledButton to 'fa-square-o'
+        publicGroupEnabledButton.titleLabel!.font = UIFont(name: "FontAwesome", size: 20)
+        publicGroupEnabledButton.setTitle("\u{f096}", forState: .Normal)
+    
+        
     }
     
     

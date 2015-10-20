@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         //For now we reset their badge numbers anytime the app launches 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+
         
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
@@ -65,6 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let aps = userInfo["aps"] as? NSDictionary
         let alert = aps!["alert"] as? NSString
         let message = alert as! String
+        let typeTest = userInfo["type"] as? NSString
+        //To prevent a crash if we happen to send a campaign-wide push notification from Parse or some other such type of notification 
+        if typeTest == nil {
+            return
+        }
         //The type can be "friendRequest", "groupInvite", "acceptedGroupInvite", "acceptedFriendRequest", "acceptedTrade", "proposedTrade", "reloadMessages", "reloadSquirrels", "rejectedTrade"
         let type = userInfo["type"] as! NSString
         

@@ -128,7 +128,7 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
         }
         let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
         userFriendsData.fetch()
-        //We only user the pendingInviters field, since we just want the friends basge to show the number of people that have requested the logged in user
+        //We only user the pendingInviters field, since we just want the friends badge to show the number of people that have requested the logged in user
         let pendingFriends = userFriendsData["pendingInviters"] as! [String]
         if pendingFriends.count > 0 {
             friendsBadgeLabel.text = "\(pendingFriends.count)"

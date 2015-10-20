@@ -22,7 +22,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     }
     */
 
-    @IBOutlet var searchController: UISearchDisplayController!
+    @IBOutlet var searchController: UISearchController!
 
     
     //Variable for seeing what to search usernames for, updates everytime user presses the search button
@@ -30,6 +30,8 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
     
     //Variable for storing all of the users' usernames that the logged in user is already friends with, has friended, or has friended them
     var users: [String] = []
+    //Variable for keeping track of whether the user has searched yet (for determining whether to show a no results image, but we don't want to do this at first because technically when this view controller loads, we run a query with no results)
+    var hasSearched = false
     
 
     // Initialise the PFQueryTable tableview
@@ -154,6 +156,41 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         return cell
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //If the user has searched already and had no results for the last search, we want to remove the imageview and label we previously created for no results. We do this for-loop at the top, to remove the label (if we are changing the text from "that user doesn't exist" to "please enter more characters" we don't want the label to pile on top of each other
+        for subview in self.tableView.subviews {
+            if subview.tag == 69 || subview.tag == 70 {
+                subview.removeFromSuperview()
+            }
+        }
+        //Check to see if there are no results, and thus we should display an image and text instead of an empty table view
+        if objects!.count == 0 && hasSearched == true {
+            let emptyLabel = UILabel(frame: CGRectMake(0, 50, self.view.bounds.size.width, 40))
+            if searchedString.characters.count < 3 {
+                emptyLabel.text = "Please enter at least three characters"
+            } else {
+                emptyLabel.text = "That user doesn't exist"
+            }
+            emptyLabel.font = UIFont(name: "BebasNeue-Thin", size: 40)
+            emptyLabel.textColor = UIColor.grayColor()
+            emptyLabel.textAlignment = .Center
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            let emptyImageView = UIImageView(frame: CGRectMake(20, 85, 256, 256))
+            emptyImageView.center.x = self.tableView.center.x
+            emptyImageView.image = UIImage(named: "watermelon")
+            //We set tags to make it easy to potentialyl remove these subviews if the user searches a new group that does have a result
+            emptyLabel.tag = 69
+            emptyImageView.tag = 70
+            self.view.addSubview(emptyLabel)
+            self.view.addSubview(emptyImageView)
+            self.tableView.addSubview(emptyImageView)
+            //Using sepatorStyle doesn't get the separator lines to disappear if there's no objects, so we do this instead
+            self.tableView.separatorColor = UIColor.clearColor()
+            return 0
+        }
+        return objects!.count
+    }
+    
      override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsSelection = false
@@ -165,10 +202,12 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
 
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        //If there are no results, we want to display an image, so we upate our variable for determining whether we should display a no results image
+        hasSearched = true
         //We want to search users regardless of capitalization
         searchedString = searchBar.text!.lowercaseString
         reload()
-        searchController.setActive(false, animated: true)
+        searchController.active = false
     }
     
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {

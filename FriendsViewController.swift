@@ -204,6 +204,29 @@ class FriendsViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //Check to see if there are no users and thus we should display an image saying the user either has no friends or no friends to invite
+        if users.count == 0 {
+            let emptyLabel = UILabel(frame: CGRectMake(0, 20, self.view.bounds.size.width, 40))
+            emptyLabel.font = UIFont(name: "BebasNeue-Thin", size: 40)
+            emptyLabel.textColor = UIColor.grayColor()
+            emptyLabel.textAlignment = .Center
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            let emptyImageView = UIImageView(frame: CGRectMake(20, 50, 256, 256))
+            emptyImageView.center.x = self.tableView.center.x
+            emptyImageView.image = UIImage(named: "watermelon")
+            if invitingToGroup == true {
+                emptyLabel.text = "You have no friends to invite"
+            } else {
+                emptyLabel.text = "You have no friends, loser"
+            }
+            self.view.addSubview(emptyLabel)
+            self.view.addSubview(emptyImageView)
+            self.tableView.addSubview(emptyImageView)
+            //Using sepatorStyle doesn't get the separator lines to disappear if there's no objects, so we do this instead
+            self.tableView.separatorColor = UIColor.clearColor()
+
+            return 0
+        }
         return users.count
     }
     

@@ -139,7 +139,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                         group.save()
                         PFUser.currentUser()!.save()
-                        //self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
                         self.viewDidLoad()
                         //Global function that stops the loading animation and dismisses the views it is attached to
                         resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
@@ -172,7 +172,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
             NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
             UIApplication.sharedApplication().endIgnoringInteractionEvents()
             }
-
 
         }
         self.dismissViewControllerAnimated(true, completion: nil)

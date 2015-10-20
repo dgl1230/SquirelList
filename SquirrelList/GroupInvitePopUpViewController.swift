@@ -86,7 +86,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
         group!.save()
         //Reload the notificationsViewController
         dismissViewControllerAnimated(true, completion: nil)
-        delegate?.reloadAfterGroupInviteDecision!(self)
+        delegate!.reloadAfterGroupInviteDecision!(self)
     }
 
     override func viewDidLoad() {

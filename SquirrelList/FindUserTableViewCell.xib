@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,12 +22,14 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="23K-9e-8Hc" userLabel="User's Name">
                         <rect key="frame" x="8" y="11" width="159" height="24"/>
+                        <animations/>
                         <fontDescription key="fontDescription" name="BebasNeue-Thin" family="Bebas Neue" pointSize="25"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vb1-bh-fDE" userLabel="Add User">
                         <rect key="frame" x="282" y="10" width="30" height="30"/>
+                        <animations/>
                         <state key="normal" title="add">
                             <color key="titleShadowColor" red="0.0" green="0.74901960779999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
@@ -35,12 +38,14 @@
                         </connections>
                     </button>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="vb1-bh-fDE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="01Y-zZ-WWr"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vb1-bh-fDE" secondAttribute="trailing" id="Grh-ZF-RIz"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vb1-bh-fDE" secondAttribute="bottom" constant="-5" id="wpt-9F-vvs"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="addButton" destination="vb1-bh-fDE" id="REj-ng-kdm"/>
                 <outlet property="nameLabel" destination="23K-9e-8Hc" id="hDl-a3-uzU"/>

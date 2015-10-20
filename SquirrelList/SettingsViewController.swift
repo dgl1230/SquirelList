@@ -109,7 +109,7 @@ class SettingsViewController: UITableViewController, ChangeInfoViewControllerDel
             emailLabel.text = email
         }
         
-        }
+    }
     
     //ChangeInfoViewControllerDelegate function - reloads so we can display the newly saved information
     func finishedSaving(controller: ChangeInfoController) {

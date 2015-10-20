@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		180253C91B2FE1410094C044 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */; };
-		1814C28C1BA8B3CF00158597 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814C28B1BA8B3CF00158597 /* Badge.swift */; settings = {ASSET_TAGS = (); }; };
+		1814C28C1BA8B3CF00158597 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814C28B1BA8B3CF00158597 /* Badge.swift */; };
 		181B7C031A834379004E83E6 /* AddSquirrelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */; };
 		181E459E1B8E37B700CD9F07 /* SquirrelTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E459D1B8E37B700CD9F07 /* SquirrelTabViewController.swift */; };
 		181E45A01B8E471B00CD9F07 /* UsersSquirrelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E459F1B8E471B00CD9F07 /* UsersSquirrelsViewController.swift */; };
@@ -88,10 +88,11 @@
 		187547BD1B0FA1B6009A6EFE /* BebasNeue Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */; };
 		187547C01B0FC907009A6EFE /* UsersCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */; };
 		187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */; };
-		1876081E1BA64952001D0075 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876081D1BA64952001D0075 /* FeedbackViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1876081E1BA64952001D0075 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876081D1BA64952001D0075 /* FeedbackViewController.swift */; };
 		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
 		1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
+		18A069761BCF30B300825F9C /* SearchGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */; };
 		18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18A568D01B0FD6B50019B2C3 /* bosun03.otf */; };
 		18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D21B1811500019B2C3 /* RegisterViewController.swift */; };
 		18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D41B182BBC0019B2C3 /* LoginViewController.swift */; };
@@ -299,6 +300,7 @@
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsViewController.swift; path = SquirrelList/NotificationsViewController.swift; sourceTree = "<group>"; };
 		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupInvitePopUpViewController.swift; path = SquirrelList/GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = SquirrelList/SettingsViewController.swift; sourceTree = "<group>"; };
+		18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupsViewController.swift; sourceTree = "<group>"; };
 		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				18625C561AC33DA100093A1B /* MoreViewController.swift */,
 				187960D11AB6732400538306 /* NotificationsViewController.swift */,
 				18F43A851B69808800CCE2C3 /* SearchUsersController.swift */,
+				18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */,
 				188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */,
 				18DC68271B59A82200364A4E /* SquirrelStoreController.swift */,
 				181E459D1B8E37B700CD9F07 /* SquirrelTabViewController.swift */,
@@ -905,6 +908,7 @@
 				18DE639E1B772CA1005EB7C0 /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */,
 				18DE639B1B772CA1005EB7C0 /* NVActivityIndicatorAnimationLineScale.swift in Sources */,
 				184841991AE976C100F23551 /* JSQMessagesMediaPlaceholderView.m in Sources */,
+				18A069761BCF30B300825F9C /* SearchGroupsViewController.swift in Sources */,
 				18DE63911B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
 				18DE63871B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
 				18DE63891B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,

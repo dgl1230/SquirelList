@@ -195,6 +195,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
             currentGroup!["squirrelSlots"] = newSquirrelSlots
             currentGroup!.save()
+            self.ratedSquirrel!.save()
             UIApplication.sharedApplication().endIgnoringInteractionEvents()
             self.dismissViewControllerAnimated(true, completion: nil)
             //Reload main squirrel view

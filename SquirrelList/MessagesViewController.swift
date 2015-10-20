@@ -30,6 +30,8 @@ class MessagesViewController: JSQMessagesViewController {
     var shouldLoadNewMessages = false
     //Variable for determining whether the user changed new groups (and thus whether we should reload all messages)
     var shouldReload = false
+    //Variable for determing whether the group chat is anonymous
+    var chatISAnonymous = false
     
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
@@ -45,6 +47,16 @@ class MessagesViewController: JSQMessagesViewController {
             }
         }
         self.finishSendingMessage()
+    }
+    
+    func checkIfAnonymousChat() {
+        let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+        let isAnonymous = currentGroup["anonymousChatEnabled"] as? Bool
+        if isAnonymous == nil || isAnonymous == false {
+            chatISAnonymous = false
+        } else {
+            chatISAnonymous = true
+        }
     }
     
     
@@ -87,6 +99,7 @@ class MessagesViewController: JSQMessagesViewController {
         self.messages = []
         self.messageObjects = []
         self.users = []
+        checkIfAnonymousChat()
         //This is goign to lead to lagging eventually, since this will mean that as soon as a user changes current groups, they will also be reloading messages, but it does prevent the array out of index error
         loadMessages()
     }
@@ -107,6 +120,7 @@ class MessagesViewController: JSQMessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        checkIfAnonymousChat()
         //Listen for when a user has pushed a new silent notification (meaning they have sent a message in the group chat)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadNewMessages", name: "reloadMessages", object: nil)
         //Set notification to "listen" for when the the user has changed their currentGroup
@@ -146,7 +160,12 @@ class MessagesViewController: JSQMessagesViewController {
             formatter.dateStyle = NSDateFormatterStyle.LongStyle
             formatter.timeStyle = .ShortStyle
             let date = formatter.stringFromDate(message.date)
-            let displayInfo = "\(message.senderDisplayName) - \(date)"
+            var displayInfo = ""
+            if chatISAnonymous == true {
+                displayInfo = "\(date)"
+            } else {
+                displayInfo = "\(message.senderDisplayName) - \(date)"
+            }
             return NSMutableAttributedString(string: displayInfo)
         }
         return nil
@@ -160,7 +179,7 @@ class MessagesViewController: JSQMessagesViewController {
         cell!.textView!.textColor = UIColor.blackColor()
         //Check to see if we are displaying a sender's name. If we are, we want their name to be aligned witht the beggining of the message
         let message = messages[indexPath.row]
-        if message.senderId != self.senderId {
+        if message.senderId != self.senderId  {
             cell!.messageBubbleTopLabel!.textInsets.left = 15.0
         }
         cell!.textView!.linkTextAttributes = [NSForegroundColorAttributeName:cell!.textView!.textColor!]

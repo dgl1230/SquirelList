@@ -37,10 +37,16 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     var delegate: NotificationsViewControllerDelegate?
     
     
-    @IBOutlet weak var createGroupButton: UIBarButtonItem?
+    //@IBOutlet weak var createGroupButton: UIBarButtonItem?
+    @IBOutlet weak var searchGroupsButton: UIBarButtonItem?
+    @IBOutlet weak var createGroupButton: UIButton?
     
     @IBAction func createGroup(sender: AnyObject) {
         performSegueWithIdentifier("CreateGroup", sender: self)
+    }
+    
+    @IBAction func searchGroups(sender: AnyObject) {
+        performSegueWithIdentifier("SearchGroups", sender: self)
     }
     
     // Initialise the PFQueryTable tableview
@@ -136,13 +142,44 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
         }
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //Check to see if there are no results, and thus we should display an image and text instead of an empty table view
+        if objects!.count == 0 {
+            let emptyLabel = UILabel(frame: CGRectMake(0, 50, self.view.bounds.size.width, 40))
+            emptyLabel.font = UIFont(name: "BebasNeue-Thin", size: 40)
+            emptyLabel.textColor = UIColor.grayColor()
+            emptyLabel.textAlignment = .Center
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            let emptyImageView = UIImageView(frame: CGRectMake(20, 85, 256, 256))
+            emptyImageView.center.x = self.tableView.center.x
+            emptyImageView.image = UIImage(named: "pineapple")
+            if typeOfNotification == "invite" {
+                emptyLabel.text = "You have no invitations"
+            } else {
+                //The user is viewing trade offers
+                emptyLabel.text = "You have no trade offers"
+                //We need to re-adjust the y postion of the label and imageView, because on trade offers there will not be another view directly below the navigation bar
+                emptyLabel.center.y = 25
+                emptyImageView.frame = CGRectMake(20, 45, 256, 256)
+                emptyImageView.center.x = self.tableView.center.x
+            }
+            self.view.addSubview(emptyLabel)
+            self.view.addSubview(emptyImageView)
+            self.tableView.addSubview(emptyImageView)
+            //Using sepatorStyle doesn't get the separator lines to disappear if there's no objects, so we do this instead
+            self.tableView.separatorColor = UIColor.clearColor()
+            return 0
+        }
+        return objects!.count
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Set the createGroupButton to 'fa-plus'
-        createGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
-        createGroupButton?.title = "\u{f067}"
-        createGroupButton?.tintColor = UIColor.orangeColor()
+        //Set the searchGroupsButton to 'fa-search'
+        searchGroupsButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
+        searchGroupsButton?.title = "\u{f002}"
+        searchGroupsButton?.tintColor = UIColor.orangeColor()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)

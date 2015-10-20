@@ -1,5 +1,5 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B4DCF71C1C3053F52BC5C9CE2DCFDF1F3F590108",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D66B5F4391CB1B6F0142DBDA3D12261C2DDCC737",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
@@ -9,12 +9,12 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4F8DE7D8-2924-4023-AEF5-BDAF17F55827",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "B4DCF71C1C3053F52BC5C9CE2DCFDF1F3F590108" : "Programming\/",
-    "D66B5F4391CB1B6F0142DBDA3D12261C2DDCC737" : "Programming\/Swift\/Squirrellist\/"
+    "B4DCF71C1C3053F52BC5C9CE2DCFDF1F3F590108" : "..",
+    "D66B5F4391CB1B6F0142DBDA3D12261C2DDCC737" : "SquirrelList\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "SquirrelList",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Swift\/SquirrelList\/SquirrelList.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "SquirrelList.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/dgl1230\/forfriends.git",

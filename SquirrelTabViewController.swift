@@ -61,7 +61,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             let controller = segue.destinationViewController as! AddSquirrelViewController
             //we need to transer the array of names so that we can make sure the user isn't creating a duplicate squirrel
             controller.delegate = self
-            
         }
         if segue.identifier == "SquirrelDetails" {
             let controller = segue.destinationViewController as! NewSquirrelDetailsViewController
@@ -253,6 +252,36 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             )
         })
         return [deleteButton]
+    }
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //If their were previously no squirrels, we want to remove the imageview and label we previously created for no squirrels existing. We remove the label and imageView by referencing their tags
+        for subview in self.tableView.subviews {
+            if subview.tag == 69 || subview.tag == 70 {
+                subview.removeFromSuperview()
+            }
+        }
+        //Check to see if there are no results, and thus we should display an image and text instead of an empty table view
+        if objects!.count == 0 {
+            let emptyLabel = UILabel(frame: CGRectMake(0, 50, self.view.bounds.size.width, 40))
+            emptyLabel.text = "No squirrels have been added yet"
+            emptyLabel.font = UIFont(name: "BebasNeue-Thin", size: 40)
+            emptyLabel.textColor = UIColor.grayColor()
+            emptyLabel.textAlignment = .Center
+            emptyLabel.adjustsFontSizeToFitWidth = true
+            let emptyImageView = UIImageView(frame: CGRectMake(20, 85, 256, 256))
+            emptyImageView.center.x = self.tableView.center.x
+            emptyImageView.image = UIImage(named: "no_squirrels")
+            //We set tags to make it easy to potentialyl remove these subviews if the user searches a new group that does have a result
+            emptyLabel.tag = 69
+            emptyImageView.tag = 70
+            self.view.addSubview(emptyLabel)
+            self.view.addSubview(emptyImageView)
+            self.tableView.addSubview(emptyImageView)
+            return 0
+        }
+        return objects!.count
     }
     
     //Updates all of the Squirrel Tab's label
