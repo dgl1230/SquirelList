@@ -132,7 +132,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         group.removeObject(acorns, forKey: "acorns")
                         group.removeObject(squirrelSlots, forKey: "squirrelSlots")
                         group.removeObject(cumulativeDays, forKey: "cumulativeDays")
-                        group.removeObject(usersOnLastVist, forKey: "usersOnLastVist")
+                        group.removeObject(usersOnLastVist, forKey: "usersOnLastVisit")
                         group.removeObject(lastVisit, forKey: "lastVisits")
                         group.removeObject(rerate, forKey: "rerates")
                         //Remve the group from the user's group

@@ -51,14 +51,13 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
         cell.addButton.enabled = false
 
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
-        group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         let numOfUsers = (group["users"] as! [String]).count
         let squirrelSlots = (numOfUsers - 1) + 3
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
         group.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
         group.addObject("\(PFUser.currentUser()!.username!):1", forKey: "cumulativeDays")
-        group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers)", forKey: "usersOnLastVisit")
+        group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers + 1)", forKey: "usersOnLastVisit")
         group.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
         let today = NSDate()
         let formatter = NSDateFormatter()

@@ -143,6 +143,12 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //If their were previously no objects, we want to remove the imageview and label we previously created for no squirrels existing. We remove the label and imageView by referencing their tags
+        for subview in self.tableView.subviews {
+            if subview.tag == 69 || subview.tag == 70 {
+                subview.removeFromSuperview()
+            }
+        }
         //Check to see if there are no results, and thus we should display an image and text instead of an empty table view
         if objects!.count == 0 {
             let emptyLabel = UILabel(frame: CGRectMake(0, 50, self.view.bounds.size.width, 40))
@@ -163,6 +169,9 @@ class NotificationsViewController: PFQueryTableViewController, TradeOfferViewCon
                 emptyImageView.frame = CGRectMake(20, 45, 256, 256)
                 emptyImageView.center.x = self.tableView.center.x
             }
+            //We set tags to make it easy to potentialyl remove these subviews if the user searches a new group that does have a result
+            emptyLabel.tag = 69
+            emptyImageView.tag = 70
             self.view.addSubview(emptyLabel)
             self.view.addSubview(emptyImageView)
             self.tableView.addSubview(emptyImageView)
