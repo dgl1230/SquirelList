@@ -31,8 +31,9 @@ class GroupInvitePopUpViewController: PopUpViewController {
         group!.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
         PFUser.currentUser()!.addObject(group!.objectId!, forKey: "groups")
-        let numOfUsers = (group!["users"] as! [String]).count
-        let squirrelSlots = (numOfUsers - 1) + 3
+        //We add one to take into consideration the logged in user who is accepting
+        let numOfUsers = (group!["users"] as! [String]).count + 1
+        let squirrelSlots = numOfUsers + 2
         group!.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
         group!.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
         group!.addObject("\(PFUser.currentUser()!.username!):1", forKey: "cumulativeDays")

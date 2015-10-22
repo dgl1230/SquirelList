@@ -45,19 +45,22 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
     func joinGroup(sender:UIButton!) {
         let buttonRow = sender.tag
         let group = objects![buttonRow] as! PFObject
+        //So that if a user joins before another user has pressed the join group button, they still get the appropriate amount of acorns
+        //group.fetch()
         //We want to prevent the user from being able to quickly press the join group button multiple times
         let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
         cell.addButton.enabled = false
 
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
-        let numOfUsers = (group["users"] as! [String]).count
-        let squirrelSlots = (numOfUsers - 1) + 3
+        //We add one to take into consideration the logged in user who is accepting
+        let numOfUsers = (group["users"] as! [String]).count + 1
+        let squirrelSlots = numOfUsers + 2
         group.addObject(PFUser.currentUser()!.username!, forKey: "users")
         group.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
         group.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
         group.addObject("\(PFUser.currentUser()!.username!):1", forKey: "cumulativeDays")
-        group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers + 1)", forKey: "usersOnLastVisit")
+        group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers)", forKey: "usersOnLastVisit")
         group.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
         let today = NSDate()
         let formatter = NSDateFormatter()
