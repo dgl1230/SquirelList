@@ -39,9 +39,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 (user: PFUser?, signupError: NSError?) -> Void in
                     if signupError ==  nil {
                         //In the weird off chance that the user has more than one account, this keep push notifications updated to whichever account they are logged in as
-                        let installation = PFInstallation.currentInstallation()
-                        installation["username"] = self.usernameTextField.text
-                        installation.saveInBackgroundWithBlock(nil)
+                        //let installation = PFInstallation.currentInstallation()
+                        //installation["username"] = self.usernameTextField.text
+                        //installation.saveInBackgroundWithBlock(nil)
                         //Global function that stops the loading animation and dismisses the views it is attached to
                         resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
                         if PFUser.currentUser()!["currentGroup"] == nil {

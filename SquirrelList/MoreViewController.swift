@@ -113,6 +113,42 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
             }))
         self.presentViewController(alert, animated: true, completion: nil)
         }
+        //We can run all of this in the background - fetch the logged in user's userFriendData and see if they have any new friend requests or group invites, and if they do, update the badges for the appropriate labels
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
+            userFriendsData.fetch()
+            //We only user the pendingInviters field, since we just want the friends badge to show the number of people that have requested the logged in user
+            let pendingFriends = userFriendsData["pendingInviters"] as! [String]
+            if pendingFriends.count > 0 {
+                self.friendsBadgeLabel.text = "\(pendingFriends.count)"
+                self.friendsBadgeLabel.backgroundColor = UIColor.redColor()
+                self.friendsBadgeLabel.layer.cornerRadius = 8
+                self.friendsBadgeLabel.layer.masksToBounds = true
+                self.friendsBadgeLabel.hidden = false
+            } else {
+                //The user doesn't have any pending friends, so we hide the badge
+                self.friendsBadgeLabel.hidden = true
+            }
+            let groupInvites = userFriendsData["groupInvites"] as? Int
+            if groupInvites == nil {
+                //The user hasn't had their userFriendsData model updated yet
+                userFriendsData["groupInvites"] = 0
+                userFriendsData.save()
+                //No badges to show since we just updated their info from nil
+                self.groupsBadgeLabel.hidden = true
+            } else if groupInvites > 0 {
+                self.groupsBadgeLabel.text = "\(groupInvites!)"
+                self.groupsBadgeLabel.backgroundColor = UIColor.redColor()
+                self.groupsBadgeLabel.layer.cornerRadius = 8
+                self.groupsBadgeLabel.layer.masksToBounds = true
+                self.groupsBadgeLabel.hidden = false
+            } else {
+                //The user doesn't have any pending friends, so we hide the badge
+                self.groupsBadgeLabel.hidden = true
+            }
+            
+        }
     }
     
     
@@ -126,37 +162,8 @@ class MoreTableViewController: UITableViewController, FriendsViewControllerDeleg
             PFUser.currentUser()!["hasSeenMoreTab"] = true
             PFUser.currentUser()!.save()
         }
-        let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
-        userFriendsData.fetch()
-        //We only user the pendingInviters field, since we just want the friends badge to show the number of people that have requested the logged in user
-        let pendingFriends = userFriendsData["pendingInviters"] as! [String]
-        if pendingFriends.count > 0 {
-            friendsBadgeLabel.text = "\(pendingFriends.count)"
-            friendsBadgeLabel.backgroundColor = UIColor.redColor()
-            friendsBadgeLabel.layer.cornerRadius = 8
-            friendsBadgeLabel.layer.masksToBounds = true
-            friendsBadgeLabel.hidden = false
-        } else {
-            //The user doesn't have any pending friends, so we hide the badge 
-            friendsBadgeLabel.hidden = true
-        }
-        let groupInvites = userFriendsData["groupInvites"] as? Int
-        if groupInvites == nil {
-            //The user hasn't had their userFriendsData model updated yet
-            userFriendsData["groupInvites"] = 0
-            userFriendsData.save()
-            //No badges to show since we just updated their info from nil
-            groupsBadgeLabel.hidden = true
-        } else if groupInvites > 0 {
-            groupsBadgeLabel.text = "\(groupInvites!)"
-            groupsBadgeLabel.backgroundColor = UIColor.redColor()
-            groupsBadgeLabel.layer.cornerRadius = 8
-            groupsBadgeLabel.layer.masksToBounds = true
-            groupsBadgeLabel.hidden = false
-        } else {
-            //The user doesn't have any pending friends, so we hide the badge 
-            groupsBadgeLabel.hidden = true
-        }
+        
+        
         self.tblOptions?.tableFooterView = UIView(frame: CGRectZero)
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)

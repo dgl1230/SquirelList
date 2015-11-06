@@ -385,7 +385,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        reload()
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        //We asynchonously update and load new results
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.reload()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -441,6 +445,12 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             currentGroup!["rerates"] = newRerates
             currentGroup!.save()
         }
+        reload()
+    }
+    
+    func showErrorAlert(controller: NewSquirrelDetailsViewController, title: String, body: String) {
+        //Global function for displaying errors
+        displayAlert(self, title: title, message: body)
         reload()
     }
     

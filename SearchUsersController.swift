@@ -59,6 +59,21 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
         let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
         cell.addButton.enabled = false
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        //We update the userFriendsData objects in the background
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            otherUserFriendData.addObject(PFUser.currentUser()!.username!, forKey: "pendingInviters")
+            
+            let currentUserFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
+            currentUserFriendsData.addObject(username, forKey: "pendingInvitees")
+        
+            currentUserFriendsData.save()
+            otherUserFriendData.save()
+        
+            //Alert the invited user that the logged in user has requested them as a friend
+            let nonLoweredUsername = otherUserFriendData["username"] as! String
+            sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) wants to be friends!", type: "friendRequest", users: [nonLoweredUsername])
+        }
         //Check to see whether we should prompt the user to enable push notifications
         let hasFriended = PFUser.currentUser()!["hasFriended"] as! Bool
         let hasBeenAskedForPush = PFUser.currentUser()!["hasBeenAskedForPush"] as! Bool
@@ -86,18 +101,7 @@ class SearchUsersViewController: PFQueryTableViewController, UISearchBarDelegate
             }))
         self.presentViewController(alert, animated: true, completion: nil)
         }
-
-        otherUserFriendData.addObject(PFUser.currentUser()!.username!, forKey: "pendingInviters")
         
-        let currentUserFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
-        currentUserFriendsData.addObject(username, forKey: "pendingInvitees")
-        
-        currentUserFriendsData.save()
-        otherUserFriendData.save()
-        
-        //Alert the invited user that the logged in user has requested them as a friend
-        let nonLoweredUsername = otherUserFriendData["username"] as! String
-        sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) wants to be friends!", type: "friendRequest", users: [nonLoweredUsername])
     }
     
     

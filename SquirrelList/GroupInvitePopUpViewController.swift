@@ -49,6 +49,7 @@ class GroupInvitePopUpViewController: PopUpViewController {
                 //Alert the inviter that the logged in user has accepted their group invite
                 let inviterName = self.groupInvite!["inviter"] as! String
                 let groupName = self.group!["name"] as? String
+                
                 let message = "\(PFUser.currentUser()!.username!) has accepted your invitation to join \(groupName!)"
                 sendPushNotifications(0, message: message, type: "acceptedGroupInvite", users: [inviterName])
                 PFUser.currentUser()!.save()
@@ -82,12 +83,15 @@ class GroupInvitePopUpViewController: PopUpViewController {
     
     @IBAction func decline(sender: AnyObject) {
         groupInvite!.delete()
-        //So that the user can be invited again if they decline
-        group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
-        group!.save()
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            //So that the user can be invited again if they decline
+            self.group!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingUsers")
+            self.group!.save()
+        }
+        self.delegate!.reloadAfterGroupInviteDecision!(self)
         //Reload the notificationsViewController
         dismissViewControllerAnimated(true, completion: nil)
-        delegate!.reloadAfterGroupInviteDecision!(self)
     }
 
     override func viewDidLoad() {

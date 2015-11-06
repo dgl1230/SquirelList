@@ -53,25 +53,34 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                 let container = viewsArray[1] as! UIView
                 let loadingView = viewsArray[2] as! UIView
                 createSquirrel(trimmedFirst2, last_name: trimmedLast2, activityIndicatorView: activityIndicatorView, container: container, loadingView: loadingView)
-            }
+        }
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        //We check in the background to make sure that Squirrel hasn't been recently created
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+
+            //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
+                currentGroup.fetch()
+                //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
+                //let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
+                let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
+                let trimmedFirst = first!.stringByTrimmingCharactersInSet(badSet)
+                let trimmedLast = last!.stringByTrimmingCharactersInSet(badSet)
+                let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
+                if (squirrelNames.indexOf(squirrelName) != nil) {
+                    self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
+                }
+        }
+        
+        
     }
     
     
     //Creates the Squirrel, after first checking to make sure that the same Squirrel name doesn't exist already. Assumes that the Squirrel has already passed checks to make sure there are no white spaces, numbers, punctuations, etc. and that the first and last name have a correct length 
     func createSquirrel(first_name: String, last_name: String, activityIndicatorView: NVActivityIndicatorView, container: UIView, loadingView: UIView) {
-        let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
-                //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
-                currentGroup.fetch()
-                //We don't want to send push notifications to the logged in user, since the delegate is reloading the Squirrels tab for them
-                //let users = (currentGroup["users"] as! [String]).filter{ $0 != PFUser.currentUser()!.username! }
-                let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
-            
                 let squirrelName = "\(first_name.lowercaseString) \(last_name.lowercaseString)"
-                if (squirrelNames.indexOf(squirrelName) != nil) {
-                    //Global function that stops the loading animation and dismisses the views it is attached to
-                    resumeInteractionEvents(activityIndicatorView, container: container, loadingView: loadingView)
-                    self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
-                } else {
                     //We create the Squirrel 
                     let newSquirrel = PFObject(className:"Squirrel")
                     newSquirrel["first_name"] = first_name
@@ -110,9 +119,6 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                         UIApplication.sharedApplication().endIgnoringInteractionEvents()
     
                     }
-
-                }
-
     
     }
     

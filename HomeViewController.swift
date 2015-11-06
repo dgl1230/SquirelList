@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
         loginButton.layer.masksToBounds = true
         registerButton.layer.cornerRadius = 5
         registerButton.layer.masksToBounds = true
+        //self.view.backgroundColor = UIColor(patternImage: UIImage(named: "squirrel-list-bg")!)
         
     }
     

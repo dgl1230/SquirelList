@@ -96,12 +96,17 @@ class MessagesViewController: JSQMessagesViewController {
     
     
     func reload() {
-        self.messages = []
-        self.messageObjects = []
-        self.users = []
-        checkIfAnonymousChat()
-        //This is goign to lead to lagging eventually, since this will mean that as soon as a user changes current groups, they will also be reloading messages, but it does prevent the array out of index error
-        loadMessages()
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        //We can run all of this in the background 
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.messages = []
+            self.messageObjects = []
+            self.users = []
+            self.checkIfAnonymousChat()
+            //This is goign to lead to lagging eventually, since this will mean that as soon as a user changes current groups, they will also   be reloading messages, but it does prevent the array out of index error
+            self.loadMessages()
+            
+        }
     }
     
     //If the user is on the chat screen, we call loadMessages, since this function is only for live chat

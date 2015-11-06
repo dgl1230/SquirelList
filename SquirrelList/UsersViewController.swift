@@ -277,7 +277,8 @@ class UsersViewController: PFQueryTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = currentGroup!["name"] as? String
+        let groupName = currentGroup!["name"] as? String
+        self.title = "\(groupName!) Users"
         //Set the addFriendToGroupButton to 'fa-user-plus
         addFriendToGroupButton?.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "FontAwesome", size: 30)!], forState: UIControlState.Normal)
         addFriendToGroupButton?.title = "\u{f234}"
@@ -297,6 +298,11 @@ class UsersViewController: PFQueryTableViewController {
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         //Check for any alerts to show
         updateAlerts()
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
+            userFriendsData.fetch()
+        }
     }
 }
 

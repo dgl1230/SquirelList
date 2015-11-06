@@ -237,6 +237,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                             self.loadObjects()
                             return
                         }
+                        
                         squirrel.removeObjectForKey("owner")
                         squirrel.removeObjectForKey("ownerUsername")
                         squirrel.save()

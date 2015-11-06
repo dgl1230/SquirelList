@@ -28,14 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         /*
         let groupQ = PFQuery(className: "Group")
-        groupQ.whereKey("objectId", equalTo: "I4OyOQmOSm")
+        groupQ.whereKey("objectId", equalTo: "GMjN8smzJm")
         let g = groupQ.getFirstObject()
         PFUser.currentUser()!["currentGroup"] = g
         PFUser.currentUser()!.save()
         */
         
+        
 
-
+        
         
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard

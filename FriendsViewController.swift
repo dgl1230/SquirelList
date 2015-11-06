@@ -47,30 +47,38 @@ class FriendsViewController: UITableViewController {
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
         cell.addButton.enabled = false
         if invitingToGroup == true {
-            createGroupInvite(username)
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            //We create the group invite in the background in the background
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                self.createGroupInvite(username)
+            }
         } else {
-            //The user is accepting a friend request
-            //We need to query and get the other user's UserFriendsData
-            let query = PFQuery(className: "UserFriendsData")
-            query.whereKey("username", equalTo: username)
-            //There is only one UserFriendsData instance per user
-            //Update the other user's UserFriendsData instance by removing logged in user's username from "requestedUsers" field and adding it to "friends" field
-            let otherUserFriendData = query.getFirstObject()
-            otherUserFriendData!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingInvitees")
-            otherUserFriendData!.addObject(PFUser.currentUser()!.username!, forKey: "friends")
-            //Update the current user's UserFriendsData instance by removing username from "requestingUsers" field and adding it to "friends" field
-            userFriendsData.removeObject(username, forKey: "pendingInviters")
-            userFriendsData.addObject(username, forKey: "friends")
-            
-            //Update the "friendAdded" field to re-sort friends array when appropraite user goes to friends list
-            userFriendsData["friendAdded"] = true
-            otherUserFriendData!["friendAdded"] = true
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            //We update the users' friends list in the background
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                //The user is accepting a friend request
+                //We need to query and get the other user's UserFriendsData
+                let query = PFQuery(className: "UserFriendsData")
+                query.whereKey("username", equalTo: username)
+                //There is only one UserFriendsData instance per user
+                //Update the other user's UserFriendsData instance by removing logged in user's username from "requestedUsers" field and adding it to "friends" field
+                let otherUserFriendData = query.getFirstObject()
+                otherUserFriendData!.removeObject(PFUser.currentUser()!.username!, forKey: "pendingInvitees")
+                otherUserFriendData!.addObject(PFUser.currentUser()!.username!, forKey: "friends")
+                //Update the current user's UserFriendsData instance by removing username from "requestingUsers" field and adding it to     "friends" field
+                self.userFriendsData.removeObject(username, forKey: "pendingInviters")
+                self.userFriendsData.addObject(username, forKey: "friends")
         
-            userFriendsData.save()
-            otherUserFriendData!.save()
+                //Update the "friendAdded" field to re-sort friends array when appropraite user goes to friends list
+                self.userFriendsData["friendAdded"] = true
+                otherUserFriendData!["friendAdded"] = true
+        
+                self.userFriendsData.save()
+                otherUserFriendData!.save()
             
-            //Alert the requester that their friend request has been accepted
-            sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) has accepted your friend request", type: "friendRequest", users: [username])
+                //Alert the requester that their friend request has been accepted
+                sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) has accepted your friend request", type: "friendRequest", users: [username])
+            }
             //When the user presses the back button, we should update the friends badges in viewWillDissappear 
             shouldUpdateFriendBadges = true
             friendBadges -= 1
@@ -125,9 +133,6 @@ class FriendsViewController: UITableViewController {
             otherUserFriendData!["groupInvites"] = newNumOfInvites
             otherUserFriendData!.saveEventually()
         }
-        
-        
-        
         //Alert the invited user that they have been invited to a group
         let groupName = group!["name"] as! String
         sendPushNotifications(1, message: "\(PFUser.currentUser()!.username!) has invited you to join \(groupName)", type: "groupInvite", users: [inviteeUsername])
@@ -267,7 +272,6 @@ class FriendsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userFriendsData.fetch()
         if invitingToGroup == true {
             //If they are inviting friends to groups, we don't show pending friends
             users = userFriendsData["friends"] as! [String]

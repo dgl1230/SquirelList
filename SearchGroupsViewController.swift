@@ -51,7 +51,8 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
         let indexPath = NSIndexPath(forRow: buttonRow, inSection: 0)
         let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! FindUserTableViewCell
         cell.addButton.enabled = false
-
+        
+        /*
         PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
         //We add one to take into consideration the logged in user who is accepting
         let numOfUsers = (group["users"] as! [String]).count + 1
@@ -68,8 +69,25 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
         let todayString = formatter.stringFromDate(today)
         group.addObject("\(PFUser.currentUser()!.username!):\(todayString)", forKey: "lastVisits")
         group.save()
+        */
         if PFUser.currentUser()!["currentGroup"] == nil {
-            //This is the user's first group, so we now need to give them access to all tabs after saving this group as their current group
+            //This is the user's first group, so we now need to give them access to all tabs after saving this group as their current group - this also means we need to calculate some things syncronously
+            PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
+            //We add one to take into consideration the logged in user who is accepting
+            let numOfUsers = (group["users"] as! [String]).count + 1
+            let squirrelSlots = numOfUsers + 2
+            group.addObject(PFUser.currentUser()!.username!, forKey: "users")
+            group.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
+            group.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
+            group.addObject("\(PFUser.currentUser()!.username!):1", forKey: "cumulativeDays")
+            group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers)", forKey: "usersOnLastVisit")
+            group.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
+            let today = NSDate()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let todayString = formatter.stringFromDate(today)
+            group.addObject("\(PFUser.currentUser()!.username!):\(todayString)", forKey: "lastVisits")
+            group.save()
             PFUser.currentUser()!["currentGroup"] = group
             PFUser.currentUser()!.save()
             //The user can now access all tabs, since they have a current group
@@ -77,7 +95,26 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
             appDelegate.window!.rootViewController = HomeTabViewController()
             appDelegate.window!.makeKeyAndVisible()
         } else {
-            PFUser.currentUser()!.save()
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                PFUser.currentUser()!.addObject(group.objectId!, forKey: "groups")
+                //We add one to take into consideration the logged in user who is accepting
+                let numOfUsers = (group["users"] as! [String]).count + 1
+                let squirrelSlots = numOfUsers + 2
+                group.addObject(PFUser.currentUser()!.username!, forKey: "users")
+                group.addObject("\(PFUser.currentUser()!.username!):750", forKey: "acorns")
+                group.addObject("\(PFUser.currentUser()!.username!):\(squirrelSlots)", forKey: "squirrelSlots")
+                group.addObject("\(PFUser.currentUser()!.username!):1", forKey: "cumulativeDays")
+                group.addObject("\(PFUser.currentUser()!.username!):\(numOfUsers)", forKey: "usersOnLastVisit")
+                group.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
+                let today = NSDate()
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                let todayString = formatter.stringFromDate(today)
+                group.addObject("\(PFUser.currentUser()!.username!):\(todayString)", forKey: "lastVisits")
+                group.save()
+                PFUser.currentUser()!.save()
+            }
             //Setting the joinGroupButton with the 'fa-plus-square-o' button
             cell.addButton.titleLabel?.font = UIFont(name: "FontAwesome", size: 20)
             cell.addButton.setTitle("\u{f196}", forState: .Normal)
@@ -155,7 +192,7 @@ class SearchGroupsViewController: PFQueryTableViewController, UISearchBarDelegat
             let emptyImageView = UIImageView(frame: CGRectMake(20, 85, 256, 256))
             emptyImageView.center.x = self.tableView.center.x
             emptyImageView.image = UIImage(named: "strawberry")
-            //We set tags to make it easy to potentialyl remove these subviews if the user searches a new group that does have a result
+            //We set tags to make it easy to potentially remove these subviews if the user searches a new group that does have a result
             emptyLabel.tag = 69
             emptyImageView.tag = 70
             self.view.addSubview(emptyLabel)

@@ -44,11 +44,15 @@ class TradeOfferViewController: PopUpViewController {
     
     @IBAction func declineTrade(sender: AnyObject) {
         tradeProposal!.deleteInBackground()
-        //Send push notification alerting them that their trade has been rejected
-        let offeringUsername = tradeProposal!["offeringUsername"] as! String
-        let yourSquirrelName = tradeProposal!["desiredSquirrelName"] as! String
-        let message = "\(PFUser.currentUser()!.username!) has rejected your offer for \(yourSquirrelName)"
-        sendPushNotifications(0, message: message, type: "rejectedTrade", users: [offeringUsername])
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            //Send push notification alerting them that their trade has been rejected
+            let offeringUsername = self.tradeProposal!["offeringUsername"] as! String
+            let yourSquirrelName = self.tradeProposal!["desiredSquirrelName"] as! String
+            let message = "\(PFUser.currentUser()!.username!) has rejected your offer for \(yourSquirrelName)"
+            sendPushNotifications(0, message: message, type: "rejectedTrade", users: [offeringUsername])
+        }
+        
         dismissViewControllerAnimated(true, completion: nil)
         //Reloading
         self.delegate?.tradeOfferViewController(self)
