@@ -8,8 +8,10 @@
 
 import UIKit
 
-protocol AddSquirrelViewControllerDelegate: class {
+@objc protocol AddSquirrelViewControllerDelegate: class {
     func createdSquirrel(controller: AddSquirrelViewController)
+    optional func addSquirrelViewControllerDelegateErrorAlert(controller: AddSquirrelViewController, title: String, body: String)
+    optional func addSquirrelUpdateLabels(controller: AddSquirrelViewController)
 }
 
 
@@ -21,7 +23,7 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     
-    
+    /*
     @IBAction func done() {
         let first = firstName.text //as! String
         let last = lastName.text //as! String
@@ -73,6 +75,84 @@ class AddSquirrelViewController: UITableViewController, UITextFieldDelegate {
                     self.displayErrorAlert( "That Squirrel already exists!", error: "Try adding another squirrel instead, you monster.")
                 }
         }
+        
+    }
+    */
+    
+    @IBAction func done() {
+        let first = firstName.text //as! String
+        let last = lastName.text //as! String
+        if first!.characters.count > 10 {
+            displayErrorAlert("Their first name is too long!", error: "Please keep first names to a max of 10 characters.")
+            return
+        } else if last!.characters.count > 15 {
+            displayErrorAlert("Their last name is too long!", error: "Please keep last names to a max of 15 characters.")
+            return
+        }
+        //Check to make user didn't just enter spaces for either name 
+        let spaces = NSCharacterSet(charactersInString: " ")
+        if first!.stringByTrimmingCharactersInSet(spaces).characters.count == 0 || last!.stringByTrimmingCharactersInSet(spaces).characters.count == 0 {
+            displayErrorAlert("That's not a name!", error: "Please provide letters (not whitespaces) for a Squirrel name. I expected better of you.")
+            return
+        }
+        //We want to make sure users can't add a squirrel that starts or ends with a space or have numbers or weird punctuation
+        let badSet: NSCharacterSet = NSCharacterSet(charactersInString: "!@#$%^&*()1234567890[]{}|;:<>,.?/_+=")
+        if first!.rangeOfCharacterFromSet(badSet, options: [], range: nil) != nil || last!.rangeOfCharacterFromSet(badSet, options: [], range: nil) != nil {
+                displayErrorAlert("No numbers or symbols!", error: "Stop trying to cheat the system, you animal.")
+                return
+        }
+        LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+        print("SQUIRREL SLOTS IS \(LOGGED_IN_USER_SQUIRREL_SLOTS)")
+        //No current errors, so we run mostly everything else asynchonously
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            let currentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
+
+            //We fetch the currentGroup to guarantee that the user isn't about to create a squirrel that was just created by another user
+                currentGroup.fetch()
+            let squirrelNames = currentGroup["squirrelFullNames"] as! [String]
+            let trimmedFirst = first!.stringByTrimmingCharactersInSet(badSet)
+            let trimmedLast = last!.stringByTrimmingCharactersInSet(badSet)
+            let trimmedFirst2 = trimmedFirst.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let trimmedLast2 = trimmedLast.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let squirrelName = "\(trimmedFirst2.lowercaseString) \(trimmedLast2.lowercaseString)"
+            if (squirrelNames.indexOf(squirrelName) != nil) {
+                //We get an error if we change the UI in  a background thread
+                dispatch_async(dispatch_get_main_queue()) {
+                    LOGGED_IN_USER_SQUIRREL_SLOTS += 1
+                    self.delegate!.addSquirrelViewControllerDelegateErrorAlert!(self, title: "That Squirrel already exists!", body: "Try adding another squirrel instead, you monster.")
+                }
+                return
+            }
+            //We create the Squirrel
+            let newSquirrel = PFObject(className:"Squirrel")
+            newSquirrel["first_name"] = trimmedFirst2
+            newSquirrel["last_name"] = trimmedLast2
+            newSquirrel["owner"] = PFUser.currentUser()!
+            newSquirrel["raters"] = []
+            newSquirrel["ratings"] = []
+            newSquirrel["avg_rating"] = 0
+            newSquirrel["group"] = PFUser.currentUser()!["currentGroup"]
+            newSquirrel["ownerUsername"] = PFUser.currentUser()!.username
+            newSquirrel["dropVotes"] = 0
+            newSquirrel["droppers"] = []
+            let picture = UIImage(named: "Squirrel_Profile_Pic")
+            let imageData = UIImagePNGRepresentation(picture!)
+            let imageFile = PFFile(name: "Squirrel_Profile_Pic", data: imageData!)
+            newSquirrel["picture"] = imageFile
+            newSquirrel.save()
+            let group = PFUser.currentUser()!["currentGroup"] as! PFObject
+            group.addObject(newSquirrel.objectId!, forKey: "squirrels")
+            
+            let newSquirrelSlots = getNewArrayToSave(group["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
+            group["squirrelSlots"] = newSquirrelSlots
+            group.addObject(squirrelName, forKey: "squirrelFullNames")
+            group.save()
+            //Reloads the parent squirrelTabViewController
+            self.delegate!.createdSquirrel(self)
+        }
+        delegate!.addSquirrelUpdateLabels!(self)
+        self.navigationController!.popViewControllerAnimated(true)
         
         
     }

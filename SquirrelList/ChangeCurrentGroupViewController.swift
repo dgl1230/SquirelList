@@ -15,6 +15,7 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     //this variable is for checking to see when the user presses done, if they have stayed on the same current group. If they have, then we don't want to send notifications to reload everything
     var currentGroup = PFUser.currentUser()!["currentGroup"]! as! PFObject
     var newView: UIView?
+    var fixedFrame = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     
     // Initialise the PFQueryTable tableview
     override init(style: UITableViewStyle, className: String!) {
@@ -153,8 +154,21 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
         let userCurrentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         if currentGroup.objectId != userCurrentGroup.objectId {
+            /*
+            let rect = CGRectIntersection(self.view.frame, self.view.superview!.bounds)
+            print("The rectangle's width is \(rect.width) and its height is \(rect.height)")
+            print("the rectangular's coordinates are: \(rect.origin.x), \(rect.origin.y)")
+            print("The view's width is \(self.view.frame.width) and its height is \(self.view.frame.height)")
+            print("the vies's coordinates are: \(self.view.frame.origin.x), \(self.view.frame.origin.y)")
+            let v = UIView(frame: rect)
+            v.center = CGPoint(x: rect.origin.x, y: rect.origin.y)
+            print("v's center is \(v.center)")
+            */
+            
+            self.view.addSubview(fixedFrame)
             //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-                let viewsArray = displayLoadingAnimator(self.view)
+                print("fixedframe's width is \(fixedFrame.frame.width), fixedFrame's height is \(fixedFrame.frame.height), fixedFrame's x is \(fixedFrame.frame.origin.x), fixedFrame's y is \(fixedFrame.frame.origin.y)")
+                let viewsArray = displayLoadingAnimator(fixedFrame)
                 _ = viewsArray[0] as! NVActivityIndicatorView
                 _ = viewsArray[1] as! UIView
                 _ = viewsArray[2] as! UIView
@@ -188,24 +202,24 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         return [deleteButton]
     }
     
-    func TouchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touches called")
-        let touch = touches.first! as UITouch
-        let location = touch.locationInView(self.view)
-        newView = UIView(frame: CGRect(origin: location, size: self.view.frame.size))
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        print("scrolling")
+        print("The content offset is \(scrollView.contentOffset.y)")
+        print("fixedframe's width is \(fixedFrame.frame.width), fixedFrame's height is \(fixedFrame.frame.height), fixedFrame's x is \(fixedFrame.frame.origin.x), fixedFrame's y is \(fixedFrame.frame.origin.y)")
+        //let startingPoint = fixedFrame.frame.origin.y
+        fixedFrame.frame.origin.y = scrollView.contentOffset.y
+        //fixedFrame.center.y = scrollView.contentOffset.y
+    
     }
     
     
-    
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print("touches ended")
-    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //Register the UsersCellTableViewCell for use in the UserViewController tableView
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        fixedFrame = UIView(frame: CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y, width: self.view.frame.width, height: self.view.frame.height))
     }
 
 

@@ -213,7 +213,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     //Assumes that user has already been given permission to claim it  - updates the Squirrel and the logged in user's info to reflect claiming of said squirrel. Assumes that there is a loading animation occuring and that we should stop it after everything has been saved.
     func claimSquirrel() {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        //To make everything a bit faster - we assume there are no problems and run all calculations asynchronously. If there was a problem, we present it to the user afterwards
+        //To make everything a bit faster  we assume there are no problems and run all calculations asynchronously. If there was a problem, we present it to the user afterwards back in the main thread
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.ratedSquirrel!.fetch()
             let currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
@@ -224,12 +224,14 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             let squirrelNames = currentGroup!["squirrelFullNames"] as! [String]
             //Make sure the squirrel hasn't been deleted  - if it has been, we can still fetch it, but it's fields won't have any values
             if squirrelNames.contains(squirrelName) == false {
+                //Get a bug if we update the UI outside of the main thread
                 dispatch_async(dispatch_get_main_queue()) {
                     self.delegate!.showErrorAlert!(self, title: "Whoops", body: "That Squirrel was just deleted! You can re-add it though :)")
                 }
                 return
             }
             if self.ratedSquirrel!["ownerUsername"] != nil {
+                //Get a bug if we update the UI outside of the main thread
                 dispatch_async(dispatch_get_main_queue()) {
                     self.delegate!.showErrorAlert!(self, title: "Oops", body: "That Squirrel was just claimed :(")
                 }

@@ -35,8 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         */
         
         
-
-        
         
         if PFUser.currentUser() == nil {
             //If the user isn't logged in, we need to present the login/register storyboard
