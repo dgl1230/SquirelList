@@ -68,7 +68,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             let controller = segue.destinationViewController as! NewSquirrelDetailsViewController
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
-            let squirrelSlots = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
+            //We use the global variable LOGGED_IN_USER_SQUIRREL_SLOTS here becuase if they have just added a squirrel, we may not be finished asynchonously saving the group. So if we access Squirrel Slots from the group field, the user may be able to pick up a squirrel, when they actually have zero squirrel slots 
+            let squirrelSlots = LOGGED_IN_USER_SQUIRREL_SLOTS
             controller.squirrelSlots = squirrelSlots
             let userRerates = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))
             if userRerates == 1 {
@@ -100,15 +101,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     //Reload the objects and checks if there are new users and updates all labels
     func reload() {
-        print("starting load objects")
         self.loadObjects()
          //Since it appears there is a chance that a user can not have a data field, for now we do a double check and create any relevant fields for them in the group instance if they don't have them
         //verifyNoNullFields()
-        print("starting update labels")
         updateLables()
-        print("starting update squirrel slots")
         updateSquirrelSlots()
-        print("done with update squirrel slots")
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -298,9 +295,9 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         //Set the number of rerates
         LOGGED_IN_USER_ACORNS = Int(getUserInfo(currentGroup!["acorns"] as! [String], username: PFUser.currentUser()!.username!))!
         if currentlyAddingSquirrel == false {
+            print("currently adding squirrels is false")
             LOGGED_IN_USER_SQUIRREL_SLOTS = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))!
         }
-        
         LOGGED_IN_USER_RERATES = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))!
         let groupUsers = currentGroup!["users"] as! [String]
         let numOfUsers = groupUsers.count
@@ -386,17 +383,20 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             currentGroup!.addObject("\(PFUser.currentUser()!.username!):0", forKey: "rerates")
         }
         if needToChangeData == true {
+            print("THERE WAS A NULL FIELD")
             currentGroup!.save()
         }
     }
     */
     
     
+    /*
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("VIEW APPEARING")
         self.reload()
     }
+    */
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -405,6 +405,8 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             //If new user, show them the tutorial screens, but we only want to present these screens from the main squirrel tab
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
+        //verifyNoNullFields()
+        self.reload()
         /*
         let badge = SwiftBadge(frame: CGRect(x: 17, y: 0, width: 15, height: 15))
         badge.text = "99"
@@ -454,6 +456,11 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         reload()
     }
     
+    func claimSquirrelUpdateLabels(controller: NewSquirrelDetailsViewController) {
+        currentlyAddingSquirrel = true
+        reload()
+    }
+    
     func showErrorAlert(controller: NewSquirrelDetailsViewController, title: String, body: String) {
         //Global function for displaying errors
         displayAlert(self, title: title, message: body)
@@ -462,7 +469,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     
     //Called after adding a Squirrel so that we can reload the SquirrelTabViewController
     func createdSquirrel(controller: AddSquirrelViewController) {
-        print("going into created squirrel area")
         //So users can't game the system if they have no squirrel slots while it reloads
         addSquirrelButton.enabled = false
         reload()
@@ -475,7 +481,6 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
     }
     
     func addSquirrelUpdateLabels(controller: AddSquirrelViewController) {
-        print("SHOULD BE UPDATING LABELS")
         currentlyAddingSquirrel = true
     }
 

@@ -154,36 +154,19 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         //We need to compare object ids to see if the user selected the group that is already their current group. If they do this, we don't need to send alerts to reload everything
         let userCurrentGroup = PFUser.currentUser()!["currentGroup"] as! PFObject
         if currentGroup.objectId != userCurrentGroup.objectId {
-            /*
-            let rect = CGRectIntersection(self.view.frame, self.view.superview!.bounds)
-            print("The rectangle's width is \(rect.width) and its height is \(rect.height)")
-            print("the rectangular's coordinates are: \(rect.origin.x), \(rect.origin.y)")
-            print("The view's width is \(self.view.frame.width) and its height is \(self.view.frame.height)")
-            print("the vies's coordinates are: \(self.view.frame.origin.x), \(self.view.frame.origin.y)")
-            let v = UIView(frame: rect)
-            v.center = CGPoint(x: rect.origin.x, y: rect.origin.y)
-            print("v's center is \(v.center)")
-            */
-            
             self.view.addSubview(fixedFrame)
             //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-                print("fixedframe's width is \(fixedFrame.frame.width), fixedFrame's height is \(fixedFrame.frame.height), fixedFrame's x is \(fixedFrame.frame.origin.x), fixedFrame's y is \(fixedFrame.frame.origin.y)")
                 let viewsArray = displayLoadingAnimator(fixedFrame)
                 _ = viewsArray[0] as! NVActivityIndicatorView
                 _ = viewsArray[1] as! UIView
                 _ = viewsArray[2] as! UIView
-                dispatch_async(dispatch_get_main_queue()) {
                 //We only want to reload everything if the user hasn't selected their same currentGroup
                 PFUser.currentUser()!["currentGroup"] = self.currentGroup
                 PFUser.currentUser()!.save()
-                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                 //We send the nsnotifications in the background
-                dispatch_async(dispatch_get_global_queue(priority, 0)) {
                     //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
-                }
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
-            }
         }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -203,13 +186,10 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("scrolling")
-        print("The content offset is \(scrollView.contentOffset.y)")
-        print("fixedframe's width is \(fixedFrame.frame.width), fixedFrame's height is \(fixedFrame.frame.height), fixedFrame's x is \(fixedFrame.frame.origin.x), fixedFrame's y is \(fixedFrame.frame.origin.y)")
-        //let startingPoint = fixedFrame.frame.origin.y
-        fixedFrame.frame.origin.y = scrollView.contentOffset.y
-        //fixedFrame.center.y = scrollView.contentOffset.y
-    
+        //For making it so that our loading animation is always centered
+        fixedFrame.bounds = scrollView.bounds
+        fixedFrame.frame = scrollView.frame
+        fixedFrame.frame.origin.y = scrollView.bounds.origin.y
     }
     
     

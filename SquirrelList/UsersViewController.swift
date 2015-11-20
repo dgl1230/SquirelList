@@ -18,9 +18,6 @@ let reloadIndividualGroupData = "com.denis.reloadIndividualGroupData"
 
 class UsersViewController: PFQueryTableViewController {
 
-    deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: reloadNotificationKey, object: nil)
-    }
 
     var currentGroup: PFObject?
     //Optional for storing whether the viewcontroller should reload (if the user changed their currentGroup)
@@ -104,17 +101,6 @@ class UsersViewController: PFQueryTableViewController {
         self.loadObjects()
         self.title = currentGroup!["name"] as? String
         updateAlerts()
-    }
-    
-    
-    func prepareForReload() {
-        if self.view.window == nil {
-            //The user is not currently on the screen, so we just make a note to refresh later
-            shouldReLoad = true
-        } else {
-            //Else the user is on the Squirrels tab right now, and we should reload
-            reload()
-        }
     }
     
     //Recursively shows the prompts to the user, depending upon the data in the alerts array
@@ -228,7 +214,6 @@ class UsersViewController: PFQueryTableViewController {
         if PFUser.currentUser()!["recentStrike"] as! Bool == true {
             alerts.append("recentStrike")
         }
-
         //Check to see if this is another day that they've consecutively checked this group
         let lastCheckedDateString = getUserInfo(currentGroup!["lastVisits"] as! [String], username: PFUser.currentUser()!.username!)
         let formatter = NSDateFormatter()
@@ -264,16 +249,17 @@ class UsersViewController: PFQueryTableViewController {
         if PFUser.currentUser()!["newUserTab"] as! Bool == true {
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
+        print("ABOUT TO RELOAD")
+        reload()
     }
     
-    
-    
+    /*
     override func viewWillAppear(animated: Bool) {
-        if shouldReLoad == true {
-            shouldReLoad = false
-            reload()
-        }
+        print("USER VIEW CONTROLLER ABOUT TTO RELOAD")
+        reload()
     }
+    */
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -289,8 +275,7 @@ class UsersViewController: PFQueryTableViewController {
         changeCurrentGroupButton?.tintColor = UIColor.orangeColor()
         self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "BebasNeueBold", size: 26)!,  NSForegroundColorAttributeName: UIColor.whiteColor()]
         
-        //Set notification to "listen" for when the the user has changed their currentGroup
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "prepareForReload", name: reloadNotificationKey, object: nil)
+
         //Customize navigation controller back button to my only the back symbol
         let backItem = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = backItem
@@ -300,6 +285,7 @@ class UsersViewController: PFQueryTableViewController {
         updateAlerts()
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            //To prevent crash if user has gone to the invite friends to group screen before checking the more tab in a while
             let userFriendsData = PFUser.currentUser()!["friendData"] as! PFObject
             userFriendsData.fetch()
         }

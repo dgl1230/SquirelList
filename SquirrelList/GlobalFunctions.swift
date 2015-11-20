@@ -49,7 +49,7 @@ var COUNTER = 0
         //Loading view is for holding activityIndicatorView
         let loadingView = UIView()
         loadingView.frame = CGRectMake(0, 0, 70, 70)
-        loadingView.center = uiView.center
+        loadingView.center = CGPointMake(container.frame.size.width / 2, container.frame.size.height / 2)
         loadingView.backgroundColor = UIColor(white: 0, alpha: 0.4)
         loadingView.clipsToBounds = true
         loadingView.layer.cornerRadius = 10
@@ -65,7 +65,6 @@ var COUNTER = 0
         container.addSubview(loadingView)
         uiView.addSubview(container)
         activityIndicatorView.startAnimation()
-        //uiView.bringSubviewToFront(activityIndicatorView)
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
         return [activityIndicatorView, container, loadingView]
     }

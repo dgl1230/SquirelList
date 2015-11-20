@@ -12,6 +12,7 @@ import UIKit
 @objc protocol NewSquirrelDetailslViewControllerDelegate: class {
     func reloadParent(controller: NewSquirrelDetailsViewController, usedRerate: Bool)
     optional func showErrorAlert(controller: NewSquirrelDetailsViewController, title: String, body: String)
+    optional func claimSquirrelUpdateLabels(controller: NewSquirrelDetailsViewController)
 }
 
 class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -48,6 +49,7 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
     @IBAction func claimOrTradeOrUploadPicture(sender: AnyObject) {
         if claimOrTradeOrPicture == "claim" {
+            print(0.5)
             self.claimSquirrel()
         } else if claimOrTradeOrPicture == "trade" {
             self.performSegueWithIdentifier("tradeSquirrel", sender: self)
@@ -212,6 +214,15 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
     
     //Assumes that user has already been given permission to claim it  - updates the Squirrel and the logged in user's info to reflect claiming of said squirrel. Assumes that there is a loading animation occuring and that we should stop it after everything has been saved.
     func claimSquirrel() {
+        //We want to immediately update this global variable so that to the user, it appears that they immediately used up a squirrel slot instead of the Squirrel Slot label on the Squirrels Tab taking a few minutes to update (since everything is being calucated asychronously). If a problem occured (like the Squirrel already exists), then we add one back to this global variable
+        print(1)
+        LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+        //Update the Squirrel Slot label immediately in Squirrels Tab
+        print(2)
+        delegate!.claimSquirrelUpdateLabels!(self)
+        print(3)
+        self.dismissViewControllerAnimated(true, completion: nil)
+        print(4)
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         //To make everything a bit faster  we assume there are no problems and run all calculations asynchronously. If there was a problem, we present it to the user afterwards back in the main thread
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -226,6 +237,8 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             if squirrelNames.contains(squirrelName) == false {
                 //Get a bug if we update the UI outside of the main thread
                 dispatch_async(dispatch_get_main_queue()) {
+                    //Make it appear to them that they gained back their Squirrel Slot, even though we haven't run calculations yet
+                    LOGGED_IN_USER_SQUIRREL_SLOTS += 1
                     self.delegate!.showErrorAlert!(self, title: "Whoops", body: "That Squirrel was just deleted! You can re-add it though :)")
                 }
                 return
@@ -233,6 +246,8 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
             if self.ratedSquirrel!["ownerUsername"] != nil {
                 //Get a bug if we update the UI outside of the main thread
                 dispatch_async(dispatch_get_main_queue()) {
+                    //Make it appear to them that they gained back their Squirrel Slot, even though we haven't run calculations yet
+                    LOGGED_IN_USER_SQUIRREL_SLOTS += 1
                     self.delegate!.showErrorAlert!(self, title: "Oops", body: "That Squirrel was just claimed :(")
                 }
                 return
@@ -245,14 +260,13 @@ class NewSquirrelDetailsViewController: PopUpViewController, UITextFieldDelegate
                 self.ratedSquirrel!["ratings"] = ratings
                 self.ratedSquirrel!.removeObject(PFUser.currentUser()!.username!, forKey: "raters")
             }
-            LOGGED_IN_USER_SQUIRREL_SLOTS -= 1
+            //LOGGED_IN_USER_SQUIRREL_SLOTS was already updated outside of this gcd function
             let newSquirrelSlots = getNewArrayToSave(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!, newInfo: String(LOGGED_IN_USER_SQUIRREL_SLOTS))
             currentGroup!["squirrelSlots"] = newSquirrelSlots
             currentGroup!.save()
             self.ratedSquirrel!.save()
             self.delegate!.reloadParent(self, usedRerate: false)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     
