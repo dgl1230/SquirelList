@@ -26,12 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         //For now we reset their badge numbers anytime the app launches 
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
         
-        
+        /*
         let groupQ = PFQuery(className: "Group")
         groupQ.whereKey("objectId", equalTo: "GMjN8smzJm")
         let g = groupQ.getFirstObject()
         PFUser.currentUser()!["currentGroup"] = g
         PFUser.currentUser()!.save()
+        */
+
+
+
         
         
 

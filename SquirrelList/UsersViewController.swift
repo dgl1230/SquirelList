@@ -89,6 +89,7 @@ class UsersViewController: PFQueryTableViewController {
     override func queryForTable() -> PFQuery {
         //The optional currentGroup needs to be called here, because queryForTable() is called before viewDidLoad()
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
+        //Need to call fetch here, because if the app hasn't booted up in a bit, there will be no data for the currentGroup variable yet
         currentGroup!.fetch()
         let query = PFUser.query()
         query!.whereKey("username", containedIn: currentGroup!["users"] as! [String])
@@ -249,17 +250,8 @@ class UsersViewController: PFQueryTableViewController {
         if PFUser.currentUser()!["newUserTab"] as! Bool == true {
             performSegueWithIdentifier("NewUserScreens", sender: self)
         }
-        print("ABOUT TO RELOAD")
         reload()
     }
-    
-    /*
-    override func viewWillAppear(animated: Bool) {
-        print("USER VIEW CONTROLLER ABOUT TTO RELOAD")
-        reload()
-    }
-    */
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -282,7 +274,7 @@ class UsersViewController: PFQueryTableViewController {
         //Register the UsersCellTableViewCell for use in the UserViewController tableView
         tableView.registerNib(UINib(nibName: "UsersCellTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         //Check for any alerts to show
-        updateAlerts()
+        //updateAlerts()
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             //To prevent crash if user has gone to the invite friends to group screen before checking the more tab in a while
