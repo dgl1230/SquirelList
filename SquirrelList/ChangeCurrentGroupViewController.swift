@@ -156,16 +156,18 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
         if currentGroup.objectId != userCurrentGroup.objectId {
             self.view.addSubview(fixedFrame)
             //Global function that starts the loading animation and returns an array of [NVAcitivtyIndicatorView, UIView, UIView] so that we can pass these views into resumeInterActionEvents() later to suspend animation and dismiss the views
-                let viewsArray = displayLoadingAnimator(fixedFrame)
-                _ = viewsArray[0] as! NVActivityIndicatorView
-                _ = viewsArray[1] as! UIView
-                _ = viewsArray[2] as! UIView
-                //We only want to reload everything if the user hasn't selected their same currentGroup
-                PFUser.currentUser()!["currentGroup"] = self.currentGroup
-                PFUser.currentUser()!.save()
-                //We send the nsnotifications in the background
+                let viewsArray = displayLoadingAnimator(self.fixedFrame)
+                    _ = viewsArray[0] as! NVActivityIndicatorView
+                    _ = viewsArray[1] as! UIView
+                    _ = viewsArray[2] as! UIView
+                    dispatch_async(dispatch_get_main_queue()) {
+                    //We only want to reload everything if the user hasn't selected their same currentGroup
+                    PFUser.currentUser()!["currentGroup"] = self.currentGroup
+                    PFUser.currentUser()!.save()
+                    //We send the nsnotifications in the background
                     //UsersViewController, SquirrelViewController, MessagesViewController, SearchUsersViewController(for adding friends to group, and NotificationsViewController(for trade proposals) all new to be reloaded when their views appear
                     NSNotificationCenter.defaultCenter().postNotificationName(reloadNotificationKey, object: nil)
+                }
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
         }
         self.dismissViewControllerAnimated(true, completion: nil)

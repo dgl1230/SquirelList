@@ -39,6 +39,7 @@ var COUNTER = 0
     interaction events, the function resumeInteractionEvents() musts be called. We return the NVActivityIndicator so that we can pass it into resumeInteractionEvents() to stop it
     */
     func displayLoadingAnimator(uiView: UIView) -> [AnyObject] {
+        print("staring global animatoon")
         //Make keyboard disappear
         uiView.endEditing(true)
         //We create a container the same size as self.view so that we can make the background whiter and more transparent
@@ -66,6 +67,7 @@ var COUNTER = 0
         uiView.addSubview(container)
         activityIndicatorView.startAnimation()
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        print("ending global animation")
         return [activityIndicatorView, container, loadingView]
     }
 
