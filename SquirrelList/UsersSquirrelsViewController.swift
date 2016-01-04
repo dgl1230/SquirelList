@@ -49,7 +49,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         self.paginationEnabled = false
     }
     
-    
+    /*
     //Calculates the average, given an array of numbers
     func calculateAverageRating(ratings:[Double]) -> Double {
         var numOfRatings = ratings.count
@@ -65,8 +65,9 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         let unroundedRating = Double(sum)/Double(numOfRatings)
         return round((10 * unroundedRating)) / 10
     }
+    */
     
-    
+    /*
     //Calculates the average rating of Squirrells owned by a user
     func calculateTeamRating(username:String) -> Double {
         var teamRatings: [Double] = []
@@ -81,8 +82,9 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         let teamRating = calculateAverageRating(teamRatings as [Double])
         return teamRating
     }
+    */
     
-    
+    /*
     //Goes through the list of raters a Squirrel has and if the username of said user is found, returns false. Else it returns true
     func didUserRatedSquirrel(username:String, raters: [String]) -> Bool {
         if (raters.indexOf(username) == nil) {
@@ -90,6 +92,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         }
         return true
     }
+    */
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -98,13 +101,14 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             controller.delegate = self
             controller.ratedSquirrel = sender as? PFObject
             //var squirrelSlots = Int(getUserInfo(currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
-        
+            /*
             let userRerates = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))
             if userRerates == 1 {
                 controller.canRerate = true
             } else {
                 controller.canRerate = false
             }
+            */
             let owner = sender!["owner"] as? PFObject
             if owner != nil {
                 let user = sender!["owner"] as? PFUser
@@ -113,7 +117,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         }
     }
     
-    
+    /*
     override func objectsDidLoad(error: NSError!) {
         super.objectsDidLoad(error)
         //Team ratings and squirrel slots are calculated here
@@ -131,6 +135,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             }
         }
     }
+    */
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
@@ -142,7 +147,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
         } else {
             query.whereKey("owner", equalTo: selectedUser!)
         }
-        query.orderByDescending("avg_rating")
+        query.orderByDescending("first_name")
         return query
     }
     
@@ -184,7 +189,7 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             let last = cell.viewWithTag(5) as! UILabel
             last.text = object!["last_name"]!.capitalizedString
             let ratingLabel = cell.viewWithTag(3) as! UILabel
-            let avgRating = object!["avg_rating"] as! Double
+            //let avgRating = object!["avg_rating"] as! Double
             let squirrel = objects![indexPath.row] as! PFObject
             let owner = squirrel["owner"] as? PFUser
             if owner == nil {
@@ -192,6 +197,9 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
             } else {
                 openLabel?.hidden = true
             }
+            //To hide ratings
+            ratingLabel.text = ""
+            /*
             if avgRating != 0 && avgRating >= 9 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.redColor()
@@ -206,6 +214,8 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                 ratingLabel.text = ""
                 cell.backgroundColor = UIColor.yellowColor()
             }
+            */
+            cell.backgroundColor = UIColor.redColor()
             return cell
     }
     
@@ -241,8 +251,8 @@ class UsersSquirrelsViewController: PFQueryTableViewController, NewSquirrelDetai
                         squirrel.removeObjectForKey("owner")
                         squirrel.removeObjectForKey("ownerUsername")
                         squirrel.save()
-                        let teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
-                        self.teamRatingLabel.text = "Team Rating: \(teamRating)"
+                        //let teamRating = self.calculateTeamRating(self.selectedUser!["username"] as! String)
+                        //self.teamRatingLabel.text = "Team Rating: \(teamRating)"
                         //Give the user a squirrel slot
                         let squirrelSlots = Int(getUserInfo(self.currentGroup!["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!))
                         LOGGED_IN_USER_SQUIRREL_SLOTS = squirrelSlots!

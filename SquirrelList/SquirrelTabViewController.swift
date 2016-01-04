@@ -71,12 +71,14 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             //We use the global variable LOGGED_IN_USER_SQUIRREL_SLOTS here becuase if they have just added a squirrel, we may not be finished asynchonously saving the group. So if we access Squirrel Slots from the group field, the user may be able to pick up a squirrel, when they actually have zero squirrel slots 
             let squirrelSlots = LOGGED_IN_USER_SQUIRREL_SLOTS
             controller.squirrelSlots = squirrelSlots
+            /*
             let userRerates = Int(getUserInfo(currentGroup!["rerates"] as! [String], username: PFUser.currentUser()!.username!))
             if userRerates == 1 {
                 controller.canRerate = true
             } else {
                 controller.canRerate = false
             }
+            */
             let owner = sender!["owner"] as? PFObject
             if owner != nil {
                 let user = sender!["owner"] as? PFUser
@@ -95,7 +97,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
         currentGroup = PFUser.currentUser()!["currentGroup"] as? PFObject
         let query = PFQuery(className: "Squirrel")
         query.whereKey("objectId", containedIn: currentGroup!["squirrels"] as! [String])
-        query.orderByDescending("avg_rating")
+        query.orderByDescending("first_name")
         return query
     }
     
@@ -124,7 +126,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             let last = cell.viewWithTag(5) as! UILabel
             last.text = object!["last_name"]!.capitalizedString
             let ratingLabel = cell.viewWithTag(3) as! UILabel
-            let avgRating = object!["avg_rating"] as! Double
+            //let avgRating = object!["avg_rating"] as! Double
             let squirrel = objects![indexPath.row] as! PFObject
             let owner = squirrel["owner"] as? PFUser
             if owner == nil {
@@ -132,7 +134,7 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
             } else {
                 openLabel?.hidden = true
             }
-        
+            /*
             if avgRating != 0 && avgRating >= 9 {
                 ratingLabel.text = "\(avgRating)"
                 cell.backgroundColor = UIColor.redColor()
@@ -147,6 +149,10 @@ class SquirrelTabViewController: PFQueryTableViewController, NewSquirrelDetailsl
                 ratingLabel.text = ""
                 cell.backgroundColor = UIColor.yellowColor()
             }
+            */
+            //To hide ratings
+            ratingLabel.text = ""
+            cell.backgroundColor = UIColor.yellowColor()
             return cell
     }
     

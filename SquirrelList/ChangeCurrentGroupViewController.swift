@@ -113,7 +113,6 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                                 }
                             }
                         })
-                    
                         group.removeObject(PFUser.currentUser()!.username!, forKey: "users")
                         let acorns = getFullUserInfo(group["acorns"] as! [String], username: PFUser.currentUser()!.username!)
                         let squirrelSlots = getFullUserInfo(group["squirrelSlots"] as! [String], username: PFUser.currentUser()!.username!)
@@ -132,14 +131,13 @@ class ChangeCurrentGroupViewController: PFQueryTableViewController {
                         group.save()
                         
                         //Remve the group from the user's group
-                        PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
-                        PFUser.currentUser()!.save()
+                        //PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
+                        //PFUser.currentUser()!.save()
                     }
                     //Remve the group from the user's group
                     PFUser.currentUser()!.removeObject(group.objectId!, forKey: "groups")
                     PFUser.currentUser()!.save()
                     self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-                    self.viewDidLoad()
                 }))
                 self.presentViewController(alert, animated: true, completion: nil)
             }

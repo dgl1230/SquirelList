@@ -90,16 +90,14 @@
 		187547C11B0FC907009A6EFE /* UsersCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */; };
 		1876081E1BA64952001D0075 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876081D1BA64952001D0075 /* FeedbackViewController.swift */; };
 		187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187960D11AB6732400538306 /* NotificationsViewController.swift */; };
-		1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */; };
+		1888363E1C3A202E00BF5E9F /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1888363D1C3A202E00BF5E9F /* Banner.swift */; };
 		188B35EA1AC8E06500F9DA2D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */; };
 		18A069761BCF30B300825F9C /* SearchGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */; };
 		18A568D11B0FD6B50019B2C3 /* bosun03.otf in Resources */ = {isa = PBXBuildFile; fileRef = 18A568D01B0FD6B50019B2C3 /* bosun03.otf */; };
 		18A568D31B1811500019B2C3 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D21B1811500019B2C3 /* RegisterViewController.swift */; };
 		18A568D51B182BBC0019B2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D41B182BBC0019B2C3 /* LoginViewController.swift */; };
-		18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A568D81B1D47B40019B2C3 /* HomeViewController.swift */; };
 		18A568E01B2133C20019B2C3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */; };
 		18A6577C1B7C1DBD000EFD7B /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */; };
-		18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6577D1B7E8103000EFD7B /* Banner.swift */; };
 		18A79D941AD9B4A900281276 /* ChangeCurrentGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */; };
 		18B3CD961AD76A5800B9736B /* CreateGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */; };
 		18C279B91B4E227A001D932A /* Terms_Of_Service.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */; };
@@ -109,6 +107,8 @@
 		18D4DF991AC0FFB900C55E48 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */; };
 		18D4DF9B1AC1065F00C55E48 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */; };
 		18D4DF9F1AC246E100C55E48 /* TradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */; };
+		18D7AC171C3A2710008E9B4D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7AC161C3A2710008E9B4D /* HomeViewController.swift */; };
+		18D7AC191C3A2865008E9B4D /* GroupInvitePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D7AC181C3A2864008E9B4D /* GroupInvitePopUpViewController.swift */; };
 		18DC68281B59A82200364A4E /* SquirrelStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC68271B59A82200364A4E /* SquirrelStoreController.swift */; };
 		18DE63871B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallBeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE63671B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallBeat.swift */; };
 		18DE63881B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DE63681B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallClipRotate.swift */; };
@@ -161,9 +161,9 @@
 		180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		1814C28B1BA8B3CF00158597 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
 		181B7C021A834379004E83E6 /* AddSquirrelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddSquirrelViewController.swift; path = SquirrelList/AddSquirrelViewController.swift; sourceTree = "<group>"; };
-		181E459D1B8E37B700CD9F07 /* SquirrelTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquirrelTabViewController.swift; sourceTree = "<group>"; };
-		181E459F1B8E471B00CD9F07 /* UsersSquirrelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersSquirrelsViewController.swift; sourceTree = "<group>"; };
-		181E45A11B8EB5D700CD9F07 /* NewSquirrelDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSquirrelDetailsController.swift; sourceTree = "<group>"; };
+		181E459D1B8E37B700CD9F07 /* SquirrelTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelTabViewController.swift; path = SquirrelList/SquirrelTabViewController.swift; sourceTree = "<group>"; };
+		181E459F1B8E471B00CD9F07 /* UsersSquirrelsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersSquirrelsViewController.swift; path = SquirrelList/UsersSquirrelsViewController.swift; sourceTree = "<group>"; };
+		181E45A11B8EB5D700CD9F07 /* NewSquirrelDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewSquirrelDetailsController.swift; path = SquirrelList/NewSquirrelDetailsController.swift; sourceTree = "<group>"; };
 		181E45A31B9008B900CD9F07 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		181E45A41B9008B900CD9F07 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageItemViewController.swift; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		184841A11AE978D100F23551 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		1854AACD1B900BBA002F25C9 /* ShittyConnection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShittyConnection.storyboard; sourceTree = "<group>"; };
 		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = SquirrelList/MoreViewController.swift; sourceTree = "<group>"; };
-		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradeOfferViewController.swift; sourceTree = "<group>"; };
+		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeOfferViewController.swift; path = SquirrelList/TradeOfferViewController.swift; sourceTree = "<group>"; };
 		186B32E01A758E5000A8D4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		186B32E11A758E5000A8D4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186B32E81A758E5000A8D4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -298,17 +298,15 @@
 		187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersCellTableViewCell.xib; sourceTree = "<group>"; };
 		1876081D1BA64952001D0075 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		187960D11AB6732400538306 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationsViewController.swift; path = SquirrelList/NotificationsViewController.swift; sourceTree = "<group>"; };
-		1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupInvitePopUpViewController.swift; path = SquirrelList/GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
+		1888363D1C3A202E00BF5E9F /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = SquirrelList/SettingsViewController.swift; sourceTree = "<group>"; };
-		18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupsViewController.swift; sourceTree = "<group>"; };
+		18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchGroupsViewController.swift; path = SquirrelList/SearchGroupsViewController.swift; sourceTree = "<group>"; };
 		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		18A568D81B1D47B40019B2C3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = ../HomeViewController.swift; sourceTree = "<group>"; };
 		18A568DC1B20E9140019B2C3 /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
+		18A568DF1B2133C20019B2C3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
-		18A6577D1B7E8103000EFD7B /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Banner.swift; path = ../Banner.swift; sourceTree = "<group>"; };
 		18A79D931AD9B4A900281276 /* ChangeCurrentGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangeCurrentGroupViewController.swift; path = SquirrelList/ChangeCurrentGroupViewController.swift; sourceTree = "<group>"; };
 		18B3CD951AD76A5800B9736B /* CreateGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateGroupViewController.swift; path = SquirrelList/CreateGroupViewController.swift; sourceTree = "<group>"; };
 		18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Terms_Of_Service.rtf; sourceTree = "<group>"; };
@@ -318,6 +316,8 @@
 		18D4DF981AC0FFB900C55E48 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersViewController.swift; path = SquirrelList/UsersViewController.swift; sourceTree = "<group>"; };
 		18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeViewController.swift; path = SquirrelList/TradeViewController.swift; sourceTree = "<group>"; };
+		18D7AC161C3A2710008E9B4D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		18D7AC181C3A2864008E9B4D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		18DC68271B59A82200364A4E /* SquirrelStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelStoreController.swift; path = SquirrelList/SquirrelStoreController.swift; sourceTree = "<group>"; };
 		18DE63671B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallBeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallBeat.swift; sourceTree = "<group>"; };
 		18DE63681B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallClipRotate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallClipRotate.swift; sourceTree = "<group>"; };
@@ -354,8 +354,8 @@
 		18DE63A71B7954DC005EB7C0 /* FlagContentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagContentController.swift; sourceTree = "<group>"; };
 		18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatHolderViewController.swift; sourceTree = "<group>"; };
 		18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
-		18F43A831B68761100CCE2C3 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
-		18F43A851B69808800CCE2C3 /* SearchUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersController.swift; sourceTree = "<group>"; };
+		18F43A831B68761100CCE2C3 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FriendsViewController.swift; path = SquirrelList/FriendsViewController.swift; sourceTree = "<group>"; };
+		18F43A851B69808800CCE2C3 /* SearchUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUsersController.swift; path = SquirrelList/SearchUsersController.swift; sourceTree = "<group>"; };
 		18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Privacy_Policy.rtf; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -563,16 +563,16 @@
 				186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */,
 				186B32E11A758E5000A8D4CB /* AppDelegate.swift */,
 				1814C28B1BA8B3CF00158597 /* Badge.swift */,
-				18A6577D1B7E8103000EFD7B /* Banner.swift */,
+				1888363D1C3A202E00BF5E9F /* Banner.swift */,
 				18C57B511B237B460068B726 /* ChangeInfoController.swift */,
 				18E06FD31AEAD2B100D5F1E2 /* ChatHolderViewController.swift */,
 				1876081D1BA64952001D0075 /* FeedbackViewController.swift */,
 				18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */,
 				18DE63A71B7954DC005EB7C0 /* FlagContentController.swift */,
+				18D7AC161C3A2710008E9B4D /* HomeViewController.swift */,
 				180253C81B2FE1410094C044 /* ForgotPasswordViewController.swift */,
 				18A6577B1B7C1DBD000EFD7B /* GlobalFunctions.swift */,
 				18E4FEFD1A78C77F001E7028 /* HomeTabViewController.swift */,
-				18A568D81B1D47B40019B2C3 /* HomeViewController.swift */,
 				186B32EA1A758E5000A8D4CB /* Images.xcassets */,
 				18A568D41B182BBC0019B2C3 /* LoginViewController.swift */,
 				184841141AE9767600F23551 /* Messages */,
@@ -662,7 +662,7 @@
 		18DC68251B588FEC00364A4E /* Pop Up Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1889BB151AD7581A0034BD7D /* GroupInvitePopUpViewController.swift */,
+				18D7AC181C3A2864008E9B4D /* GroupInvitePopUpViewController.swift */,
 				181E45A11B8EB5D700CD9F07 /* NewSquirrelDetailsController.swift */,
 				18625C581AC3610E00093A1B /* TradeOfferViewController.swift */,
 				18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */,
@@ -847,6 +847,7 @@
 				18A6577C1B7C1DBD000EFD7B /* GlobalFunctions.swift in Sources */,
 				1828B76A1B3108CF0081AAD4 /* TutorialPageItemViewController.swift in Sources */,
 				184841951AE976C100F23551 /* JSQMessagesInputToolbar.m in Sources */,
+				18D7AC191C3A2865008E9B4D /* GroupInvitePopUpViewController.swift in Sources */,
 				187960D21AB6732400538306 /* NotificationsViewController.swift in Sources */,
 				1848419A1AE976C100F23551 /* JSQMessagesToolbarContentView.m in Sources */,
 				1848418B1AE976C100F23551 /* JSQPhotoMediaItem.m in Sources */,
@@ -879,15 +880,13 @@
 				1848418C1AE976C100F23551 /* JSQVideoMediaItem.m in Sources */,
 				184841751AE976C100F23551 /* NSBundle+JSQMessages.m in Sources */,
 				1848418F1AE976C100F23551 /* JSQMessagesCollectionViewCell.m in Sources */,
+				1888363E1C3A202E00BF5E9F /* Banner.swift in Sources */,
 				18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */,
 				18DE63991B772CA1005EB7C0 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				180253C91B2FE1410094C044 /* ForgotPasswordViewController.swift in Sources */,
 				1848419C1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.m in Sources */,
 				184841941AE976C100F23551 /* JSQMessagesComposerTextView.m in Sources */,
 				18DE63A81B7954DC005EB7C0 /* FlagContentController.swift in Sources */,
-				18A6577E1B7E8103000EFD7B /* Banner.swift in Sources */,
-				18A568D91B1D47B40019B2C3 /* HomeViewController.swift in Sources */,
-				1889BB161AD7581A0034BD7D /* GroupInvitePopUpViewController.swift in Sources */,
 				184841961AE976C100F23551 /* JSQMessagesLabel.m in Sources */,
 				184561211ABFCE3100026473 /* GradientView.swift in Sources */,
 				18DE63A21B772CA1005EB7C0 /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
@@ -917,6 +916,7 @@
 				18DE63941B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallScaleRippleMultiple.swift in Sources */,
 				18C57B521B237B460068B726 /* ChangeInfoController.swift in Sources */,
 				1848417B1AE976C100F23551 /* JSQMessagesKeyboardController.m in Sources */,
+				18D7AC171C3A2710008E9B4D /* HomeViewController.swift in Sources */,
 				18DE638D1B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
 				18F43A841B68761100CCE2C3 /* FriendsViewController.swift in Sources */,
 				18DE63A51B772CA1005EB7C0 /* NVActivityIndicatorShape.swift in Sources */,
