@@ -64,6 +64,8 @@
 		1848419D1AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184841721AE976C100F23551 /* JSQMessagesTypingIndicatorFooterView.xib */; };
 		184841A01AE9770400F23551 /* JSQSystemSoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848419F1AE9770400F23551 /* JSQSystemSoundPlayer.m */; };
 		184841A21AE978D100F23551 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184841A11AE978D100F23551 /* MessagesViewController.swift */; };
+		185176941C3A555800087EC6 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 185176931C3A555800087EC6 /* libsqlite3.dylib */; };
+		185176961C3A55CA00087EC6 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 185176951C3A55CA00087EC6 /* libz.1.dylib */; };
 		1854AACE1B900BBA002F25C9 /* ShittyConnection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1854AACD1B900BBA002F25C9 /* ShittyConnection.storyboard */; };
 		18625C571AC33DA100093A1B /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C561AC33DA100093A1B /* MoreViewController.swift */; };
 		18625C591AC3610E00093A1B /* TradeOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18625C581AC3610E00093A1B /* TradeOfferViewController.swift */; };
@@ -78,8 +80,6 @@
 		186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33111A758FB100A8D4CB /* QuartzCore.framework */; };
 		186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33131A758FBC00A8D4CB /* Security.framework */; };
 		186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */; };
-		186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B33191A758FDA00A8D4CB /* libz.dylib */; };
-		186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 186B331B1A758FE500A8D4CB /* libsqlite3.dylib */; };
 		187547B31B0E6C77009A6EFE /* Login-Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187547B21B0E6C77009A6EFE /* Login-Register.storyboard */; };
 		187547B91B0FA1B6009A6EFE /* BebasNeue Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */; };
 		187547BA1B0FA1B6009A6EFE /* BebasNeue Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */; };
@@ -168,16 +168,16 @@
 		181E45A41B9008B900CD9F07 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1828B7691B3108CF0081AAD4 /* TutorialPageItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageItemViewController.swift; sourceTree = "<group>"; };
 		1828B76D1B3F4ED30081AAD4 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		1832B78F1B94E99B00DF23E7 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		1832B7901B94E99B00DF23E7 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		1832B7911B94E99B00DF23E7 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		1832B7921B94E99B00DF23E7 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		1832B7931B94E99B00DF23E7 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
-		1832B7941B94E99B00DF23E7 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		1832B7951B94E99B00DF23E7 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		1832B7961B94E99B00DF23E7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		1832B7971B94E99B00DF23E7 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		1832B7981B94E99B00DF23E7 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		1832B78F1B94E99B00DF23E7 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		1832B7901B94E99B00DF23E7 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		1832B7911B94E99B00DF23E7 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		1832B7921B94E99B00DF23E7 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBoldItalic.ttf"; path = "Fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		1832B7931B94E99B00DF23E7 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Italic.ttf"; path = "Fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		1832B7941B94E99B00DF23E7 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "Fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		1832B7951B94E99B00DF23E7 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		1832B7961B94E99B00DF23E7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		1832B7971B94E99B00DF23E7 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		1832B7981B94E99B00DF23E7 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		1845611E1ABFAB8D00026473 /* DimmingPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DimmingPresentationViewController.swift; sourceTree = "<group>"; };
 		184561201ABFCE3100026473 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		184561221ABFD24B00026473 /* BounceAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BounceAnimationController.swift; sourceTree = "<group>"; };
@@ -270,6 +270,8 @@
 		1848419E1AE9770400F23551 /* JSQSystemSoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQSystemSoundPlayer.h; sourceTree = "<group>"; };
 		1848419F1AE9770400F23551 /* JSQSystemSoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQSystemSoundPlayer.m; sourceTree = "<group>"; };
 		184841A11AE978D100F23551 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		185176931C3A555800087EC6 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = /usr/lib/libsqlite3.dylib; sourceTree = "<absolute>"; };
+		185176951C3A55CA00087EC6 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = /usr/lib/libz.1.dylib; sourceTree = "<absolute>"; };
 		1854AACD1B900BBA002F25C9 /* ShittyConnection.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShittyConnection.storyboard; sourceTree = "<group>"; };
 		18625C561AC33DA100093A1B /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoreViewController.swift; path = SquirrelList/MoreViewController.swift; sourceTree = "<group>"; };
 		18625C581AC3610E00093A1B /* TradeOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeOfferViewController.swift; path = SquirrelList/TradeOfferViewController.swift; sourceTree = "<group>"; };
@@ -285,15 +287,13 @@
 		186B33111A758FB100A8D4CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		186B33131A758FBC00A8D4CB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		186B33171A758FCF00A8D4CB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		186B33191A758FDA00A8D4CB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		186B331B1A758FE500A8D4CB /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		186B331D1A75908400A8D4CB /* SquirelList-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SquirelList-Bridging-Header.h"; sourceTree = "<group>"; };
 		187547B21B0E6C77009A6EFE /* Login-Register.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Login-Register.storyboard"; sourceTree = "<group>"; };
-		187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Bold.otf"; sourceTree = "<group>"; };
-		187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Book.otf"; sourceTree = "<group>"; };
-		187547B61B0FA1B6009A6EFE /* BebasNeue Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Light.otf"; sourceTree = "<group>"; };
-		187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Regular.otf"; sourceTree = "<group>"; };
-		187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BebasNeue Thin.otf"; sourceTree = "<group>"; };
+		187547B41B0FA1B6009A6EFE /* BebasNeue Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Bold.otf"; path = "Fonts/BebasNeue Bold.otf"; sourceTree = "<group>"; };
+		187547B51B0FA1B6009A6EFE /* BebasNeue Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Book.otf"; path = "Fonts/BebasNeue Book.otf"; sourceTree = "<group>"; };
+		187547B61B0FA1B6009A6EFE /* BebasNeue Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Light.otf"; path = "Fonts/BebasNeue Light.otf"; sourceTree = "<group>"; };
+		187547B71B0FA1B6009A6EFE /* BebasNeue Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Regular.otf"; path = "Fonts/BebasNeue Regular.otf"; sourceTree = "<group>"; };
+		187547B81B0FA1B6009A6EFE /* BebasNeue Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BebasNeue Thin.otf"; path = "Fonts/BebasNeue Thin.otf"; sourceTree = "<group>"; };
 		187547BE1B0FC907009A6EFE /* UsersCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersCellTableViewCell.swift; sourceTree = "<group>"; };
 		187547BF1B0FC907009A6EFE /* UsersCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsersCellTableViewCell.xib; sourceTree = "<group>"; };
 		1876081D1BA64952001D0075 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		1888363D1C3A202E00BF5E9F /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		188B35E91AC8E06500F9DA2D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = SquirrelList/SettingsViewController.swift; sourceTree = "<group>"; };
 		18A069751BCF30B300825F9C /* SearchGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchGroupsViewController.swift; path = SquirrelList/SearchGroupsViewController.swift; sourceTree = "<group>"; };
-		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bosun03.otf; sourceTree = "<group>"; };
+		18A568D01B0FD6B50019B2C3 /* bosun03.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bosun03.otf; path = Fonts/bosun03.otf; sourceTree = "<group>"; };
 		18A568D21B1811500019B2C3 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		18A568D41B182BBC0019B2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		18A568DC1B20E9140019B2C3 /* Squirrel List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squirrel List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -317,7 +317,7 @@
 		18D4DF9A1AC1065F00C55E48 /* PopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		18D4DF9E1AC246E100C55E48 /* TradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TradeViewController.swift; path = SquirrelList/TradeViewController.swift; sourceTree = "<group>"; };
 		18D7AC161C3A2710008E9B4D /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		18D7AC181C3A2864008E9B4D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
+		18D7AC181C3A2864008E9B4D /* GroupInvitePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupInvitePopUpViewController.swift; path = SquirrelList/GroupInvitePopUpViewController.swift; sourceTree = "<group>"; };
 		18DC68271B59A82200364A4E /* SquirrelStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SquirrelStoreController.swift; path = SquirrelList/SquirrelStoreController.swift; sourceTree = "<group>"; };
 		18DE63671B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallBeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallBeat.swift; sourceTree = "<group>"; };
 		18DE63681B772CA1005EB7C0 /* NVActivityIndicatorAnimationBallClipRotate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallClipRotate.swift; sourceTree = "<group>"; };
@@ -358,7 +358,7 @@
 		18F43A851B69808800CCE2C3 /* SearchUsersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUsersController.swift; path = SquirrelList/SearchUsersController.swift; sourceTree = "<group>"; };
 		18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Privacy_Policy.rtf; sourceTree = "<group>"; };
 		18F768FB1AC9FE8500314DB2 /* More.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
-		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		18F768FF1ACB2AA000314DB2 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "fontawesome-webfont.ttf"; path = "Fonts/fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		18F769011ACB995C00314DB2 /* FindUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindUserTableViewCell.swift; sourceTree = "<group>"; };
 		18F769021ACB995C00314DB2 /* FindUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindUserTableViewCell.xib; sourceTree = "<group>"; };
 		18FDAC4C1B825D4600300282 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -371,8 +371,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				186B331C1A758FE500A8D4CB /* libsqlite3.dylib in Frameworks */,
-				186B331A1A758FDA00A8D4CB /* libz.dylib in Frameworks */,
+				185176961C3A55CA00087EC6 /* libz.1.dylib in Frameworks */,
+				185176941C3A555800087EC6 /* libsqlite3.dylib in Frameworks */,
 				186B33181A758FCF00A8D4CB /* SystemConfiguration.framework in Frameworks */,
 				186B33141A758FBC00A8D4CB /* Security.framework in Frameworks */,
 				186B33121A758FB100A8D4CB /* QuartzCore.framework in Frameworks */,
@@ -614,10 +614,10 @@
 				1832B7981B94E99B00DF23E7 /* OpenSans-SemiboldItalic.ttf */,
 				18F43A871B6AA5E700CCE2C3 /* Privacy_Policy.rtf */,
 				18C279B81B4E227A001D932A /* Terms_Of_Service.rtf */,
-				186B331B1A758FE500A8D4CB /* libsqlite3.dylib */,
-				186B33191A758FDA00A8D4CB /* libz.dylib */,
 				181E45A31B9008B900CD9F07 /* Reachability.h */,
 				181E45A41B9008B900CD9F07 /* Reachability.m */,
+				185176951C3A55CA00087EC6 /* libz.1.dylib */,
+				185176931C3A555800087EC6 /* libsqlite3.dylib */,
 				18FDAC501B825D5B00300282 /* ParseUI.framework */,
 				18FDAC4E1B825D5400300282 /* Parse.framework */,
 				18FDAC4C1B825D4600300282 /* Bolts.framework */,
